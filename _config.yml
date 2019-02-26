@@ -3,13 +3,19 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
+title: cpp288
 subtitle:
 description:
 keywords:
-author: John Doe
-language:
+author: Chen Jian
+language: zh-Hans
 timezone:
+
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
