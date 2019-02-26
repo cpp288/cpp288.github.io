@@ -91,7 +91,7 @@ hexo d
 
 **如何添加本地图片**
 
-TODO
+在 source 目录下新建目录，将图片放在其中（可以建多级目录），hexo 会在 generate 时将图片放到 public 中，使用 markdown 图片语法即可
 
 # 相关博客
 * [我是如何利用Github Pages搭建起我的博客，细数一路的坑](https://www.cnblogs.com/jackyroc/p/7681938.html)
