@@ -89,7 +89,7 @@ hexo d
 * https://www.zhihu.com/question/21193762
 * https://blog.csdn.net/heimu24/article/details/81210640
 
-**如何添加本地图片**
+**如何添加本地图片？**
 
 在 source 目录下新建目录，将图片放在其中（可以建多级目录），hexo 会在 generate 时将图片放到 public 中，使用 markdown 图片语法即可
 
