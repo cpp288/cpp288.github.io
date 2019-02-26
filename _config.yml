@@ -8,7 +8,7 @@ subtitle:
 description:
 keywords:
 author: Chen Jian
-language: zh-Hans
+language: zh-CN
 timezone:
 
 search:
@@ -79,7 +79,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: next-5.1.4
+theme: next-6.7.0
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -87,3 +87,11 @@ deploy:
   type: git
   repo: git@github.com:cpp288/cpp288.github.io.git
   branch: master
+
+symbols_count_time:
+  #文章内是否显示
+  symbols: true
+  time: true
+  # 网页底部是否显示
+  total_symbols: true
+  total_time: false
