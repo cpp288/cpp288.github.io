@@ -1,8 +1,8 @@
 ---
-title: mysql索引
+title: Mysql索引
 date: 2019-02-26 18:36:24
 tags: 
-- mysql
+- Mysql
 categories: 
 - 数据库
 ---
