@@ -1,8 +1,10 @@
 ---
 title: 如何使用hexo + github pages建立个人博客
 date: 2019-02-26 15:56:47
-tags: hexo
+tags: 
+- hexo
 categories: 
+- 其它
 ---
 
 # hexo
