@@ -221,7 +221,7 @@ auto_excerpt:
 
 # Post meta display settings
 post_meta:
-  item_text: true
+  item_text: false
   created_at: true
   updated_at: false
   categories: true
@@ -230,10 +230,10 @@ post_meta:
 # Dependencies: https://github.com/willin/hexo-wordcount
 post_wordcount:
   item_text: true
-  wordcount: false
-  min2read: false
-  totalcount: false
-  separated_meta: true
+  wordcount: true   # 单篇 字数统计
+  min2read: true   # 单篇 阅读时长
+  totalcount: true # 网站 字数统计
+  separated_meta: false
 
 # Wechat Subscriber
 #wechat_subscriber:
