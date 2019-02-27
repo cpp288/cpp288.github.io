@@ -96,3 +96,4 @@ hexo d
 * [我是如何利用Github Pages搭建起我的博客，细数一路的坑](https://www.cnblogs.com/jackyroc/p/7681938.html)
 * [Hexo和Next主题的相关设置（持续更新）](https://www.jianshu.com/p/3a01cc514ce7?utm_source=oschina-app)
 * [使腾讯404公益页面支持HTTPS](https://eason-yang.com/2016/08/06/set-tencent-lostchild-404-page-for-ssl/)
+* [【持续更新】最全Hexo博客搭建+主题优化+插件配置+常用操作+错误分析](https://www.simon96.online/2018/10/12/hexo-tutorial/)
