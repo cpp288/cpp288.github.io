@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 commit_message=
 while getopts ':m:' opt
@@ -8,10 +8,17 @@ do
         commit_message=$OPTARG
         ;;
         ?)
-        echo "未知参数"
-        exit 1;;
+        echo "Usage: args [-m]"
+        echo "-m means git commit message"
+        exit 1
+        ;;
     esac
 done
+
+if [[ ! ${commit_message} ]]; then
+    echo "git提交注释不能为空，使用 -m \"commit message\""
+    exit 1
+fi
 
 hexo clean
 hexo g
