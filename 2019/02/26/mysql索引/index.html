@@ -14,7 +14,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="zh-CN">
+<html class="theme-next gemini use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -72,7 +72,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Mist',
+    scheme: 'Gemini',
     version: '6.7.0',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: false,
@@ -97,7 +97,7 @@
 
 
   <meta name="description" content="索引是为了加速对表中数据行的检索而创建的一种分散存储的数据结构  为什么要用索引：  索引能极大的减少存储引擎需要扫描的数据量 索引可以把随机IO变成顺序IO 索引可以帮助我们在进行分组、排序等操作时，避免使用临时表  Mysql 为什么使用 B+Tree二叉查找树 动画演示 平衡二叉查找树 动画演示 缺点：  太深了 数据处的(高)深度决定着他的IO操作次数，IO操作耗时大   太小了 每一个磁">
-<meta name="keywords" content="Mysql">
+<meta name="keywords" content="Mysql,笔记,性能优化">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mysql索引">
 <meta property="og:url" content="https://cpp288.github.io/2019/02/26/Mysql索引/index.html">
@@ -113,7 +113,7 @@
 <meta property="og:image" content="https://cpp288.github.io/images/mysql/Myisam_index2.png">
 <meta property="og:image" content="https://cpp288.github.io/images/mysql/Innodb_index.png">
 <meta property="og:image" content="https://cpp288.github.io/images/mysql/Innodb_index2.png">
-<meta property="og:updated_time" content="2019-02-26T10:58:35.191Z">
+<meta property="og:updated_time" content="2019-02-27T11:32:44.750Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mysql索引">
 <meta name="twitter:description" content="索引是为了加速对表中数据行的检索而创建的一种分散存储的数据结构  为什么要用索引：  索引能极大的减少存储引擎需要扫描的数据量 索引可以把随机IO变成顺序IO 索引可以帮助我们在进行分组、排序等操作时，避免使用临时表  Mysql 为什么使用 B+Tree二叉查找树 动画演示 平衡二叉查找树 动画演示 缺点：  太深了 数据处的(高)深度决定着他的IO操作次数，IO操作耗时大   太小了 每一个磁">
@@ -316,9 +316,6 @@
   
 
   
-    
-
-  
 
   
     <div class="site-search">
@@ -359,6 +356,9 @@
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
+          
+            
+
           
           <div id="content" class="content">
             
@@ -420,12 +420,22 @@
                 
               
 
-              <time title="创建时间：2019-02-26 18:36:24 / 修改时间：18:58:35" itemprop="dateCreated datePublished" datetime="2019-02-26T18:36:24+08:00">2019-02-26</time>
+              <time title="创建时间：2019-02-26 18:36:24" itemprop="dateCreated datePublished" datetime="2019-02-26T18:36:24+08:00">2019-02-26</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                <time title="修改时间：2019-02-27 19:32:44" itemprop="dateModified" datetime="2019-02-27T19:32:44+08:00">2019-02-27</time>
               
             
           </span>
@@ -644,6 +654,10 @@
           
             <a href="/tags/Mysql/" rel="tag"># Mysql</a>
           
+            <a href="/tags/笔记/" rel="tag"># 笔记</a>
+          
+            <a href="/tags/性能优化/" rel="tag"># 性能优化</a>
+          
         </div>
       
 
@@ -769,7 +783,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">2</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -854,7 +872,7 @@
 
 
 
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v6.7.0</div>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.7.0</div>
 
 
 
@@ -940,6 +958,13 @@
 
   
   
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
 
   
   <script src="/js/src/scrollspy.js?v=6.7.0"></script>
