@@ -96,20 +96,25 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="cpp288">
-<meta property="og:url" content="https://cpp288.github.io/archives/index.html">
+  <meta name="description" content="前言介绍 插拔式的插件方式 存储引擎是指定在表之上的，即一个库中的每一个表都可以指定专用的存储引擎  不管表采用什么样的存储引擎，都会在数据区，产生对应的一个frm文件（表结构定义描述文件） 1-rw-rw---- 1 mysql mysql  8586 12月  6 18:56 sys_user.frm   各存储引擎对比查看官网：https://dev.mysql.com/doc/refman">
+<meta name="keywords" content="Mysql,笔记,性能优化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mysql存储引擎">
+<meta property="og:url" content="https://cpp288.github.io/2019/02/27/mysql/Mysql存储引擎/index.html">
 <meta property="og:site_name" content="cpp288">
+<meta property="og:description" content="前言介绍 插拔式的插件方式 存储引擎是指定在表之上的，即一个库中的每一个表都可以指定专用的存储引擎  不管表采用什么样的存储引擎，都会在数据区，产生对应的一个frm文件（表结构定义描述文件） 1-rw-rw---- 1 mysql mysql  8586 12月  6 18:56 sys_user.frm   各存储引擎对比查看官网：https://dev.mysql.com/doc/refman">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-02-27T11:51:58.728Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="cpp288">
+<meta name="twitter:title" content="Mysql存储引擎">
+<meta name="twitter:description" content="前言介绍 插拔式的插件方式 存储引擎是指定在表之上的，即一个库中的每一个表都可以指定专用的存储引擎  不管表采用什么样的存储引擎，都会在数据区，产生对应的一个frm文件（表结构定义描述文件） 1-rw-rw---- 1 mysql mysql  8586 12月  6 18:56 sys_user.frm   各存储引擎对比查看官网：https://dev.mysql.com/doc/refman">
 
 
 
 
 
 
-  <link rel="canonical" href="https://cpp288.github.io/archives/">
+  <link rel="canonical" href="https://cpp288.github.io/2019/02/27/mysql/Mysql存储引擎/">
 
 
 
@@ -119,7 +124,7 @@
   };
 </script>
 
-  <title>归档 | cpp288</title>
+  <title>Mysql存储引擎 | cpp288</title>
   
 
 
@@ -167,7 +172,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -256,7 +261,7 @@
         
         
           
-          <li class="menu-item menu-item-archives menu-item-active">
+          <li class="menu-item menu-item-archives">
 
     
     
@@ -344,174 +349,304 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://cpp288.github.io/2019/02/27/mysql/Mysql存储引擎/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chen Jian">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cpp288">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">Mysql存储引擎
+
+              
+            
+          </h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-27 19:48:38 / 修改时间：19:51:58" itemprop="dateCreated datePublished" datetime="2019-02-27T19:48:38+08:00">2019-02-27</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 3 篇日志。 继续努力。
-      </span>
-      
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
 
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/02/27/mysql/Mysql存储引擎/" itemprop="url">
+          
             
-              <span itemprop="name">Mysql存储引擎</span>
-            
-          </a>
-        
-      </h2>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-02-27T19:48:38+08:00" content="2019-02-27">
-          02-27
-        </time>
-      </div>
+          
+          
 
-    </header>
-  </article>
+          
 
+          
+            <div class="post-symbolscount">
+              
+                <span class="post-meta-divider">|</span>
+              
 
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">1.4k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/02/26/mysql/Mysql索引/" itemprop="url">
-            
-              <span itemprop="name">Mysql索引</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-02-26T18:36:24+08:00" content="2019-02-26">
-          02-26
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/02/26/如何使用hexo-github-pages建立个人博客/" itemprop="url">
-            
-              <span itemprop="name">如何使用hexo + github pages建立个人博客</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-02-26T15:56:47+08:00" content="2019-02-26">
-          02-26
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><ul>
+<li>插拔式的插件方式</li>
+<li>存储引擎是指定在表之上的，即一个库中的每一个表都可以指定专用的存储引擎 </li>
+<li><p>不管表采用什么样的存储引擎，都会在数据区，产生对应的一个frm文件（表结构定义描述文件）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-rw-rw---- 1 mysql mysql  8586 12月  6 18:56 sys_user.frm</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="各存储引擎对比"><a href="#各存储引擎对比" class="headerlink" title="各存储引擎对比"></a>各存储引擎对比</h2><p>查看官网：<a href="https://dev.mysql.com/doc/refman/5.7/en/storage-engines.html" target="_blank" rel="noopener">https://dev.mysql.com/doc/refman/5.7/en/storage-engines.html</a></p>
+<h1 id="CSV-存储引擎"><a href="#CSV-存储引擎" class="headerlink" title="CSV 存储引擎"></a>CSV 存储引擎</h1><p>数据存储以CSV文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-rw-rw---- 1 mysql mysql     0 12月 18 19:27 table_csv.CSV</span><br></pre></td></tr></table></figure>
+<p>看其文件内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1,&quot;chen&quot;</span><br><span class="line">2,&quot;jian&quot;</span><br></pre></td></tr></table></figure>
+<p>存储的就是我们的表数据</p>
+<p>特点：</p>
+<ol>
+<li><p>不能定义索引、列定义必须为NOT NULL、不能设置自增列</p>
+<blockquote>
+<p>不适用大表或者数据的在线处理</p>
+</blockquote>
+</li>
+<li><p>CSV数据的存储用 <code>,</code> 隔开，可直接编辑CSV文件进行数据的编排</p>
+<blockquote>
+<p>数据安全性低（编辑之后，要生效使用flush table XXX 命令）</p>
+</blockquote>
+</li>
+</ol>
+<p>应用场景：</p>
+<ol>
+<li>数据的快速导出导入</li>
+<li>表格直接转换成CSV</li>
+</ol>
+<h1 id="Archive-存储引擎"><a href="#Archive-存储引擎" class="headerlink" title="Archive 存储引擎"></a>Archive 存储引擎</h1><p>压缩协议进行数据的存储，数据存储为 <code>ARZ</code> 文件格式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-rw-rw---- 1 mysql mysql  8674 12月 18 19:40 table_archive.ARZ</span><br></pre></td></tr></table></figure>
+<p>特点：</p>
+<ol>
+<li>只支持 <code>insert</code> 和 <code>select</code> 两种操作</li>
+<li>只允许自增ID列建立索引</li>
+<li>行级锁</li>
+<li>不支持事务</li>
+<li>数据占用磁盘少</li>
+</ol>
+<p>应用场景：</p>
+<ol>
+<li>日志系统</li>
+<li>大量的设备数据采集</li>
+</ol>
+<h1 id="Memory-存储引擎"><a href="#Memory-存储引擎" class="headerlink" title="Memory 存储引擎"></a>Memory 存储引擎</h1><p>数据都是存储在内存中，IO效率要比其他引擎高很多，服务重启数据丢失，内存数据表默认只有16M </p>
+<p>特点：</p>
+<ol>
+<li>支持hash索引，B tree索引，默认hash（查找复杂度 <code>0(1)</code> ）</li>
+<li>字段长度都是固定长度 <code>varchar(32)=char(32)</code></li>
+<li>不支持大数据存储类型字段如 <code>blog</code> ，<code>text</code></li>
+<li>表级锁</li>
+</ol>
+<p>应用场景：</p>
+<ol>
+<li>等值查找热度较高数据</li>
+<li>查询结果内存中的计算，大多数都是采用这种存储引擎作为临时表存储需计算的数据</li>
+</ol>
+<p><strong>实际应用中不常用</strong></p>
+<h1 id="Myisam-存储引擎"><a href="#Myisam-存储引擎" class="headerlink" title="Myisam 存储引擎"></a>Myisam 存储引擎</h1><p>Mysql5.5 版本之前的默认存储引擎</p>
+<p>较多的系统表也还是使用这个存储引擎</p>
+<p>系统临时表也会用到 Myisam 存储引擎（Memory 存储引擎不支持的情况下，比如数据超过了16M）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-rw-rw---- 1 mysql mysql     0 12月 18 16:30 table_myisam.MYD</span><br><span class="line">-rw-rw---- 1 mysql mysql  1024 12月 18 16:30 table_myisam.MYI</span><br></pre></td></tr></table></figure>
+<p>特点：</p>
+<ol>
+<li><code>select count(*) from table</code> 无需进行数据的扫描（有专门存储）</li>
+<li>数据（<code>.MYD</code>）和索引（<code>.MYI</code>）分开存储</li>
+<li>表级锁</li>
+<li>不支持事务</li>
+</ol>
+<h1 id="InnoDB-存储引擎"><a href="#InnoDB-存储引擎" class="headerlink" title="InnoDB 存储引擎"></a>InnoDB 存储引擎</h1><p>Mysql5.5及以后版本的默认存储引擎</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-rw-rw---- 1 mysql mysql 98304 12月  6 19:00 table_innodb.ibd</span><br></pre></td></tr></table></figure>
+<p>特点：</p>
+<ol>
+<li>支持事务ACID</li>
+<li>行级锁</li>
+<li>聚集索引（主键索引）方式进行数据存储</li>
+<li>支持外键关系保证数据完整性（尽量不要用）</li>
+</ol>
 
       
-
     </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Mysql/" rel="tag"># Mysql</a>
+          
+            <a href="/tags/笔记/" rel="tag"># 笔记</a>
+          
+            <a href="/tags/性能优化/" rel="tag"># 性能优化</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/26/mysql/Mysql索引/" rel="next" title="Mysql索引">
+                <i class="fa fa-chevron-left"></i> Mysql索引
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -532,8 +667,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -613,6 +757,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">1.1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#各存储引擎对比"><span class="nav-number">1.2.</span> <span class="nav-text">各存储引擎对比</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CSV-存储引擎"><span class="nav-number">2.</span> <span class="nav-text">CSV 存储引擎</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Archive-存储引擎"><span class="nav-number">3.</span> <span class="nav-text">Archive 存储引擎</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Memory-存储引擎"><span class="nav-number">4.</span> <span class="nav-text">Memory 存储引擎</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Myisam-存储引擎"><span class="nav-number">5.</span> <span class="nav-text">Myisam 存储引擎</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#InnoDB-存储引擎"><span class="nav-number">6.</span> <span class="nav-text">InnoDB 存储引擎</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -751,6 +912,10 @@
 
 
   
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
 
   
 
