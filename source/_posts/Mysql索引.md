@@ -3,6 +3,8 @@ title: Mysql索引
 date: 2019-02-26 18:36:24
 tags: 
 - Mysql
+- 笔记
+- 性能优化
 categories: 
 - 数据库
 ---
