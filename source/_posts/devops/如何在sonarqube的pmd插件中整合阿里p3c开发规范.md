@@ -13,6 +13,8 @@ sonar-pmd是sonar官方的支持pmd的插件，但是还不支持p3c，需要在
 * 插件源码下载地址：https://github.com/mrprince/sonar-p3c-pmd
 * 阿里p3c github：https://github.com/alibaba/p3c
 
+此次使用的sonar版本：6.5
+
 此源码工程已经添加了P3C支持：
 ```xml
 <dependency>
