@@ -23,7 +23,7 @@ nacos官方文档：https://nacos.io
 
 部署nacos server，按照官方文档部署就行（分为单机部署和集群部署，两者的启动方式稍有不同）
 
-下面介绍的是和spring cloud作集成
+下面介绍的是和spring cloud做集成
 
 # 注册中心
 
@@ -118,5 +118,5 @@ spring.cloud.nacos.discovery.namespace=077d70f7-e430-4b4c-926a-44a9bfef003c
 
 启动服务：
 
-![i](/images/micro-service/nacos/nacos服务发现.png)
+![](/images/micro-service/nacos/nacos服务发现.png)
 
