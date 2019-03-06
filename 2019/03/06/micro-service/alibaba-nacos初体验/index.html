@@ -96,25 +96,28 @@
 
 
 
-  <meta name="description" content="参数作用域 全局参数（global）：     1set global autocommit = ON/OFF;  会话参数（session），会话参数不单独设置则会采用全局参数： 1set session autocommit = ON/OFF;   注意点：  全局参数的设定对于已经存在的会话无法生效（需要重新开启会话） 会话参数的设定随着会话的销毁而失效 全局类的统一配置建议配置在默认配置文">
-<meta name="keywords" content="Mysql,笔记,性能优化">
+  <meta name="description" content="Nacos 是一个更易于帮助构建云原生应用的动态服务发现、配置和服务管理平台，提供「注册中心」、「配置中心」和「动态DNS服务」三大功能。 使用的相关版本：  nacos server：0.9.0 nacos client：0.9.1 spring boot：1.5.17.RELEASE spring cloud：Edgware.SR4 spring-cloud-starter-alibaba-n">
+<meta name="keywords" content="微服务,阿里技术">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mysql配置优化">
-<meta property="og:url" content="https://cpp288.github.io/2019/02/28/mysql/Mysql配置优化/index.html">
+<meta property="og:title" content="alibaba nacos初体验">
+<meta property="og:url" content="https://cpp288.github.io/2019/03/06/micro-service/alibaba-nacos初体验/index.html">
 <meta property="og:site_name" content="cpp288&#39;s blog">
-<meta property="og:description" content="参数作用域 全局参数（global）：     1set global autocommit = ON/OFF;  会话参数（session），会话参数不单独设置则会采用全局参数： 1set session autocommit = ON/OFF;   注意点：  全局参数的设定对于已经存在的会话无法生效（需要重新开启会话） 会话参数的设定随着会话的销毁而失效 全局类的统一配置建议配置在默认配置文">
+<meta property="og:description" content="Nacos 是一个更易于帮助构建云原生应用的动态服务发现、配置和服务管理平台，提供「注册中心」、「配置中心」和「动态DNS服务」三大功能。 使用的相关版本：  nacos server：0.9.0 nacos client：0.9.1 spring boot：1.5.17.RELEASE spring cloud：Edgware.SR4 spring-cloud-starter-alibaba-n">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-02-28T01:20:42.720Z">
+<meta property="og:image" content="https://cpp288.github.io/images/micro-service/nacos/namespace.png">
+<meta property="og:image" content="https://cpp288.github.io/images/micro-service/nacos/nacos服务发现.png">
+<meta property="og:updated_time" content="2019-03-06T11:22:46.454Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mysql配置优化">
-<meta name="twitter:description" content="参数作用域 全局参数（global）：     1set global autocommit = ON/OFF;  会话参数（session），会话参数不单独设置则会采用全局参数： 1set session autocommit = ON/OFF;   注意点：  全局参数的设定对于已经存在的会话无法生效（需要重新开启会话） 会话参数的设定随着会话的销毁而失效 全局类的统一配置建议配置在默认配置文">
+<meta name="twitter:title" content="alibaba nacos初体验">
+<meta name="twitter:description" content="Nacos 是一个更易于帮助构建云原生应用的动态服务发现、配置和服务管理平台，提供「注册中心」、「配置中心」和「动态DNS服务」三大功能。 使用的相关版本：  nacos server：0.9.0 nacos client：0.9.1 spring boot：1.5.17.RELEASE spring cloud：Edgware.SR4 spring-cloud-starter-alibaba-n">
+<meta name="twitter:image" content="https://cpp288.github.io/images/micro-service/nacos/namespace.png">
 
 
 
 
 
 
-  <link rel="canonical" href="https://cpp288.github.io/2019/02/28/mysql/Mysql配置优化/">
+  <link rel="canonical" href="https://cpp288.github.io/2019/03/06/micro-service/alibaba-nacos初体验/">
 
 
 
@@ -124,7 +127,7 @@
   };
 </script>
 
-  <title>Mysql配置优化 | cpp288's blog</title>
+  <title>alibaba nacos初体验 | cpp288's blog</title>
   
 
 
@@ -369,7 +372,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://cpp288.github.io/2019/02/28/mysql/Mysql配置优化/">
+    <link itemprop="mainEntityOfPage" href="https://cpp288.github.io/2019/03/06/micro-service/alibaba-nacos初体验/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chen Jian">
@@ -386,7 +389,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Mysql配置优化
+          <h1 class="post-title" itemprop="name headline">alibaba nacos初体验
 
               
             
@@ -410,7 +413,7 @@
                 
               
 
-              <time title="创建时间：2019-02-28 09:20:04 / 修改时间：09:20:42" itemprop="dateCreated datePublished" datetime="2019-02-28T09:20:04+08:00">2019-02-28</time>
+              <time title="创建时间：2019-03-06 19:19:46 / 修改时间：19:22:46" itemprop="dateCreated datePublished" datetime="2019-03-06T19:19:46+08:00">2019-03-06</time>
             
 
             
@@ -430,7 +433,7 @@
               </span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/微服务/" itemprop="url" rel="index"><span itemprop="name">微服务</span></a></span>
 
                 
                 
@@ -460,7 +463,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1.4k</span>
+                <span title="本文字数">2.5k</span>
               
 
               
@@ -474,7 +477,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 分钟</span>
+                <span title="阅读时长">2 分钟</span>
               
             </div>
           
@@ -494,51 +497,130 @@
       
 
       
-        <h1 id="参数作用域"><a href="#参数作用域" class="headerlink" title="参数作用域"></a>参数作用域</h1><ul>
-<li><p>全局参数（global）：    </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set global autocommit = ON/OFF;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>会话参数（session），会话参数不单独设置则会采用全局参数：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set session autocommit = ON/OFF;</span><br></pre></td></tr></table></figure>
-</li>
+        <p>Nacos 是一个更易于帮助构建云原生应用的动态服务发现、配置和服务管理平台，提供「注册中心」、「配置中心」和「动态DNS服务」三大功能。</p>
+<p>使用的相关版本：</p>
+<ul>
+<li>nacos server：0.9.0</li>
+<li>nacos client：0.9.1</li>
+<li>spring boot：1.5.17.RELEASE</li>
+<li>spring cloud：Edgware.SR4</li>
+<li>spring-cloud-starter-alibaba-nacos-discovery：0.1.1.RELEASE（对应spring boot 1.x版本）</li>
+<li>spring-cloud-starter-alibaba-nacos-config：0.1.1.RELEASE（对应spring boot 1.x版本）</li>
 </ul>
+<p>nacos官方文档：<a href="https://nacos.io" target="_blank" rel="noopener">https://nacos.io</a></p>
+<p>部署nacos server，按照官方文档部署就行（分为单机部署和集群部署，两者的启动方式稍有不同）</p>
+<p>下面介绍的是和spring cloud作集成</p>
+<h1 id="注册中心"><a href="#注册中心" class="headerlink" title="注册中心"></a>注册中心</h1><h2 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h2><table>
+<thead>
+<tr>
+<th>比较点</th>
+<th>Eureka</th>
+<th>Zookeeper</th>
+<th>Consul</th>
+<th>Nacos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>运维熟悉度</td>
+<td>相对陌生</td>
+<td>熟悉</td>
+<td>更陌生</td>
+<td>陌生</td>
+</tr>
+<tr>
+<td>一致性（CAP）</td>
+<td>AP</td>
+<td>CP</td>
+<td>AP</td>
+<td>AP</td>
+</tr>
+<tr>
+<td>一致性协议</td>
+<td>HTTP 定时轮训</td>
+<td>ZAB</td>
+<td>RAFT</td>
+<td>～</td>
+</tr>
+<tr>
+<td>通讯方式</td>
+<td>HTTP REST</td>
+<td>自定义协议</td>
+<td>HTTP REST</td>
+<td>～</td>
+</tr>
+<tr>
+<td>更新机制</td>
+<td>Peer 2 Peer（服务器之间） + Scheduler（服务器和客户端）</td>
+<td>ZK Watch</td>
+<td>Agent 监听的方式</td>
+<td>～</td>
+</tr>
+<tr>
+<td>适用规模</td>
+<td>&lt; 30K</td>
+<td>&lt;20K</td>
+<td>&lt;5K</td>
+<td>100K+</td>
+</tr>
+<tr>
+<td>性能问题</td>
+<td>简单的更新机制、复杂设计、规模较大时 GC 频繁</td>
+<td>扩容麻烦、规模较大时 GC 频繁</td>
+<td>3K 节点以上，更新列表缓慢</td>
+<td>刚开源</td>
+</tr>
+<tr>
+<td>dashboard</td>
+<td>有</td>
+<td>没有，可以自己实现</td>
+<td>有</td>
+<td>有</td>
+</tr>
+</tbody>
+</table>
+<p>各自缺点：</p>
+<p><strong>Eureka：</strong></p>
+<ol>
+<li>客户端注册服务上报所有信息，节点多的情况下，网络，服务端压力过大，且浪费内存</li>
+<li>客户端更新服务信息通过简单的轮询机制，当服务数量巨大时，服务器压力过大。</li>
+<li>集群伸缩性不强，服务端集群通过广播式的复制，增加服务器压力</li>
+<li>Eureka2.0 闭源（Spring Cloud最新版本还是使用的1.X版本的Eureka）</li>
+</ol>
+<p><strong>Zookeeper：</strong></p>
+<ol>
+<li>维护成本较高，客户端，session状态，网络故障等问题，会导致服务异常</li>
+<li>集群伸缩性限制，内存，GC和连接</li>
+<li>主节点挂的情况下，会进行leader选举，在此过程中服务将不可用</li>
+<li>无控制台管理</li>
+</ol>
+<p><strong>Consul：</strong></p>
+<ol>
+<li>未经大规模市场验证，无法保证可靠性</li>
+<li>Go语言编写，内部异常排查困难</li>
+</ol>
+<p><strong>Nacos：</strong></p>
+<ol>
+<li>刚刚开源不久，社区热度不够，依然存在bug</li>
+</ol>
+<p>上面对比摘自与 <a href="https://github.com/mercyblitz/tech-weekly" target="_blank" rel="noopener">小马哥技术周报</a></p>
+<h2 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h2><p>加入依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-alibaba-nacos-discovery<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- spring boot 1.x使用0.1.x版本，spring boot 2.x使用0.2.x版本 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.1.1.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba.nacos<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>nacos-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 这里需要替换 nacos-client 版本 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba.nacos<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>nacos-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.9.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>注意点：</p>
 <ol>
-<li>全局参数的设定对于已经存在的会话无法生效（需要重新开启会话）</li>
-<li>会话参数的设定随着会话的销毁而失效</li>
-<li>全局类的统一配置建议配置在默认配置文件中，否则重启服务会导致配置失效</li>
+<li>spring-cloud-starter-alibaba-nacos-discovery 依赖的版本和 spring boot 版本有关</li>
+<li>spring-cloud-starter-alibaba-nacos-discovery 默认使用的 nacos-client 的版本较低，会有问题（比如namespace设置无效），这里替换了较高的版本</li>
 </ol>
-<h1 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h1><p><code>mysql --help</code> 寻找配置文件的位置和加载顺序：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Default options are read from the following files in the given order:</span><br><span class="line">/etc/my.cnf /etc/mysql/my.cnf /usr/etc/my.cnf ~/.my.cnf</span><br></pre></td></tr></table></figure>
-<p>因为参数比较多，可以通过命令过滤：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql --help | grep -A 1 &apos;Default options are read from the following files in the given order&apos;</span><br></pre></td></tr></table></figure>
-<h2 id="连接数配置"><a href="#连接数配置" class="headerlink" title="连接数配置"></a>连接数配置</h2><p>设置 <code>max_connections</code> 可配置最大连接数，mysql5.6 默认是151个连接：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">+--------------------+-------+</span><br><span class="line">| Variable_name      | Value |</span><br><span class="line">+--------------------+-------+</span><br><span class="line">| max_connections    | 151   |</span><br><span class="line">+--------------------+-------+</span><br></pre></td></tr></table></figure>
-<p>这个设置受其它两个配置影响：</p>
-<ol>
-<li><p>系统句柄数配置</p>
-<p>使用 <code>ulimit -a</code> 或者查看 <code>/etc/security/limits.conf</code> 配置文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">open files                      (-n) 65535</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>mysql句柄数配置</p>
-<p>查看 <code>/usr/lib/systemd/system/mysqld.service</code> 配置文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LimitNOFILE = 6000</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="内存参数配置"><a href="#内存参数配置" class="headerlink" title="内存参数配置"></a>内存参数配置</h2><ul>
-<li><p><code>sort_buffer_size</code> connection 排序缓冲区大小 </p>
-<p>当查询语句中有需要文件排序功能时，马上为 connection 分配配置的内存大小，建议256K（默认值）～ 2M之内</p>
-</li>
-<li><p><code>join_buffer_size</code> connection关联查询缓冲区大小</p>
-<p>当查询语句中有关联查询时，马上分配配置大小的内存用这个关联查询，所以有可能在一个查询语句中会分配很多个关联查询缓冲区 ，建议256K（默认值）～1M之间</p>
-</li>
-<li><p><code>Innodb_buffer_pool_size</code> innodb buffer/cache 的大小（默认128M）</p>
-<p>innodb buffer/cache中存着数据缓存、索引缓存、缓冲数据、内部结构这些数据，所以大的缓冲池可以减小多次磁盘I/O访问相同的表数据以提高性能</p>
-<p>计算公式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Innodb_buffer_pool_size = (总物理内存 - 系统运行所用 - connection 所用) * 90%</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="其它参数配置"><a href="#其它参数配置" class="headerlink" title="其它参数配置"></a>其它参数配置</h2><p>参考帖子：<a href="https://www.cnblogs.com/wyy123/p/6092976.html" target="_blank" rel="noopener">https://www.cnblogs.com/wyy123/p/6092976.html</a></p>
+<p>application.properties：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">spring.application.name=nacos-test</span><br><span class="line">server.port=8525</span><br><span class="line"># nacos server地址</span><br><span class="line">spring.cloud.nacos.discovery.server-addr=192.168.173.80:8848</span><br><span class="line"># namespace id</span><br><span class="line">spring.cloud.nacos.discovery.namespace=077d70f7-e430-4b4c-926a-44a9bfef003c</span><br></pre></td></tr></table></figure>
+<p>其它配置可以参考官网</p>
+<p><img src="/images/micro-service/nacos/namespace.png" alt></p>
+<p>注意：这里设置的namespace是界面上显示的id，不设置会进入public默认的命名空间</p>
+<blockquote>
+<p>namespace：常用场景之一是不同环境的注册的区分隔离，例如开发测试环境和生产环境的资源（如配置、服务）隔离等</p>
+</blockquote>
+<p>启动服务：</p>
+<p><img src="/images/micro-service/nacos/nacos服务发现.png" alt="i"></p>
 
       
     </div>
@@ -562,11 +644,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Mysql/" rel="tag"># Mysql</a>
+            <a href="/tags/微服务/" rel="tag"># 微服务</a>
           
-            <a href="/tags/笔记/" rel="tag"># 笔记</a>
-          
-            <a href="/tags/性能优化/" rel="tag"># 性能优化</a>
+            <a href="/tags/阿里技术/" rel="tag"># 阿里技术</a>
           
         </div>
       
@@ -579,8 +659,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/28/mysql/Mysql-MVCC/" rel="next" title="Mysql MVCC">
-                <i class="fa fa-chevron-left"></i> Mysql MVCC
+              <a href="/2019/03/04/java/java拦截器（interceptor）和过滤器（filter）/" rel="next" title="java拦截器（interceptor）和过滤器（filter）">
+                <i class="fa fa-chevron-left"></i> java拦截器（interceptor）和过滤器（filter）
               </a>
             
           </div>
@@ -588,10 +668,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/02/28/devops/如何在sonarqube的pmd插件中整合阿里p3c开发规范/" rel="prev" title="如何在sonarqube的pmd插件中整合阿里p3c开发规范">
-                如何在sonarqube的pmd插件中整合阿里p3c开发规范 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -769,7 +845,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#参数作用域"><span class="nav-text">参数作用域</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置文件"><span class="nav-text">配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#连接数配置"><span class="nav-text">连接数配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存参数配置"><span class="nav-text">内存参数配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其它参数配置"><span class="nav-text">其它参数配置</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#注册中心"><span class="nav-text">注册中心</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#对比"><span class="nav-text">对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单使用"><span class="nav-text">简单使用</span></a></li></ol></li></ol></div>
             
 
           </div>
