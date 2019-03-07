@@ -96,25 +96,25 @@
 
 
 
-  <meta name="description" content="Nacos 0.8.0版本完善了监控系统，支持通过暴露metrics数据接入第三方监控系统监控Nacos运行状态，目前支持prometheus、elastic search和influxdb 官方文档地址：https://nacos.io/zh-cn/docs/monitor-guide.html 官方文档有 结合prometheus和grafana如何监控Nacos 的详细教程 其它方案待有机会">
+  <meta name="description" content="官方文档：https://nacos.io/zh-cn/index.html 官方博客：https://nacos.io/zh-cn/blog/index.html 核心功能：  注册中心 配置中心  nacos服务监控：https://nacos.io/zh-cn/docs/monitor-guide.html 0.9.0 Nacos 0.9.0 发布，稳定的快速迭代 Nacos 0.9.0版本">
 <meta name="keywords" content="nacos,微服务,阿里技术">
 <meta property="og:type" content="article">
-<meta property="og:title" content="alibaba nacos服务监控">
-<meta property="og:url" content="https://cpp288.github.io/2019/03/07/micro-service/alibaba-nacos服务监控/index.html">
+<meta property="og:title" content="nacos版本迭代整理（持续更新）">
+<meta property="og:url" content="https://cpp288.github.io/2019/03/07/micro-service/nacos版本迭代整理（持续更新）/index.html">
 <meta property="og:site_name" content="cpp288&#39;s blog">
-<meta property="og:description" content="Nacos 0.8.0版本完善了监控系统，支持通过暴露metrics数据接入第三方监控系统监控Nacos运行状态，目前支持prometheus、elastic search和influxdb 官方文档地址：https://nacos.io/zh-cn/docs/monitor-guide.html 官方文档有 结合prometheus和grafana如何监控Nacos 的详细教程 其它方案待有机会">
+<meta property="og:description" content="官方文档：https://nacos.io/zh-cn/index.html 官方博客：https://nacos.io/zh-cn/blog/index.html 核心功能：  注册中心 配置中心  nacos服务监控：https://nacos.io/zh-cn/docs/monitor-guide.html 0.9.0 Nacos 0.9.0 发布，稳定的快速迭代 Nacos 0.9.0版本">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-07T09:01:07.353Z">
+<meta property="og:updated_time" content="2019-03-07T10:59:08.853Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="alibaba nacos服务监控">
-<meta name="twitter:description" content="Nacos 0.8.0版本完善了监控系统，支持通过暴露metrics数据接入第三方监控系统监控Nacos运行状态，目前支持prometheus、elastic search和influxdb 官方文档地址：https://nacos.io/zh-cn/docs/monitor-guide.html 官方文档有 结合prometheus和grafana如何监控Nacos 的详细教程 其它方案待有机会">
+<meta name="twitter:title" content="nacos版本迭代整理（持续更新）">
+<meta name="twitter:description" content="官方文档：https://nacos.io/zh-cn/index.html 官方博客：https://nacos.io/zh-cn/blog/index.html 核心功能：  注册中心 配置中心  nacos服务监控：https://nacos.io/zh-cn/docs/monitor-guide.html 0.9.0 Nacos 0.9.0 发布，稳定的快速迭代 Nacos 0.9.0版本">
 
 
 
 
 
 
-  <link rel="canonical" href="https://cpp288.github.io/2019/03/07/micro-service/alibaba-nacos服务监控/">
+  <link rel="canonical" href="https://cpp288.github.io/2019/03/07/micro-service/nacos版本迭代整理（持续更新）/">
 
 
 
@@ -124,7 +124,7 @@
   };
 </script>
 
-  <title>alibaba nacos服务监控 | cpp288's blog</title>
+  <title>nacos版本迭代整理（持续更新） | cpp288's blog</title>
   
 
 
@@ -369,7 +369,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://cpp288.github.io/2019/03/07/micro-service/alibaba-nacos服务监控/">
+    <link itemprop="mainEntityOfPage" href="https://cpp288.github.io/2019/03/07/micro-service/nacos版本迭代整理（持续更新）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chen Jian">
@@ -386,7 +386,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">alibaba nacos服务监控
+          <h1 class="post-title" itemprop="name headline">nacos版本迭代整理（持续更新）
 
               
             
@@ -410,7 +410,7 @@
                 
               
 
-              <time title="创建时间：2019-03-07 16:54:16 / 修改时间：17:01:07" itemprop="dateCreated datePublished" datetime="2019-03-07T16:54:16+08:00">2019-03-07</time>
+              <time title="创建时间：2019-03-07 17:50:13 / 修改时间：18:59:08" itemprop="dateCreated datePublished" datetime="2019-03-07T17:50:13+08:00">2019-03-07</time>
             
 
             
@@ -460,7 +460,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">206</span>
+                <span title="本文字数">390</span>
               
 
               
@@ -494,10 +494,27 @@
       
 
       
-        <p>Nacos 0.8.0版本完善了监控系统，支持通过暴露metrics数据接入第三方监控系统监控Nacos运行状态，目前支持prometheus、elastic search和influxdb</p>
-<p>官方文档地址：<a href="https://nacos.io/zh-cn/docs/monitor-guide.html" target="_blank" rel="noopener">https://nacos.io/zh-cn/docs/monitor-guide.html</a></p>
-<p>官方文档有 <code>结合prometheus和grafana如何监控Nacos</code> 的详细教程</p>
-<p>其它方案待有机会实践再写吧</p>
+        <p>官方文档：<a href="https://nacos.io/zh-cn/index.html" target="_blank" rel="noopener">https://nacos.io/zh-cn/index.html</a></p>
+<p>官方博客：<a href="https://nacos.io/zh-cn/blog/index.html" target="_blank" rel="noopener">https://nacos.io/zh-cn/blog/index.html</a></p>
+<p>核心功能：</p>
+<ul>
+<li>注册中心</li>
+<li>配置中心</li>
+</ul>
+<p>nacos服务监控：<a href="https://nacos.io/zh-cn/docs/monitor-guide.html" target="_blank" rel="noopener">https://nacos.io/zh-cn/docs/monitor-guide.html</a></p>
+<h1 id="0-9-0"><a href="#0-9-0" class="headerlink" title="0.9.0"></a>0.9.0</h1><ul>
+<li><a href="https://nacos.io/en-us/blog/nacos0.9.0.html" target="_blank" rel="noopener">Nacos 0.9.0 发布，稳定的快速迭代</a></li>
+<li><a href="https://nacos.io/en-us/blog/nacos0.9-intro.html" target="_blank" rel="noopener">Nacos 0.9.0版本发布啦</a></li>
+</ul>
+<p>更新内容：</p>
+<ol>
+<li>Nacos-Sync稳定性提升</li>
+<li><strong>Nacos Server功能拆分部署（通过启动参数实现拆分部署）</strong><blockquote>
+<p>启动Nacos server时候，增加-f参数，意思是function mode，和对应模块标示来进行启动，如果不穿，或者传入有误，都将启动全部功能。 配置中心参数对应config，注册中心参数对应naming</p>
+</blockquote>
+</li>
+<li>Nacos python语言体系的支持</li>
+</ol>
 
       
     </div>
@@ -538,8 +555,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/06/micro-service/alibaba-nacos做为注册中心/" rel="next" title="alibaba nacos做为注册中心">
-                <i class="fa fa-chevron-left"></i> alibaba nacos做为注册中心
+              <a href="/2019/03/06/micro-service/nacos做为注册中心/" rel="next" title="nacos做为注册中心">
+                <i class="fa fa-chevron-left"></i> nacos做为注册中心
               </a>
             
           </div>
@@ -591,8 +608,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -706,6 +732,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0-9-0"><span class="nav-text">0.9.0</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
