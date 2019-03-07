@@ -1,7 +1,8 @@
 ---
-title: alibaba nacos初体验
+title: alibaba nacos做为注册中心
 date: 2019-03-06 19:19:46
 tags: 
+- nacos
 - 微服务
 - 阿里技术
 categories:
