@@ -1,5 +1,5 @@
 ---
-title: alibaba nacos做为注册中心
+title: nacos做为注册中心
 date: 2019-03-06 19:19:46
 tags: 
 - nacos
@@ -21,7 +21,7 @@ Nacos 是一个更易于帮助构建云原生应用的动态服务发现、配�
 
 nacos官方文档：https://nacos.io
 
-部署nacos server，按照官方文档部署就行（分为单机部署和集群部署，两者的启动方式稍有不同）
+部署nacos server，按照官方文档部署就行（分为单机部署和集群部署，两者的启动方式稍有不同），现已支持拆分部署
 
 下面介绍的是和spring cloud做集成
 
