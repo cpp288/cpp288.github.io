@@ -21,6 +21,8 @@ nacos服务监控：https://nacos.io/zh-cn/docs/monitor-guide.html
 
 # 0.9.0
 
+发布时间：2019.2.28
+
 * [Nacos 0.9.0 发布，稳定的快速迭代](https://nacos.io/en-us/blog/nacos0.9.0.html)
 * [Nacos 0.9.0版本发布啦](https://nacos.io/en-us/blog/nacos0.9-intro.html)
 
