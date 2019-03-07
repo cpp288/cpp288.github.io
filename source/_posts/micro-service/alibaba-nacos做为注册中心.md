@@ -17,7 +17,6 @@ Nacos 是一个更易于帮助构建云原生应用的动态服务发现、配�
 - spring boot：1.5.17.RELEASE
 - spring cloud：Edgware.SR4
 - spring-cloud-starter-alibaba-nacos-discovery：0.1.1.RELEASE（对应spring boot 1.x版本）
-- spring-cloud-starter-alibaba-nacos-config：0.1.1.RELEASE（对应spring boot 1.x版本）
 
 nacos官方文档：https://nacos.io
 
@@ -25,9 +24,7 @@ nacos官方文档：https://nacos.io
 
 下面介绍的是和spring cloud做集成
 
-# 注册中心
-
-## 对比
+# 相关对比
 
 |比较点|Eureka|Zookeeper|Consul|Nacos|
 |---|---|---|---|---|
@@ -67,7 +64,7 @@ nacos官方文档：https://nacos.io
 
 上面对比摘自与 [小马哥技术周报](https://github.com/mercyblitz/tech-weekly)
 
-## 简单使用
+# 简单使用
 
 加入依赖：
 
