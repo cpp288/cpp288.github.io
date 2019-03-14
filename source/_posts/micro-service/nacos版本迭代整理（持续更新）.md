@@ -31,3 +31,9 @@ nacos服务监控：https://nacos.io/zh-cn/docs/monitor-guide.html
 2. **Nacos Server功能拆分部署（通过启动参数实现拆分部署）**
     > 启动Nacos server时候，增加-f参数，意思是function mode，和对应模块标示来进行启动，如果不穿，或者传入有误，都将启动全部功能。 配置中心参数对应config，注册中心参数对应naming
 3. Nacos python语言体系的支持
+
+# 1.0.0（即将发布）
+
+# 相关博客
+
+* [阿里巴巴基于 Nacos 实现环境隔离的实践](https://mp.weixin.qq.com/s/TQDhSMJJcCSJTR7Z0gh4gw) 2019.3.13
