@@ -172,15 +172,6 @@ docker build -t rocketbot .
 docker run -p 8080:80 -d -e SKYWALKING_URL=192.168.173.113:12800 rocketbot
 ```
 
-注意点：在 docker run 的时候，指定的
-
-```
-npm install
-npm run build
-docker build -t rocketbot .
-docker run -p 8080:80 -d -e SKYWALKING_URL=192.168.173.113:12800 rocketbot
-```
-
 注意：在 docker run 的时候，由于 rockerbot 容器中没有 skywalking，指定的 `SKYWALKING_URL` 必须是ip地址
 
 # 相关参考
