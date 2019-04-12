@@ -1,5 +1,5 @@
 ---
-title: skywalking 6.0.0-GA安装
+title: 使用skywalking做分布式系统链路监控
 date: 2019-04-12 14:09:24
 tags:
 - skywalking
