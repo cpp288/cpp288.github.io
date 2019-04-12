@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="cpp288&#39;s blog">
 <meta property="og:description" content="版本：  skywalking：6.0.0-GA elasticsearch：6.5.4 rocketbot：最新（master分支）2019.04.12  skywalking官网 skywalking 可以使用 H2、elasticsearch、MySql做为数据存储，推荐使用 elasticsearch 网上有相关的 docker-compose （参考），但是只有 5.0.0 版本的 In">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-12T06:11:25.360Z">
+<meta property="og:updated_time" content="2019-04-12T06:14:20.424Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="skywalking 6.0.0-GA安装">
 <meta name="twitter:description" content="版本：  skywalking：6.0.0-GA elasticsearch：6.5.4 rocketbot：最新（master分支）2019.04.12  skywalking官网 skywalking 可以使用 H2、elasticsearch、MySql做为数据存储，推荐使用 elasticsearch 网上有相关的 docker-compose （参考），但是只有 5.0.0 版本的 In">
@@ -410,7 +410,7 @@
                 
               
 
-              <time title="创建时间：2019-04-12 14:09:24 / 修改时间：14:11:25" itemprop="dateCreated datePublished" datetime="2019-04-12T14:09:24+08:00">2019-04-12</time>
+              <time title="创建时间：2019-04-12 14:09:24 / 修改时间：14:14:20" itemprop="dateCreated datePublished" datetime="2019-04-12T14:09:24+08:00">2019-04-12</time>
             
 
             
@@ -460,7 +460,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">4.2k</span>
+                <span title="本文字数">4k</span>
               
 
               
@@ -545,8 +545,6 @@
 <p>GitHub地址：<a href="https://github.com/TinyAllen/rocketbot" target="_blank" rel="noopener">https://github.com/TinyAllen/rocketbot</a></p>
 <p>这里使用的是 docker 安装的方式，按照 GitHub 的教程安装即可（此次安装由于 Rocketbot 的 shell 脚本问题，搞的久了点）</p>
 <p>按照步骤：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br><span class="line">npm run build</span><br><span class="line">docker build -t rocketbot .</span><br><span class="line">docker run -p 8080:80 -d -e SKYWALKING_URL=192.168.173.113:12800 rocketbot</span><br></pre></td></tr></table></figure>
-<p>注意点：在 docker run 的时候，指定的</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br><span class="line">npm run build</span><br><span class="line">docker build -t rocketbot .</span><br><span class="line">docker run -p 8080:80 -d -e SKYWALKING_URL=192.168.173.113:12800 rocketbot</span><br></pre></td></tr></table></figure>
 <p>注意：在 docker run 的时候，由于 rockerbot 容器中没有 skywalking，指定的 <code>SKYWALKING_URL</code> 必须是ip地址</p>
 <h1 id="相关参考"><a href="#相关参考" class="headerlink" title="相关参考"></a>相关参考</h1><ul>
