@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[文章收藏]]></title>
     <url>%2F2019%2F04%2F15%2F%E6%96%87%E7%AB%A0%E6%94%B6%E8%97%8F%2F</url>
-    <content type="text"><![CDATA[微服务注册中心Nacos Nacos 发布 1.0.0 GA 版本，可大规模投入到生产环境 Spring Cloud Alibaba系列教程-03-搭建生产可用的Nacos集群 熔断限流Spring Cloud Alibaba Sentinel Spring Cloud Alibaba基础教程：使用Sentinel实现接口限流 Sentinel Client: 整合Apollo规则持久化 分布式事务Seata 开发者说：深度剖析开源分布式事务方案 Seata 的事务协调器 其它Spring Cloud Bus 干货｜Spring Cloud Bus 消息总线介绍Spring Cloud Stream 干货｜Spring Cloud Stream 体系及原理介绍 消息队列RocketMQ 从RocketMQ我们学到了什么？（NameServer篇）]]></content>
+    <content type="text"><![CDATA[微服务注册中心Nacos Nacos 发布 1.0.0 GA 版本，可大规模投入到生产环境 Spring Cloud Alibaba系列教程-03-搭建生产可用的Nacos集群 熔断限流Spring Cloud Alibaba Sentinel Spring Cloud Alibaba基础教程：使用Sentinel实现接口限流 Sentinel Client: 整合Apollo规则持久化 分布式事务Seata 开发者说：深度剖析开源分布式事务方案 Seata 的事务协调器 其它Spring Cloud Bus 干货｜Spring Cloud Bus 消息总线介绍 Spring Cloud Stream 干货｜Spring Cloud Stream 体系及原理介绍 消息队列RocketMQ 从RocketMQ我们学到了什么？（NameServer篇）]]></content>
       <categories>
         <category>收藏</category>
       </categories>
