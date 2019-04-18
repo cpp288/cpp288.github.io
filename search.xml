@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Redis的过期策略以及内存淘汰机制]]></title>
+    <url>%2F2019%2F04%2F18%2Fredis%2FRedis%E7%9A%84%E8%BF%87%E6%9C%9F%E7%AD%96%E7%95%A5%E4%BB%A5%E5%8F%8A%E5%86%85%E5%AD%98%E6%B7%98%E6%B1%B0%E6%9C%BA%E5%88%B6%2F</url>
+    <content type="text"><![CDATA[Redis采用的是定期删除+惰性删除策略，官方文档解释：https://redis.io/commands/expire 为什么不用定时删除策略定时删除，用一个定时器来负责监视key，过期则自动删除，虽然内存及时释放，但是十分消耗CPU资源。 在大并发请求下，CPU要将事件应用在处理请求，而不是删除key，因此没有采用这一策略。 定期删除+惰性删除定期删除，redis默认每隔100ms检查，是否有过期的key，有过期key则删除，需要说明的是，redis不是每隔100ms将所有的key检查一次，而是随机进行检查。 因此，如果只采用定期删除策略，会导致很多key到时间没有删除，于是，惰性删除派上用场了，也就是说在你获取某个key的时候，redis会检查一下，这个key如果设置了过期时间，那么是否过期了，过期此时就会删除。 若果定期删除没有删除key，然后也没有去请求key，也就是惰性删除也没有发生，这样，redis的内存会越来越高，那么就应该采用内存淘汰机制。 在redis.conf中有一行配置：1maxmemory-policy volatile-lru 该配置就是配内存淘汰策略的 noeviction：当内存不足以容纳新写入数据时，新写入操作会报错 allkeys-lru：当内存不足以容纳新写入数据时，在键空间中，移除最近最少使用的key（推荐使用） allkeys-random：当内存不足以容纳新写入数据时，在键空间中，随机移除某个key volatile-lru：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，移除最近最少使用的key。这种情况一般是把redis既当缓存，又当持久化存储的时候采用 volatile-random：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，随机移除某个key volatile-ttl：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，有更早过期时间的key优先移除]]></content>
+      <categories>
+        <category>redis</category>
+      </categories>
+      <tags>
+        <tag>redis</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Redis之Lua脚本]]></title>
     <url>%2F2019%2F04%2F18%2Fredis%2FRedis%E4%B9%8BLua%E8%84%9A%E6%9C%AC%2F</url>
     <content type="text"><![CDATA[为什么要使用Lua脚本Redis中内嵌了对Lua环境的支持，允许开发者使用Lua语言编写脚本传到Redis中执行，直接在服务端原子的执行多个Redis命令。 Lua是一个高效的轻量级脚本语言（JavaScript、shell、sql、python、ruby…），用标准C语言编写并以源代码形式开放，其设计目的是为了嵌入应用程序中，从而为应用程序提供灵活的扩展和制定功能。 使用Lua脚本的好处： 减少网络开销，在Lua脚本中可以把多个命令放在同一个脚本中运行 原子操作，redis会将整个脚本作为一个整体执行，中间不会被其他命令插入 复用性，客户端发送的脚本会永远存储在redis中，其他客户端可以复用这一脚本来完成同样的逻辑 Lua脚本使用在Lua脚本中调用Redis命令在Lua脚本中调用Redis命令，可以使用redis.call函数调用：12redis.call(&apos;set&apos;, &apos;hello&apos;, &apos;world&apos;)local value = redis.call(&apos;get&apos;, &apos;hello&apos;) redis.call函数的返回值就是redis命令的执行结果，redis.call函数会将redis的数据类型返回值转换对应的Lua的数据类型，在脚本中可以使用return语句将值返回给redis客户端，如果没有执行return，默认返回为nil EVAL命令格式：1[EVAL][脚本内容][key参数的数量][key...][arg...] 可以通过key和arg这两个参数向脚本中传递数据，他们的值可以在脚本中分别使用KEYS和ARGV这两个类型的全局变量访问，比如： Lua脚本：1return redis.call(&apos;set&apos;,KEYS[1],ARGV[1]) // KEYS和ARGV必须大写 EVAL命令：1eval &quot;return redis.call(&apos;set&apos;,KEYS[1],ARGV[1])&quot; 1 lua1 hello 注意：EVAL命令是根据key参数的数量，也就是上面例子中的1来将后面所有参数分别存入脚本中KEYS和ARGV两个表类型的全局变量。当脚本不需要任何参数时也不能省略这个参数，如果没有则设置为0：1eval &quot;return redis.call(&apos;get&apos;,&apos;lua1&apos;)&quot; 0 EVALSHA命令考虑到通过eval执行lua脚本，脚本比较长的情况下，每次调用脚本都需要把整个脚本传给redis，比较占用带宽。为了解决这个问题，redis提供了EVALSHA命令，允许通过脚本内容的SHA1摘要来执行脚本。 该命令用法和EVAL一样，只不过是将脚本内容替换成脚本内容的SHA1摘要： Redis在执行EVAL命令时会计算脚本的SHA1摘要并记录在脚本缓存中 执行EVALSHA命令时Redis会根据提供的摘要从脚本缓存中查找对应的脚本内容，如果找到了就执行，否则返回“NOSCRIPT No matching script, Please use EVAL” 将脚本加入缓存并生成sha1摘要：1script load &quot;return redis.call(&apos;get&apos;,&quot;lua1&quot;)&quot; 使用EVALSHA执行：1evalsha &quot;a5a402e90df3hkfakyi32970058233hjfd574&quot; 0 我们在调用eval命令之前，先执行evalsha命令，如果提示脚本不存在，则再调用eval命令]]></content>
