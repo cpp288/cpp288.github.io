@@ -96,23 +96,29 @@
 
 
 
-  <meta name="description" content="For record only">
-<meta property="og:type" content="website">
-<meta property="og:title" content="cpp288&#39;s blog">
-<meta property="og:url" content="https://cpp288.github.io/tags/redis/index.html">
+  <meta name="description" content="即使是使用哨兵，此时的redis集群的每个数据库依然存有集群中的所有数据，从而导致集群的总数据存储量受限于可用存储内存最小的节点，形成木桶效应。因为redis是基于内存存储的，所以这个问题尤为突出。 在redis3.0之前，我们是通过在客户端去做分片，通过hash的方式对key进行分片存储。分片虽然能够解决各个节点的存储压力，但是维护成本高，增加、移除节点比较繁琐。因此在3.0之后的版本支持了集群">
+<meta name="keywords" content="redis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis Cluster">
+<meta property="og:url" content="https://cpp288.github.io/2019/04/18/redis/Redis-Cluster/index.html">
 <meta property="og:site_name" content="cpp288&#39;s blog">
-<meta property="og:description" content="For record only">
+<meta property="og:description" content="即使是使用哨兵，此时的redis集群的每个数据库依然存有集群中的所有数据，从而导致集群的总数据存储量受限于可用存储内存最小的节点，形成木桶效应。因为redis是基于内存存储的，所以这个问题尤为突出。 在redis3.0之前，我们是通过在客户端去做分片，通过hash的方式对key进行分片存储。分片虽然能够解决各个节点的存储压力，但是维护成本高，增加、移除节点比较繁琐。因此在3.0之后的版本支持了集群">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://cpp288.github.io/images/redis/Cluster拓扑结构.png">
+<meta property="og:image" content="https://cpp288.github.io/images/redis/Cluster数据分区.png">
+<meta property="og:image" content="https://cpp288.github.io/images/redis/Cluster槽迁移.png">
+<meta property="og:updated_time" content="2019-04-18T02:29:07.847Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="cpp288&#39;s blog">
-<meta name="twitter:description" content="For record only">
+<meta name="twitter:title" content="Redis Cluster">
+<meta name="twitter:description" content="即使是使用哨兵，此时的redis集群的每个数据库依然存有集群中的所有数据，从而导致集群的总数据存储量受限于可用存储内存最小的节点，形成木桶效应。因为redis是基于内存存储的，所以这个问题尤为突出。 在redis3.0之前，我们是通过在客户端去做分片，通过hash的方式对key进行分片存储。分片虽然能够解决各个节点的存储压力，但是维护成本高，增加、移除节点比较繁琐。因此在3.0之后的版本支持了集群">
+<meta name="twitter:image" content="https://cpp288.github.io/images/redis/Cluster拓扑结构.png">
 
 
 
 
 
 
-  <link rel="canonical" href="https://cpp288.github.io/tags/redis/">
+  <link rel="canonical" href="https://cpp288.github.io/2019/04/18/redis/Redis-Cluster/">
 
 
 
@@ -122,7 +128,7 @@
   };
 </script>
 
-  <title>标签: redis | cpp288's blog</title>
+  <title>Redis Cluster | cpp288's blog</title>
   
 
 
@@ -170,7 +176,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -225,7 +231,7 @@
         
         
           
-          <li class="menu-item menu-item-tags menu-item-active">
+          <li class="menu-item menu-item-tags">
 
     
     
@@ -347,264 +353,274 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block tag">
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>redis<small>标签</small>
-        </h1>
-      </div>
-
-      
-        
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://cpp288.github.io/2019/04/18/redis/Redis-Cluster/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chen Jian">
+      <meta itemprop="description" content="For record only">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cpp288's blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-          <a class="post-title-link" href="/2019/04/18/redis/Redis-Cluster/" itemprop="url">
-            
-              <span itemprop="name">Redis Cluster</span>
-            
-          </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Redis Cluster
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-18T10:26:01+08:00" content="2019-04-18">
-          04-18
-        </time>
-      </div>
+              
+            
+          </h1>
+        
 
-    </header>
-  </article>
+        <div class="post-meta">
+          <span class="post-time">
 
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-18 10:26:01 / 修改时间：10:29:07" itemprop="dateCreated datePublished" datetime="2019-04-18T10:26:01+08:00">2019-04-18</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">2.5k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">2 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/04/18/redis/Redis哨兵机制/" itemprop="url">
-            
-              <span itemprop="name">Redis哨兵机制</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-18T10:12:56+08:00" content="2019-04-18">
-          04-18
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/04/18/redis/Redis中字符串的二进制安全/" itemprop="url">
-            
-              <span itemprop="name">Redis中字符串的二进制安全</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-18T10:06:34+08:00" content="2019-04-18">
-          04-18
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/04/18/redis/单线程的Redis性能为什么这么快/" itemprop="url">
-            
-              <span itemprop="name">单线程的Redis性能为什么这么快</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-18T10:01:33+08:00" content="2019-04-18">
-          04-18
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/04/18/redis/Redis的过期策略以及内存淘汰机制/" itemprop="url">
-            
-              <span itemprop="name">Redis的过期策略以及内存淘汰机制</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-18T09:57:19+08:00" content="2019-04-18">
-          04-18
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/04/18/redis/Redis之Lua脚本/" itemprop="url">
-            
-              <span itemprop="name">Redis之Lua脚本</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-18T09:54:39+08:00" content="2019-04-18">
-          04-18
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/04/18/redis/Redis的数据持久化/" itemprop="url">
-            
-              <span itemprop="name">Redis的数据持久化</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-18T09:51:12+08:00" content="2019-04-18">
-          04-18
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/04/18/redis/Redis数据结构深入分析/" itemprop="url">
-            
-              <span itemprop="name">Redis数据结构深入分析</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-18T09:38:28+08:00" content="2019-04-18">
-          04-18
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+        <p>即使是使用哨兵，此时的redis集群的每个数据库依然存有集群中的所有数据，从而导致集群的总数据存储量受限于可用存储内存最小的节点，形成木桶效应。因为redis是基于内存存储的，所以这个问题尤为突出。</p>
+<p>在redis3.0之前，我们是通过在客户端去做分片，通过hash的方式对key进行分片存储。分片虽然能够解决各个节点的存储压力，但是维护成本高，增加、移除节点比较繁琐。因此在3.0之后的版本支持了集群功能，集群的特点在于拥有和单机实例一样的性能，同时在网络分区以后能够提供一定的可访问性以及对主数据库故障恢复的支持。</p>
+<p><strong>哨兵和集群是两个独立的功能，当不需要对数据进行分片使用哨兵就够了，如果要进行水平扩容，集群是一个比较好的方式</strong></p>
+<h1 id="拓扑结构"><a href="#拓扑结构" class="headerlink" title="拓扑结构"></a>拓扑结构</h1><p>一个redis-cluster由多个redis节点构成，不同节点组服务的数据没有交集。</p>
+<p>节点组内分为主备两类节点，对应master和slave节点，两者数据准实时一致，通过异步化的主备复制机制来保证。一个节点组有且只有一个master节点，可以有0到多个slave节点，在这个节点组中只有master节点对用户提供写服务，读服务可以由master和slave提供</p>
+<p><img src="/images/redis/Cluster拓扑结构.png" alt="redis-cluster拓扑"></p>
+<p>redis-cluster是基于gossip协议实现的无中心化节点的集群，因为去中心化的架构不存在统一的配置中心，各个节点对整个集群状态的认知是来自于节点之间的信息交互。在redis-cluster中，这个信息交互是通过Redis Cluster Bus来完成的</p>
+<h1 id="数据分区"><a href="#数据分区" class="headerlink" title="数据分区"></a>数据分区</h1><p>分布式数据库首要解决把整个数据集按照分区规则映射到多个节点的问题，每个节点负责整个数据的一个子集，redis-cluster采用哈希分区规则，采用虚拟槽分区。</p>
+<p>虚拟槽分区巧妙地使用了哈希空间，使用分散度良好的哈希函数把所有的数据映射到一个固定范围内的整数集合中，整数定义为槽（slot）。redis-cluster槽的范围是0 ~ 16383。</p>
+<p>槽是集群内数据管理和迁移的基本单位，采用大范围的槽的主要目的是为了方便数据的拆分和集群的扩展，每个节点负责一定数量的槽，计算公式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">slot = CRC16(key)%16383</span><br></pre></td></tr></table></figure></p>
+<p>如下图所示：</p>
+<p><img src="/images/redis/Cluster数据分区.png" alt="数据分区"></p>
+<h2 id="HashTags"><a href="#HashTags" class="headerlink" title="HashTags"></a>HashTags</h2><p>通过分片手段，可以将数据合理的划分到不同的节点上，但是有时候，我们希望对相关联的业务以原子方式进行操作，比如：</p>
+<blockquote>
+<p>在单节点上执行MSET，是一个原子操作，但是在集群环境下，它的操作就不是原子操作，是因为多个key可能会被分配到不同的机器上</p>
+</blockquote>
+<p>所以，就会有一个矛盾点，即要求key尽可能的分散在不同机器上，又要求相关联的key分配到相同的机器上，这该如何解决呢？</p>
+<p>从之前的分析中可以了解到，分片其实就是一个hash的过程，对key做hash取模后划分到不同的机器上。所以要做到上面这点，需要考虑如何让相关联的key得到的hash值都相同，在redis中引入了HashTags的概念，可以使得数据分布算法可以根据key的某一个部分进行计算，然后让相关的key落到同一个数据分片中。</p>
+<p>举个例子：加入对于用户的信息进行存储：user:user1:id、user:user1:name，那么通过hashtag的方式：user:{user1}:id、user:{user1}:name</p>
+<p>当一个key包含{}的时候，就不对整个key做hash，而是仅对{}包含的字符串做hash</p>
+<h2 id="重定向客户端"><a href="#重定向客户端" class="headerlink" title="重定向客户端"></a>重定向客户端</h2><p>Redis Cluster并不会代理查询，那么如果客户端访问了一个key并不存在的节点，该如何处理？比如获取key为msg的值，msg计算出来的槽编号为254，当前节点正好不负责编号为254的槽，那么就会返回客户端下面的信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-MOVED 254 127.0.0.1:6381</span><br></pre></td></tr></table></figure></p>
+<p>表示客户端想要的254槽由运行在IP为127.0.0.1，端口为6381的master示例服务上，如果恰好由当前节点负责，则当前节点会立即返回结果</p>
+<h2 id="分片迁移"><a href="#分片迁移" class="headerlink" title="分片迁移"></a>分片迁移</h2><p>在一个稳定的redis-cluster下，每一个slot对应的节点是确定的，但是在以下情况节点和分片对应的关系会发生变更：</p>
+<ol>
+<li>新加入master节点</li>
+<li>某个节点宕机</li>
+</ol>
+<p>也就是说当动态添加或减少节点时，需要将16384个槽做个再分配，槽中的键值也要迁移（这一过程处于半自动状态，需要人工介入）</p>
+<p><strong>新增一个主节点：</strong></p>
+<p>新增一个节点D，redis-cluster从各个节点的前面各拿取一部分slot到D上，最后大致会变成：</p>
+<ul>
+<li>节点A覆盖1365 ～ 5460</li>
+<li>节点B覆盖6827 ～ 10922</li>
+<li>节点C覆盖12288 ～ 16383</li>
+<li>节点D覆盖0 ～ 1364，5461 ～ 6826，10923 ～ 12287</li>
+</ul>
+<p><strong>删除一个节点：</strong></p>
+<p>先将节点的数据移动到其它节点上，然后执行删除</p>
+<h3 id="槽迁移的过程"><a href="#槽迁移的过程" class="headerlink" title="槽迁移的过程"></a>槽迁移的过程</h3><p>槽迁移的过程中有一个不稳定状态，这个不稳定状态会有一些规则，这些规则定义客户端的行为，从而使得redis-cluster不必宕机的情况下也可以执行槽的迁移。如下图（迁移槽编号为1，2，3的）：</p>
+<p><img src="/images/redis/Cluster槽迁移.png" alt="槽迁移"></p>
+<p>简单的工作流程：</p>
+<ol>
+<li>向Master B发送状态变更命令，把Master B对应的slot状态设置为IMPORTING</li>
+<li>向Master A发送状态变更命令，把Master A对应的slot状态设置为MIGRATING</li>
+</ol>
+<p>当状态变成IMPROTING或者MIGRATING时，对于slot内部数据提供读写服务的行为和通常状态下是有区别的</p>
+<h4 id="MIGRATING状态"><a href="#MIGRATING状态" class="headerlink" title="MIGRATING状态"></a>MIGRATING状态</h4><ol>
+<li>如果客户端访问的key还没有迁移出去，则正常处理这个key</li>
+<li>如果key已经迁移或者根本就不存在这个key，则回复客户端ASK信息让它跳转到Master B去执行</li>
+</ol>
+<h4 id="IMPORTING状态"><a href="#IMPORTING状态" class="headerlink" title="IMPORTING状态"></a>IMPORTING状态</h4><p>当来自客户端的正常访问不是从ASK跳转过来的，说明客户端还不知道迁移正在进行，很有可能操作了一个目前还没迁移完成的并且还存在与Master A上的key，如果此时在A上已经修改了，那么B和A的修改则会发生冲突。</p>
+<blockquote>
+<p>对于Master B上的slot所有非ASK跳转过来的操作，Master B都不会去处理，而是通过MOVED命令让客户端调转到Master A上去处理</p>
+</blockquote>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/redis/" rel="tag"># redis</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/18/redis/Redis哨兵机制/" rel="next" title="Redis哨兵机制">
+                <i class="fa fa-chevron-left"></i> Redis哨兵机制
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -625,8 +641,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -752,6 +777,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#拓扑结构"><span class="nav-text">拓扑结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据分区"><span class="nav-text">数据分区</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HashTags"><span class="nav-text">HashTags</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重定向客户端"><span class="nav-text">重定向客户端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分片迁移"><span class="nav-text">分片迁移</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#槽迁移的过程"><span class="nav-text">槽迁移的过程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MIGRATING状态"><span class="nav-text">MIGRATING状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IMPORTING状态"><span class="nav-text">IMPORTING状态</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -890,6 +932,10 @@
 
 
   
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
 
   
 
