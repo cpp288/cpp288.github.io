@@ -96,25 +96,28 @@
 
 
 
-  <meta name="description" content="为什么要使用Lua脚本Redis中内嵌了对Lua环境的支持，允许开发者使用Lua语言编写脚本传到Redis中执行，直接在服务端原子的执行多个Redis命令。  Lua是一个高效的轻量级脚本语言（JavaScript、shell、sql、python、ruby…），用标准C语言编写并以源代码形式开放，其设计目的是为了嵌入应用程序中，从而为应用程序提供灵活的扩展和制定功能。  使用Lua脚本的好处：">
-<meta name="keywords" content="redis">
+  <meta name="description" content="摘自《Netty权威指南》 BIOBIO通信模型：  问题显而易见：每个客户端都需要创建一个线程，并发访问量大时，系统会出现堆栈溢出、创建新线程失败等问题 代码演示功能：时间服务器 服务端：123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657">
+<meta name="keywords" content="java,IO,Netty权威指南">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Redis之Lua脚本">
-<meta property="og:url" content="https://cpp288.github.io/2019/04/18/redis/Redis之Lua脚本/index.html">
+<meta property="og:title" content="Java BIO编程和伪异步I&#x2F;O编程">
+<meta property="og:url" content="https://cpp288.github.io/2019/04/18/java/IO/Java-BIO编程和伪异步I-O编程/index.html">
 <meta property="og:site_name" content="cpp288&#39;s blog">
-<meta property="og:description" content="为什么要使用Lua脚本Redis中内嵌了对Lua环境的支持，允许开发者使用Lua语言编写脚本传到Redis中执行，直接在服务端原子的执行多个Redis命令。  Lua是一个高效的轻量级脚本语言（JavaScript、shell、sql、python、ruby…），用标准C语言编写并以源代码形式开放，其设计目的是为了嵌入应用程序中，从而为应用程序提供灵活的扩展和制定功能。  使用Lua脚本的好处：">
+<meta property="og:description" content="摘自《Netty权威指南》 BIOBIO通信模型：  问题显而易见：每个客户端都需要创建一个线程，并发访问量大时，系统会出现堆栈溢出、创建新线程失败等问题 代码演示功能：时间服务器 服务端：123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-18T01:55:55.106Z">
+<meta property="og:image" content="https://cpp288.github.io/images/java/io/BIO通信模型.png">
+<meta property="og:image" content="https://cpp288.github.io/images/java/io/伪异步IO模型.png">
+<meta property="og:updated_time" content="2019-04-18T09:25:03.296Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Redis之Lua脚本">
-<meta name="twitter:description" content="为什么要使用Lua脚本Redis中内嵌了对Lua环境的支持，允许开发者使用Lua语言编写脚本传到Redis中执行，直接在服务端原子的执行多个Redis命令。  Lua是一个高效的轻量级脚本语言（JavaScript、shell、sql、python、ruby…），用标准C语言编写并以源代码形式开放，其设计目的是为了嵌入应用程序中，从而为应用程序提供灵活的扩展和制定功能。  使用Lua脚本的好处：">
+<meta name="twitter:title" content="Java BIO编程和伪异步I&#x2F;O编程">
+<meta name="twitter:description" content="摘自《Netty权威指南》 BIOBIO通信模型：  问题显而易见：每个客户端都需要创建一个线程，并发访问量大时，系统会出现堆栈溢出、创建新线程失败等问题 代码演示功能：时间服务器 服务端：123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657">
+<meta name="twitter:image" content="https://cpp288.github.io/images/java/io/BIO通信模型.png">
 
 
 
 
 
 
-  <link rel="canonical" href="https://cpp288.github.io/2019/04/18/redis/Redis之Lua脚本/">
+  <link rel="canonical" href="https://cpp288.github.io/2019/04/18/java/IO/Java-BIO编程和伪异步I-O编程/">
 
 
 
@@ -124,7 +127,7 @@
   };
 </script>
 
-  <title>Redis之Lua脚本 | cpp288's blog</title>
+  <title>Java BIO编程和伪异步I/O编程 | cpp288's blog</title>
   
 
 
@@ -369,7 +372,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://cpp288.github.io/2019/04/18/redis/Redis之Lua脚本/">
+    <link itemprop="mainEntityOfPage" href="https://cpp288.github.io/2019/04/18/java/IO/Java-BIO编程和伪异步I-O编程/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chen Jian">
@@ -386,7 +389,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Redis之Lua脚本
+          <h1 class="post-title" itemprop="name headline">Java BIO编程和伪异步I/O编程
 
               
             
@@ -410,7 +413,7 @@
                 
               
 
-              <time title="创建时间：2019-04-18 09:54:39 / 修改时间：09:55:55" itemprop="dateCreated datePublished" datetime="2019-04-18T09:54:39+08:00">2019-04-18</time>
+              <time title="创建时间：2019-04-18 16:37:38 / 修改时间：17:25:03" itemprop="dateCreated datePublished" datetime="2019-04-18T16:37:38+08:00">2019-04-18</time>
             
 
             
@@ -430,7 +433,14 @@
               </span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/笔记/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
 
                 
                 
@@ -460,7 +470,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1.6k</span>
+                <span title="本文字数">4.5k</span>
               
 
               
@@ -474,7 +484,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 分钟</span>
+                <span title="阅读时长">4 分钟</span>
               
             </div>
           
@@ -494,32 +504,17 @@
       
 
       
-        <h1 id="为什么要使用Lua脚本"><a href="#为什么要使用Lua脚本" class="headerlink" title="为什么要使用Lua脚本"></a>为什么要使用Lua脚本</h1><p>Redis中内嵌了对Lua环境的支持，允许开发者使用Lua语言编写脚本传到Redis中执行，直接在服务端原子的执行多个Redis命令。</p>
-<blockquote>
-<p>Lua是一个高效的轻量级脚本语言（JavaScript、shell、sql、python、ruby…），用标准C语言编写并以源代码形式开放，其设计目的是为了嵌入应用程序中，从而为应用程序提供灵活的扩展和制定功能。</p>
-</blockquote>
-<p>使用Lua脚本的好处：</p>
-<ol>
-<li>减少网络开销，在Lua脚本中可以把多个命令放在同一个脚本中运行</li>
-<li>原子操作，redis会将整个脚本作为一个整体执行，中间不会被其他命令插入</li>
-<li>复用性，客户端发送的脚本会永远存储在redis中，其他客户端可以复用这一脚本来完成同样的逻辑</li>
-</ol>
-<h1 id="Lua脚本使用"><a href="#Lua脚本使用" class="headerlink" title="Lua脚本使用"></a>Lua脚本使用</h1><h2 id="在Lua脚本中调用Redis命令"><a href="#在Lua脚本中调用Redis命令" class="headerlink" title="在Lua脚本中调用Redis命令"></a>在Lua脚本中调用Redis命令</h2><p>在Lua脚本中调用Redis命令，可以使用<code>redis.call</code>函数调用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">redis.call(&apos;set&apos;, &apos;hello&apos;, &apos;world&apos;)</span><br><span class="line">local value = redis.call(&apos;get&apos;, &apos;hello&apos;)</span><br></pre></td></tr></table></figure></p>
-<p><code>redis.call</code>函数的返回值就是redis命令的执行结果，<code>redis.call</code>函数会将redis的数据类型返回值转换对应的Lua的数据类型，在脚本中可以使用return语句将值返回给redis客户端，如果没有执行return，默认返回为nil</p>
-<h2 id="EVAL命令"><a href="#EVAL命令" class="headerlink" title="EVAL命令"></a>EVAL命令</h2><p>格式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[EVAL][脚本内容][key参数的数量][key...][arg...]</span><br></pre></td></tr></table></figure></p>
-<p>可以通过key和arg这两个参数向脚本中传递数据，他们的值可以在脚本中分别使用KEYS和ARGV这两个类型的全局变量访问，比如：</p>
-<p>Lua脚本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">return redis.call(&apos;set&apos;,KEYS[1],ARGV[1]) // KEYS和ARGV必须大写</span><br></pre></td></tr></table></figure></p>
-<p>EVAL命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eval &quot;return redis.call(&apos;set&apos;,KEYS[1],ARGV[1])&quot; 1 lua1 hello</span><br></pre></td></tr></table></figure></p>
-<p>注意：EVAL命令是根据key参数的数量，也就是上面例子中的1来将后面所有参数分别存入脚本中KEYS和ARGV两个表类型的全局变量。当脚本不需要任何参数时也不能省略这个参数，如果没有则设置为0：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eval &quot;return redis.call(&apos;get&apos;,&apos;lua1&apos;)&quot; 0</span><br></pre></td></tr></table></figure></p>
-<h2 id="EVALSHA命令"><a href="#EVALSHA命令" class="headerlink" title="EVALSHA命令"></a>EVALSHA命令</h2><p>考虑到通过eval执行lua脚本，脚本比较长的情况下，每次调用脚本都需要把整个脚本传给redis，比较占用带宽。为了解决这个问题，redis提供了EVALSHA命令，允许通过脚本内容的SHA1摘要来执行脚本。</p>
-<p>该命令用法和EVAL一样，只不过是将脚本内容替换成脚本内容的SHA1摘要：</p>
-<ol>
-<li>Redis在执行EVAL命令时会计算脚本的SHA1摘要并记录在脚本缓存中</li>
-<li>执行EVALSHA命令时Redis会根据提供的摘要从脚本缓存中查找对应的脚本内容，如果找到了就执行，否则返回“NOSCRIPT No matching script, Please use EVAL”</li>
-</ol>
-<p>将脚本加入缓存并生成sha1摘要：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">script load &quot;return redis.call(&apos;get&apos;,&quot;lua1&quot;)&quot;</span><br></pre></td></tr></table></figure></p>
-<p>使用EVALSHA执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">evalsha &quot;a5a402e90df3hkfakyi32970058233hjfd574&quot; 0</span><br></pre></td></tr></table></figure></p>
-<p>我们在调用eval命令之前，先执行evalsha命令，如果提示脚本不存在，则再调用eval命令</p>
+        <p>摘自《Netty权威指南》</p>
+<h1 id="BIO"><a href="#BIO" class="headerlink" title="BIO"></a>BIO</h1><p>BIO通信模型：</p>
+<p><img src="/images/java/io/BIO通信模型.png" alt="BIO通信模型"></p>
+<p>问题显而易见：<strong>每个客户端都需要创建一个线程，并发访问量大时，系统会出现堆栈溢出、创建新线程失败等问题</strong></p>
+<h2 id="代码演示"><a href="#代码演示" class="headerlink" title="代码演示"></a>代码演示</h2><p>功能：时间服务器</p>
+<p>服务端：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TimeServer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="comment">// 监听8080端口</span></span><br><span class="line">        <span class="keyword">int</span> port = <span class="number">8080</span>;</span><br><span class="line">        <span class="keyword">if</span> (args != <span class="keyword">null</span> &amp;&amp; args.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            port = Integer.valueOf(args[<span class="number">0</span>]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        ServerSocket server = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            server = <span class="keyword">new</span> ServerSocket(port);</span><br><span class="line">            System.out.println(<span class="string">"The time server is start in port : "</span> + port);</span><br><span class="line">            Socket socket;</span><br><span class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">                socket = server.accept();</span><br><span class="line">                <span class="comment">// 这里创建一个线程去执行业务</span></span><br><span class="line">                <span class="keyword">new</span> Thread(<span class="keyword">new</span> TimeServerHandler(socket)).start();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (server != <span class="keyword">null</span>) &#123;</span><br><span class="line">                System.out.println(<span class="string">"The time server close"</span>);</span><br><span class="line">                server.close();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 具体执行的线程 </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TimeServerHandler</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Socket socket;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TimeServerHandler</span><span class="params">(Socket socket)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.socket = socket;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        BufferedReader in = <span class="keyword">null</span>;</span><br><span class="line">        PrintWriter out = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            in = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(<span class="keyword">this</span>.socket.getInputStream()));</span><br><span class="line">            out = <span class="keyword">new</span> PrintWriter(<span class="keyword">this</span>.socket.getOutputStream(), <span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line">            String currentTime;</span><br><span class="line">            String body;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">                body = in.readLine();</span><br><span class="line">                <span class="keyword">if</span> (body == <span class="keyword">null</span>) &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(<span class="string">"The time server receive order : "</span> + body);</span><br><span class="line">                currentTime = <span class="string">"QUERY TIME ORDER"</span>.equalsIgnoreCase(body)</span><br><span class="line">                        ? <span class="keyword">new</span> Date(System.currentTimeMillis()).toString() : <span class="string">"BAD ORDER"</span>;</span><br><span class="line">                out.println(currentTime);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="comment">// 释放相关资源</span></span><br><span class="line">            <span class="keyword">if</span> (in != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    in.close();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (out != <span class="keyword">null</span>) &#123;</span><br><span class="line">                out.close();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">this</span>.socket != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    <span class="keyword">this</span>.socket.close();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">this</span>.socket = <span class="keyword">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>客户端：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TimeClient</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> port = <span class="number">8080</span>;</span><br><span class="line">        <span class="keyword">if</span> (args != <span class="keyword">null</span> &amp;&amp; args.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            port = Integer.valueOf(args[<span class="number">0</span>]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Socket socket = <span class="keyword">null</span>;</span><br><span class="line">        BufferedReader in = <span class="keyword">null</span>;</span><br><span class="line">        PrintWriter out = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            socket = <span class="keyword">new</span> Socket(<span class="string">"127.0.0.1"</span>, port);</span><br><span class="line">            in = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(socket.getInputStream()));</span><br><span class="line">            out = <span class="keyword">new</span> PrintWriter(socket.getOutputStream(), <span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line">            out.println(<span class="string">"QUERY TIME ORDER"</span>);</span><br><span class="line">            System.out.println(<span class="string">"Send order 2 server succeed."</span>);</span><br><span class="line"></span><br><span class="line">            String resp = in.readLine();</span><br><span class="line">            System.out.println(<span class="string">"Now is : "</span> + resp);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="comment">// 释放相关资源</span></span><br><span class="line">            <span class="keyword">if</span> (in != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    in.close();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (out != <span class="keyword">null</span>) &#123;</span><br><span class="line">                out.close();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (socket != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    socket.close();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="伪异步I-O"><a href="#伪异步I-O" class="headerlink" title="伪异步I/O"></a>伪异步I/O</h1><p>伪异步I/O模型图：</p>
+<p><img src="/images/java/io/伪异步IO模型.png" alt="伪异步IO模型"></p>
+<p>可以看到，伪异步I/O只是加入了一个线程池，避免了每次请求都创建线程的问题（这里就不写demo了）</p>
+<p>但是通过对输入和输出流的API文档分析，了解到读和写操作都是同步阻塞的，阻塞的时间取决于对方I/O线程的处理速度和网络I/O的传输速度。我们无法保证生产环境的网络状况和对端的应用程序能足够快，所以它的可靠性就非常差。</p>
 
       
     </div>
@@ -543,7 +538,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/redis/" rel="tag"># redis</a>
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+            <a href="/tags/IO/" rel="tag"># IO</a>
+          
+            <a href="/tags/Netty权威指南/" rel="tag"># Netty权威指南</a>
           
         </div>
       
@@ -556,8 +555,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/18/redis/Redis的数据持久化/" rel="next" title="Redis的数据持久化">
-                <i class="fa fa-chevron-left"></i> Redis的数据持久化
+              <a href="/2019/04/18/nginx/Nginx之Openresty最佳实践/" rel="next" title="Nginx之Openresty最佳实践">
+                <i class="fa fa-chevron-left"></i> Nginx之Openresty最佳实践
               </a>
             
           </div>
@@ -565,10 +564,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/18/redis/Redis的过期策略以及内存淘汰机制/" rel="prev" title="Redis的过期策略以及内存淘汰机制">
-                Redis的过期策略以及内存淘汰机制 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -770,7 +765,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么要使用Lua脚本"><span class="nav-text">为什么要使用Lua脚本</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lua脚本使用"><span class="nav-text">Lua脚本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#在Lua脚本中调用Redis命令"><span class="nav-text">在Lua脚本中调用Redis命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EVAL命令"><span class="nav-text">EVAL命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EVALSHA命令"><span class="nav-text">EVALSHA命令</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#BIO"><span class="nav-text">BIO</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#代码演示"><span class="nav-text">代码演示</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#伪异步I-O"><span class="nav-text">伪异步I/O</span></a></li></ol></div>
             
 
           </div>
