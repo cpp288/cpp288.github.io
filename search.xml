@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[单线程的Redis性能为什么这么快]]></title>
+    <url>%2F2019%2F04%2F18%2Fredis%2F%E5%8D%95%E7%BA%BF%E7%A8%8B%E7%9A%84Redis%E6%80%A7%E8%83%BD%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E5%BF%AB%2F</url>
+    <content type="text"><![CDATA[Redis采用了一种非常简单的做法，单线程来处理来自所有客户端的并发请求，Redis把任务封闭在一个线程中从而避免了线程安全问题。 至于为什么是单线程的，官方的解释是，CPU并不是Redis的瓶颈所在，Redis的瓶颈主要在机器的内存和网络的带宽。 Redis采用的是基于内存的、单进程、单线程模型的KV数据库，由C语言编写，官方提供的数据是可以达到100000+的QPS（每秒内查询次数）。这个数据不比采用单进程多线程的同样基于内存的KV数据库Memcached差！有兴趣的可以参考官方的基准程序测试《How fast is Redis？》（https://redis.io/topics/benchmarks） Redis为什么这么快： 完全基于内存，绝大部分请求是纯粹的内存操作，非常快速。数据存在内存中，类似于HashMap，HashMap的优势就是查找和操作的时间复杂度都是O(1)； 数据结构简单，对数据操作也简单，Redis中的数据结构是专门进行设计的； 采用单线程，避免了不必要的上下文切换和竞争条件，也不存在多进程或者多线程导致的切换而消耗CPU，不用去考虑各种锁的问题，不存在加锁释放锁操作，没有因为可能出现死锁而导致的性能消耗； 使用多路I/O复用模型； 使用底层模型不同，它们之间底层实现方式以及与客户端之间通信的应用协议不一样，Redis直接自己构建了VM 机制 ，因为一般的系统调用系统函数的话，会浪费一定的时间去移动和请求； 多路I/O复用 Redis是跑在单线程中的，所有的操作都是按照顺序执行的，但是由于读写操作等待用户输入或输出都是阻塞的，所以I/O操作在一般情况下往往不能直接返回，这回导致某一文件的I/O阻塞导致整个进程无法对其他客户端提供服务，而I/O多路复用就是为了解决这个问题而出现的。 在这之前，先简单了解下几种I/O模型： 同步阻塞IO（Blocking IO）：传统的IO模型 同步非阻塞IO（Non-blocking IO）：默认创建的socket都是阻塞的，非阻塞IO要求socket被设置为NONBLOCK IO多路复用（IO Multiplexing）：也叫异步阻塞IO，即经典的Reactor设计模式，java中的selector和Linux中的epoll都是这种模型 异步IO（Asynchronous IO）：也叫异步非阻塞IO，即经典的Proactor设计模式 异步和同步、阻塞和非阻塞，感觉原理都差不多，来简单了解下： 同步和异步，是指用户线程和内核的交互方式 阻塞和非阻塞，是指用户线程调用内核IO操作的方式是阻塞还是非阻塞的]]></content>
+      <categories>
+        <category>redis</category>
+      </categories>
+      <tags>
+        <tag>redis</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Redis的过期策略以及内存淘汰机制]]></title>
     <url>%2F2019%2F04%2F18%2Fredis%2FRedis%E7%9A%84%E8%BF%87%E6%9C%9F%E7%AD%96%E7%95%A5%E4%BB%A5%E5%8F%8A%E5%86%85%E5%AD%98%E6%B7%98%E6%B1%B0%E6%9C%BA%E5%88%B6%2F</url>
     <content type="text"><![CDATA[Redis采用的是定期删除+惰性删除策略，官方文档解释：https://redis.io/commands/expire 为什么不用定时删除策略定时删除，用一个定时器来负责监视key，过期则自动删除，虽然内存及时释放，但是十分消耗CPU资源。 在大并发请求下，CPU要将事件应用在处理请求，而不是删除key，因此没有采用这一策略。 定期删除+惰性删除定期删除，redis默认每隔100ms检查，是否有过期的key，有过期key则删除，需要说明的是，redis不是每隔100ms将所有的key检查一次，而是随机进行检查。 因此，如果只采用定期删除策略，会导致很多key到时间没有删除，于是，惰性删除派上用场了，也就是说在你获取某个key的时候，redis会检查一下，这个key如果设置了过期时间，那么是否过期了，过期此时就会删除。 若果定期删除没有删除key，然后也没有去请求key，也就是惰性删除也没有发生，这样，redis的内存会越来越高，那么就应该采用内存淘汰机制。 在redis.conf中有一行配置：1maxmemory-policy volatile-lru 该配置就是配内存淘汰策略的 noeviction：当内存不足以容纳新写入数据时，新写入操作会报错 allkeys-lru：当内存不足以容纳新写入数据时，在键空间中，移除最近最少使用的key（推荐使用） allkeys-random：当内存不足以容纳新写入数据时，在键空间中，随机移除某个key volatile-lru：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，移除最近最少使用的key。这种情况一般是把redis既当缓存，又当持久化存储的时候采用 volatile-random：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，随机移除某个key volatile-ttl：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，有更早过期时间的key优先移除]]></content>

@@ -96,23 +96,25 @@
 
 
 
-  <meta name="description" content="For record only">
-<meta property="og:type" content="website">
-<meta property="og:title" content="cpp288&#39;s blog">
-<meta property="og:url" content="https://cpp288.github.io/tags/APM/index.html">
+  <meta name="description" content="Redis采用了一种非常简单的做法，单线程来处理来自所有客户端的并发请求，Redis把任务封闭在一个线程中从而避免了线程安全问题。 至于为什么是单线程的，官方的解释是，CPU并不是Redis的瓶颈所在，Redis的瓶颈主要在机器的内存和网络的带宽。 Redis采用的是基于内存的、单进程、单线程模型的KV数据库，由C语言编写，官方提供的数据是可以达到100000+的QPS（每秒内查询次数）。这个数据">
+<meta name="keywords" content="redis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="单线程的Redis性能为什么这么快">
+<meta property="og:url" content="https://cpp288.github.io/2019/04/18/redis/单线程的Redis性能为什么这么快/index.html">
 <meta property="og:site_name" content="cpp288&#39;s blog">
-<meta property="og:description" content="For record only">
+<meta property="og:description" content="Redis采用了一种非常简单的做法，单线程来处理来自所有客户端的并发请求，Redis把任务封闭在一个线程中从而避免了线程安全问题。 至于为什么是单线程的，官方的解释是，CPU并不是Redis的瓶颈所在，Redis的瓶颈主要在机器的内存和网络的带宽。 Redis采用的是基于内存的、单进程、单线程模型的KV数据库，由C语言编写，官方提供的数据是可以达到100000+的QPS（每秒内查询次数）。这个数据">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-18T02:04:04.033Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="cpp288&#39;s blog">
-<meta name="twitter:description" content="For record only">
+<meta name="twitter:title" content="单线程的Redis性能为什么这么快">
+<meta name="twitter:description" content="Redis采用了一种非常简单的做法，单线程来处理来自所有客户端的并发请求，Redis把任务封闭在一个线程中从而避免了线程安全问题。 至于为什么是单线程的，官方的解释是，CPU并不是Redis的瓶颈所在，Redis的瓶颈主要在机器的内存和网络的带宽。 Redis采用的是基于内存的、单进程、单线程模型的KV数据库，由C语言编写，官方提供的数据是可以达到100000+的QPS（每秒内查询次数）。这个数据">
 
 
 
 
 
 
-  <link rel="canonical" href="https://cpp288.github.io/tags/APM/">
+  <link rel="canonical" href="https://cpp288.github.io/2019/04/18/redis/单线程的Redis性能为什么这么快/">
 
 
 
@@ -122,7 +124,7 @@
   };
 </script>
 
-  <title>标签: APM | cpp288's blog</title>
+  <title>单线程的Redis性能为什么这么快 | cpp288's blog</title>
   
 
 
@@ -170,7 +172,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -225,7 +227,7 @@
         
         
           
-          <li class="menu-item menu-item-tags menu-item-active">
+          <li class="menu-item menu-item-tags">
 
     
     
@@ -347,82 +349,245 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>APM<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
+
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://cpp288.github.io/2019/04/18/redis/单线程的Redis性能为什么这么快/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chen Jian">
+      <meta itemprop="description" content="For record only">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cpp288's blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-          <a class="post-title-link" href="/2019/04/12/micro-service/apm/使用skywalking做分布式系统链路监控/" itemprop="url">
-            
-              <span itemprop="name">使用skywalking做分布式系统链路监控</span>
-            
-          </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">单线程的Redis性能为什么这么快
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-12T14:09:24+08:00" content="2019-04-12">
-          04-12
-        </time>
-      </div>
+              
+            
+          </h1>
+        
 
-    </header>
-  </article>
+        <div class="post-meta">
+          <span class="post-time">
 
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-18 10:01:33 / 修改时间：10:04:04" itemprop="dateCreated datePublished" datetime="2019-04-18T10:01:33+08:00">2019-04-18</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">1.1k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Redis采用了一种非常简单的做法，单线程来处理来自所有客户端的并发请求，Redis把任务封闭在一个线程中从而避免了线程安全问题。</p>
+<p>至于为什么是单线程的，官方的解释是，CPU并不是Redis的瓶颈所在，Redis的瓶颈主要在机器的内存和网络的带宽。</p>
+<p>Redis采用的是基于内存的、单进程、单线程模型的KV数据库，由C语言编写，官方提供的数据是可以达到100000+的QPS（每秒内查询次数）。这个数据不比采用单进程多线程的同样基于内存的KV数据库Memcached差！有兴趣的可以参考官方的基准程序测试《How fast is Redis？》（<a href="https://redis.io/topics/benchmarks）" target="_blank" rel="noopener">https://redis.io/topics/benchmarks）</a></p>
+<p>Redis为什么这么快：</p>
+<ol>
+<li>完全基于内存，绝大部分请求是纯粹的内存操作，非常快速。数据存在内存中，类似于HashMap，HashMap的优势就是查找和操作的时间复杂度都是O(1)；</li>
+<li>数据结构简单，对数据操作也简单，Redis中的数据结构是专门进行设计的；</li>
+<li>采用单线程，避免了不必要的上下文切换和竞争条件，也不存在多进程或者多线程导致的切换而消耗CPU，不用去考虑各种锁的问题，不存在加锁释放锁操作，没有因为可能出现死锁而导致的性能消耗；</li>
+<li>使用多路I/O复用模型；</li>
+<li>使用底层模型不同，它们之间底层实现方式以及与客户端之间通信的应用协议不一样，Redis直接自己构建了VM 机制 ，因为一般的系统调用系统函数的话，会浪费一定的时间去移动和请求；</li>
+</ol>
+<p><strong>多路I/O复用</strong></p>
+<p>Redis是跑在单线程中的，所有的操作都是按照顺序执行的，但是由于读写操作等待用户输入或输出都是阻塞的，所以I/O操作在一般情况下往往不能直接返回，这回导致某一文件的I/O阻塞导致整个进程无法对其他客户端提供服务，而I/O多路复用就是为了解决这个问题而出现的。</p>
+<p>在这之前，先简单了解下几种I/O模型：</p>
+<ol>
+<li>同步阻塞IO（Blocking IO）：传统的IO模型</li>
+<li>同步非阻塞IO（Non-blocking IO）：默认创建的socket都是阻塞的，非阻塞IO要求socket被设置为NONBLOCK</li>
+<li>IO多路复用（IO Multiplexing）：也叫异步阻塞IO，即经典的Reactor设计模式，java中的selector和Linux中的epoll都是这种模型</li>
+<li>异步IO（Asynchronous IO）：也叫异步非阻塞IO，即经典的Proactor设计模式</li>
+</ol>
+<p>异步和同步、阻塞和非阻塞，感觉原理都差不多，来简单了解下：</p>
+<ul>
+<li>同步和异步，是指用户线程和内核的交互方式</li>
+<li>阻塞和非阻塞，是指用户线程调用内核IO操作的方式是阻塞还是非阻塞的</li>
+</ul>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/redis/" rel="tag"># redis</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/18/redis/Redis的过期策略以及内存淘汰机制/" rel="next" title="Redis的过期策略以及内存淘汰机制">
+                <i class="fa fa-chevron-left"></i> Redis的过期策略以及内存淘汰机制
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -708,6 +873,10 @@
 
 
   
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
 
   
 
