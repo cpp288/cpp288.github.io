@@ -96,23 +96,29 @@
 
 
 
-  <meta name="description" content="For record only">
-<meta property="og:type" content="website">
-<meta property="og:title" content="cpp288&#39;s blog">
-<meta property="og:url" content="https://cpp288.github.io/categories/java/index.html">
+  <meta name="description" content="再master/slave模式中，当master遇到异常中断后，需要从slave中选举一个新的master继续对外提供服务，这种机制有很多，比如在zk中的leader选举、kafka中可以基于zk的节点实现master选举。所以在redis中也需要一种机制去实现master的决策，redis没有提供自动master选举功能，需要借助一个哨兵来进行监控。 哨兵的作用就是监控redis系统的运行情况，">
+<meta name="keywords" content="redis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis哨兵机制">
+<meta property="og:url" content="https://cpp288.github.io/2019/04/18/redis/Redis哨兵机制/index.html">
 <meta property="og:site_name" content="cpp288&#39;s blog">
-<meta property="og:description" content="For record only">
+<meta property="og:description" content="再master/slave模式中，当master遇到异常中断后，需要从slave中选举一个新的master继续对外提供服务，这种机制有很多，比如在zk中的leader选举、kafka中可以基于zk的节点实现master选举。所以在redis中也需要一种机制去实现master的决策，redis没有提供自动master选举功能，需要借助一个哨兵来进行监控。 哨兵的作用就是监控redis系统的运行情况，">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://cpp288.github.io/images/redis/哨兵机制.png">
+<meta property="og:image" content="https://cpp288.github.io/images/redis/哨兵集群.png">
+<meta property="og:image" content="https://cpp288.github.io/images/redis/哨兵感知.png">
+<meta property="og:updated_time" content="2019-04-18T02:20:05.547Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="cpp288&#39;s blog">
-<meta name="twitter:description" content="For record only">
+<meta name="twitter:title" content="Redis哨兵机制">
+<meta name="twitter:description" content="再master/slave模式中，当master遇到异常中断后，需要从slave中选举一个新的master继续对外提供服务，这种机制有很多，比如在zk中的leader选举、kafka中可以基于zk的节点实现master选举。所以在redis中也需要一种机制去实现master的决策，redis没有提供自动master选举功能，需要借助一个哨兵来进行监控。 哨兵的作用就是监控redis系统的运行情况，">
+<meta name="twitter:image" content="https://cpp288.github.io/images/redis/哨兵机制.png">
 
 
 
 
 
 
-  <link rel="canonical" href="https://cpp288.github.io/categories/java/">
+  <link rel="canonical" href="https://cpp288.github.io/2019/04/18/redis/Redis哨兵机制/">
 
 
 
@@ -122,7 +128,7 @@
   };
 </script>
 
-  <title>分类: java | cpp288's blog</title>
+  <title>Redis哨兵机制 | cpp288's blog</title>
   
 
 
@@ -170,7 +176,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -242,7 +248,7 @@
         
         
           
-          <li class="menu-item menu-item-categories menu-item-active">
+          <li class="menu-item menu-item-categories">
 
     
     
@@ -347,109 +353,246 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block category">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>java<small>分类</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
+
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://cpp288.github.io/2019/04/18/redis/Redis哨兵机制/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chen Jian">
+      <meta itemprop="description" content="For record only">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cpp288's blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-          <a class="post-title-link" href="/2019/03/04/java/java拦截器（interceptor）和过滤器（filter）/" itemprop="url">
-            
-              <span itemprop="name">java拦截器（interceptor）和过滤器（filter）</span>
-            
-          </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Redis哨兵机制
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-03-04T13:32:22+08:00" content="2019-03-04">
-          03-04
-        </time>
-      </div>
+              
+            
+          </h1>
+        
 
-    </header>
-  </article>
+        <div class="post-meta">
+          <span class="post-time">
 
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-18 10:12:56 / 修改时间：10:20:05" itemprop="dateCreated datePublished" datetime="2019-04-18T10:12:56+08:00">2019-04-18</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">1.6k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
+      
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/03/04/java/java各版本异步并发编程/" itemprop="url">
-            
-              <span itemprop="name">java各版本异步并发编程</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-03-04T09:56:30+08:00" content="2019-03-04">
-          03-04
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
+        <p>再master/slave模式中，当master遇到异常中断后，需要从slave中选举一个新的master继续对外提供服务，这种机制有很多，比如在zk中的leader选举、kafka中可以基于zk的节点实现master选举。所以在redis中也需要一种机制去实现master的决策，redis没有提供自动master选举功能，需要借助一个哨兵来进行监控。</p>
+<p>哨兵的作用就是监控redis系统的运行情况，功能包括两个：</p>
+<ol>
+<li>监控master和slave是否正常运行</li>
+<li>master出现故障时自动将slave数据库升级为master</li>
+</ol>
+<p>哨兵是一个独立的进程，使用哨兵后的架构图：</p>
+<p><img src="/images/redis/哨兵机制.png" alt="哨兵机制"></p>
+<h1 id="哨兵集群"><a href="#哨兵集群" class="headerlink" title="哨兵集群"></a>哨兵集群</h1><p>为了解决master选举问题，又引出了一个单点问题，就是哨兵的可用性问题，在一个一主多从的redis系统中，可以使用多个哨兵进行监控来保证系统足够稳定，此时哨兵不仅会监控master和slave，同时还会互相监控。这种方式成为哨兵集群，哨兵集群需要解决故障发现和master决策协商机制问题。</p>
+<p><img src="/images/redis/哨兵集群.png" alt="哨兵集群"></p>
+<h1 id="哨兵之间的相互感知"><a href="#哨兵之间的相互感知" class="headerlink" title="哨兵之间的相互感知"></a>哨兵之间的相互感知</h1><p>哨兵节点之间会因为共同监视同一个master从而产生关联，一个新加入的哨兵节点需要和其他监视相同master节点的哨兵相互感知：</p>
+<ol>
+<li>需要相互感知的哨兵都向他们共同监视的master节点订阅<code>channel:sentinel:hello</code></li>
+<li>新键入的哨兵节点向这个channel发布一条消息，包含自己本身的信息，这样订阅了这个channel的哨兵就可以发现这个新的哨兵</li>
+<li>新加入的哨兵和其他哨兵节点建立长连接</li>
+</ol>
+<p><img src="/images/redis/哨兵感知.png" alt="哨兵感知"></p>
+<h1 id="master故障发现"><a href="#master故障发现" class="headerlink" title="master故障发现"></a>master故障发现</h1><p>sentinel节点会定期向master节点发送心跳包来判断存活状态，一旦master节点没有正确响应，sentinel会把master设置为“主观不可用状态”，然后会把“主观不可用”发送给其他所有的sentinel节点去确认，当确认的sentinel节点数大于quorum时，则会认为master是“客观不可用”，接着就开始进入选举新的master流程。</p>
+<p>这里会遇到一个问题，就是sentinel中，本身是一个集群，如果多个节点同时发现master节点达到客观不可用状态，那谁来决策选择哪个节点作为master呢？</p>
+<blockquote>
+<p>这个时候就需要从sentinel集群中选择一个leader来做决策，这里用到了一致性算法Raft算法，它和Paxos算法类似，都是分布式一致性算法，但是它比Paxos算法更容易理解，它们都是基于投票算法，只要保证半数节点通过提议即可</p>
+</blockquote>
+<p>动画演示地址：<a href="http://thesecretlivesofdata.com/raft" target="_blank" rel="noopener">http://thesecretlivesofdata.com/raft</a></p>
+<h1 id="配置实现"><a href="#配置实现" class="headerlink" title="配置实现"></a>配置实现</h1><p>创建sentinel.conf文件，文件主要配置：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// sentinel monitor name ip port quorum</span></span><br><span class="line"><span class="comment">// name表示要监控的master的名字，自定义</span></span><br><span class="line"><span class="comment">// ip和port表示master的ip和端口号</span></span><br><span class="line"><span class="comment">// quorum表示最低通过票数，也就是说需要几个哨兵节点统一才可以</span></span><br><span class="line">sentinel monitor mymaster <span class="number">192.168</span>.11.131 <span class="number">6397</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 表示如果5s内mymaster没响应，就认为SDOWN</span></span><br><span class="line">sentinel down-after-milliseconds mymaster <span class="number">5000</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 表示15s后，mymaster仍没活过来，则启动failover，从剩下的slave中选一个升级为master</span></span><br><span class="line">sentinel failover-timeout mymaster <span class="number">15000</span></span><br></pre></td></tr></table></figure></p>
+<p>两种方式启动哨兵：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">redis-sentinel sentinel.conf</span><br><span class="line">redis-server /path/sentinel.conf --sentinel</span><br></pre></td></tr></table></figure></p>
+<p>哨兵监控一个系统时，只需要配置监控master即可，哨兵会自动发现所有slave</p>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/redis/" rel="tag"># redis</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/18/redis/Redis中字符串的二进制安全/" rel="next" title="Redis中字符串的二进制安全">
+                <i class="fa fa-chevron-left"></i> Redis中字符串的二进制安全
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -470,8 +613,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -597,6 +749,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#哨兵集群"><span class="nav-text">哨兵集群</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#哨兵之间的相互感知"><span class="nav-text">哨兵之间的相互感知</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#master故障发现"><span class="nav-text">master故障发现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置实现"><span class="nav-text">配置实现</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -735,6 +904,10 @@
 
 
   
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
 
   
 
