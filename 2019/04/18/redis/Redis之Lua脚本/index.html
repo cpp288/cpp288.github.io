@@ -96,23 +96,25 @@
 
 
 
-  <meta name="description" content="For record only">
-<meta property="og:type" content="website">
-<meta property="og:title" content="cpp288&#39;s blog">
-<meta property="og:url" content="https://cpp288.github.io/tags/阿里技术/index.html">
+  <meta name="description" content="为什么要使用Lua脚本Redis中内嵌了对Lua环境的支持，允许开发者使用Lua语言编写脚本传到Redis中执行，直接在服务端原子的执行多个Redis命令。  Lua是一个高效的轻量级脚本语言（JavaScript、shell、sql、python、ruby…），用标准C语言编写并以源代码形式开放，其设计目的是为了嵌入应用程序中，从而为应用程序提供灵活的扩展和制定功能。  使用Lua脚本的好处：">
+<meta name="keywords" content="redis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis之Lua脚本">
+<meta property="og:url" content="https://cpp288.github.io/2019/04/18/redis/Redis之Lua脚本/index.html">
 <meta property="og:site_name" content="cpp288&#39;s blog">
-<meta property="og:description" content="For record only">
+<meta property="og:description" content="为什么要使用Lua脚本Redis中内嵌了对Lua环境的支持，允许开发者使用Lua语言编写脚本传到Redis中执行，直接在服务端原子的执行多个Redis命令。  Lua是一个高效的轻量级脚本语言（JavaScript、shell、sql、python、ruby…），用标准C语言编写并以源代码形式开放，其设计目的是为了嵌入应用程序中，从而为应用程序提供灵活的扩展和制定功能。  使用Lua脚本的好处：">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-18T01:55:55.106Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="cpp288&#39;s blog">
-<meta name="twitter:description" content="For record only">
+<meta name="twitter:title" content="Redis之Lua脚本">
+<meta name="twitter:description" content="为什么要使用Lua脚本Redis中内嵌了对Lua环境的支持，允许开发者使用Lua语言编写脚本传到Redis中执行，直接在服务端原子的执行多个Redis命令。  Lua是一个高效的轻量级脚本语言（JavaScript、shell、sql、python、ruby…），用标准C语言编写并以源代码形式开放，其设计目的是为了嵌入应用程序中，从而为应用程序提供灵活的扩展和制定功能。  使用Lua脚本的好处：">
 
 
 
 
 
 
-  <link rel="canonical" href="https://cpp288.github.io/tags/阿里技术/">
+  <link rel="canonical" href="https://cpp288.github.io/2019/04/18/redis/Redis之Lua脚本/">
 
 
 
@@ -122,7 +124,7 @@
   };
 </script>
 
-  <title>标签: 阿里技术 | cpp288's blog</title>
+  <title>Redis之Lua脚本 | cpp288's blog</title>
   
 
 
@@ -170,7 +172,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -225,7 +227,7 @@
         
         
           
-          <li class="menu-item menu-item-tags menu-item-active">
+          <li class="menu-item menu-item-tags">
 
     
     
@@ -347,108 +349,246 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>阿里技术<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
+
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://cpp288.github.io/2019/04/18/redis/Redis之Lua脚本/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chen Jian">
+      <meta itemprop="description" content="For record only">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cpp288's blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-          <a class="post-title-link" href="/2019/03/07/micro-service/nacos版本迭代整理（持续更新）/" itemprop="url">
-            
-              <span itemprop="name">nacos版本迭代整理（持续更新）</span>
-            
-          </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Redis之Lua脚本
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-03-07T17:50:13+08:00" content="2019-03-07">
-          03-07
-        </time>
-      </div>
+              
+            
+          </h1>
+        
 
-    </header>
-  </article>
+        <div class="post-meta">
+          <span class="post-time">
 
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-18 09:54:39 / 修改时间：09:55:55" itemprop="dateCreated datePublished" datetime="2019-04-18T09:54:39+08:00">2019-04-18</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">1.6k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
+      
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/03/06/micro-service/nacos做为注册中心/" itemprop="url">
-            
-              <span itemprop="name">nacos做为注册中心</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-03-06T19:19:46+08:00" content="2019-03-06">
-          03-06
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
+        <h1 id="为什么要使用Lua脚本"><a href="#为什么要使用Lua脚本" class="headerlink" title="为什么要使用Lua脚本"></a>为什么要使用Lua脚本</h1><p>Redis中内嵌了对Lua环境的支持，允许开发者使用Lua语言编写脚本传到Redis中执行，直接在服务端原子的执行多个Redis命令。</p>
+<blockquote>
+<p>Lua是一个高效的轻量级脚本语言（JavaScript、shell、sql、python、ruby…），用标准C语言编写并以源代码形式开放，其设计目的是为了嵌入应用程序中，从而为应用程序提供灵活的扩展和制定功能。</p>
+</blockquote>
+<p>使用Lua脚本的好处：</p>
+<ol>
+<li>减少网络开销，在Lua脚本中可以把多个命令放在同一个脚本中运行</li>
+<li>原子操作，redis会将整个脚本作为一个整体执行，中间不会被其他命令插入</li>
+<li>复用性，客户端发送的脚本会永远存储在redis中，其他客户端可以复用这一脚本来完成同样的逻辑</li>
+</ol>
+<h1 id="Lua脚本使用"><a href="#Lua脚本使用" class="headerlink" title="Lua脚本使用"></a>Lua脚本使用</h1><h2 id="在Lua脚本中调用Redis命令"><a href="#在Lua脚本中调用Redis命令" class="headerlink" title="在Lua脚本中调用Redis命令"></a>在Lua脚本中调用Redis命令</h2><p>在Lua脚本中调用Redis命令，可以使用<code>redis.call</code>函数调用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">redis.call(&apos;set&apos;, &apos;hello&apos;, &apos;world&apos;)</span><br><span class="line">local value = redis.call(&apos;get&apos;, &apos;hello&apos;)</span><br></pre></td></tr></table></figure></p>
+<p><code>redis.call</code>函数的返回值就是redis命令的执行结果，<code>redis.call</code>函数会将redis的数据类型返回值转换对应的Lua的数据类型，在脚本中可以使用return语句将值返回给redis客户端，如果没有执行return，默认返回为nil</p>
+<h2 id="EVAL命令"><a href="#EVAL命令" class="headerlink" title="EVAL命令"></a>EVAL命令</h2><p>格式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[EVAL][脚本内容][key参数的数量][key...][arg...]</span><br></pre></td></tr></table></figure></p>
+<p>可以通过key和arg这两个参数向脚本中传递数据，他们的值可以在脚本中分别使用KEYS和ARGV这两个类型的全局变量访问，比如：</p>
+<p>Lua脚本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">return redis.call(&apos;set&apos;,KEYS[1],ARGV[1]) // KEYS和ARGV必须大写</span><br></pre></td></tr></table></figure></p>
+<p>EVAL命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eval &quot;return redis.call(&apos;set&apos;,KEYS[1],ARGV[1])&quot; 1 lua1 hello</span><br></pre></td></tr></table></figure></p>
+<p>注意：EVAL命令是根据key参数的数量，也就是上面例子中的1来将后面所有参数分别存入脚本中KEYS和ARGV两个表类型的全局变量。当脚本不需要任何参数时也不能省略这个参数，如果没有则设置为0：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eval &quot;return redis.call(&apos;get&apos;,&apos;lua1&apos;)&quot; 0</span><br></pre></td></tr></table></figure></p>
+<h2 id="EVALSHA命令"><a href="#EVALSHA命令" class="headerlink" title="EVALSHA命令"></a>EVALSHA命令</h2><p>考虑到通过eval执行lua脚本，脚本比较长的情况下，每次调用脚本都需要把整个脚本传给redis，比较占用带宽。为了解决这个问题，redis提供了EVALSHA命令，允许通过脚本内容的SHA1摘要来执行脚本。</p>
+<p>该命令用法和EVAL一样，只不过是将脚本内容替换成脚本内容的SHA1摘要：</p>
+<ol>
+<li>Redis在执行EVAL命令时会计算脚本的SHA1摘要并记录在脚本缓存中</li>
+<li>执行EVALSHA命令时Redis会根据提供的摘要从脚本缓存中查找对应的脚本内容，如果找到了就执行，否则返回“NOSCRIPT No matching script, Please use EVAL”</li>
+</ol>
+<p>将脚本加入缓存并生成sha1摘要：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">script load &quot;return redis.call(&apos;get&apos;,&quot;lua1&quot;)&quot;</span><br></pre></td></tr></table></figure></p>
+<p>使用EVALSHA执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">evalsha &quot;a5a402e90df3hkfakyi32970058233hjfd574&quot; 0</span><br></pre></td></tr></table></figure></p>
+<p>我们在调用eval命令之前，先执行evalsha命令，如果提示脚本不存在，则再调用eval命令</p>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/redis/" rel="tag"># redis</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/18/redis/Redis的数据持久化/" rel="next" title="Redis的数据持久化">
+                <i class="fa fa-chevron-left"></i> Redis的数据持久化
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -469,8 +609,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -596,6 +745,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么要使用Lua脚本"><span class="nav-text">为什么要使用Lua脚本</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lua脚本使用"><span class="nav-text">Lua脚本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#在Lua脚本中调用Redis命令"><span class="nav-text">在Lua脚本中调用Redis命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EVAL命令"><span class="nav-text">EVAL命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EVALSHA命令"><span class="nav-text">EVALSHA命令</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -734,6 +900,10 @@
 
 
   
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
 
   
 
