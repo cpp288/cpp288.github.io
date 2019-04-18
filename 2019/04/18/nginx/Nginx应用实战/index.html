@@ -96,25 +96,25 @@
 
 
 
-  <meta name="description" content="Redis支持两种方式的持久化：  RDB方式：根据指定的规则“定时”将内存中的数据存储在硬盘上 AOF(append-only-file)方式：每次执行命令后将命令本身记录下来  两种持久化方式可以单独使用其中一种，也可以将这两种方式结合使用 RDB方式当符合一定条件时，Redis会单独创建(fork)一个子进程来进行持久化，会先将数据写入到一个临时文件中，等 到持久化过程都结束了，再用这个临时">
-<meta name="keywords" content="redis">
+  <meta name="description" content="反向代理nginx反向代理的指令不需要新增额外的模块，默认自带proxy_pass指令，只需要修改配置文件就可以实现反向代理。 1234567server &amp;#123;    listen 80;    server_name localhost;    location / &amp;#123;       proxy_pass http://192.168.11.161:8080;    &amp;#125;">
+<meta name="keywords" content="nginx">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Redis的数据持久化">
-<meta property="og:url" content="https://cpp288.github.io/2019/04/18/redis/Redis的数据持久化/index.html">
+<meta property="og:title" content="Nginx应用实战">
+<meta property="og:url" content="https://cpp288.github.io/2019/04/18/nginx/Nginx应用实战/index.html">
 <meta property="og:site_name" content="cpp288&#39;s blog">
-<meta property="og:description" content="Redis支持两种方式的持久化：  RDB方式：根据指定的规则“定时”将内存中的数据存储在硬盘上 AOF(append-only-file)方式：每次执行命令后将命令本身记录下来  两种持久化方式可以单独使用其中一种，也可以将这两种方式结合使用 RDB方式当符合一定条件时，Redis会单独创建(fork)一个子进程来进行持久化，会先将数据写入到一个临时文件中，等 到持久化过程都结束了，再用这个临时">
+<meta property="og:description" content="反向代理nginx反向代理的指令不需要新增额外的模块，默认自带proxy_pass指令，只需要修改配置文件就可以实现反向代理。 1234567server &amp;#123;    listen 80;    server_name localhost;    location / &amp;#123;       proxy_pass http://192.168.11.161:8080;    &amp;#125;">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-18T01:52:08.077Z">
+<meta property="og:updated_time" content="2019-04-18T02:52:39.744Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Redis的数据持久化">
-<meta name="twitter:description" content="Redis支持两种方式的持久化：  RDB方式：根据指定的规则“定时”将内存中的数据存储在硬盘上 AOF(append-only-file)方式：每次执行命令后将命令本身记录下来  两种持久化方式可以单独使用其中一种，也可以将这两种方式结合使用 RDB方式当符合一定条件时，Redis会单独创建(fork)一个子进程来进行持久化，会先将数据写入到一个临时文件中，等 到持久化过程都结束了，再用这个临时">
+<meta name="twitter:title" content="Nginx应用实战">
+<meta name="twitter:description" content="反向代理nginx反向代理的指令不需要新增额外的模块，默认自带proxy_pass指令，只需要修改配置文件就可以实现反向代理。 1234567server &amp;#123;    listen 80;    server_name localhost;    location / &amp;#123;       proxy_pass http://192.168.11.161:8080;    &amp;#125;">
 
 
 
 
 
 
-  <link rel="canonical" href="https://cpp288.github.io/2019/04/18/redis/Redis的数据持久化/">
+  <link rel="canonical" href="https://cpp288.github.io/2019/04/18/nginx/Nginx应用实战/">
 
 
 
@@ -124,7 +124,7 @@
   };
 </script>
 
-  <title>Redis的数据持久化 | cpp288's blog</title>
+  <title>Nginx应用实战 | cpp288's blog</title>
   
 
 
@@ -369,7 +369,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://cpp288.github.io/2019/04/18/redis/Redis的数据持久化/">
+    <link itemprop="mainEntityOfPage" href="https://cpp288.github.io/2019/04/18/nginx/Nginx应用实战/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chen Jian">
@@ -386,7 +386,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Redis的数据持久化
+          <h1 class="post-title" itemprop="name headline">Nginx应用实战
 
               
             
@@ -410,7 +410,7 @@
                 
               
 
-              <time title="创建时间：2019-04-18 09:51:12 / 修改时间：09:52:08" itemprop="dateCreated datePublished" datetime="2019-04-18T09:51:12+08:00">2019-04-18</time>
+              <time title="创建时间：2019-04-18 10:50:44 / 修改时间：10:52:39" itemprop="dateCreated datePublished" datetime="2019-04-18T10:50:44+08:00">2019-04-18</time>
             
 
             
@@ -430,7 +430,7 @@
               </span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/nginx/" itemprop="url" rel="index"><span itemprop="name">nginx</span></a></span>
 
                 
                 
@@ -460,7 +460,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">2.9k</span>
+                <span title="本文字数">6k</span>
               
 
               
@@ -474,7 +474,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">3 分钟</span>
+                <span title="阅读时长">5 分钟</span>
               
             </div>
           
@@ -494,64 +494,105 @@
       
 
       
-        <p>Redis支持两种方式的持久化：</p>
+        <h1 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h1><p>nginx反向代理的指令不需要新增额外的模块，默认自带proxy_pass指令，只需要修改配置文件就可以实现反向代理。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    server_name localhost;</span><br><span class="line">    location / &#123;</span><br><span class="line">       proxy_pass http://192.168.11.161:8080;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h1><p>网络负载均衡的大致原理是利用一定的分配策略将网络负载平衡地分摊到网络集群的各个操作单元上，使得单个重负载任务能够分担到多个单元上并行处理，使得大量并发访问或数据流量分担到多个单元上分别处理，从而减少用户的等待响应时间</p>
+<h2 id="upstream"><a href="#upstream" class="headerlink" title="upstream"></a>upstream</h2><p>是Nginx的HTTP Upstream模块，这个模块通过一个简单的调度算法来实现客户端IP到后端服务器的负载均衡，其算法：</p>
+<ol>
+<li>轮询算法（默认），如果后端服务器宕机以后，会自动踢出</li>
+<li>ip_hash算法，根据请求的ip地址进行hash</li>
+<li>权重轮询</li>
+</ol>
+<p>配置方式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"># 定义一个名为tomcat的upstream</span><br><span class="line">upstream tomcat &#123;</span><br><span class="line">  server 192.168.11.161:8080 max_fails=2 fail_timeout=60s;</span><br><span class="line">  server 192.168.11.159:8080;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 在server中使用</span><br><span class="line">server &#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    server_name localhost;</span><br><span class="line">    location / &#123;</span><br><span class="line">       proxy_pass http://tomcat;</span><br><span class="line">       proxy_set_header Host $host;</span><br><span class="line">       proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">       proxy_next_upstream error timeout http_500 http_503;</span><br><span class="line">       proxy_connect_timeout 60s;</span><br><span class="line">       proxy_send_timeout 60s;</span><br><span class="line">       proxy_read_timeout 60s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="其它配置"><a href="#其它配置" class="headerlink" title="其它配置"></a>其它配置</h2><h3 id="proxy-next-upstream"><a href="#proxy-next-upstream" class="headerlink" title="proxy_next_upstream"></a>proxy_next_upstream</h3><p>语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxy_next_upstream [error | timeout | invalid_header | http_500 | http_502 | http_503 | http_504 | http_404 | off ];</span><br></pre></td></tr></table></figure></p>
 <ul>
-<li>RDB方式：根据指定的规则“定时”将内存中的数据存储在硬盘上</li>
-<li>AOF(append-only-file)方式：每次执行命令后将命令本身记录下来</li>
+<li>默认:proxy_next_upstream error timeout;</li>
+<li>配置块:http、server、location</li>
 </ul>
-<p>两种持久化方式可以单独使用其中一种，也可以将这两种方式结合使用</p>
-<h1 id="RDB方式"><a href="#RDB方式" class="headerlink" title="RDB方式"></a>RDB方式</h1><p>当符合一定条件时，Redis会单独创建(fork)一个子进程来进行持久化，会先将数据写入到一个临时文件中，等 到持久化过程都结束了，再用这个临时文件替换上次持久化好的文件。</p>
-<p>整个过程中，主进程是不进行任何IO操作的，这就确保了极高的性能。如果需要进行大规模数据的恢复，且对于数据恢复的完整性不是非常敏感，那RDB方式要比AOF方式更加的高效。RDB的缺点是最后一次持久化后的数据可能丢失</p>
+<p>这个配置表示当向一台上有服务器转发请求出现错误的时候，继续换一台上后服务器来处理这个请求。</p>
+<p>默认情况下，上游服务器一旦开始发送响应数据，Nginx反向代理服务器会立刻把应答包转发给客户端。因此，一旦Nginx开始向客户端发送响应包，如果中途出现错误也不允许切换到下一个上有服务器继续处理的。这样做的目的是保证客户端只收到来自同一个上游服务器的应答。</p>
+<h3 id="proxy-connect-timeout"><a href="#proxy-connect-timeout" class="headerlink" title="proxy_connect_timeout"></a>proxy_connect_timeout</h3><ul>
+<li>语法: proxy_connect_timeout time;</li>
+<li>默认: proxy_connect_timeout 60s;</li>
+<li>范围: http, server, location</li>
+</ul>
+<p>用于设置nginx与upstream server的连接超时时间，比如我们直接在location中设置proxy_connect_timeout 1ms，1ms很短，如果无法在指定时间建立连接，就会报错。</p>
+<h3 id="proxy-send-timeout"><a href="#proxy-send-timeout" class="headerlink" title="proxy_send_timeout"></a>proxy_send_timeout</h3><p>向后端写数据的超时时间，两次写操作的时间间隔如果大于这个值，也就是过了指定时间后端还没有收到数据，连接会被关闭</p>
+<h3 id="proxy-read-timeout"><a href="#proxy-read-timeout" class="headerlink" title="proxy_read_timeout"></a>proxy_read_timeout</h3><p>从后端读取数据的超时时间，两次读取操作的时间间隔如果大于这个值，那么nginx和后端的链接会被关闭，如果一个请求的处理时间比较长，可以把这个值设置得大一些</p>
+<h3 id="proxy-upstream-fail-timeout"><a href="#proxy-upstream-fail-timeout" class="headerlink" title="proxy_upstream_fail_timeout"></a>proxy_upstream_fail_timeout</h3><p>设置了某一个upstream后端失败了指定次数(max_fails)后，在fail_timeout时间内不再去请求它，默认为10秒</p>
+<p>语法 server address [fail_timeout=30s]</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">upstream backend &#123;</span><br><span class="line">    server 192.168.218.129:8080 weight=1 max_fails=2 fail_timeout=600s;</span><br><span class="line">    server 192.168.218.131:8080 weight=1 max_fails=2 fail_timeout=600s; &#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Nginx动静分离"><a href="#Nginx动静分离" class="headerlink" title="Nginx动静分离"></a>Nginx动静分离</h1><p>在Nginx的conf目录下，有一个mime.types文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">types &#123;</span><br><span class="line">    text/html               html htm shtml;</span><br><span class="line">    text/css                css;</span><br><span class="line">    text/xml                xml;</span><br><span class="line">    image/gif               gif;</span><br><span class="line">    image/jpeg              jpeg jpg;</span><br><span class="line">    application/javascript  js;</span><br><span class="line">    application/atom+xml    atom;</span><br><span class="line">    application/rss+xml     rss;</span><br><span class="line">    ....</span><br></pre></td></tr></table></figure></p>
+<p>用户访问一个网站，然后从服务器端获取相应的资源通过浏览器进行解析渲染最后展示给用户，而服务端可以返回各种类型的内容，比如xml、jpg、png、gif、flash、MP4、html、css等等，那么浏览器就是根据mime-type来决 定用什么形式来展示的</p>
+<p>服务器返回的资源给到浏览器时，会把媒体类型告知浏览器，这个告知的标识就是Content-Type，比如Content- Type:text/html。</p>
+<p>演示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 将静态资源到static-resource目录下访问</span><br><span class="line">location ~ .*\.(js|css|png|svg|ico|jpg)$ &#123;</span><br><span class="line">    root static-resource;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><p>当一个客户端请求web服务器，请求的内容可以从以下几个地方获取：服务器、浏览器缓存中或缓存服务器中。这取决于服务器端输出的页面信息</p>
+<p>浏览器缓存将文件保存在客户端，好的缓存策略可以减少对网络带宽的占用，可以提高访问速度，提高用户的体验，还可以减轻服务器的负担nginx缓存配置</p>
+<p>Nginx可以通过expires设置缓存，比如我们可以针对图片做缓存，因为图片这类信息基本上不会改变。</p>
+<p>在location中设置expires：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">expires 30s|m|h|d</span><br></pre></td></tr></table></figure></p>
+<h2 id="压缩"><a href="#压缩" class="headerlink" title="压缩"></a>压缩</h2><p>我们一个网站一定会包含很多的静态文件，比如图片、脚本、样式等等，而这些css/js可能本身会比较大，那么在网络传输的时候就会比较慢，从而导致网站的渲染速度。因此Nginx中提供了一种Gzip的压缩优化手段，可以对后端的文件进行压缩传输，压缩以后的好处在于能够降低文件的大小来提高传输效率</p>
+<p>可以在http中设置：</p>
+<ul>
+<li>gzip on|off </li>
+</ul>
 <blockquote>
-<p>fork的作用是复制一个与当前进程一样的进程。新进程的所有数据(变量、环境变量、程序计数器等)数值都和 原进程一致，但是是一个全新的进程，并作为原进程的子进程</p>
+<p>是否开启gzip压缩</p>
 </blockquote>
-<h2 id="什么情况下会进行RDB快照"><a href="#什么情况下会进行RDB快照" class="headerlink" title="什么情况下会进行RDB快照"></a>什么情况下会进行RDB快照</h2><p>Redis会在以下几种情况下对数据进行快照:</p>
-<ol>
-<li>根据配置规则进行自动快照</li>
-<li>用户执行SAVE或者GBSAVE命令</li>
-<li>执行FLUSHALL命令</li>
-<li>执行复制(replication)时</li>
-</ol>
-<h3 id="根据配置规则进行自动快照"><a href="#根据配置规则进行自动快照" class="headerlink" title="根据配置规则进行自动快照"></a>根据配置规则进行自动快照</h3><p>Redis允许用户自定义快照条件，当符合快照条件时，Redis会自动执行快照操作。快照的条件可以由用户在配置文件中配置。配置格式如下：</p>
-<ol>
-<li>第一个参数是时间窗口</li>
-<li>第二个是键的个数</li>
-</ol>
-<p>也就是说，在第一个时间参数配置范围内被更改的键的个数大于后面的changes时，即符合快照条件。redis默认配置了三个规则：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">save 900 1</span><br><span class="line">save 300 10</span><br><span class="line">save 60 10000</span><br></pre></td></tr></table></figure></p>
-<p>每条快照规则占一行，每条规则之间是“或”的关系。 在900秒(15分)内有一个以上的键被更改则进行快照。</p>
-<h3 id="用户执行SAVE或者GBSAVE命令"><a href="#用户执行SAVE或者GBSAVE命令" class="headerlink" title="用户执行SAVE或者GBSAVE命令"></a>用户执行SAVE或者GBSAVE命令</h3><p>除了让Redis自动进行快照以外，当我们对服务进行重启或者服务器迁移我们需要人工去干预备份。redis提供了两条命令来完成这个任务：</p>
-<ol>
-<li>save命令<blockquote>
-<p>当执行save命令时，Redis同步做快照操作，在快照执行过程中会阻塞所有来自客户端的请求。当redis内存中的数据较多时，通过该命令将导致Redis较长时间的不响应。所以不建议在生产环境上使用这个命令，而是推荐使用bgsave命令</p>
-</blockquote>
-</li>
-<li>bgsave命令<blockquote>
-<p>bgsave命令可以在后台异步地进行快照操作，快照的同时服务器还可以继续响应来自客户端的请求。执行BGSAVE后，Redis会立即返回ok表示开始执行快照操作。</p>
-</blockquote>
-</li>
-</ol>
-<p>通过LASTSAVE命令可以获取最近一次成功执行快照的时间; (自动快照采用的是异步快照操作)</p>
-<h3 id="执行FLUSHALL命令"><a href="#执行FLUSHALL命令" class="headerlink" title="执行FLUSHALL命令"></a>执行FLUSHALL命令</h3><p>该命令会清除redis在内存中的所有数据。执行该命令后，只要redis中配置的快照规则不为空，也就是save 的规则存在。redis就会执行一次快照操作。不管规则是什么样的都会执行。如果没有定义快照规则，就不会执行快照操作</p>
-<h3 id="执行复制时"><a href="#执行复制时" class="headerlink" title="执行复制时"></a>执行复制时</h3><p>该操作主要是在主从模式下，redis会在复制初始化时进行自动快照。</p>
-<p>这里只需要了解当执行复制操作时，即使没有定义自动快照规则，并且没有手动执行过快照操作，它仍然会生成RDB快照文件</p>
-<h1 id="AOF方式"><a href="#AOF方式" class="headerlink" title="AOF方式"></a>AOF方式</h1><p>当使用Redis存储非临时数据时，一般需要打开AOF持久化来降低进程终止导致的数据丢失。AOF可以将Redis执行的每一条写命令追加到硬盘文件中，这一过程会降低Redis的性能，但大部分情况下这个影响是能够接受的，另外使用较快的硬盘可以提高AOF的性能</p>
-<h2 id="开启AOF"><a href="#开启AOF" class="headerlink" title="开启AOF"></a>开启AOF</h2><p>默认情况下Redis没有开启AOF(append only file)方式的持久化，可以通过appendonly参数启用，在redis.conf中找到<code>appendonly yes</code>开启AOF持久化后每执行一条会更改Redis中的数据的命令后，Redis就会将该命令写入硬盘中的AOF文件。</p>
-<p>AOF文件的保存位置和RDB文件的位置相同，都是通过dir参数设置的，默认的文件名是apendonly.aof。可以在redis.conf中的属性<code>appendfilename appendonlyh.aof</code>修改</p>
-<h2 id="AOF的实现"><a href="#AOF的实现" class="headerlink" title="AOF的实现"></a>AOF的实现</h2><p>AOF文件以纯文本的形式记录Redis执行的写命令例如开启AOF持久化的情况下执行如下4条命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">set foo 1</span><br><span class="line">set foo 2</span><br><span class="line">set foo 3</span><br><span class="line">get</span><br></pre></td></tr></table></figure></p>
-<p>redis会将前3条命令写入AOF文件中，通过vim的方式可以看到aof文件中的内容</p>
-<p>我们会发现AOF文件的内容正是Redis发送的原始通信协议的内容，从内容中我们发现Redis记录了3条命令，然后这时有一个问题是前面2条命令其实是冗余的，因为这两条的执行结果都会被第三条命令覆盖。随着执行的命令越来越多，AOF文件的大小也会越来越大，其实内存中实际的数据可能没有多少，那这样就会造成磁盘空间以及redis数据还原的过程比较长的问题。因此我们希望Redis可以自动优化AOF文件，就上面这个例子来说，前面两条是可以被删除的。而实际上Redis也考虑到了，可以配置一个条件，每当达到一定条件时Redis就会自动重写AOF文件，这个条件的配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">auto-aof-rewrite-percentage 100</span><br><span class="line">auto-aof-rewrite-min-size 64mb</span><br></pre></td></tr></table></figure></p>
 <ul>
-<li><code>auto-aof-rewrite-percentage</code>表示的是当目前的AOF文件大小超过上一次重写时的AOF文件大小的百分之多少时会再次进行重写，如果之前没有重写过，则以启动时AOF文件大小为依据</li>
-<li><code>auto-aof-rewrite-min-size</code>表示限制了允许重写的最小AOF文件大小，通常在AOF文件很小的情况下即使其中有很多冗余的命令我们也并不太关心。</li>
+<li>gzip_buffers 4 16k</li>
 </ul>
-<p>另外，还可以通过<code>BGREWRITEAOF</code>命令手动执行AOF，执行完以后冗余的命令已经被删除了</p>
-<p>在启动时，Redis会逐个执行AOF文件中的命令来将硬盘中的数据载入到内存中，载入的速度相对于RDB会慢一些</p>
-<h2 id="AOF的重写原理"><a href="#AOF的重写原理" class="headerlink" title="AOF的重写原理"></a>AOF的重写原理</h2><p>Redis可以在AOF文件体积变得过大时，自动地在后台对 AOF进行重写: 重写后的新AOF文件包含了恢复当前数据集所需的最小命令集合。</p>
-<p>重写的流程是这样：</p>
-<p>主进程会fork一个子进程出来进行AOF重写，这个重写过程并不是基于原有的aof文件来做的，而是有点类似于快照的方式，全量遍历内存中的数据，然后逐个序列到aof文件中。</p>
-<p>在fork子进程这个过程中，服务端仍然可以对外提供服务，那这个时候重写的aof文件的数据和redis内存数据不一致了怎么办?不用担心，这个过程中，主进程的数据更新操作，会缓存到<code>aof_rewrite_buf</code>中，也就是单独开辟一块缓存来存储重写期间收到的命令，当子进程重写完以后再把缓存中的数据追加到新的aof文件。</p>
-<p>当所有的数据全部追加到新的aof文件中后，把新的aof文件重命名，此后所有的操作都会被写入新的aof文件。</p>
-<p>如果在rewrite过程中出现故障，不会影响原来aof文件的正常工作，只有当rewrite完成后才会切换文件。因此这个rewrite过程是比较可靠的</p>
+<blockquote>
+<p>设置gzip申请内存的大小，作用是按指定大小的倍数申请内存空间。4 16k代表按照原始数据大小以16k为单位的4倍申请内存。</p>
+</blockquote>
+<ul>
+<li>gzip_comp_level[1-9] </li>
+</ul>
+<blockquote>
+<p>压缩级别， 级别越高，压缩越小，但是会占用CPU资源 </p>
+</blockquote>
+<ul>
+<li>gzip_disable </li>
+</ul>
+<blockquote>
+<p>正则匹配UA 表示什么样的浏览器不进行gzip</p>
+</blockquote>
+<ul>
+<li><p>gzip_min_length</p>
+<blockquote>
+<p>开始压缩的最小长度(小于多少就不做压缩)，可以指定单位，比如 1k Gzip_http_version 1.0|1.1表示开始压缩的http协议版本</p>
+</blockquote>
+</li>
+<li><p>gzip_proxied </p>
+</li>
+</ul>
+<blockquote>
+<p>nginx做前端代理时启用该选项，表示无论后端服务器的headers头返回什么信息，都无条件启用压缩</p>
+</blockquote>
+<ul>
+<li>gzip_type </li>
+</ul>
+<blockquote>
+<p>text/pliain，application/xml对那些类型的文件做压缩 (conf/mime.conf)</p>
+</blockquote>
+<ul>
+<li>gzip_vary on|off </li>
+</ul>
+<blockquote>
+<p>是否传输gzip压缩标识； 启用应答头”Vary:Accept-Encoding”；给代理服务器用的，有的浏览器支持压缩，有的不支持，所以避免浪费不支持的也压缩，所以根据客户端的HTTP头来判断，是否需要压缩</p>
+</blockquote>
+<p>演示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"> http &#123;</span><br><span class="line">    include       mime.types;</span><br><span class="line">    default_type  application/octet-stream;</span><br><span class="line">    #log_format  main  &apos;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &apos;</span><br><span class="line">    #                  &apos;$status $body_bytes_sent &quot;$http_referer&quot; &apos;</span><br><span class="line">    #                  &apos;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&apos;;</span><br><span class="line">    #access_log  logs/access.log  main;</span><br><span class="line">    sendfile        on;</span><br><span class="line">    #tcp_nopush     on;</span><br><span class="line">    keepalive_timeout  60;</span><br><span class="line">    include extra/*.conf;</span><br><span class="line">    </span><br><span class="line">    gzip  on;</span><br><span class="line">    gzip_min_length 5k;</span><br><span class="line">    gzip_comp_level 3;</span><br><span class="line">    gzip_types application/javascript image/jpeg image/svg+xml;</span><br><span class="line">    gzip_buffers 4 32k;</span><br><span class="line">    gzip_vary on;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="防盗链"><a href="#防盗链" class="headerlink" title="防盗链"></a>防盗链</h1><p>一个网站上会有很多的图片，如果你不希望其他网站直接用你的图片地址访问自己的图片，或者希望对图片有版权保护。再或者不希望被第三方调用造成服务器的负载以及消耗比较多的流量问题，那么防盗链就是你必须要做的</p>
+<p>在Nginx中配置防盗链其实很简单：</p>
+<ul>
+<li>语法: valid_referers none | blocked | server_names | string …;</li>
+<li>范围：server、location</li>
+</ul>
+<p><code>Referer</code>请求头为指定值时，内嵌变量<code>$invalid_referer</code>被设置为空字符串，否则这个变量会被置成“1”。</p>
+<p>查找匹配时不区分大小写，其中none表示缺少referer请求头、blocked表示请求头存在，但是它的值被防火墙或者代理服务器删除、server_names表示referer请求头包含指定的虚拟主机名</p>
+<p>配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">location ~ .*.(gif|jpg|ico|png|css|svg|js)$ &#123;</span><br><span class="line">    valid_referers none blocked 192.168.11.153;</span><br><span class="line">    if ($invalid_referer) &#123; </span><br><span class="line">        return 404;</span><br><span class="line">    &#125;</span><br><span class="line">    root static; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>需要注意的是伪造一个有效的“Referer”请求头是相当容易的，因此这个模块的预期目的不在于彻底地阻止这些非法请求，而是为了阻止由正常浏览器发出的大规模此类请求。还有一点需要注意，即使正常浏览器发送的合法请求，也可能没有“Referer”请求头。</strong></p>
+<h1 id="跨域访问"><a href="#跨域访问" class="headerlink" title="跨域访问"></a>跨域访问</h1><p>如果两个节点的协议、域名、端口、子域名不同，那么进行的操作都是跨域的，浏览器为了安全问题都是限制跨域访问，所以跨域其实是浏览器本身的限制。</p>
+<p>配置方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">server&#123;</span><br><span class="line">   listen 80;</span><br><span class="line">   server_name localhost;</span><br><span class="line">   location / &#123;</span><br><span class="line">       proxy_pass http://192.168.11.154:8080;</span><br><span class="line">       proxy_set_header Host $host;</span><br><span class="line">       proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">       proxy_send_timeout 60s;</span><br><span class="line">       proxy_read_timeout 60s;</span><br><span class="line">       proxy_connect_timeout 60s;</span><br><span class="line">       add_header &apos;Access-Control-Allow-Origin&apos; &apos;*&apos;; // #允许来自所有的访问地址</span><br><span class="line">       add_header &apos;Access-Control-Allow-Methods&apos; &apos;GET,PUT,POST,DELETE,OPTIONS&apos;; //支持的</span><br><span class="line">请求方式</span><br><span class="line">       add_header &apos;Access-Control-Allow-Header&apos; &apos;Content-Type,*&apos;; //支持的媒体类型</span><br><span class="line">   &#125;</span><br><span class="line">   location ~ .*\.(gif|jpg|ico|png|css|svg|js)$ &#123;</span><br><span class="line">       root static;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -575,7 +616,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/redis/" rel="tag"># redis</a>
+            <a href="/tags/nginx/" rel="tag"># nginx</a>
           
         </div>
       
@@ -588,8 +629,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/18/redis/Redis数据结构深入分析/" rel="next" title="Redis数据结构深入分析">
-                <i class="fa fa-chevron-left"></i> Redis数据结构深入分析
+              <a href="/2019/04/18/redis/Redis集群主从复制原理/" rel="next" title="Redis集群主从复制原理">
+                <i class="fa fa-chevron-left"></i> Redis集群主从复制原理
               </a>
             
           </div>
@@ -597,10 +638,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/18/redis/Redis之Lua脚本/" rel="prev" title="Redis之Lua脚本">
-                Redis之Lua脚本 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -796,7 +833,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#RDB方式"><span class="nav-text">RDB方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么情况下会进行RDB快照"><span class="nav-text">什么情况下会进行RDB快照</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#根据配置规则进行自动快照"><span class="nav-text">根据配置规则进行自动快照</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户执行SAVE或者GBSAVE命令"><span class="nav-text">用户执行SAVE或者GBSAVE命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行FLUSHALL命令"><span class="nav-text">执行FLUSHALL命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行复制时"><span class="nav-text">执行复制时</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AOF方式"><span class="nav-text">AOF方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#开启AOF"><span class="nav-text">开启AOF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AOF的实现"><span class="nav-text">AOF的实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AOF的重写原理"><span class="nav-text">AOF的重写原理</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#反向代理"><span class="nav-text">反向代理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#负载均衡"><span class="nav-text">负载均衡</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#upstream"><span class="nav-text">upstream</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其它配置"><span class="nav-text">其它配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#proxy-next-upstream"><span class="nav-text">proxy_next_upstream</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#proxy-connect-timeout"><span class="nav-text">proxy_connect_timeout</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#proxy-send-timeout"><span class="nav-text">proxy_send_timeout</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#proxy-read-timeout"><span class="nav-text">proxy_read_timeout</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#proxy-upstream-fail-timeout"><span class="nav-text">proxy_upstream_fail_timeout</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx动静分离"><span class="nav-text">Nginx动静分离</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#缓存"><span class="nav-text">缓存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#压缩"><span class="nav-text">压缩</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#防盗链"><span class="nav-text">防盗链</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#跨域访问"><span class="nav-text">跨域访问</span></a></li></ol></div>
             
 
           </div>
