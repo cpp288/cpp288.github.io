@@ -7,7 +7,6 @@ tags:
 - Netty权威指南
 categories: 
 - java
-- 笔记
 ---
 
 摘自《Netty权威指南》
