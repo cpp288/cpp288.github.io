@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Netty WebSocket协议开发]]></title>
+    <url>%2F2019%2F04%2F23%2Fnetty%2FNetty-WebSocket%E5%8D%8F%E8%AE%AE%E5%BC%80%E5%8F%91%2F</url>
+    <content type="text"><![CDATA[摘自《Netty权威指南》 HTTP协议弊端 HTTP协议为半双工协议，数据可以在客户端和服务端两个方向上传输，但是不能同时传输 HTTP消息冗长而繁琐，它包含消息头、消息体、换行符等，通常采用文本方式传输，相比于其它的二进制通信协议，冗长而繁琐 针对服务器推送的黑客攻击 WebSocket介绍WebSocket 基于 TCP 的双向全双工进行消息传输，相比于HTTP的半双工，性能得到很大提升，其特点： 单一的TCP连接，采用全双工模式通信 对代理、防火墙和路由器透明 无头部信息、Cookie和身份验证 无安全开销 通过”ping/pong”帧保持链路激活 服务器可以主动传递消息给客户端，不再需要客户端轮询 WebSocket生命周期浏览器通过 JavaScript 向服务器发出建立 WebSocket 连接的请求，客户端和服务器可以通过TCP连接直接交换数据。因为 WebSocket 连接本质上就是一个TCP连接，所以在数据传输的稳定性和传输量大小方面，比轮询以及 Comet 技术有很大的性能优势 为了建立一个 WebSocket 连接，浏览器首先要向服务器发起一个HTTP请求，包含了一些附加头信息，其中附加头信息 Upgrade:WebSocket 表明这是一个申请协议升级的HTTP请求 服务端返回给客户端的应答消息： 握手成功以后，可以通过”messages”的方式进行通信了，一个消息由一个或者多个帧组成，WebSocket 的消息并不一定对应一个特定网络层的帧，可以被分隔或者被合并 帧都有属于自己的类型，属于同一个消息的多个帧具有相同类型的数据，可以是文本数据、二进制数据和控制帧（协议级信令，如信号） 连接关闭为关闭 WebSocket 连接，客户端和服务器需要通过一个安全的方法关闭底层TCP连接以及TLS会话，如果合适，丢弃任何可能已经接收的字节；必要时（受到攻击），可以通过任何可用的手段关闭连接 底层的TCP连接，在正常情况下，应该首先由服务器关闭。在异常情况下（例如在一个合理的时间周期后没有接收到服务器的TCP Close），客户端可以发起TCP Close。因此，当服务器被指示关闭 WebSocket 连接时，它应该立即发起一个TCP Close操作，客户端应该等待服务器的TCP Close WebSocket 的握手关闭消息带有一个状态码和一个可选的关闭原因，它必须按照协议要求发送一个Close控制帧，当对端接收到关闭控制帧指令时，需要主动关闭 WebSocket 连接 Netty WebSocket Demo源码地址 目前主流的浏览器都已经支持 WebSocket 功能如下：浏览器通过 WebSocket 协议发送请求消息到服务器，服务器对请求进行判断，如果是合法的 WebSocket 请求，则获取请求消息（文本），并在后面追加字符串返回 服务端：123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127public class WebSocketServer &#123; public static void main(String[] args) throws InterruptedException &#123; new WebSocketServer().run(8080); &#125; public void run(int port) throws InterruptedException &#123; NioEventLoopGroup bossGroup = new NioEventLoopGroup(); NioEventLoopGroup workGroup = new NioEventLoopGroup(); try &#123; ServerBootstrap b = new ServerBootstrap(); b.group(bossGroup, workGroup) .channel(NioServerSocketChannel.class) .childHandler(new ChannelInitializer&lt;SocketChannel&gt;() &#123; @Override protected void initChannel(SocketChannel socketChannel) throws Exception &#123; socketChannel.pipeline() // 将请求和应答消息编码或者解码为HTTP消息 .addLast("http-codec", new HttpServerCodec()) // 将HTTP消息的多个部分组合成一个完整的HTTP消息 .addLast("aggregator", new HttpObjectAggregator(65535)) // 向客户端发送HTML5文件，主要用于支持浏览器和服务端进行WebSocket通信 .addLast("http-chunked", new ChunkedWriteHandler()) // 增加服务端handler .addLast("handler", new WebSocketServerHandler()); &#125; &#125;); Channel channel = b.bind(port).sync().channel(); System.out.println(String.format("Web socket server started at port : %d", port)); System.out.println(String.format("Open your browser and navigate to http://localhost:%d/", port)); channel.closeFuture().sync(); &#125; finally &#123; bossGroup.shutdownGracefully(); workGroup.shutdownGracefully(); &#125; &#125; private class WebSocketServerHandler extends SimpleChannelInboundHandler&lt;Object&gt; &#123; private WebSocketServerHandshaker handshaker; @Override protected void messageReceived(ChannelHandlerContext ctx, Object msg) throws Exception &#123; // 普通HTTP接入，第一次接入是通过HTTP if (msg instanceof FullHttpRequest) &#123; handleHttpRequest(ctx, (FullHttpRequest) msg); &#125; // WebSocket接入 else if (msg instanceof WebSocketFrame) &#123; handleWebSocketFrame(ctx, (WebSocketFrame) msg); &#125; &#125; @Override public void channelReadComplete(ChannelHandlerContext ctx) throws Exception &#123; ctx.flush(); &#125; @Override public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception &#123; cause.printStackTrace(); ctx.close(); &#125; private void handleHttpRequest(ChannelHandlerContext ctx, FullHttpRequest req) &#123; // 判断是否header里是否有Upgrade为websocket if (!req.decoderResult().isSuccess() || (!"websocket".contentEquals(req.headers().get("Upgrade")))) &#123; sendHttpResponse(ctx, req, new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.BAD_REQUEST)); return; &#125; // 建立websocket连接 WebSocketServerHandshakerFactory wsFactory = new WebSocketServerHandshakerFactory("ws://localhost:8080/websocket", null, false); handshaker = wsFactory.newHandshaker(req); if (handshaker == null) &#123; WebSocketServerHandshakerFactory.sendUnsupportedVersionResponse(ctx.channel()); &#125; else &#123; handshaker.handshake(ctx.channel(), req); &#125; &#125; private void sendHttpResponse(ChannelHandlerContext ctx, FullHttpRequest req, FullHttpResponse resp) &#123; // 返回客户端应答 if (resp.status().code() != 200) &#123; ByteBuf buf = Unpooled.copiedBuffer(resp.status().toString(), CharsetUtil.UTF_8); resp.content().writeBytes(buf); buf.release(); HttpHeaderUtil.setContentLength(resp, resp.content().readableBytes()); &#125; ChannelFuture f = ctx.channel().writeAndFlush(resp); if (!HttpHeaderUtil.isKeepAlive(req) || resp.status().code() != 200) &#123; f.addListener(ChannelFutureListener.CLOSE); &#125; &#125; private void handleWebSocketFrame(ChannelHandlerContext ctx, WebSocketFrame frame) &#123; // 是否是关闭链路的命令 if (frame instanceof CloseWebSocketFrame) &#123; handshaker.close(ctx.channel(), ((CloseWebSocketFrame) frame).retain()); return; &#125; // 是否是Ping消息 if (frame instanceof PingWebSocketFrame) &#123; ctx.channel().write(new PongWebSocketFrame(frame.content().retain())); return; &#125; // 本demo仅支持文本消息，不支持二进制消息 if (!(frame instanceof TextWebSocketFrame)) &#123; throw new UnsupportedOperationException( String.format("%s frame types not supported", frame.getClass().getName())); &#125; // 返回应答消息 String request = ((TextWebSocketFrame) frame).text(); System.out.println(String.format("%s received %s", ctx.channel(), request)); ctx.channel().write(new TextWebSocketFrame( String.format("%s , 欢迎使用Netty WebSocket服务，现在时刻：%s", request, new Date().toString()))); &#125; &#125;&#125; 浏览器HTML：1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556&lt;!DOCTYPE html&gt;&lt;html lang="en"&gt;&lt;head&gt; &lt;meta charset="UTF-8"&gt; &lt;title&gt;Netty WebSocket 时间服务器&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;/body&gt;&lt;script type="text/javascript"&gt; var socket; if (!window.WebSocket) &#123; window.WebSocket = window.MozWebSocket; &#125; if (window.WebSocket) &#123; socket = new WebSocket("ws://localhost:8080/websocket"); socket.onmessage = function (ev) &#123; var ta = document.getElementById("responseText"); ta.value = ""; ta.value = ev.data; &#125;; socket.onopen = function (ev) &#123; var ta = document.getElementById("responseText"); ta.value = "打开 WebSocket 服务正常，浏览器支持 WebSocket！"; &#125;; socket.onclose = function (ev) &#123; var ta = document.getElementById("responseText"); ta.value = ""; ta.value = "WebSocket 关闭！"; &#125; &#125; else &#123; alert("抱歉，您的浏览器不支持 WebSocket 协议"); &#125; function send(message) &#123; if (!window.WebSocket) &#123; return; &#125; if (socket.readyState === WebSocket.OPEN) &#123; socket.send(message); &#125; else &#123; alert("WebSocket 连接没有建立成功！"); &#125; &#125;&lt;/script&gt;&lt;form onsubmit="return false;"&gt; &lt;input type="text" name="message" value="Netty WebSocket"/&gt; &lt;br/&gt; &lt;input type="button" value="发送 WebSocket 请求消息" onclick="send(this.form.message.value)"/&gt; &lt;hr color="blur"/&gt; &lt;h3&gt;服务端返回的消息&lt;/h3&gt; &lt;textarea id="responseText" style="width: 500px;height: 300px"&gt;&lt;/textarea&gt;&lt;/form&gt;&lt;/html&gt;]]></content>
+      <categories>
+        <category>netty</category>
+      </categories>
+      <tags>
+        <tag>netty</tag>
+        <tag>Netty权威指南</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Java 序列化的缺点]]></title>
     <url>%2F2019%2F04%2F22%2Fjava%2Fio%2FJava-%E5%BA%8F%E5%88%97%E5%8C%96%E7%9A%84%E7%BC%BA%E7%82%B9%2F</url>
     <content type="text"><![CDATA[摘自《Netty权威指南》 JDK1.1版本提供了Java序列化，只需要实现 java.io.Serializable 接口并生成序列ID即可，但是在远程服务调用（RPC）时，很少使用Java序列化进行消息的编解码和传输 源码地址 无法跨语言由于Java序列化是Java语言内部的私有协议，其它语言并不支持，对于用户来说完全是黑盒，其序列化后的字节数组，别的语言无法进行反序列化 目前几乎所有流行的Java RPC通信框架，都没有使用Java序列化，原因就是它无法跨语言，而一般情况下，RPC框架都需要支持跨语言应用 序列化后的码流太大通过下面的例子看下Java序列化后的字节数组大小： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152@Getter@Setterpublic class UserInfo implements Serializable &#123; private static final long serialVersionUID = 1L; private String userName; private int userId; public UserInfo buildUserName(String userName) &#123; this.userName = userName; return this; &#125; public UserInfo buildUserId(int userId) &#123; this.userId = userId; return this; &#125; public byte[] codeC() &#123; ByteBuffer buffer = ByteBuffer.allocate(1024); byte[] value = this.userName.getBytes(); buffer.putInt(value.length); buffer.put(value); buffer.putInt(this.userId); buffer.flip(); value = null; byte[] result = new byte[buffer.remaining()]; buffer.get(result); return result; &#125; public static void main(String[] args) throws IOException &#123; UserInfo userInfo = new UserInfo(); userInfo.buildUserId(100).buildUserName("hello"); ByteArrayOutputStream bos = new ByteArrayOutputStream(); ObjectOutputStream os = new ObjectOutputStream(bos); os.writeObject(userInfo); os.flush(); os.close(); byte[] b = bos.toByteArray(); System.out.println("The jdk serializable length is : " + b.length); bos.close(); System.out.println("----------------------------------------------"); System.out.println("The byte array serializable length is : " + userInfo.codeC().length); &#125;&#125; 执行后的结果：123The jdk serializable length is : 106----------------------------------------------The byte array serializable length is : 13 可以发现，使用Java序列化后的字节数组很大，这样就导致占用空间大、网络传输更占带宽，导致系统的吞吐量降低 序列化性能太低将上面的例子改造成性能测试版本 123456789101112131415161718192021222324252627282930313233public class JavaSerializePerformTest &#123; public static void main(String[] args) throws IOException &#123; UserInfo userInfo = new UserInfo(); userInfo.buildUserId(100).buildUserName("hello"); int loop = 1000000; ByteArrayOutputStream bos; ObjectOutputStream os; long startTime = System.currentTimeMillis(); for (int i = 0; i &lt; loop; i++) &#123; bos = new ByteArrayOutputStream(); os = new ObjectOutputStream(bos); os.writeObject(userInfo); os.flush(); os.close(); byte[] b = bos.toByteArray(); bos.close(); &#125; long endTime = System.currentTimeMillis(); System.out.println("The jdk serializable cost time is : " + (endTime - startTime) + " ms"); System.out.println("----------------------------------------------"); startTime = System.currentTimeMillis(); for (int i = 0; i &lt; loop; i++) &#123; userInfo.codeC(); &#125; endTime = System.currentTimeMillis(); System.out.println("The byte array serializable cost time is : " + (endTime - startTime) + " ms"); &#125;&#125; 执行结果：123The jdk serializable cost time is : 2667 ms----------------------------------------------The byte array serializable cost time is : 160 ms 简单的例子可以看出，Java序列化的性能很低]]></content>
@@ -9,8 +21,8 @@
       </categories>
       <tags>
         <tag>java</tag>
-        <tag>IO</tag>
         <tag>Netty权威指南</tag>
+        <tag>IO</tag>
       </tags>
   </entry>
   <entry>
@@ -22,8 +34,8 @@
       </categories>
       <tags>
         <tag>java</tag>
-        <tag>IO</tag>
         <tag>Netty权威指南</tag>
+        <tag>IO</tag>
       </tags>
   </entry>
   <entry>
@@ -35,8 +47,8 @@
       </categories>
       <tags>
         <tag>java</tag>
-        <tag>IO</tag>
         <tag>Netty权威指南</tag>
+        <tag>IO</tag>
       </tags>
   </entry>
   <entry>
@@ -48,8 +60,8 @@
       </categories>
       <tags>
         <tag>java</tag>
-        <tag>IO</tag>
         <tag>Netty权威指南</tag>
+        <tag>IO</tag>
       </tags>
   </entry>
   <entry>
