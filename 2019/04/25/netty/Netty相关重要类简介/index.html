@@ -96,32 +96,25 @@
 
 
 
-  <meta name="description" content="表锁和行锁锁是用于管理不同事务对共享资源的并发访问 表锁与行锁的区别:   锁定粒度：表锁 &amp;gt; 行锁 加锁效率：表锁 &amp;gt; 行锁 冲突概率：表锁 &amp;gt; 行锁 并发性能：表锁 &amp;lt; 行锁  InnoDB 存储引擎支持行锁和表锁（表锁是通过行锁实现的） InnoDB 锁类型锁类型：  共享锁（行锁）：Shared Locks 排它锁（行锁）：Exclusive Locks 意向共享锁">
-<meta name="keywords" content="Mysql,笔记,性能优化">
+  <meta name="description" content="摘自《Netty权威指南》 这里简单介绍Netty重要的类，深入了解可以参考《Netty权威指南》 ByteBuf当我们进行数据传输时，往往需要使用到缓冲区，常用的是JDK NIO类库提供的 java.nio.Buffer，但是它有如下缺点：  ByteBuffer长度固定，一旦分配完成，容量不能动态扩展和收缩，当需要编码大对象时，可能会发生索引越界异常 ByteBuffer只有一个标识位置的指针">
+<meta name="keywords" content="netty,Netty权威指南">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mysql InnoDB锁机制">
-<meta property="og:url" content="https://cpp288.github.io/2019/02/28/mysql/Mysql-InnoDB锁机制/index.html">
+<meta property="og:title" content="Netty相关重要类简介">
+<meta property="og:url" content="https://cpp288.github.io/2019/04/25/netty/Netty相关重要类简介/index.html">
 <meta property="og:site_name" content="cpp288&#39;s blog">
-<meta property="og:description" content="表锁和行锁锁是用于管理不同事务对共享资源的并发访问 表锁与行锁的区别:   锁定粒度：表锁 &amp;gt; 行锁 加锁效率：表锁 &amp;gt; 行锁 冲突概率：表锁 &amp;gt; 行锁 并发性能：表锁 &amp;lt; 行锁  InnoDB 存储引擎支持行锁和表锁（表锁是通过行锁实现的） InnoDB 锁类型锁类型：  共享锁（行锁）：Shared Locks 排它锁（行锁）：Exclusive Locks 意向共享锁">
+<meta property="og:description" content="摘自《Netty权威指南》 这里简单介绍Netty重要的类，深入了解可以参考《Netty权威指南》 ByteBuf当我们进行数据传输时，往往需要使用到缓冲区，常用的是JDK NIO类库提供的 java.nio.Buffer，但是它有如下缺点：  ByteBuffer长度固定，一旦分配完成，容量不能动态扩展和收缩，当需要编码大对象时，可能会发生索引越界异常 ByteBuffer只有一个标识位置的指针">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://cpp288.github.io/images/mysql/临键锁.png">
-<meta property="og:image" content="https://cpp288.github.io/images/mysql/间隙锁.png">
-<meta property="og:image" content="https://cpp288.github.io/images/mysql/记录锁.png">
-<meta property="og:image" content="https://cpp288.github.io/images/mysql/解决脏读.png">
-<meta property="og:image" content="https://cpp288.github.io/images/mysql/解决不可重复读.png">
-<meta property="og:image" content="https://cpp288.github.io/images/mysql/解决幻读.png">
-<meta property="og:updated_time" content="2019-02-28T01:13:55.060Z">
+<meta property="og:updated_time" content="2019-04-25T03:05:03.928Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mysql InnoDB锁机制">
-<meta name="twitter:description" content="表锁和行锁锁是用于管理不同事务对共享资源的并发访问 表锁与行锁的区别:   锁定粒度：表锁 &amp;gt; 行锁 加锁效率：表锁 &amp;gt; 行锁 冲突概率：表锁 &amp;gt; 行锁 并发性能：表锁 &amp;lt; 行锁  InnoDB 存储引擎支持行锁和表锁（表锁是通过行锁实现的） InnoDB 锁类型锁类型：  共享锁（行锁）：Shared Locks 排它锁（行锁）：Exclusive Locks 意向共享锁">
-<meta name="twitter:image" content="https://cpp288.github.io/images/mysql/临键锁.png">
+<meta name="twitter:title" content="Netty相关重要类简介">
+<meta name="twitter:description" content="摘自《Netty权威指南》 这里简单介绍Netty重要的类，深入了解可以参考《Netty权威指南》 ByteBuf当我们进行数据传输时，往往需要使用到缓冲区，常用的是JDK NIO类库提供的 java.nio.Buffer，但是它有如下缺点：  ByteBuffer长度固定，一旦分配完成，容量不能动态扩展和收缩，当需要编码大对象时，可能会发生索引越界异常 ByteBuffer只有一个标识位置的指针">
 
 
 
 
 
 
-  <link rel="canonical" href="https://cpp288.github.io/2019/02/28/mysql/Mysql-InnoDB锁机制/">
+  <link rel="canonical" href="https://cpp288.github.io/2019/04/25/netty/Netty相关重要类简介/">
 
 
 
@@ -131,7 +124,7 @@
   };
 </script>
 
-  <title>Mysql InnoDB锁机制 | cpp288's blog</title>
+  <title>Netty相关重要类简介 | cpp288's blog</title>
   
 
 
@@ -376,7 +369,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://cpp288.github.io/2019/02/28/mysql/Mysql-InnoDB锁机制/">
+    <link itemprop="mainEntityOfPage" href="https://cpp288.github.io/2019/04/25/netty/Netty相关重要类简介/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chen Jian">
@@ -393,7 +386,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Mysql InnoDB锁机制
+          <h1 class="post-title" itemprop="name headline">Netty相关重要类简介
 
               
             
@@ -417,7 +410,7 @@
                 
               
 
-              <time title="创建时间：2019-02-28 09:12:24 / 修改时间：09:13:55" itemprop="dateCreated datePublished" datetime="2019-02-28T09:12:24+08:00">2019-02-28</time>
+              <time title="创建时间：2019-04-25 10:26:17 / 修改时间：11:05:03" itemprop="dateCreated datePublished" datetime="2019-04-25T10:26:17+08:00">2019-04-25</time>
             
 
             
@@ -437,7 +430,7 @@
               </span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/netty/" itemprop="url" rel="index"><span itemprop="name">netty</span></a></span>
 
                 
                 
@@ -467,7 +460,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">2.3k</span>
+                <span title="本文字数">1.4k</span>
               
 
               
@@ -481,7 +474,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">2 分钟</span>
+                <span title="阅读时长">1 分钟</span>
               
             </div>
           
@@ -501,81 +494,52 @@
       
 
       
-        <h1 id="表锁和行锁"><a href="#表锁和行锁" class="headerlink" title="表锁和行锁"></a>表锁和行锁</h1><p>锁是用于管理不同事务对共享资源的并发访问</p>
-<p>表锁与行锁的区别: </p>
-<ul>
-<li>锁定粒度：表锁 &gt; 行锁</li>
-<li>加锁效率：表锁 &gt; 行锁</li>
-<li>冲突概率：表锁 &gt; 行锁</li>
-<li>并发性能：表锁 &lt; 行锁</li>
-</ul>
-<p>InnoDB 存储引擎支持行锁和表锁（表锁是通过行锁实现的）</p>
-<h1 id="InnoDB-锁类型"><a href="#InnoDB-锁类型" class="headerlink" title="InnoDB 锁类型"></a>InnoDB 锁类型</h1><p>锁类型：</p>
-<ul>
-<li>共享锁（行锁）：Shared Locks</li>
-<li>排它锁（行锁）：Exclusive Locks</li>
-<li>意向共享锁（表锁）：IntentionShared Locks </li>
-<li>意向排它锁（表锁）：Intention Exclusive Locks</li>
-<li>自增锁：AUTO-INC Locks</li>
-</ul>
-<p>行锁的算法：</p>
-<ul>
-<li>记录锁 Record Locks</li>
-<li>间隙锁 Gap Locks</li>
-<li>临键锁 Next-key Locks </li>
-</ul>
-<h2 id="共享锁与排他锁"><a href="#共享锁与排他锁" class="headerlink" title="共享锁与排他锁"></a>共享锁与排他锁</h2><h3 id="共享锁"><a href="#共享锁" class="headerlink" title="共享锁"></a>共享锁</h3><p>又称为读锁，简称 <code>S锁</code> ，顾名思义，共享锁就是多个事务对于同一数据可以共享一把锁，都能访问到数据，但是只能读不能修改</p>
-<p>加锁释锁方式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select * from users WHERE id=1 LOCK IN SHARE MODE; </span><br><span class="line">commit/rollback;</span><br></pre></td></tr></table></figure>
-<p>举个例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">### session1 ###</span><br><span class="line">begin;</span><br><span class="line">select * from sys_user where id=1 lock in share mode;	# 获取S锁</span><br><span class="line">commit;</span><br><span class="line"></span><br><span class="line">### session2 ###</span><br><span class="line">select * from sys_user where id=1;			# 可以正常执行</span><br><span class="line">update sys_user set name=&apos;k2&apos; where id=1;	# 当上面没有commit，该语句将被阻塞</span><br></pre></td></tr></table></figure>
-<h3 id="排他锁"><a href="#排他锁" class="headerlink" title="排他锁"></a>排他锁</h3><p>又称为写锁，简称 <code>X锁</code> ，排他锁不能与其他锁并存，如一个事务获取了一个数据行的排他锁，其他事务就不能再获取该行的锁（共享锁、排他锁），只有该获取了排他锁的事务是可以对数据行进行读取和修改，（其他事务要读取数据可来自于快照）</p>
-<p>加锁释锁方式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">delete / update / insert 默认加上X锁</span><br><span class="line">SELECT * FROM table_name WHERE ... FOR UPDATE;</span><br><span class="line">commit/rollback;</span><br></pre></td></tr></table></figure>
-<p>例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">### session1 ###</span><br><span class="line">begin;</span><br><span class="line">update sys_user set name=&apos;k3&apos; where id=1;	# 自动获取X锁</span><br><span class="line">commit;</span><br><span class="line"></span><br><span class="line">### session2 ###</span><br><span class="line">select * from sys_user where id=1 for update;			# 等待上面commit</span><br><span class="line">select * from sys_user where id=1 lock in share mode;	# 等待上面commit</span><br><span class="line">select * from sys_user where id=1;						# 没影响</span><br></pre></td></tr></table></figure>
-<h3 id="那么-InnoDB-行锁到底锁了什么？"><a href="#那么-InnoDB-行锁到底锁了什么？" class="headerlink" title="那么 InnoDB 行锁到底锁了什么？"></a>那么 InnoDB 行锁到底锁了什么？</h3><p>InnoDB的行锁是通过给索引上的索引项加锁来实现的</p>
-<p><strong>只有通过索引条件进行数据检索，InnoDB才使用行级锁，否则，InnoDB 将使用表锁（锁住索引的所有记录）</strong></p>
-<p>所以在执行 delete / update / insert 时，也需要考虑索引，因为没有命中索引会变成表锁</p>
-<p>表锁：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lock tables xx read/write;</span><br></pre></td></tr></table></figure>
-<h2 id="意向共享锁与意向排它锁"><a href="#意向共享锁与意向排它锁" class="headerlink" title="意向共享锁与意向排它锁"></a>意向共享锁与意向排它锁</h2><ul>
-<li><p>意向共享锁（IS）</p>
-<p>表示事务准备给数据行加入共享锁，即一个数据行加共享锁前必须先取得该表的IS锁</p>
-</li>
-<li><p>意向排它锁（IX） </p>
-<p>表示事务准备给数据行加入排他锁，即一个数据行加排他锁前必须先取得该表的IX锁</p>
-</li>
-</ul>
-<p>简单来说，这两种锁就是一个标志位，在拿锁之前，先要判断IS/IX</p>
-<p>意向锁（IS、IX）是 InnoDB 数据操作之前自动加的，不需要用户干预 </p>
-<p>当事务想去进行锁表时，可以先判断意向锁是否存在，存在时则可快速返回该表不能启用表锁 </p>
-<h2 id="自增锁"><a href="#自增锁" class="headerlink" title="自增锁"></a>自增锁</h2><p>针对自增列自增长的一个特殊的表级别锁</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show variables like &apos;innodb_autoinc_lock_mode&apos;;</span><br></pre></td></tr></table></figure>
-<p>默认取值1，代表连续，事务未提交ID永久丢失</p>
-<h2 id="记录锁、间隙锁、临键锁"><a href="#记录锁、间隙锁、临键锁" class="headerlink" title="记录锁、间隙锁、临键锁"></a>记录锁、间隙锁、临键锁</h2><h3 id="临键锁（Next-Key）"><a href="#临键锁（Next-Key）" class="headerlink" title="临键锁（Next-Key）"></a>临键锁（Next-Key）</h3><p>临键锁是 InnoDB 默认的行锁算法</p>
-<p>当sql执行按照索引进行数据的检索时，查询条件为范围查找（between and、&lt;、&gt;等）并有数据命中，则此时sql语句加上的锁为 Next-Key locks，锁住索引的记录 + 区间（左开右闭）</p>
-<p>例子：</p>
-<p>当数据库里与 id 为1、4、7、10四条数据，那么：</p>
-<p><img src="/images/mysql/临键锁.png" alt></p>
-<p>它可以有效的方式幻读</p>
-<h3 id="间隙锁（Gap）"><a href="#间隙锁（Gap）" class="headerlink" title="间隙锁（Gap）"></a>间隙锁（Gap）</h3><p>当sql执行按照索引进行数据的检索时，查询条件的数据不存在，这时sql语句加上的锁即为Gap locks，锁住索引不存在的区间（左开右开）</p>
-<p><img src="/images/mysql/间隙锁.png" alt></p>
-<p>Gap locks只在RR事务隔离级别存在</p>
-<h3 id="记录锁（Record）"><a href="#记录锁（Record）" class="headerlink" title="记录锁（Record）"></a>记录锁（Record）</h3><p>当sql执行按照唯一性（Primary key、Unique key）索引进行数据的检索时，查询条件等值匹配且查询的数据时存在，这时sql语句加上的锁为记录锁，锁住具体的索引项</p>
-<p><img src="/images/mysql/记录锁.png" alt></p>
-<h1 id="锁是如何解决事务并发"><a href="#锁是如何解决事务并发" class="headerlink" title="锁是如何解决事务并发"></a>锁是如何解决事务并发</h1><h2 id="解决脏读"><a href="#解决脏读" class="headerlink" title="解决脏读"></a>解决脏读</h2><p><img src="/images/mysql/解决脏读.png" alt></p>
-<h2 id="解决不可重复读"><a href="#解决不可重复读" class="headerlink" title="解决不可重复读"></a>解决不可重复读</h2><p><img src="/images/mysql/解决不可重复读.png" alt></p>
-<h2 id="解决幻读"><a href="#解决幻读" class="headerlink" title="解决幻读"></a>解决幻读</h2><p><img src="/images/mysql/解决幻读.png" alt></p>
-<h1 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h1><p>当2个或以上事务都在等待对方释放锁，产生循环等待，即形成了死锁</p>
-<p>如何解决：</p>
+        <p>摘自《Netty权威指南》</p>
+<p>这里简单介绍Netty重要的类，深入了解可以参考《Netty权威指南》</p>
+<h1 id="ByteBuf"><a href="#ByteBuf" class="headerlink" title="ByteBuf"></a>ByteBuf</h1><p>当我们进行数据传输时，往往需要使用到缓冲区，常用的是JDK NIO类库提供的 <code>java.nio.Buffer</code>，但是它有如下缺点：</p>
 <ol>
-<li>类似的业务逻辑以固定的顺序访问表和行</li>
-<li>大事务拆小（大事务更倾向于死锁）</li>
-<li>在同一个事务中，尽可能做到一次锁定所需要的所有资源</li>
-<li>如果业务允许，可以降低事务隔离级别</li>
-<li>为表添加合适的索引（如果不走索引将会为表的每一行记录添加上锁，产生表锁）</li>
+<li>ByteBuffer长度固定，一旦分配完成，容量不能动态扩展和收缩，当需要编码大对象时，可能会发生索引越界异常</li>
+<li>ByteBuffer只有一个标识位置的指针position，读写需要手动调用 <code>flip()</code> 和 <code>rewind()</code>，且必须小心使用，很容易导致程序处理失败</li>
+<li>ByteBuffer的API功能有限，一些高级特性不支持，需要自己实现</li>
 </ol>
+<p>由于以上缺点，Netty提供了自己的 ByteBuffer 实现：ByteBuf</p>
+<p>功能介绍：</p>
+<ol>
+<li>顺序读操作</li>
+<li>顺序写操作</li>
+<li>readerIndex 和 writerIndex：提供两个指针变量用于支持顺序读写操作</li>
+<li>Discardable bytes</li>
+<li>Readable bytes 和 Writable bytes</li>
+<li>clear操作</li>
+<li>Mark 和 Rest</li>
+<li>查找操作</li>
+<li>Derived buffers</li>
+<li>转换成标准的ByteBuffer</li>
+<li>随机读写（set 和 get）</li>
+</ol>
+<p>相关辅助类：</p>
+<ul>
+<li>ByteBufHolder：ByteBuf容器，实现该接口定制化需求</li>
+<li>ByteBufAllocator：字节缓冲区分配器</li>
+<li>CompositeByteBuf：允许多个 ByteBuf 的实例组装到一起</li>
+<li>ByteBufUtil：工具类</li>
+</ul>
+<h1 id="Channel和Unsafe"><a href="#Channel和Unsafe" class="headerlink" title="Channel和Unsafe"></a>Channel和Unsafe</h1><h2 id="Channel"><a href="#Channel" class="headerlink" title="Channel"></a>Channel</h2><p><code>io.netty.channel.Channel</code> 是Netty网络操作抽象类，包含了：</p>
+<ol>
+<li>网络IO操作</li>
+<li>客户端发起连接、主动关闭连接、链路关闭</li>
+<li>获取通信双方的网络地址</li>
+<li>获取该 Channel 的 EventLoop</li>
+<li>获取缓冲分配器 ByteBufAllocator 和 pipeline</li>
+<li>…</li>
+</ol>
+<h2 id="Unsafe"><a href="#Unsafe" class="headerlink" title="Unsafe"></a>Unsafe</h2><p>Unsafe 接口实际上是 Channel 接口的辅助接口，它不应该被用户代码直接调用到，实际的IO操作都是由Unsafe接口完成的</p>
+<h1 id="ChannelPipeline和ChannelHandler"><a href="#ChannelPipeline和ChannelHandler" class="headerlink" title="ChannelPipeline和ChannelHandler"></a>ChannelPipeline和ChannelHandler</h1><p>Netty 的 ChannelPipeline 和 ChannelHandler 机制类似于 Servlet 和 Filter 过滤器</p>
+<p>Netty 的 Channel 过滤器实现原理与 Servlet Filter 机制一直，它将 Channel 的数据管道抽象成 ChannelPipeline，消息在 ChannelPipeline 中流动和传递， ChannelPipeline 持有IO事件拦截器 ChannelHandler 的链表，由 ChannelHandler 对IO事件进行拦截和处理</p>
+<h1 id="EventLoop-和-EventLoopGroup"><a href="#EventLoop-和-EventLoopGroup" class="headerlink" title="EventLoop 和 EventLoopGroup"></a>EventLoop 和 EventLoopGroup</h1><p>见Netty线程模型</p>
+<h1 id="Future-和-Promise"><a href="#Future-和-Promise" class="headerlink" title="Future 和 Promise"></a>Future 和 Promise</h1><h2 id="Future"><a href="#Future" class="headerlink" title="Future"></a>Future</h2><p>Future 最早来源于JDK的 <code>java.util.concurrent.Future</code>，它用于代表异步操作的结果</p>
+<p>由于Netty的Future都是与异步IO操作相关，因此命名为 <code>ChannelFuture</code>，代表与Channel操作相关</p>
+<h1 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h1><p>Promise 是可写的 Future，Future 自身并没有写操作相关的接口，Netty通过Promise对Future进行扩展，用于设置IO操作的结果</p>
 
       
     </div>
@@ -599,11 +563,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Mysql/" rel="tag"># Mysql</a>
+            <a href="/tags/netty/" rel="tag"># netty</a>
           
-            <a href="/tags/笔记/" rel="tag"># 笔记</a>
-          
-            <a href="/tags/性能优化/" rel="tag"># 性能优化</a>
+            <a href="/tags/Netty权威指南/" rel="tag"># Netty权威指南</a>
           
         </div>
       
@@ -616,8 +578,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/27/mysql/Mysql事务/" rel="next" title="Mysql事务">
-                <i class="fa fa-chevron-left"></i> Mysql事务
+              <a href="/2019/04/24/netty/Netty线程模型（EventLoop、EventLoopGroup）/" rel="next" title="Netty线程模型（EventLoop、EventLoopGroup）">
+                <i class="fa fa-chevron-left"></i> Netty线程模型（EventLoop、EventLoopGroup）
               </a>
             
           </div>
@@ -625,10 +587,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/02/28/mysql/Mysql-MVCC/" rel="prev" title="Mysql MVCC">
-                Mysql MVCC <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -832,7 +790,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#表锁和行锁"><span class="nav-text">表锁和行锁</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#InnoDB-锁类型"><span class="nav-text">InnoDB 锁类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#共享锁与排他锁"><span class="nav-text">共享锁与排他锁</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#共享锁"><span class="nav-text">共享锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#排他锁"><span class="nav-text">排他锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#那么-InnoDB-行锁到底锁了什么？"><span class="nav-text">那么 InnoDB 行锁到底锁了什么？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#意向共享锁与意向排它锁"><span class="nav-text">意向共享锁与意向排它锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自增锁"><span class="nav-text">自增锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#记录锁、间隙锁、临键锁"><span class="nav-text">记录锁、间隙锁、临键锁</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#临键锁（Next-Key）"><span class="nav-text">临键锁（Next-Key）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#间隙锁（Gap）"><span class="nav-text">间隙锁（Gap）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#记录锁（Record）"><span class="nav-text">记录锁（Record）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#锁是如何解决事务并发"><span class="nav-text">锁是如何解决事务并发</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#解决脏读"><span class="nav-text">解决脏读</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决不可重复读"><span class="nav-text">解决不可重复读</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决幻读"><span class="nav-text">解决幻读</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#死锁"><span class="nav-text">死锁</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ByteBuf"><span class="nav-text">ByteBuf</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Channel和Unsafe"><span class="nav-text">Channel和Unsafe</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Channel"><span class="nav-text">Channel</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Unsafe"><span class="nav-text">Unsafe</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ChannelPipeline和ChannelHandler"><span class="nav-text">ChannelPipeline和ChannelHandler</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#EventLoop-和-EventLoopGroup"><span class="nav-text">EventLoop 和 EventLoopGroup</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Future-和-Promise"><span class="nav-text">Future 和 Promise</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Future"><span class="nav-text">Future</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Promise"><span class="nav-text">Promise</span></a></li></ol></div>
             
 
           </div>
