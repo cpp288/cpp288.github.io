@@ -99,8 +99,8 @@
   <meta name="description" content="摘自《Netty权威指南》 在我们讨论Netty线程模型的时候，都会想到经典的Reactor线程模型 Reactor单线程模型Reactor单线程模型，是指所有的IO操作都在同一个NIO线程上面完成，NIO线程职责如下：  作为NIO服务端，接收客户端的TCP连接 作为NIO客户端，向客户端发起TCP连接 读取通信对端的请求或者应答消息 向通信对端发送消息或者应答消息   由于 Reactor 模">
 <meta name="keywords" content="netty,Netty权威指南">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Netty线程模型">
-<meta property="og:url" content="https://cpp288.github.io/2019/04/24/netty/Netty线程模型/index.html">
+<meta property="og:title" content="Netty线程模型（EventLoop、EventLoopGroup）">
+<meta property="og:url" content="https://cpp288.github.io/2019/04/24/netty/Netty线程模型（EventLoop、EventLoopGroup）/index.html">
 <meta property="og:site_name" content="cpp288&#39;s blog">
 <meta property="og:description" content="摘自《Netty权威指南》 在我们讨论Netty线程模型的时候，都会想到经典的Reactor线程模型 Reactor单线程模型Reactor单线程模型，是指所有的IO操作都在同一个NIO线程上面完成，NIO线程职责如下：  作为NIO服务端，接收客户端的TCP连接 作为NIO客户端，向客户端发起TCP连接 读取通信对端的请求或者应答消息 向通信对端发送消息或者应答消息   由于 Reactor 模">
 <meta property="og:locale" content="zh-CN">
@@ -109,9 +109,9 @@
 <meta property="og:image" content="https://cpp288.github.io/images/netty/主从Reactor多线程模型.png">
 <meta property="og:image" content="https://cpp288.github.io/images/netty/Netty线程模型.png">
 <meta property="og:image" content="https://cpp288.github.io/images/netty/Netty线程模型2.png">
-<meta property="og:updated_time" content="2019-04-25T02:01:24.746Z">
+<meta property="og:updated_time" content="2019-04-25T02:13:34.657Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Netty线程模型">
+<meta name="twitter:title" content="Netty线程模型（EventLoop、EventLoopGroup）">
 <meta name="twitter:description" content="摘自《Netty权威指南》 在我们讨论Netty线程模型的时候，都会想到经典的Reactor线程模型 Reactor单线程模型Reactor单线程模型，是指所有的IO操作都在同一个NIO线程上面完成，NIO线程职责如下：  作为NIO服务端，接收客户端的TCP连接 作为NIO客户端，向客户端发起TCP连接 读取通信对端的请求或者应答消息 向通信对端发送消息或者应答消息   由于 Reactor 模">
 <meta name="twitter:image" content="https://cpp288.github.io/images/netty/Reactor单线程模型.png">
 
@@ -120,7 +120,7 @@
 
 
 
-  <link rel="canonical" href="https://cpp288.github.io/2019/04/24/netty/Netty线程模型/">
+  <link rel="canonical" href="https://cpp288.github.io/2019/04/24/netty/Netty线程模型（EventLoop、EventLoopGroup）/">
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>Netty线程模型 | cpp288's blog</title>
+  <title>Netty线程模型（EventLoop、EventLoopGroup） | cpp288's blog</title>
   
 
 
@@ -375,7 +375,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://cpp288.github.io/2019/04/24/netty/Netty线程模型/">
+    <link itemprop="mainEntityOfPage" href="https://cpp288.github.io/2019/04/24/netty/Netty线程模型（EventLoop、EventLoopGroup）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chen Jian">
@@ -392,7 +392,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Netty线程模型
+          <h1 class="post-title" itemprop="name headline">Netty线程模型（EventLoop、EventLoopGroup）
 
               
             
@@ -431,7 +431,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                <time title="修改时间：2019-04-25 10:01:24" itemprop="dateModified" datetime="2019-04-25T10:01:24+08:00">2019-04-25</time>
+                <time title="修改时间：2019-04-25 10:13:34" itemprop="dateModified" datetime="2019-04-25T10:13:34+08:00">2019-04-25</time>
               
             
           </span>
