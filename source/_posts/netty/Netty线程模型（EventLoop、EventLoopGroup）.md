@@ -1,5 +1,5 @@
 ---
-title: Netty线程模型
+title: Netty线程模型（EventLoop、EventLoopGroup）
 date: 2019-04-24 20:19:25
 tags:
 - netty
