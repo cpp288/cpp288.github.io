@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Netty线程模型]]></title>
+    <url>%2F2019%2F04%2F24%2Fnetty%2FNetty%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B%2F</url>
+    <content type="text"><![CDATA[摘自《Netty权威指南》 在我们讨论Netty线程模型的时候，都会想到经典的Reactor线程模型 Reactor单线程模型Reactor单线程模型，是指所有的IO操作都在同一个NIO线程上面完成，NIO线程职责如下： 作为NIO服务端，接收客户端的TCP连接 作为NIO客户端，向客户端发起TCP连接 读取通信对端的请求或者应答消息 向通信对端发送消息或者应答消息 由于 Reactor 模式使用的是异步非阻塞IO，所有的IO操作都不会导致阻塞，理论上一个线程可以独立处理所有IO相关操作。例如通过 Acceptor 类接收客户端的TCP连接，当链路建立成功后，通过 Dispatch 将对应的 ByteBuffer 派发到指定的 Handler 上，进行消息解码，用户线程消息编码后通过NIO线程将消息发送给客户端 这种模型对于高负载、大并发的应用场景却不适合，原因如下： 一个NIO线程同时处理成百上千的链路，性能上无法支撑，无法满足海量消息的编码、解码、读取和发送 当NIO线程负载锅中之后，处理速度将变慢，会导致大量客户端连接超时，超时往往会进行重发，会导致大量消息积压和处理超时，成为性能瓶颈 一旦NIO线程出现意外，或者进入死循环，会导致整个系统通信模块不可用 Reactor多线程模型Reactor多线程模型与单线程最大的区别就是有一组NIO线程来处理IO操作： 特点如下： 有专门一个NIO线程（Acceptor线程）用于监听TCP连接请求 网络IO操作（读、写等）由一个NIO线程池负责，线程池可以用JDK线程池实现，它包含一个任务队列和N个可用的线程，这些NIO线程负责消息的读取、解码、编码和发送 一个NIO线程可以同时处理N条链路，但是一个链路只对应一个NIO线程，防止发生并发操作问题 在绝大多数场景下，该模型可以满足性能要求，但是当并发百万客户端连接，或者服务端需要对客户端进行安全认证，单独一个Acceptor线程可能存在性能不足的问题 主从Reactor多线程模型它的特点是：服务端用于接收客户端连接的不再是一个单独的NIO线程，而是一个线程池。Acceptor接收到客户端TCP连接请求并处理完成后（可能包含接入认证等），将新创建的 SocketChannel 注册到IO线程池（sub reactor线程池）的某个线程上，由它负责 SocketChannel 的读写和编解码工作，Acceptor线程池只用于客户端的登陆、握手和安全认证，一旦链路建立成功，就将链路注册到后端 subReactor 线程池的IO线程上 这样就可以解决一个服务端无法有效处理所有客户端连接的性能不足问题 Netty线程模型Netty线程模型不是一成不变的，它取决于用户的启动参数配置，可以支持Reactor单线程模型、Reactor多线程模型和主从Reactor多线程模型 通过服务端代码了解其线程模型： 1234567891011NioEventLoopGroup bossGroup = new NioEventLoopGroup();NioEventLoopGroup workGroup = new NioEventLoopGroup();ServerBootstrap b = new ServerBootstrap();b.group(bossGroup, workGroup) .channel(NioServerSocketChannel.class) .option(ChannelOption.SO_BACKLOG, 100) .handler(new LoggingHandler(LogLevel.INFO)) .childHandler(new ChannelInitializer&lt;SocketChannel&gt;() &#123; // ... &#125; 创建了两个 NioEventLoopGroup，一个用于接收客户端的TCP连接，另一个用户处理IO相关读写操作，或者执行系统Task、定时任务Task等 用于接收客户端请求的线程池职责： 接收客户端TCP连接，初始化 Channel 参数 将链路状态变更事件通知给 ChannelPipeline 处理IO操作的 Reactor 线程池职责： 异步读取通信对端的数据，发送读事件到 ChannelPipeline 异步发送消息到通信对端，调用 ChannelPipeline 的消息发送接口 执行系统调用Task 执行定时任务Task，如链路空闲状态检测定时任务 为了尽可能提升性能，Netty在很多地方进行了无锁化的设计，比如在IO线程内部进行串行操作，避免多线程竞争导致的性能下降，表面上看这种设计CPU利用率不高，并发度不够，但是通过调整NIO线程池的线程参数，可以同时启动多个串行化的线程并行运行，这种局部的无锁化串行线程设计比一个队列多个工作线程的模型性能更好 Netty的 NioEventLoop 读取到消息后，直接调用 ChannelPipeline 的 fireChannelRead(Object msg)。只要用户不主动切换线程，一直都是由 NioEventLoop 调用用户的 Handler，期间不进行线程切换，避免多线程操作导致的锁的竞争 最佳实践Netty多线程编程最佳实践如下： 创建两个 NioEventLoopGroup，用户逻辑隔离NIO Acceptor和NIO IO线程 尽量不要在 ChannelHandler 中启动用户线程（解码后用于将消息派发到后端业务线程的例外） 解码要放在NIO线程调用的解码Handler中进行，不要切换到用户线程中完成消息的解码 如果业务逻辑操作非常简单，没有可能会导致线程被阻塞的磁盘操作、数据库操作、网络操作等，可以直接在NIO线程上完成业务逻辑，不需要切换到用户线程 乳沟业务逻辑处理复杂，不要在NIO线程上完成，建议将解码后的消息封装成Task，派发到业务线程池中由业务线程执行，以保证NIO线程尽快被释放，处理其它IO操作 推荐的线程数量计算公式： 线程数量 = （线程总时间/瓶颈资源时间） * 瓶颈资源的线程并行数 QPS = 1000/线程总时间 * 线程数 由于用户场景的不同，对于一些复杂的系统，实际上很难计算，职能根据测试数据和用户场景，结合公式给出一个相对合理的范围，然后对范围内的数据进行性能测试，选择相对最优值]]></content>
+      <categories>
+        <category>netty</category>
+      </categories>
+      <tags>
+        <tag>netty</tag>
+        <tag>Netty权威指南</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Netty UDP协议开发]]></title>
     <url>%2F2019%2F04%2F23%2Fnetty%2FNetty-UDP%E5%8D%8F%E8%AE%AE%E5%BC%80%E5%8F%91%2F</url>
     <content type="text"><![CDATA[摘自《Netty权威指南》 介绍UDP是用户数据协议（User Datagram Protocol），作用是将网络数据流量压缩成数据报形式，提供面向事务的简单信息传送服务。与TCP不同，UDP直接利用IP协议进行UDP数据报的传输，它提供面向无连接的、不可靠的数据报投递服务 由于UDP具有资源消耗小、处理速度快的优点，通常视屏、音频等可靠性要求不高的数据传输一般会使用UDP UDP是无连接的，通信双方不需要建立物理链路连接。在网络中它用于处理数据包，在OSI模型中，处于第四层传输层，位于IP协议上一层。它不对数据报分组、组装、校验和排序 其数据报格式有首部和数据两个部分，首部很简单，为8个字节，包含： 源端口：2个字节，最大值为65535 目的端口：2个字节，最大值为65535 长度：2个字节，UDP用户数据报的总长度 校验和：2个字节，用于校验UDP数据报的数字段和包含UDP数据报首部的”伪首部”（其校验方法类似于IP分组首部中的首部校验和） UDP协议的特点： 传送数据前并不与对方建立连接，在传送数据前，发送方和接收方相互交换信息使双方同步 对接收到的数据报不发送确认信号，发送端不知道数据是否正确接收，也不会重复发送 比TCP快速，系统开销少 Netty UDP Demo源码地址 服务端：12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455public class ChineseProverbServer &#123; public static void main(String[] args) throws InterruptedException &#123; new ChineseProverbServer().run(8080); &#125; public void run(int port) throws InterruptedException &#123; NioEventLoopGroup group = new NioEventLoopGroup(); try &#123; Bootstrap b = new Bootstrap(); b.group(group) // UDP通信，使用 NioDatagramChannel 来创建 .channel(NioDatagramChannel.class) .option(ChannelOption.SO_BROADCAST, true) // UDP不存在客户端和服务端的实际连接，因此不需要为连接（ChannelPipeline）设置 handler .handler(new ChineseProverbServerHandler()); b.bind(port).sync().channel().closeFuture().await(); &#125; finally &#123; group.shutdownGracefully(); &#125; &#125; private static class ChineseProverbServerHandler extends SimpleChannelInboundHandler&lt;DatagramPacket&gt; &#123; private static final String[] DICTIONARY = &#123; "只要功夫深，铁杵磨成针", "旧时王谢堂前燕，飞入寻常百姓家", "洛阳亲友如想问，一片冰心在玉壶", "一寸光阴一寸金，寸金难买寸光阴" &#125;; private String nextQuote() &#123; int index = ThreadLocalRandom.current().nextInt(DICTIONARY.length); return DICTIONARY[index]; &#125; @Override protected void messageReceived(ChannelHandlerContext ctx, DatagramPacket packet) throws Exception &#123; String req = packet.content().toString(CharsetUtil.UTF_8); System.out.println(req); if ("谚语字典查询?".equals(req)) &#123; ctx.writeAndFlush(new DatagramPacket( Unpooled.copiedBuffer("谚语查询结果：" + nextQuote(), CharsetUtil.UTF_8), packet.sender())); &#125; &#125; @Override public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception &#123; cause.printStackTrace(); ctx.close(); &#125; &#125;&#125; 客户端：123456789101112131415161718192021222324252627282930313233343536373839404142434445public class ChineseProverbClient &#123; public static void main(String[] args) throws InterruptedException &#123; new ChineseProverbClient().run(8080); &#125; public void run(int port) throws InterruptedException &#123; NioEventLoopGroup group = new NioEventLoopGroup(); try &#123; Bootstrap b = new Bootstrap(); b.group(group) .channel(NioDatagramChannel.class) .option(ChannelOption.SO_BROADCAST, true) .handler(new ChineseProverbClientHandler()); Channel ch = b.bind(0).sync().channel(); // 创建UDP Channel完成之后，客户端就要主动发送广播消息： // TCP客户端是在客户端和服务端链路建立成功之后由客户端的业务handler发送消息，这是两者的区别 ch.writeAndFlush(new DatagramPacket(Unpooled.copiedBuffer("谚语字典查询?", CharsetUtil.UTF_8), new InetSocketAddress("255.255.255.255", port))).sync(); // 等待15s秒接收服务端的应答消息，然后退出 if (!ch.closeFuture().await(15000)) &#123; System.out.println("查询超时！"); &#125; &#125; finally &#123; group.shutdownGracefully(); &#125; &#125; private class ChineseProverbClientHandler extends SimpleChannelInboundHandler&lt;DatagramPacket&gt; &#123; @Override protected void messageReceived(ChannelHandlerContext ctx, DatagramPacket msg) throws Exception &#123; String resp = msg.content().toString(CharsetUtil.UTF_8); System.out.println(resp); ctx.close(); &#125; @Override public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception &#123; cause.printStackTrace(); ctx.close(); &#125; &#125;&#125;]]></content>
@@ -32,8 +44,8 @@
         <category>java</category>
       </categories>
       <tags>
-        <tag>Netty权威指南</tag>
         <tag>java</tag>
+        <tag>Netty权威指南</tag>
         <tag>IO</tag>
       </tags>
   </entry>
@@ -45,8 +57,8 @@
         <category>java</category>
       </categories>
       <tags>
-        <tag>Netty权威指南</tag>
         <tag>java</tag>
+        <tag>Netty权威指南</tag>
         <tag>IO</tag>
       </tags>
   </entry>
@@ -58,8 +70,8 @@
         <category>java</category>
       </categories>
       <tags>
-        <tag>Netty权威指南</tag>
         <tag>java</tag>
+        <tag>Netty权威指南</tag>
         <tag>IO</tag>
       </tags>
   </entry>
@@ -71,8 +83,8 @@
         <category>java</category>
       </categories>
       <tags>
-        <tag>Netty权威指南</tag>
         <tag>java</tag>
+        <tag>Netty权威指南</tag>
         <tag>IO</tag>
       </tags>
   </entry>
