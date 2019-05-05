@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[ElasticSearch词项查询]]></title>
+    <url>%2F2019%2F05%2F05%2Felasticsearch%2F%E6%90%9C%E7%B4%A2%E6%9F%A5%E8%AF%A2%2FElasticSearch%E8%AF%8D%E9%A1%B9%E6%9F%A5%E8%AF%A2%2F</url>
+    <content type="text"><![CDATA[全文搜索在执行查询之前会分析查询字符串，词项搜索时对倒排序索引中存储的词项进行精确操作。常用于结构化数据，如数字、日期和枚举类型 term queryterm 查询用来查找指定字段中包含给定单词的文档，term 查询不被解析，只有查询词和文档中的词精确匹配才会被搜索到 12345678GET books/_search&#123; "query" : &#123; "term" : &#123; "title" : "java" &#125; &#125;&#125; terms query是 term 的升级，可以用来查询文档中包含多个词的文档 12345678GET books/_search&#123; "query" : &#123; "terms" : &#123; "title" : ["java", "python"] &#125; &#125;&#125; range queryrange 查询用于匹配某一范围内的数值型、日期类型或者字符串字段的文档，支持的参数： gt：大于 gte：大于等于 lt：小于 lte：小于等于 12345678910111213141516GET books/_search&#123; "query" : &#123; "range" : &#123; "price" : &#123; "gt" : 50, "lte" : 70 &#125;, "publish_time" : &#123; "gte" : "2018-01-01", "lte" : "2019-12-31", "format" : "yyyy-MM-dd" &#125; &#125; &#125;&#125; exists queryexists 查询会返回字段中至少有一个非空值的文档： 12345678GET _search&#123; "query" : &#123; "exists" : &#123; "field" : "user" &#125; &#125;&#125; 以下会匹配： {&quot;user&quot; : &quot;jane&quot;} {&quot;user&quot; : &quot;&quot;} {&quot;user&quot; : &quot;-&quot;} {&quot;user&quot; : [&quot;jane&quot;]} {&quot;user&quot; : [&quot;jane&quot;, null]} 以下不会匹配： {&quot;user&quot; : null} {&quot;user&quot; : []} {&quot;user&quot; : [null]} {&quot;foo&quot; : bar} 没有user字段 prefix queryprefix 查询用于查询某个字段中以给定前缀开始的文档： 12345678GET books/_search&#123; "query" : &#123; "prefix" : &#123; "description" : "win" &#125; &#125;&#125; wildcard query通配符查询，支持单字符通配符和多字符通配符： ? 匹配一个任意字符 * 匹配零个或多个字符 和 prefix 查询一样，wildcard 查询的性能不是很高，需要消耗较多的CPU资源 12345678GET books/_search&#123; "query" : &#123; "wildcard" : &#123; "author" : "陈*" &#125; &#125;&#125; regexp query正则表达式查询 12345678GET _search&#123; "query" : &#123; "regexp" : &#123; "oistcide" : "W[0-9].+" &#125; &#125;&#125; fuzzy query编辑距离又称 Levenshtein 距离，是指两个字符串之间，由一个转成另一个所需的最少编辑操作次数（许可操作包括替换、插入、删除一个字符） fuzzy 查询就是通过计算词项与文档的编辑距离来得到结果的，但是需要消耗的资源比较大，效率不高，适用于需要模糊查询的场景 12345678GET books/_search&#123; "query" : &#123; "fuzzy" : &#123; "title" : "javascritp" // 将 javascript 打成了 javascritp &#125; &#125;&#125; type query用于查询具有指定类型的文档： 12345678GET _search&#123; "query" : &#123; "type" : &#123; "value" : "IT" &#125; &#125;&#125; ids query用于查询具有指定id的文档 类型是可选的，也可以省略，也可以接受一个数组： 123456789GET _search&#123; "query" : &#123; "ids" : &#123; "type" : "IT", "value" : ["1", "2", "3"] &#125; &#125;&#125;]]></content>
+      <categories>
+        <category>ElasticSearch</category>
+      </categories>
+      <tags>
+        <tag>ElasticSearch</tag>
+        <tag>从Lucene到ElasticSearch：全文检索实战</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[ElasticSearch搜索机制]]></title>
     <url>%2F2019%2F05%2F05%2Felasticsearch%2F%E6%90%9C%E7%B4%A2%E6%9F%A5%E8%AF%A2%2FElasticSearch%E6%90%9C%E7%B4%A2%E6%9C%BA%E5%88%B6%2F</url>
     <content type="text"><![CDATA[摘自《从Lucene到ElasticSearch：全文检索实战》 搜索流程图如下： 第一象限：用户 第二象限：原始文档 第三象限：ElasticSearch 第四象限：搜索结果 索引过程：原始文档有 title 和 content 两个字段，当把这条文档写入到 ElasticSearch 之后，默认情况下会保存两份内容，一份是该文档的原始内容，也就是 _source 中的文档内容，另一份是索引时通过分词、过滤等一系列过程生成的倒排序索引文件（保存了词项和文档的对应关系） 搜索过程：ElasticSearch 收到用户查询关键词之后，到倒排序索引中进行查询，找到关键词对应的文档集合，然后做评分、排序、高亮处理，最终返回结果给用户]]></content>
@@ -80,8 +92,8 @@
         <category>java</category>
       </categories>
       <tags>
-        <tag>Netty权威指南</tag>
         <tag>java</tag>
+        <tag>Netty权威指南</tag>
         <tag>IO</tag>
       </tags>
   </entry>
@@ -93,8 +105,8 @@
         <category>java</category>
       </categories>
       <tags>
-        <tag>Netty权威指南</tag>
         <tag>java</tag>
+        <tag>Netty权威指南</tag>
         <tag>IO</tag>
       </tags>
   </entry>
@@ -106,8 +118,8 @@
         <category>java</category>
       </categories>
       <tags>
-        <tag>Netty权威指南</tag>
         <tag>java</tag>
+        <tag>Netty权威指南</tag>
         <tag>IO</tag>
       </tags>
   </entry>
@@ -119,8 +131,8 @@
         <category>java</category>
       </categories>
       <tags>
-        <tag>Netty权威指南</tag>
         <tag>java</tag>
+        <tag>Netty权威指南</tag>
         <tag>IO</tag>
       </tags>
   </entry>
