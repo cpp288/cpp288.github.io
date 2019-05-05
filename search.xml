@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[ElasticSearch嵌套查询]]></title>
+    <url>%2F2019%2F05%2F05%2Felasticsearch%2F%E6%90%9C%E7%B4%A2%E6%9F%A5%E8%AF%A2%2FElasticSearch%E5%B5%8C%E5%A5%97%E6%9F%A5%E8%AF%A2%2F</url>
+    <content type="text"><![CDATA[在 ElasticSearch 这样的分布式系统中执行 SQL 风格的连接查询代价昂贵，为了实现水平规模的扩展，提供了两种形式的join： nested query（嵌套查询） 文档中可能包含嵌套类型的字段，这些字段用来索引一些数组对象，每个对象都可以作为一条独立的文档被查询出来 has_child query（有子查询）和has_parent query（有父查询） 父子关系可以存在单个的索引的两个类型的文档之间。has_child 返回其子文档能满足特定查询的父文档；has_parent 返回其父文档能满足特定查询的子文档 nested query文档中可能包含嵌套类型的字段，这些字段用来索引一些数组对象，每个对象都可以作为一条独立的文档被查询出来 文档的父子关系在创建索引时在映射中声明 123456789101112PUT /my_index&#123; "mappings" : &#123; "type1" : &#123; "properties" : &#123; "obj1" : &#123; "type" : "nested" &#125; &#125; &#125; &#125;&#125; has_child query这里以员工（employee）和工作城市（branch）为例，它们属于不同的类型，相当于数据库中的两张表，这里需要建立映射关系，员工是 child type，工作城市是 parent type： 1234567891011PUT /company&#123; "mappings" : &#123; "branch" : &#123;&#125;, "employee" : &#123; "_parent" : &#123; "type" : "branch" &#125; &#125; &#125;&#125; 使用 bulk api 索引 branch 类型下的文档： 12345POST company/branch/_bulk&#123;"index" : &#123;"_id" : "london"&#125;&#125;&#123;"name" : "London Westminster", "city" : "London", "country" : "UK"&#125;&#123;"index" : &#123;"_id" : "liverpool"&#125;&#125;&#123;"name" : "Liverpool Central", "city" : "Liverpool", "country" : "UK"&#125; 添加员工数据：1234&#123;"index" : &#123;"_id" : 1, "parent" : "london"&#125;&#125;&#123;"name" : "Alice Smith", "dob" : "1970-10-24", "hobby" : "hiking"&#125;&#123;"index" : &#123;"_id" : 2, "parent" : "liverpool"&#125;&#125;&#123;"name" : "Alice Grand", "dob" : "1980-04-24", "hobby" : "diving"&#125; 搜索1980年以后出生的员工所在工作城市： 123456789101112131415GET company/barnch/_search&#123; "query" : &#123; "has_child" : &#123; "type" : "employee", "query" : &#123; "range" : &#123; "dob" : &#123; "gte" : "1980-01-01" &#125; &#125; &#125; &#125; &#125;&#125; 可以使用 min_children 指定子文档的最小个数，例如搜索最少有两个 employee 的机构： 123456789101112GET company/barnch/_search?pretty&#123; "query" : &#123; "has_child" : &#123; "type" : "employee", "min_children" : 2, "query" : &#123; "match_all" : &#123;&#125; &#125; &#125; &#125;&#125; has_parent query搜索哪些 employee 工作在 UK： 12345678910111213GET company/employee/_search&#123; "query" : &#123; "has_parent" : &#123; "parent_type" : "branch", "query" : &#123; "match" : &#123; "country" : "UK" &#125; &#125; &#125; &#125;&#125;]]></content>
+      <categories>
+        <category>ElasticSearch</category>
+      </categories>
+      <tags>
+        <tag>ElasticSearch</tag>
+        <tag>从Lucene到ElasticSearch：全文检索实战</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[ElasticSearch复合查询]]></title>
     <url>%2F2019%2F05%2F05%2Felasticsearch%2F%E6%90%9C%E7%B4%A2%E6%9F%A5%E8%AF%A2%2FElasticSearch%E5%A4%8D%E5%90%88%E6%9F%A5%E8%AF%A2%2F</url>
     <content type="text"><![CDATA[复合查询就是把一些简单查询组合在一起实现更复杂的查询需求，除此之外还可以控制另外一个查询的行为 constant_score queryconstant_source query 可以包装一个其它类型的查询，并返回匹配过滤器中的查询条件且具有相同评分的文档 下面的查询会返回 title 字段中含有关键词”java”的文档，所有文档评分都是1.2 12345678910111213GET books/_search&#123; "query" : &#123; "constant_score" : &#123; "filter" : &#123; "term" : &#123; "title" : "java" &#125;, "boost" : 1.2 &#125; &#125; &#125;&#125; bool querybool 查询可以把任意多个简单查询组合在一起，使用 must、should、must_not、filter选项来表示简单查询之间的逻辑（可以出现0次或多次）： must：文档必须匹配 must选项下的查询条件，相当于and should：文档可以匹配 should 选项下的查询条件也可以不匹配，相当于or must_not：于 must 相反 filter：和 must 一样，但是 filter 不评分，只起到过滤作用 查询 title 中包含关键字 java，且 price 不高于70，description 可以包含也可以不包含虚拟机的书籍： 123456789101112131415161718192021222324GET books/_search&#123; "query" : &#123; "bool" : &#123; "must" : &#123; "match" : &#123; "title" : "java" &#125; &#125;, "should" : &#123; "match" : &#123; "description" : "虚拟机" &#125; &#125;, "must_not" : &#123; "range" : &#123; "price" : &#123; "gte" : 70 &#125; &#125; &#125; &#125; &#125;&#125; dis_max querydis_max query 与 bool query 有一定联系也有一定区别，dis_max query 支持多并发查询，可返回与任意查询条件子句匹配的任何文档类型。与 bool 查询可以将所有匹配查询的分数相结合的方式不通，dis_max 查询只使用最佳匹配查询条件的分数 123456789101112131415161718192021GET _search&#123; "query" : &#123; "dis_max" : &#123; "tie_breaker" : 0.7, "boost" : 1.2, "queries" : [ &#123; "term" : &#123; "age" : 34 &#125; &#125;, &#123; "term" : &#123; "age" : 35 &#125; &#125; ] &#125; &#125;&#125; function_score queryfunction_score query 可以修改查询的文档得分，比如通过评分函数计算文档得分代价较高，可以改用过滤器加自定义评分函数的方式来取代传统的评分方式 用户需要定义一个查询和一到多个评分函数，评分函数会对查询到的每个文档分别计算得分 下面这条语句会返回books索引中的所有文档，最大得分为5，每个文档的得分随机生成，权重的计算模式为相乘模式： 12345678910111213GET books/_search&#123; "query" : &#123; "function_score" : &#123; "query" : &#123; "match_all" : &#123;&#125; &#125;, "boost" : "5", "random_score" : &#123;&#125;, "boost_mode" : "multiply" &#125; &#125;&#125; 使用脚本自定义评分公式，这里把 price 值的十分之一开方作为每个文档的得分： 1234567891011121314151617GET books/_search&#123; "query" : &#123; "function_score" : &#123; "query" : &#123; "match" : &#123; "title" : "java" &#125; &#125;, "script_score" : &#123; "script" : &#123; "inline" : "Math.sqrt(doc('price').value/10)" &#125; &#125; &#125; &#125;&#125; boosting queryboosting 查询用于需要对两个查询的评分进行调整的场景，boosting 查询会把两个查询封装在一起并降低其中一个查询的评分。 boosting 查询包括 positive、negative 和 negative_boost 三个部分： positive：查询评分保持不变 negative：查询会降低文档评分 negative_boost：指明 negative 中降低的权值（之前得分的XX倍） 1234567891011121314151617181920GET books/_search&#123; "query" : &#123; "boosting" : &#123; "positive" : &#123; "match" : &#123; "title" : "python" &#125; &#125;, "negative" : &#123; "range" : &#123; "publish_time" : &#123; "lte" : "2015-01-01" &#125; &#125; &#125;, "negative_boost" : 0.2 &#125; &#125;&#125; indices queryindices query 适用于需要在多个索引之间进行查询的场景，它允许指定一个索引名字列表和内部查询。 由 query 和 no_match_query 两部分组成： query：用于搜索指定索引列表中的文档 no_match_query：用于搜索指定索引列表之外的文档 123456789101112131415161718GET _search&#123; "query" : &#123; "indices" : &#123; "indices" : ["books", "books2"], "query" : &#123; "match" : &#123; "title" : "javascript" &#125; &#125;, "no_match_query" : &#123; "term" : &#123; "title" : "basketball" &#125; &#125; &#125; &#125;&#125;]]></content>
@@ -104,8 +116,8 @@
         <category>java</category>
       </categories>
       <tags>
-        <tag>java</tag>
         <tag>Netty权威指南</tag>
+        <tag>java</tag>
         <tag>IO</tag>
       </tags>
   </entry>
@@ -117,8 +129,8 @@
         <category>java</category>
       </categories>
       <tags>
-        <tag>java</tag>
         <tag>Netty权威指南</tag>
+        <tag>java</tag>
         <tag>IO</tag>
       </tags>
   </entry>
@@ -130,8 +142,8 @@
         <category>java</category>
       </categories>
       <tags>
-        <tag>java</tag>
         <tag>Netty权威指南</tag>
+        <tag>java</tag>
         <tag>IO</tag>
       </tags>
   </entry>
@@ -143,8 +155,8 @@
         <category>java</category>
       </categories>
       <tags>
-        <tag>java</tag>
         <tag>Netty权威指南</tag>
+        <tag>java</tag>
         <tag>IO</tag>
       </tags>
   </entry>
