@@ -96,25 +96,25 @@
 
 
 
-  <meta name="description" content="前言介绍 插拔式的插件方式 存储引擎是指定在表之上的，即一个库中的每一个表都可以指定专用的存储引擎  不管表采用什么样的存储引擎，都会在数据区，产生对应的一个frm文件（表结构定义描述文件） 1-rw-rw---- 1 mysql mysql  8586 12月  6 18:56 sys_user.frm   各存储引擎对比查看官网：https://dev.mysql.com/doc/refman">
-<meta name="keywords" content="Mysql,笔记,性能优化">
+  <meta name="description" content="复合查询就是把一些简单查询组合在一起实现更复杂的查询需求，除此之外还可以控制另外一个查询的行为 constant_score queryconstant_source query 可以包装一个其它类型的查询，并返回匹配过滤器中的查询条件且具有相同评分的文档 下面的查询会返回 title 字段中含有关键词”java”的文档，所有文档评分都是1.2 12345678910111213GET books">
+<meta name="keywords" content="ElasticSearch,从Lucene到ElasticSearch：全文检索实战">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mysql存储引擎">
-<meta property="og:url" content="https://cpp288.github.io/2019/02/27/mysql/Mysql存储引擎/index.html">
+<meta property="og:title" content="ElasticSearch复合查询">
+<meta property="og:url" content="https://cpp288.github.io/2019/05/05/elasticsearch/搜索查询/ElasticSearch复合查询/index.html">
 <meta property="og:site_name" content="cpp288&#39;s blog">
-<meta property="og:description" content="前言介绍 插拔式的插件方式 存储引擎是指定在表之上的，即一个库中的每一个表都可以指定专用的存储引擎  不管表采用什么样的存储引擎，都会在数据区，产生对应的一个frm文件（表结构定义描述文件） 1-rw-rw---- 1 mysql mysql  8586 12月  6 18:56 sys_user.frm   各存储引擎对比查看官网：https://dev.mysql.com/doc/refman">
+<meta property="og:description" content="复合查询就是把一些简单查询组合在一起实现更复杂的查询需求，除此之外还可以控制另外一个查询的行为 constant_score queryconstant_source query 可以包装一个其它类型的查询，并返回匹配过滤器中的查询条件且具有相同评分的文档 下面的查询会返回 title 字段中含有关键词”java”的文档，所有文档评分都是1.2 12345678910111213GET books">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-02-27T11:51:58.728Z">
+<meta property="og:updated_time" content="2019-05-05T09:14:58.133Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mysql存储引擎">
-<meta name="twitter:description" content="前言介绍 插拔式的插件方式 存储引擎是指定在表之上的，即一个库中的每一个表都可以指定专用的存储引擎  不管表采用什么样的存储引擎，都会在数据区，产生对应的一个frm文件（表结构定义描述文件） 1-rw-rw---- 1 mysql mysql  8586 12月  6 18:56 sys_user.frm   各存储引擎对比查看官网：https://dev.mysql.com/doc/refman">
+<meta name="twitter:title" content="ElasticSearch复合查询">
+<meta name="twitter:description" content="复合查询就是把一些简单查询组合在一起实现更复杂的查询需求，除此之外还可以控制另外一个查询的行为 constant_score queryconstant_source query 可以包装一个其它类型的查询，并返回匹配过滤器中的查询条件且具有相同评分的文档 下面的查询会返回 title 字段中含有关键词”java”的文档，所有文档评分都是1.2 12345678910111213GET books">
 
 
 
 
 
 
-  <link rel="canonical" href="https://cpp288.github.io/2019/02/27/mysql/Mysql存储引擎/">
+  <link rel="canonical" href="https://cpp288.github.io/2019/05/05/elasticsearch/搜索查询/ElasticSearch复合查询/">
 
 
 
@@ -124,7 +124,7 @@
   };
 </script>
 
-  <title>Mysql存储引擎 | cpp288's blog</title>
+  <title>ElasticSearch复合查询 | cpp288's blog</title>
   
 
 
@@ -369,7 +369,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://cpp288.github.io/2019/02/27/mysql/Mysql存储引擎/">
+    <link itemprop="mainEntityOfPage" href="https://cpp288.github.io/2019/05/05/elasticsearch/搜索查询/ElasticSearch复合查询/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chen Jian">
@@ -386,7 +386,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Mysql存储引擎
+          <h1 class="post-title" itemprop="name headline">ElasticSearch复合查询
 
               
             
@@ -410,7 +410,7 @@
                 
               
 
-              <time title="创建时间：2019-02-27 19:48:38 / 修改时间：19:51:58" itemprop="dateCreated datePublished" datetime="2019-02-27T19:48:38+08:00">2019-02-27</time>
+              <time title="创建时间：2019-05-05 16:42:32 / 修改时间：17:14:58" itemprop="dateCreated datePublished" datetime="2019-05-05T16:42:32+08:00">2019-05-05</time>
             
 
             
@@ -430,7 +430,7 @@
               </span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ElasticSearch/" itemprop="url" rel="index"><span itemprop="name">ElasticSearch</span></a></span>
 
                 
                 
@@ -460,7 +460,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1.4k</span>
+                <span title="本文字数">4.4k</span>
               
 
               
@@ -474,7 +474,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 分钟</span>
+                <span title="阅读时长">4 分钟</span>
               
             </div>
           
@@ -494,87 +494,42 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><ul>
-<li>插拔式的插件方式</li>
-<li>存储引擎是指定在表之上的，即一个库中的每一个表都可以指定专用的存储引擎 </li>
-<li><p>不管表采用什么样的存储引擎，都会在数据区，产生对应的一个frm文件（表结构定义描述文件）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-rw-rw---- 1 mysql mysql  8586 12月  6 18:56 sys_user.frm</span><br></pre></td></tr></table></figure>
-</li>
+        <p>复合查询就是把一些简单查询组合在一起实现更复杂的查询需求，除此之外还可以控制另外一个查询的行为</p>
+<h1 id="constant-score-query"><a href="#constant-score-query" class="headerlink" title="constant_score query"></a>constant_score query</h1><p>constant_source query 可以包装一个其它类型的查询，并返回匹配过滤器中的查询条件且具有相同评分的文档</p>
+<p>下面的查询会返回 title 字段中含有关键词”java”的文档，所有文档评分都是1.2</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">GET books/_search</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"query"</span> : &#123;</span><br><span class="line">        <span class="attr">"constant_score"</span> : &#123;</span><br><span class="line">            <span class="attr">"filter"</span> : &#123;</span><br><span class="line">                <span class="attr">"term"</span> : &#123;</span><br><span class="line">                    <span class="attr">"title"</span> : <span class="string">"java"</span></span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="attr">"boost"</span> : <span class="number">1.2</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="bool-query"><a href="#bool-query" class="headerlink" title="bool query"></a>bool query</h1><p>bool 查询可以把任意多个简单查询组合在一起，使用 must、should、must_not、filter选项来表示简单查询之间的逻辑（可以出现0次或多次）：</p>
+<ul>
+<li>must：文档必须匹配 must选项下的查询条件，相当于and</li>
+<li>should：文档可以匹配 should 选项下的查询条件也可以不匹配，相当于or</li>
+<li>must_not：于 must 相反</li>
+<li>filter：和 must 一样，但是 filter 不评分，只起到过滤作用</li>
 </ul>
-<h2 id="各存储引擎对比"><a href="#各存储引擎对比" class="headerlink" title="各存储引擎对比"></a>各存储引擎对比</h2><p>查看官网：<a href="https://dev.mysql.com/doc/refman/5.7/en/storage-engines.html" target="_blank" rel="noopener">https://dev.mysql.com/doc/refman/5.7/en/storage-engines.html</a></p>
-<h1 id="CSV-存储引擎"><a href="#CSV-存储引擎" class="headerlink" title="CSV 存储引擎"></a>CSV 存储引擎</h1><p>数据存储以CSV文件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-rw-rw---- 1 mysql mysql     0 12月 18 19:27 table_csv.CSV</span><br></pre></td></tr></table></figure>
-<p>看其文件内容：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1,&quot;chen&quot;</span><br><span class="line">2,&quot;jian&quot;</span><br></pre></td></tr></table></figure>
-<p>存储的就是我们的表数据</p>
-<p>特点：</p>
-<ol>
-<li><p>不能定义索引、列定义必须为NOT NULL、不能设置自增列</p>
-<blockquote>
-<p>不适用大表或者数据的在线处理</p>
-</blockquote>
-</li>
-<li><p>CSV数据的存储用 <code>,</code> 隔开，可直接编辑CSV文件进行数据的编排</p>
-<blockquote>
-<p>数据安全性低（编辑之后，要生效使用flush table XXX 命令）</p>
-</blockquote>
-</li>
-</ol>
-<p>应用场景：</p>
-<ol>
-<li>数据的快速导出导入</li>
-<li>表格直接转换成CSV</li>
-</ol>
-<h1 id="Archive-存储引擎"><a href="#Archive-存储引擎" class="headerlink" title="Archive 存储引擎"></a>Archive 存储引擎</h1><p>压缩协议进行数据的存储，数据存储为 <code>ARZ</code> 文件格式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-rw-rw---- 1 mysql mysql  8674 12月 18 19:40 table_archive.ARZ</span><br></pre></td></tr></table></figure>
-<p>特点：</p>
-<ol>
-<li>只支持 <code>insert</code> 和 <code>select</code> 两种操作</li>
-<li>只允许自增ID列建立索引</li>
-<li>行级锁</li>
-<li>不支持事务</li>
-<li>数据占用磁盘少</li>
-</ol>
-<p>应用场景：</p>
-<ol>
-<li>日志系统</li>
-<li>大量的设备数据采集</li>
-</ol>
-<h1 id="Memory-存储引擎"><a href="#Memory-存储引擎" class="headerlink" title="Memory 存储引擎"></a>Memory 存储引擎</h1><p>数据都是存储在内存中，IO效率要比其他引擎高很多，服务重启数据丢失，内存数据表默认只有16M </p>
-<p>特点：</p>
-<ol>
-<li>支持hash索引，B tree索引，默认hash（查找复杂度 <code>0(1)</code> ）</li>
-<li>字段长度都是固定长度 <code>varchar(32)=char(32)</code></li>
-<li>不支持大数据存储类型字段如 <code>blog</code> ，<code>text</code></li>
-<li>表级锁</li>
-</ol>
-<p>应用场景：</p>
-<ol>
-<li>等值查找热度较高数据</li>
-<li>查询结果内存中的计算，大多数都是采用这种存储引擎作为临时表存储需计算的数据</li>
-</ol>
-<p><strong>实际应用中不常用</strong></p>
-<h1 id="Myisam-存储引擎"><a href="#Myisam-存储引擎" class="headerlink" title="Myisam 存储引擎"></a>Myisam 存储引擎</h1><p>Mysql5.5 版本之前的默认存储引擎</p>
-<p>较多的系统表也还是使用这个存储引擎</p>
-<p>系统临时表也会用到 Myisam 存储引擎（Memory 存储引擎不支持的情况下，比如数据超过了16M）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-rw-rw---- 1 mysql mysql     0 12月 18 16:30 table_myisam.MYD</span><br><span class="line">-rw-rw---- 1 mysql mysql  1024 12月 18 16:30 table_myisam.MYI</span><br></pre></td></tr></table></figure>
-<p>特点：</p>
-<ol>
-<li><code>select count(*) from table</code> 无需进行数据的扫描（有专门存储）</li>
-<li>数据（<code>.MYD</code>）和索引（<code>.MYI</code>）分开存储</li>
-<li>表级锁</li>
-<li>不支持事务</li>
-</ol>
-<h1 id="InnoDB-存储引擎"><a href="#InnoDB-存储引擎" class="headerlink" title="InnoDB 存储引擎"></a>InnoDB 存储引擎</h1><p>Mysql5.5及以后版本的默认存储引擎</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-rw-rw---- 1 mysql mysql 98304 12月  6 19:00 table_innodb.ibd</span><br></pre></td></tr></table></figure>
-<p>特点：</p>
-<ol>
-<li>支持事务ACID</li>
-<li>行级锁</li>
-<li>聚集索引（主键索引）方式进行数据存储</li>
-<li>支持外键关系保证数据完整性（尽量不要用）</li>
-</ol>
-
+<p>查询 title 中包含关键字 java，且 price 不高于70，description 可以包含也可以不包含虚拟机的书籍：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">GET books/_search</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"query"</span> : &#123;</span><br><span class="line">        <span class="attr">"bool"</span> : &#123;</span><br><span class="line">            <span class="attr">"must"</span> : &#123;</span><br><span class="line">                <span class="attr">"match"</span> : &#123;</span><br><span class="line">                    <span class="attr">"title"</span> : <span class="string">"java"</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">"should"</span> : &#123;</span><br><span class="line">                <span class="attr">"match"</span> : &#123;</span><br><span class="line">                    <span class="attr">"description"</span> : <span class="string">"虚拟机"</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">"must_not"</span> : &#123;</span><br><span class="line">                <span class="attr">"range"</span> : &#123;</span><br><span class="line">                    <span class="attr">"price"</span> : &#123;</span><br><span class="line">                        <span class="attr">"gte"</span> : <span class="number">70</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="dis-max-query"><a href="#dis-max-query" class="headerlink" title="dis_max query"></a>dis_max query</h1><p>dis_max query 与 bool query 有一定联系也有一定区别，dis_max query 支持多并发查询，可返回与任意查询条件子句匹配的任何文档类型。与 bool 查询可以将所有匹配查询的分数相结合的方式不通，dis_max 查询只使用最佳匹配查询条件的分数</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">GET _search</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"query"</span> : &#123;</span><br><span class="line">        <span class="attr">"dis_max"</span> : &#123;</span><br><span class="line">            <span class="attr">"tie_breaker"</span> : <span class="number">0.7</span>,</span><br><span class="line">            <span class="attr">"boost"</span> : <span class="number">1.2</span>,</span><br><span class="line">            <span class="attr">"queries"</span> : [</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="attr">"term"</span> : &#123;</span><br><span class="line">                        <span class="attr">"age"</span> : <span class="number">34</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="attr">"term"</span> : &#123;</span><br><span class="line">                        <span class="attr">"age"</span> : <span class="number">35</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="function-score-query"><a href="#function-score-query" class="headerlink" title="function_score query"></a>function_score query</h1><p>function_score query 可以修改查询的文档得分，比如通过评分函数计算文档得分代价较高，可以改用过滤器加自定义评分函数的方式来取代传统的评分方式</p>
+<p>用户需要定义一个查询和一到多个评分函数，评分函数会对查询到的每个文档分别计算得分</p>
+<p>下面这条语句会返回books索引中的所有文档，最大得分为5，每个文档的得分随机生成，权重的计算模式为相乘模式：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">GET books/_search</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"query"</span> : &#123;</span><br><span class="line">        <span class="attr">"function_score"</span> : &#123;</span><br><span class="line">            <span class="attr">"query"</span> : &#123;</span><br><span class="line">                <span class="attr">"match_all"</span> : &#123;&#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">"boost"</span> : <span class="string">"5"</span>,</span><br><span class="line">            <span class="attr">"random_score"</span> : &#123;&#125;,</span><br><span class="line">            <span class="attr">"boost_mode"</span> : <span class="string">"multiply"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用脚本自定义评分公式，这里把 price 值的十分之一开方作为每个文档的得分：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">GET books/_search</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"query"</span> : &#123;</span><br><span class="line">        <span class="attr">"function_score"</span> : &#123;</span><br><span class="line">            <span class="attr">"query"</span> : &#123;</span><br><span class="line">                <span class="attr">"match"</span> : &#123;</span><br><span class="line">                    <span class="attr">"title"</span> : <span class="string">"java"</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">"script_score"</span> : &#123;</span><br><span class="line">                <span class="attr">"script"</span> : &#123;</span><br><span class="line">                    <span class="attr">"inline"</span> : <span class="string">"Math.sqrt(doc('price').value/10)"</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="boosting-query"><a href="#boosting-query" class="headerlink" title="boosting query"></a>boosting query</h1><p>boosting 查询用于需要对两个查询的评分进行调整的场景，boosting 查询会把两个查询封装在一起并降低其中一个查询的评分。</p>
+<p>boosting 查询包括 positive、negative 和 negative_boost 三个部分：</p>
+<ul>
+<li>positive：查询评分保持不变</li>
+<li>negative：查询会降低文档评分</li>
+<li>negative_boost：指明 negative 中降低的权值（之前得分的XX倍）</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">GET books/_search</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"query"</span> : &#123;</span><br><span class="line">        <span class="attr">"boosting"</span> : &#123;</span><br><span class="line">            <span class="attr">"positive"</span> : &#123;</span><br><span class="line">                <span class="attr">"match"</span> : &#123;</span><br><span class="line">                    <span class="attr">"title"</span> : <span class="string">"python"</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">"negative"</span> : &#123;</span><br><span class="line">                <span class="attr">"range"</span> : &#123;</span><br><span class="line">                    <span class="attr">"publish_time"</span> : &#123;</span><br><span class="line">                        <span class="attr">"lte"</span> : <span class="string">"2015-01-01"</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">"negative_boost"</span> : <span class="number">0.2</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="indices-query"><a href="#indices-query" class="headerlink" title="indices query"></a>indices query</h1><p>indices query 适用于需要在多个索引之间进行查询的场景，它允许指定一个索引名字列表和内部查询。</p>
+<p>由 query 和 no_match_query 两部分组成：</p>
+<ul>
+<li>query：用于搜索指定索引列表中的文档</li>
+<li>no_match_query：用于搜索指定索引列表之外的文档</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">GET _search</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"query"</span> : &#123;</span><br><span class="line">        <span class="attr">"indices"</span> : &#123;</span><br><span class="line">            <span class="attr">"indices"</span> : [<span class="string">"books"</span>, <span class="string">"books2"</span>],</span><br><span class="line">            <span class="attr">"query"</span> : &#123;</span><br><span class="line">                <span class="attr">"match"</span> : &#123;</span><br><span class="line">                    <span class="attr">"title"</span> : <span class="string">"javascript"</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">"no_match_query"</span> : &#123;</span><br><span class="line">                <span class="attr">"term"</span> : &#123;</span><br><span class="line">                    <span class="attr">"title"</span> : <span class="string">"basketball"</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -597,11 +552,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Mysql/" rel="tag"># Mysql</a>
+            <a href="/tags/ElasticSearch/" rel="tag"># ElasticSearch</a>
           
-            <a href="/tags/笔记/" rel="tag"># 笔记</a>
-          
-            <a href="/tags/性能优化/" rel="tag"># 性能优化</a>
+            <a href="/tags/从Lucene到ElasticSearch：全文检索实战/" rel="tag"># 从Lucene到ElasticSearch：全文检索实战</a>
           
         </div>
       
@@ -614,8 +567,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/26/mysql/Mysql索引/" rel="next" title="Mysql索引">
-                <i class="fa fa-chevron-left"></i> Mysql索引
+              <a href="/2019/05/05/elasticsearch/搜索查询/ElasticSearch词项查询/" rel="next" title="ElasticSearch词项查询">
+                <i class="fa fa-chevron-left"></i> ElasticSearch词项查询
               </a>
             
           </div>
@@ -623,10 +576,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/02/27/mysql/Mysql查询优化/" rel="prev" title="Mysql查询优化">
-                Mysql查询优化 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -836,7 +785,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#各存储引擎对比"><span class="nav-text">各存储引擎对比</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CSV-存储引擎"><span class="nav-text">CSV 存储引擎</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Archive-存储引擎"><span class="nav-text">Archive 存储引擎</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Memory-存储引擎"><span class="nav-text">Memory 存储引擎</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Myisam-存储引擎"><span class="nav-text">Myisam 存储引擎</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#InnoDB-存储引擎"><span class="nav-text">InnoDB 存储引擎</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#constant-score-query"><span class="nav-text">constant_score query</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#bool-query"><span class="nav-text">bool query</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dis-max-query"><span class="nav-text">dis_max query</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#function-score-query"><span class="nav-text">function_score query</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#boosting-query"><span class="nav-text">boosting query</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#indices-query"><span class="nav-text">indices query</span></a></li></ol></div>
             
 
           </div>
