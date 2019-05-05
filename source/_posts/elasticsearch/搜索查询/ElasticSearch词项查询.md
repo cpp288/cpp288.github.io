@@ -1,6 +1,7 @@
 ---
 title: ElasticSearch词项查询
 date: 2019-05-05 14:55:16
+tags:
 - ElasticSearch
 - 从Lucene到ElasticSearch：全文检索实战
 categories:
