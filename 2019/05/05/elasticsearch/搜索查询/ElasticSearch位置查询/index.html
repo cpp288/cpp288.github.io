@@ -96,25 +96,27 @@
 
 
 
-  <meta name="description" content="Redis支持两种方式的持久化：  RDB方式：根据指定的规则“定时”将内存中的数据存储在硬盘上 AOF(append-only-file)方式：每次执行命令后将命令本身记录下来  两种持久化方式可以单独使用其中一种，也可以将这两种方式结合使用 RDB方式当符合一定条件时，Redis会单独创建(fork)一个子进程来进行持久化，会先将数据写入到一个临时文件中，等 到持久化过程都结束了，再用这个临时">
-<meta name="keywords" content="redis">
+  <meta name="description" content="ElasticSearch 可以对地理位置点 geo_point 类型和地理位置形状 geo_shape 类型的数据进行搜索。 地址位置数据： 12345678&amp;#123;&quot;index&quot; : &amp;#123;&quot;_index&quot; : &quot;geo&quot;, &quot;_type&quot; : &quot;city&quot;, &quot;_id&quot; : &quot;1&quot;&amp;#125;&amp;#125;&amp;#123;&quot;name&quot; : &quot;北京&quot;, &quot;location&quot; : &quot;39.9">
+<meta name="keywords" content="ElasticSearch,从Lucene到ElasticSearch：全文检索实战">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Redis的数据持久化">
-<meta property="og:url" content="https://cpp288.github.io/2019/04/18/redis/Redis的数据持久化/index.html">
+<meta property="og:title" content="ElasticSearch位置查询">
+<meta property="og:url" content="https://cpp288.github.io/2019/05/05/elasticsearch/搜索查询/ElasticSearch位置查询/index.html">
 <meta property="og:site_name" content="cpp288&#39;s blog">
-<meta property="og:description" content="Redis支持两种方式的持久化：  RDB方式：根据指定的规则“定时”将内存中的数据存储在硬盘上 AOF(append-only-file)方式：每次执行命令后将命令本身记录下来  两种持久化方式可以单独使用其中一种，也可以将这两种方式结合使用 RDB方式当符合一定条件时，Redis会单独创建(fork)一个子进程来进行持久化，会先将数据写入到一个临时文件中，等 到持久化过程都结束了，再用这个临时">
+<meta property="og:description" content="ElasticSearch 可以对地理位置点 geo_point 类型和地理位置形状 geo_shape 类型的数据进行搜索。 地址位置数据： 12345678&amp;#123;&quot;index&quot; : &amp;#123;&quot;_index&quot; : &quot;geo&quot;, &quot;_type&quot; : &quot;city&quot;, &quot;_id&quot; : &quot;1&quot;&amp;#125;&amp;#125;&amp;#123;&quot;name&quot; : &quot;北京&quot;, &quot;location&quot; : &quot;39.9">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-18T01:52:08.077Z">
+<meta property="og:image" content="https://cpp288.github.io/images/elasticsearch/geo_bounding_box矩形查找.png">
+<meta property="og:updated_time" content="2019-05-05T12:02:57.247Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Redis的数据持久化">
-<meta name="twitter:description" content="Redis支持两种方式的持久化：  RDB方式：根据指定的规则“定时”将内存中的数据存储在硬盘上 AOF(append-only-file)方式：每次执行命令后将命令本身记录下来  两种持久化方式可以单独使用其中一种，也可以将这两种方式结合使用 RDB方式当符合一定条件时，Redis会单独创建(fork)一个子进程来进行持久化，会先将数据写入到一个临时文件中，等 到持久化过程都结束了，再用这个临时">
+<meta name="twitter:title" content="ElasticSearch位置查询">
+<meta name="twitter:description" content="ElasticSearch 可以对地理位置点 geo_point 类型和地理位置形状 geo_shape 类型的数据进行搜索。 地址位置数据： 12345678&amp;#123;&quot;index&quot; : &amp;#123;&quot;_index&quot; : &quot;geo&quot;, &quot;_type&quot; : &quot;city&quot;, &quot;_id&quot; : &quot;1&quot;&amp;#125;&amp;#125;&amp;#123;&quot;name&quot; : &quot;北京&quot;, &quot;location&quot; : &quot;39.9">
+<meta name="twitter:image" content="https://cpp288.github.io/images/elasticsearch/geo_bounding_box矩形查找.png">
 
 
 
 
 
 
-  <link rel="canonical" href="https://cpp288.github.io/2019/04/18/redis/Redis的数据持久化/">
+  <link rel="canonical" href="https://cpp288.github.io/2019/05/05/elasticsearch/搜索查询/ElasticSearch位置查询/">
 
 
 
@@ -124,7 +126,7 @@
   };
 </script>
 
-  <title>Redis的数据持久化 | cpp288's blog</title>
+  <title>ElasticSearch位置查询 | cpp288's blog</title>
   
 
 
@@ -369,7 +371,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://cpp288.github.io/2019/04/18/redis/Redis的数据持久化/">
+    <link itemprop="mainEntityOfPage" href="https://cpp288.github.io/2019/05/05/elasticsearch/搜索查询/ElasticSearch位置查询/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chen Jian">
@@ -386,7 +388,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Redis的数据持久化
+          <h1 class="post-title" itemprop="name headline">ElasticSearch位置查询
 
               
             
@@ -410,7 +412,7 @@
                 
               
 
-              <time title="创建时间：2019-04-18 09:51:12 / 修改时间：09:52:08" itemprop="dateCreated datePublished" datetime="2019-04-18T09:51:12+08:00">2019-04-18</time>
+              <time title="创建时间：2019-05-05 19:32:32 / 修改时间：20:02:57" itemprop="dateCreated datePublished" datetime="2019-05-05T19:32:32+08:00">2019-05-05</time>
             
 
             
@@ -430,7 +432,7 @@
               </span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ElasticSearch/" itemprop="url" rel="index"><span itemprop="name">ElasticSearch</span></a></span>
 
                 
                 
@@ -460,7 +462,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">2.9k</span>
+                <span title="本文字数">5.4k</span>
               
 
               
@@ -474,7 +476,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">3 分钟</span>
+                <span title="阅读时长">5 分钟</span>
               
             </div>
           
@@ -494,65 +496,30 @@
       
 
       
-        <p>Redis支持两种方式的持久化：</p>
-<ul>
-<li>RDB方式：根据指定的规则“定时”将内存中的数据存储在硬盘上</li>
-<li>AOF(append-only-file)方式：每次执行命令后将命令本身记录下来</li>
-</ul>
-<p>两种持久化方式可以单独使用其中一种，也可以将这两种方式结合使用</p>
-<h1 id="RDB方式"><a href="#RDB方式" class="headerlink" title="RDB方式"></a>RDB方式</h1><p>当符合一定条件时，Redis会单独创建(fork)一个子进程来进行持久化，会先将数据写入到一个临时文件中，等 到持久化过程都结束了，再用这个临时文件替换上次持久化好的文件。</p>
-<p>整个过程中，主进程是不进行任何IO操作的，这就确保了极高的性能。如果需要进行大规模数据的恢复，且对于数据恢复的完整性不是非常敏感，那RDB方式要比AOF方式更加的高效。RDB的缺点是最后一次持久化后的数据可能丢失</p>
+        <p>ElasticSearch 可以对地理位置点 geo_point 类型和地理位置形状 geo_shape 类型的数据进行搜索。</p>
+<p>地址位置数据：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"index"</span> : &#123;<span class="attr">"_index"</span> : <span class="string">"geo"</span>, <span class="attr">"_type"</span> : <span class="string">"city"</span>, <span class="attr">"_id"</span> : <span class="string">"1"</span>&#125;&#125;</span><br><span class="line">&#123;<span class="attr">"name"</span> : <span class="string">"北京"</span>, <span class="attr">"location"</span> : <span class="string">"39.90498900,116.40528500"</span>&#125;</span><br><span class="line">&#123;<span class="attr">"index"</span> : &#123;<span class="attr">"_index"</span> : <span class="string">"geo"</span>, <span class="attr">"_type"</span> : <span class="string">"city"</span>, <span class="attr">"_id"</span> : <span class="string">"2"</span>&#125;&#125;</span><br><span class="line">&#123;<span class="attr">"name"</span> : <span class="string">"上海"</span>, <span class="attr">"location"</span> : <span class="string">"31.23170600,121.47264400"</span>&#125;</span><br><span class="line">&#123;<span class="attr">"index"</span> : &#123;<span class="attr">"_index"</span> : <span class="string">"geo"</span>, <span class="attr">"_type"</span> : <span class="string">"city"</span>, <span class="attr">"_id"</span> : <span class="string">"3"</span>&#125;&#125;</span><br><span class="line">&#123;<span class="attr">"name"</span> : <span class="string">"广州"</span>, <span class="attr">"location"</span> : <span class="string">"23.12517800,113.28063700"</span>&#125;</span><br><span class="line">&#123;<span class="attr">"index"</span> : &#123;<span class="attr">"_index"</span> : <span class="string">"geo"</span>, <span class="attr">"_type"</span> : <span class="string">"city"</span>, <span class="attr">"_id"</span> : <span class="string">"4"</span>&#125;&#125;</span><br><span class="line">&#123;<span class="attr">"name"</span> : <span class="string">"杭州"</span>, <span class="attr">"location"</span> : <span class="string">"30.28745900,120.15357600"</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>创建一个索引并设置映射：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">PUT geo</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"mappings"</span> : &#123;</span><br><span class="line">        <span class="attr">"city"</span> : &#123;</span><br><span class="line">            <span class="attr">"properties"</span> : &#123;</span><br><span class="line">                <span class="attr">"name"</span> : &#123;</span><br><span class="line">                    <span class="attr">"type"</span> : <span class="string">"keyword"</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">"location"</span> : &#123;</span><br><span class="line">                <span class="attr">"type"</span> : <span class="string">"geo_point"</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="geo-distance-query"><a href="#geo-distance-query" class="headerlink" title="geo_distance query"></a>geo_distance query</h1><p>geo_distance query 可以查找在一个中心点指定范围内的地理点文档，例如查找距离北京200KM以内的城市</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">GET geo/_search</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"query"</span> : &#123;</span><br><span class="line">        <span class="attr">"bool"</span> : &#123;</span><br><span class="line">            <span class="attr">"must"</span> : &#123;</span><br><span class="line">                <span class="attr">"match_all"</span> : &#123;&#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">"filter"</span> : &#123;</span><br><span class="line">                <span class="attr">"geo_distance"</span> : &#123;</span><br><span class="line">                    <span class="attr">"distance"</span> : <span class="string">"200km"</span>,</span><br><span class="line">                    <span class="attr">"location"</span> : &#123;</span><br><span class="line">                        <span class="attr">"lat"</span> : <span class="number">39.90498900</span>,</span><br><span class="line">                        <span class="attr">"lon"</span> : <span class="number">116.40528500</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>按各城市离北京的距离排序：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">GET geo/_search</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"query"</span> : &#123;</span><br><span class="line">        <span class="attr">"match_all"</span> : &#123;&#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"sort"</span> : &#123;</span><br><span class="line">        <span class="attr">"_geo_distance"</span> : &#123;</span><br><span class="line">            <span class="attr">"location"</span> : <span class="string">"39.90498900,116.40528500"</span>,</span><br><span class="line">            <span class="attr">"unit"</span> : <span class="string">"km"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="geo-bounding-box-query"><a href="#geo-bounding-box-query" class="headerlink" title="geo_bounding_box query"></a>geo_bounding_box query</h1><p>geo_bounding_box query 用于查找落入指定的矩形内的地址坐标。查询中由两个点确定一个矩形</p>
+<p><img src="/images/elasticsearch/geo_bounding_box矩形查找.png" alt></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">GET geo/_search</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"query"</span> : &#123;</span><br><span class="line">        <span class="attr">"bool"</span> : &#123;</span><br><span class="line">            <span class="attr">"must"</span> : &#123;</span><br><span class="line">                 <span class="attr">"match_all"</span> : &#123;&#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">"filter"</span> : &#123;</span><br><span class="line">                <span class="attr">"geo_bounding_box"</span> : &#123;</span><br><span class="line">                    <span class="attr">"location"</span> : &#123;</span><br><span class="line">                        <span class="attr">"top_left"</span> : &#123;</span><br><span class="line">                            <span class="attr">"lat"</span> : <span class="number">39.90498900</span>,</span><br><span class="line">                            <span class="attr">"lon"</span> : <span class="number">116.40528500</span></span><br><span class="line">                        &#125;,</span><br><span class="line">                        <span class="attr">"bottom_right"</span> : &#123;</span><br><span class="line">                            <span class="attr">"lat"</span> : <span class="number">30.28745900</span>,</span><br><span class="line">                            <span class="attr">"lon"</span> : <span class="number">120.15357600</span></span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="geo-polygon-query"><a href="#geo-polygon-query" class="headerlink" title="geo_polygon query"></a>geo_polygon query</h1><p>geo_polygon query 用于查找在指定多边形内的地理点</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">GET geo/_search</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"query"</span> : &#123;</span><br><span class="line">        <span class="attr">"bool"</span> : &#123;</span><br><span class="line">            <span class="attr">"must"</span> : &#123;</span><br><span class="line">                 <span class="attr">"match_all"</span> : &#123;&#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">"filter"</span> : &#123;</span><br><span class="line">                <span class="attr">"geo_polygon"</span> : &#123;</span><br><span class="line">                    <span class="attr">"location"</span> : &#123;</span><br><span class="line">                        <span class="attr">"points"</span> : [</span><br><span class="line">                            &#123;</span><br><span class="line">                                <span class="attr">"lat"</span> : <span class="number">39.90498900</span>,</span><br><span class="line">                                <span class="attr">"lon"</span> : <span class="number">116.40528500</span></span><br><span class="line">                            &#125;,</span><br><span class="line">                            &#123;</span><br><span class="line">                                <span class="attr">"lat"</span> : <span class="number">39.90498900</span>,</span><br><span class="line">                                <span class="attr">"lon"</span> : <span class="number">116.40528500</span></span><br><span class="line">                            &#125;,</span><br><span class="line">                            &#123;</span><br><span class="line">                                <span class="attr">"lat"</span> : <span class="number">23.12517800</span>,</span><br><span class="line">                                <span class="attr">"lon"</span> : <span class="number">113.28063700</span></span><br><span class="line">                            &#125;,</span><br><span class="line">                        ]</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="geo-shape-query"><a href="#geo-shape-query" class="headerlink" title="geo_shape query"></a>geo_shape query</h1><p>geo_shape query 用于查询 get_shape 类型的地理数据，地理形状之间的关系有相交、包含、不相交三种。</p>
+<p>创建一个新的索引用于测试，其中 location 字段的类型设为 get_shape 类型：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">PUT geoshape</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"mappings"</span> : &#123;</span><br><span class="line">        <span class="attr">"city"</span> : &#123;</span><br><span class="line">            <span class="attr">"properties"</span> : &#123;</span><br><span class="line">                <span class="attr">"name"</span> : &#123;</span><br><span class="line">                    <span class="attr">"type"</span> : <span class="string">"keyword"</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">"location"</span> : &#123;</span><br><span class="line">                <span class="attr">"type"</span> : <span class="string">"geo_shape"</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>fork的作用是复制一个与当前进程一样的进程。新进程的所有数据(变量、环境变量、程序计数器等)数值都和 原进程一致，但是是一个全新的进程，并作为原进程的子进程</p>
+<p>关于经纬度的顺序，geo_point 类型的字段纬度在前经度在后，对于 geo_shape 类型则相反</p>
 </blockquote>
-<h2 id="什么情况下会进行RDB快照"><a href="#什么情况下会进行RDB快照" class="headerlink" title="什么情况下会进行RDB快照"></a>什么情况下会进行RDB快照</h2><p>Redis会在以下几种情况下对数据进行快照:</p>
-<ol>
-<li>根据配置规则进行自动快照</li>
-<li>用户执行SAVE或者GBSAVE命令</li>
-<li>执行FLUSHALL命令</li>
-<li>执行复制(replication)时</li>
-</ol>
-<h3 id="根据配置规则进行自动快照"><a href="#根据配置规则进行自动快照" class="headerlink" title="根据配置规则进行自动快照"></a>根据配置规则进行自动快照</h3><p>Redis允许用户自定义快照条件，当符合快照条件时，Redis会自动执行快照操作。快照的条件可以由用户在配置文件中配置。配置格式如下：</p>
-<ol>
-<li>第一个参数是时间窗口</li>
-<li>第二个是键的个数</li>
-</ol>
-<p>也就是说，在第一个时间参数配置范围内被更改的键的个数大于后面的changes时，即符合快照条件。redis默认配置了三个规则：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">save 900 1</span><br><span class="line">save 300 10</span><br><span class="line">save 60 10000</span><br></pre></td></tr></table></figure></p>
-<p>每条快照规则占一行，每条规则之间是“或”的关系。 在900秒(15分)内有一个以上的键被更改则进行快照。</p>
-<h3 id="用户执行SAVE或者GBSAVE命令"><a href="#用户执行SAVE或者GBSAVE命令" class="headerlink" title="用户执行SAVE或者GBSAVE命令"></a>用户执行SAVE或者GBSAVE命令</h3><p>除了让Redis自动进行快照以外，当我们对服务进行重启或者服务器迁移我们需要人工去干预备份。redis提供了两条命令来完成这个任务：</p>
-<ol>
-<li>save命令<blockquote>
-<p>当执行save命令时，Redis同步做快照操作，在快照执行过程中会阻塞所有来自客户端的请求。当redis内存中的数据较多时，通过该命令将导致Redis较长时间的不响应。所以不建议在生产环境上使用这个命令，而是推荐使用bgsave命令</p>
-</blockquote>
-</li>
-<li>bgsave命令<blockquote>
-<p>bgsave命令可以在后台异步地进行快照操作，快照的同时服务器还可以继续响应来自客户端的请求。执行BGSAVE后，Redis会立即返回ok表示开始执行快照操作。</p>
-</blockquote>
-</li>
-</ol>
-<p>通过LASTSAVE命令可以获取最近一次成功执行快照的时间; (自动快照采用的是异步快照操作)</p>
-<h3 id="执行FLUSHALL命令"><a href="#执行FLUSHALL命令" class="headerlink" title="执行FLUSHALL命令"></a>执行FLUSHALL命令</h3><p>该命令会清除redis在内存中的所有数据。执行该命令后，只要redis中配置的快照规则不为空，也就是save 的规则存在。redis就会执行一次快照操作。不管规则是什么样的都会执行。如果没有定义快照规则，就不会执行快照操作</p>
-<h3 id="执行复制时"><a href="#执行复制时" class="headerlink" title="执行复制时"></a>执行复制时</h3><p>该操作主要是在主从模式下，redis会在复制初始化时进行自动快照。</p>
-<p>这里只需要了解当执行复制操作时，即使没有定义自动快照规则，并且没有手动执行过快照操作，它仍然会生成RDB快照文件</p>
-<h1 id="AOF方式"><a href="#AOF方式" class="headerlink" title="AOF方式"></a>AOF方式</h1><p>当使用Redis存储非临时数据时，一般需要打开AOF持久化来降低进程终止导致的数据丢失。AOF可以将Redis执行的每一条写命令追加到硬盘文件中，这一过程会降低Redis的性能，但大部分情况下这个影响是能够接受的，另外使用较快的硬盘可以提高AOF的性能</p>
-<h2 id="开启AOF"><a href="#开启AOF" class="headerlink" title="开启AOF"></a>开启AOF</h2><p>默认情况下Redis没有开启AOF(append only file)方式的持久化，可以通过appendonly参数启用，在redis.conf中找到<code>appendonly yes</code>开启AOF持久化后每执行一条会更改Redis中的数据的命令后，Redis就会将该命令写入硬盘中的AOF文件。</p>
-<p>AOF文件的保存位置和RDB文件的位置相同，都是通过dir参数设置的，默认的文件名是apendonly.aof。可以在redis.conf中的属性<code>appendfilename appendonlyh.aof</code>修改</p>
-<h2 id="AOF的实现"><a href="#AOF的实现" class="headerlink" title="AOF的实现"></a>AOF的实现</h2><p>AOF文件以纯文本的形式记录Redis执行的写命令例如开启AOF持久化的情况下执行如下4条命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">set foo 1</span><br><span class="line">set foo 2</span><br><span class="line">set foo 3</span><br><span class="line">get</span><br></pre></td></tr></table></figure></p>
-<p>redis会将前3条命令写入AOF文件中，通过vim的方式可以看到aof文件中的内容</p>
-<p>我们会发现AOF文件的内容正是Redis发送的原始通信协议的内容，从内容中我们发现Redis记录了3条命令，然后这时有一个问题是前面2条命令其实是冗余的，因为这两条的执行结果都会被第三条命令覆盖。随着执行的命令越来越多，AOF文件的大小也会越来越大，其实内存中实际的数据可能没有多少，那这样就会造成磁盘空间以及redis数据还原的过程比较长的问题。因此我们希望Redis可以自动优化AOF文件，就上面这个例子来说，前面两条是可以被删除的。而实际上Redis也考虑到了，可以配置一个条件，每当达到一定条件时Redis就会自动重写AOF文件，这个条件的配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">auto-aof-rewrite-percentage 100</span><br><span class="line">auto-aof-rewrite-min-size 64mb</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li><code>auto-aof-rewrite-percentage</code>表示的是当目前的AOF文件大小超过上一次重写时的AOF文件大小的百分之多少时会再次进行重写，如果之前没有重写过，则以启动时AOF文件大小为依据</li>
-<li><code>auto-aof-rewrite-min-size</code>表示限制了允许重写的最小AOF文件大小，通常在AOF文件很小的情况下即使其中有很多冗余的命令我们也并不太关心。</li>
-</ul>
-<p>另外，还可以通过<code>BGREWRITEAOF</code>命令手动执行AOF，执行完以后冗余的命令已经被删除了</p>
-<p>在启动时，Redis会逐个执行AOF文件中的命令来将硬盘中的数据载入到内存中，载入的速度相对于RDB会慢一些</p>
-<h2 id="AOF的重写原理"><a href="#AOF的重写原理" class="headerlink" title="AOF的重写原理"></a>AOF的重写原理</h2><p>Redis可以在AOF文件体积变得过大时，自动地在后台对 AOF进行重写: 重写后的新AOF文件包含了恢复当前数据集所需的最小命令集合。</p>
-<p>重写的流程是这样：</p>
-<p>主进程会fork一个子进程出来进行AOF重写，这个重写过程并不是基于原有的aof文件来做的，而是有点类似于快照的方式，全量遍历内存中的数据，然后逐个序列到aof文件中。</p>
-<p>在fork子进程这个过程中，服务端仍然可以对外提供服务，那这个时候重写的aof文件的数据和redis内存数据不一致了怎么办?不用担心，这个过程中，主进程的数据更新操作，会缓存到<code>aof_rewrite_buf</code>中，也就是单独开辟一块缓存来存储重写期间收到的命令，当子进程重写完以后再把缓存中的数据追加到新的aof文件。</p>
-<p>当所有的数据全部追加到新的aof文件中后，把新的aof文件重命名，此后所有的操作都会被写入新的aof文件。</p>
-<p>如果在rewrite过程中出现故障，不会影响原来aof文件的正常工作，只有当rewrite完成后才会切换文件。因此这个rewrite过程是比较可靠的</p>
-
+<p>把西安和郑州连成的线写入索引：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">POST geoshape/city/1</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"name"</span> : <span class="string">"西安-郑州"</span>,</span><br><span class="line">    <span class="attr">"location"</span> : &#123;</span><br><span class="line">        <span class="attr">"type"</span> : <span class="string">"linestring"</span>,</span><br><span class="line">        <span class="attr">"coordinates"</span> : [</span><br><span class="line">            [<span class="number">108.94802400</span>, <span class="number">34.26316100</span>],</span><br><span class="line">            [<span class="number">113.66541200</span>, <span class="number">34.75797500</span>]</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>查询包含在由银川和南昌作为对角线上的点组成的矩形的地理形状，由于西安和郑州组成的直线在该矩形区域内，因此可以被查到</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">GET geoshape/_search</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"query"</span> : &#123;</span><br><span class="line">        <span class="attr">"bool"</span> : &#123;</span><br><span class="line">            <span class="attr">"must"</span> : &#123;</span><br><span class="line">                 <span class="attr">"match_all"</span> : &#123;&#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">"filter"</span> : &#123;</span><br><span class="line">                <span class="attr">"geo_shape"</span> : &#123;</span><br><span class="line">                    <span class="attr">"location"</span> : &#123;</span><br><span class="line">                        <span class="attr">"shape"</span> : &#123;</span><br><span class="line">                            <span class="attr">"type"</span> : <span class="string">"envelope"</span>,</span><br><span class="line">                            <span class="attr">"coordinates"</span> : [</span><br><span class="line">                                [<span class="number">106.27817900</span>, <span class="number">38.46637000</span>],  // 银川</span><br><span class="line">                                [<span class="number">115.89215100</span>, <span class="number">28.67649300</span>]   // 南昌</span><br><span class="line">                            ]</span><br><span class="line">                        &#125;,</span><br><span class="line">                        <span class="attr">"relation"</span> : <span class="string">"within"</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -575,7 +542,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/redis/" rel="tag"># redis</a>
+            <a href="/tags/ElasticSearch/" rel="tag"># ElasticSearch</a>
+          
+            <a href="/tags/从Lucene到ElasticSearch：全文检索实战/" rel="tag"># 从Lucene到ElasticSearch：全文检索实战</a>
           
         </div>
       
@@ -588,8 +557,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/18/redis/Redis数据结构深入分析/" rel="next" title="Redis数据结构深入分析">
-                <i class="fa fa-chevron-left"></i> Redis数据结构深入分析
+              <a href="/2019/05/05/elasticsearch/搜索查询/ElasticSearch嵌套查询/" rel="next" title="ElasticSearch嵌套查询">
+                <i class="fa fa-chevron-left"></i> ElasticSearch嵌套查询
               </a>
             
           </div>
@@ -597,10 +566,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/18/redis/Redis之Lua脚本/" rel="prev" title="Redis之Lua脚本">
-                Redis之Lua脚本 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -810,7 +775,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#RDB方式"><span class="nav-text">RDB方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么情况下会进行RDB快照"><span class="nav-text">什么情况下会进行RDB快照</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#根据配置规则进行自动快照"><span class="nav-text">根据配置规则进行自动快照</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户执行SAVE或者GBSAVE命令"><span class="nav-text">用户执行SAVE或者GBSAVE命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行FLUSHALL命令"><span class="nav-text">执行FLUSHALL命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行复制时"><span class="nav-text">执行复制时</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AOF方式"><span class="nav-text">AOF方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#开启AOF"><span class="nav-text">开启AOF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AOF的实现"><span class="nav-text">AOF的实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AOF的重写原理"><span class="nav-text">AOF的重写原理</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#geo-distance-query"><span class="nav-text">geo_distance query</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#geo-bounding-box-query"><span class="nav-text">geo_bounding_box query</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#geo-polygon-query"><span class="nav-text">geo_polygon query</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#geo-shape-query"><span class="nav-text">geo_shape query</span></a></li></ol></div>
             
 
           </div>
