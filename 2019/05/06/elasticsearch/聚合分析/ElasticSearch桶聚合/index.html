@@ -96,31 +96,25 @@
 
 
 
-  <meta name="description" content="摘自《Netty权威指南》 在我们讨论Netty线程模型的时候，都会想到经典的Reactor线程模型 Reactor单线程模型Reactor单线程模型，是指所有的IO操作都在同一个NIO线程上面完成，NIO线程职责如下：  作为NIO服务端，接收客户端的TCP连接 作为NIO客户端，向客户端发起TCP连接 读取通信对端的请求或者应答消息 向通信对端发送消息或者应答消息   由于 Reactor 模">
-<meta name="keywords" content="netty,Netty权威指南">
+  <meta name="description" content="Bucket 可以理解为一个桶，它会遍历文档中的内容，凡是符合某一要求的就放入一个桶中（类似于SQL中的group by） Terms Aggregation用于分组聚合 根据 language 字段对 books 索引中的文档进行分组，统计各编程语言的书的数量 12345678POST books/_search?size=0&amp;#123;    &quot;aggs&quot; : &amp;#123;        &quot;p">
+<meta name="keywords" content="ElasticSearch,从Lucene到ElasticSearch：全文检索实战">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Netty线程模型（EventLoop、EventLoopGroup）">
-<meta property="og:url" content="https://cpp288.github.io/2019/04/24/netty/Netty线程模型（EventLoop、EventLoopGroup）/index.html">
+<meta property="og:title" content="ElasticSearch桶聚合">
+<meta property="og:url" content="https://cpp288.github.io/2019/05/06/elasticsearch/聚合分析/ElasticSearch桶聚合/index.html">
 <meta property="og:site_name" content="cpp288&#39;s blog">
-<meta property="og:description" content="摘自《Netty权威指南》 在我们讨论Netty线程模型的时候，都会想到经典的Reactor线程模型 Reactor单线程模型Reactor单线程模型，是指所有的IO操作都在同一个NIO线程上面完成，NIO线程职责如下：  作为NIO服务端，接收客户端的TCP连接 作为NIO客户端，向客户端发起TCP连接 读取通信对端的请求或者应答消息 向通信对端发送消息或者应答消息   由于 Reactor 模">
+<meta property="og:description" content="Bucket 可以理解为一个桶，它会遍历文档中的内容，凡是符合某一要求的就放入一个桶中（类似于SQL中的group by） Terms Aggregation用于分组聚合 根据 language 字段对 books 索引中的文档进行分组，统计各编程语言的书的数量 12345678POST books/_search?size=0&amp;#123;    &quot;aggs&quot; : &amp;#123;        &quot;p">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://cpp288.github.io/images/netty/Reactor单线程模型.png">
-<meta property="og:image" content="https://cpp288.github.io/images/netty/Reactor多线程模型.png">
-<meta property="og:image" content="https://cpp288.github.io/images/netty/主从Reactor多线程模型.png">
-<meta property="og:image" content="https://cpp288.github.io/images/netty/Netty线程模型.png">
-<meta property="og:image" content="https://cpp288.github.io/images/netty/Netty线程模型2.png">
-<meta property="og:updated_time" content="2019-04-25T02:13:34.657Z">
+<meta property="og:updated_time" content="2019-05-06T07:28:15.754Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Netty线程模型（EventLoop、EventLoopGroup）">
-<meta name="twitter:description" content="摘自《Netty权威指南》 在我们讨论Netty线程模型的时候，都会想到经典的Reactor线程模型 Reactor单线程模型Reactor单线程模型，是指所有的IO操作都在同一个NIO线程上面完成，NIO线程职责如下：  作为NIO服务端，接收客户端的TCP连接 作为NIO客户端，向客户端发起TCP连接 读取通信对端的请求或者应答消息 向通信对端发送消息或者应答消息   由于 Reactor 模">
-<meta name="twitter:image" content="https://cpp288.github.io/images/netty/Reactor单线程模型.png">
+<meta name="twitter:title" content="ElasticSearch桶聚合">
+<meta name="twitter:description" content="Bucket 可以理解为一个桶，它会遍历文档中的内容，凡是符合某一要求的就放入一个桶中（类似于SQL中的group by） Terms Aggregation用于分组聚合 根据 language 字段对 books 索引中的文档进行分组，统计各编程语言的书的数量 12345678POST books/_search?size=0&amp;#123;    &quot;aggs&quot; : &amp;#123;        &quot;p">
 
 
 
 
 
 
-  <link rel="canonical" href="https://cpp288.github.io/2019/04/24/netty/Netty线程模型（EventLoop、EventLoopGroup）/">
+  <link rel="canonical" href="https://cpp288.github.io/2019/05/06/elasticsearch/聚合分析/ElasticSearch桶聚合/">
 
 
 
@@ -130,7 +124,7 @@
   };
 </script>
 
-  <title>Netty线程模型（EventLoop、EventLoopGroup） | cpp288's blog</title>
+  <title>ElasticSearch桶聚合 | cpp288's blog</title>
   
 
 
@@ -375,7 +369,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://cpp288.github.io/2019/04/24/netty/Netty线程模型（EventLoop、EventLoopGroup）/">
+    <link itemprop="mainEntityOfPage" href="https://cpp288.github.io/2019/05/06/elasticsearch/聚合分析/ElasticSearch桶聚合/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chen Jian">
@@ -392,7 +386,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Netty线程模型（EventLoop、EventLoopGroup）
+          <h1 class="post-title" itemprop="name headline">ElasticSearch桶聚合
 
               
             
@@ -416,22 +410,12 @@
                 
               
 
-              <time title="创建时间：2019-04-24 20:19:25" itemprop="dateCreated datePublished" datetime="2019-04-24T20:19:25+08:00">2019-04-24</time>
+              <time title="创建时间：2019-05-06 14:40:01 / 修改时间：15:28:15" itemprop="dateCreated datePublished" datetime="2019-05-06T14:40:01+08:00">2019-05-06</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                <time title="修改时间：2019-04-25 10:13:34" itemprop="dateModified" datetime="2019-04-25T10:13:34+08:00">2019-04-25</time>
               
             
           </span>
@@ -446,7 +430,7 @@
               </span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/netty/" itemprop="url" rel="index"><span itemprop="name">netty</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ElasticSearch/" itemprop="url" rel="index"><span itemprop="name">ElasticSearch</span></a></span>
 
                 
                 
@@ -476,7 +460,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">2.7k</span>
+                <span title="本文字数">5.7k</span>
               
 
               
@@ -490,7 +474,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">2 分钟</span>
+                <span title="阅读时长">5 分钟</span>
               
             </div>
           
@@ -510,70 +494,38 @@
       
 
       
-        <p>摘自《Netty权威指南》</p>
-<p>在我们讨论Netty线程模型的时候，都会想到经典的Reactor线程模型</p>
-<h1 id="Reactor单线程模型"><a href="#Reactor单线程模型" class="headerlink" title="Reactor单线程模型"></a>Reactor单线程模型</h1><p>Reactor单线程模型，是指所有的IO操作都在同一个NIO线程上面完成，NIO线程职责如下：</p>
-<ul>
-<li>作为NIO服务端，接收客户端的TCP连接</li>
-<li>作为NIO客户端，向客户端发起TCP连接</li>
-<li>读取通信对端的请求或者应答消息</li>
-<li>向通信对端发送消息或者应答消息</li>
-</ul>
-<p><img src="/images/netty/Reactor单线程模型.png" alt></p>
-<p>由于 Reactor 模式使用的是异步非阻塞IO，所有的IO操作都不会导致阻塞，理论上一个线程可以独立处理所有IO相关操作。例如通过 Acceptor 类接收客户端的TCP连接，当链路建立成功后，通过 Dispatch 将对应的 ByteBuffer 派发到指定的 Handler 上，进行消息解码，用户线程消息编码后通过NIO线程将消息发送给客户端</p>
-<p>这种模型对于高负载、大并发的应用场景却不适合，原因如下：</p>
-<ul>
-<li>一个NIO线程同时处理成百上千的链路，性能上无法支撑，无法满足海量消息的编码、解码、读取和发送</li>
-<li>当NIO线程负载锅中之后，处理速度将变慢，会导致大量客户端连接超时，超时往往会进行重发，会导致大量消息积压和处理超时，成为性能瓶颈</li>
-<li>一旦NIO线程出现意外，或者进入死循环，会导致整个系统通信模块不可用</li>
-</ul>
-<h1 id="Reactor多线程模型"><a href="#Reactor多线程模型" class="headerlink" title="Reactor多线程模型"></a>Reactor多线程模型</h1><p>Reactor多线程模型与单线程最大的区别就是有一组NIO线程来处理IO操作：</p>
-<p><img src="/images/netty/Reactor多线程模型.png" alt></p>
-<p>特点如下：</p>
-<ul>
-<li>有专门一个NIO线程（Acceptor线程）用于监听TCP连接请求</li>
-<li>网络IO操作（读、写等）由一个NIO线程池负责，线程池可以用JDK线程池实现，它包含一个任务队列和N个可用的线程，这些NIO线程负责消息的读取、解码、编码和发送</li>
-<li>一个NIO线程可以同时处理N条链路，但是一个链路只对应一个NIO线程，防止发生并发操作问题</li>
-</ul>
-<p>在绝大多数场景下，该模型可以满足性能要求，但是当并发百万客户端连接，或者服务端需要对客户端进行安全认证，单独一个Acceptor线程可能存在性能不足的问题</p>
-<h1 id="主从Reactor多线程模型"><a href="#主从Reactor多线程模型" class="headerlink" title="主从Reactor多线程模型"></a>主从Reactor多线程模型</h1><p>它的特点是：服务端用于接收客户端连接的不再是一个单独的NIO线程，而是一个线程池。Acceptor接收到客户端TCP连接请求并处理完成后（可能包含接入认证等），将新创建的 SocketChannel 注册到IO线程池（sub reactor线程池）的某个线程上，由它负责 SocketChannel 的读写和编解码工作，Acceptor线程池只用于客户端的登陆、握手和安全认证，一旦链路建立成功，就将链路注册到后端 subReactor 线程池的IO线程上</p>
-<p><img src="/images/netty/主从Reactor多线程模型.png" alt></p>
-<p>这样就可以解决一个服务端无法有效处理所有客户端连接的性能不足问题</p>
-<h1 id="Netty线程模型"><a href="#Netty线程模型" class="headerlink" title="Netty线程模型"></a>Netty线程模型</h1><p>Netty线程模型不是一成不变的，它取决于用户的启动参数配置，可以支持Reactor单线程模型、Reactor多线程模型和主从Reactor多线程模型</p>
-<p><img src="/images/netty/Netty线程模型.png" alt></p>
-<p>通过服务端代码了解其线程模型：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">NioEventLoopGroup bossGroup = <span class="keyword">new</span> NioEventLoopGroup();</span><br><span class="line">NioEventLoopGroup workGroup = <span class="keyword">new</span> NioEventLoopGroup();</span><br><span class="line"></span><br><span class="line">ServerBootstrap b = <span class="keyword">new</span> ServerBootstrap();</span><br><span class="line">b.group(bossGroup, workGroup)</span><br><span class="line">        .channel(NioServerSocketChannel.class)</span><br><span class="line">        .option(ChannelOption.SO_BACKLOG, <span class="number">100</span>)</span><br><span class="line">        .handler(<span class="keyword">new</span> LoggingHandler(LogLevel.INFO))</span><br><span class="line">        .childHandler(<span class="keyword">new</span> ChannelInitializer&lt;SocketChannel&gt;() &#123;</span><br><span class="line">            <span class="comment">// ...</span></span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
-<p>创建了两个 <code>NioEventLoopGroup</code>，一个用于接收客户端的TCP连接，另一个用户处理IO相关读写操作，或者执行系统Task、定时任务Task等</p>
-<p>用于接收客户端请求的线程池职责：</p>
-<ol>
-<li>接收客户端TCP连接，初始化 Channel 参数</li>
-<li>将链路状态变更事件通知给 ChannelPipeline</li>
-</ol>
-<p>处理IO操作的 Reactor 线程池职责：</p>
-<ol>
-<li>异步读取通信对端的数据，发送读事件到 ChannelPipeline</li>
-<li>异步发送消息到通信对端，调用 ChannelPipeline 的消息发送接口</li>
-<li>执行系统调用Task</li>
-<li>执行定时任务Task，如链路空闲状态检测定时任务</li>
-</ol>
-<p>为了尽可能提升性能，Netty在很多地方进行了无锁化的设计，比如在IO线程内部进行串行操作，避免多线程竞争导致的性能下降，表面上看这种设计CPU利用率不高，并发度不够，但是通过调整NIO线程池的线程参数，可以同时启动多个串行化的线程并行运行，这种局部的无锁化串行线程设计比一个队列多个工作线程的模型性能更好</p>
-<p><img src="/images/netty/Netty线程模型2.png" alt></p>
-<p>Netty的 <code>NioEventLoop</code> 读取到消息后，直接调用 ChannelPipeline 的 <code>fireChannelRead(Object msg)</code>。只要用户不主动切换线程，一直都是由 <code>NioEventLoop</code> 调用用户的 Handler，期间不进行线程切换，避免多线程操作导致的锁的竞争</p>
-<h2 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h2><p>Netty多线程编程最佳实践如下：</p>
-<ol>
-<li>创建两个 <code>NioEventLoopGroup</code>，用户逻辑隔离NIO Acceptor和NIO IO线程</li>
-<li>尽量不要在 <code>ChannelHandler</code> 中启动用户线程（解码后用于将消息派发到后端业务线程的例外）</li>
-<li>解码要放在NIO线程调用的解码Handler中进行，不要切换到用户线程中完成消息的解码</li>
-<li>如果业务逻辑操作非常简单，没有可能会导致线程被阻塞的磁盘操作、数据库操作、网络操作等，可以直接在NIO线程上完成业务逻辑，不需要切换到用户线程</li>
-<li>乳沟业务逻辑处理复杂，不要在NIO线程上完成，建议将解码后的消息封装成Task，派发到业务线程池中由业务线程执行，以保证NIO线程尽快被释放，处理其它IO操作</li>
-</ol>
-<p>推荐的线程数量计算公式：</p>
-<ol>
-<li>线程数量 = （线程总时间/瓶颈资源时间） * 瓶颈资源的线程并行数</li>
-<li>QPS = 1000/线程总时间 * 线程数</li>
-</ol>
-<p>由于用户场景的不同，对于一些复杂的系统，实际上很难计算，职能根据测试数据和用户场景，结合公式给出一个相对合理的范围，然后对范围内的数据进行性能测试，选择相对最优值</p>
-
+        <p>Bucket 可以理解为一个桶，它会遍历文档中的内容，凡是符合某一要求的就放入一个桶中（类似于SQL中的group by）</p>
+<h1 id="Terms-Aggregation"><a href="#Terms-Aggregation" class="headerlink" title="Terms Aggregation"></a>Terms Aggregation</h1><p>用于分组聚合</p>
+<p>根据 language 字段对 books 索引中的文档进行分组，统计各编程语言的书的数量</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">POST books/_search?size=0</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"aggs"</span> : &#123;</span><br><span class="line">        <span class="attr">"per_count"</span> : &#123;</span><br><span class="line">            <span class="attr">"items"</span> : &#123;<span class="attr">"feild"</span> : <span class="string">"language"</span>&#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果如下：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"aggregations"</span> : &#123;</span><br><span class="line">        <span class="attr">"per_count"</span> : &#123;</span><br><span class="line">            <span class="attr">"doc_count_error_upper_bound"</span> : <span class="number">0</span>,</span><br><span class="line">            <span class="attr">"sum_other_doc_count"</span> : <span class="number">0</span>,</span><br><span class="line">            <span class="attr">"buckets"</span> : [</span><br><span class="line">                &#123;<span class="attr">"key"</span> : <span class="string">"java"</span>, <span class="attr">"doc_count"</span> :  <span class="number">2</span>&#125;,</span><br><span class="line">                &#123;<span class="attr">"key"</span> : <span class="string">"python"</span>, <span class="attr">"doc_count"</span> :  <span class="number">2</span>&#125;,</span><br><span class="line">                &#123;<span class="attr">"key"</span> : <span class="string">"javascript"</span>, <span class="attr">"doc_count"</span> :  <span class="number">3</span>&#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Filter-Filters-Aggregation"><a href="#Filter-Filters-Aggregation" class="headerlink" title="Filter / Filters Aggregation"></a>Filter / Filters Aggregation</h1><p>Filter 是过滤器聚合，将符合过滤器条件的文档分别分到一个桶中</p>
+<p>Filters 是多过滤器聚合，将符合多个过滤条件的文档分到不通的桶中</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">POST books/_search?size=0</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"aggs"</span> : &#123;</span><br><span class="line">        <span class="attr">"per_avg_price"</span> : &#123;</span><br><span class="line">            <span class="attr">"filters"</span> : &#123;</span><br><span class="line">                <span class="attr">"filters"</span> : [</span><br><span class="line">                    &#123;<span class="attr">"match"</span> : &#123;<span class="attr">"title"</span> : <span class="string">"java"</span>&#125;&#125;,</span><br><span class="line">                    &#123;<span class="attr">"match"</span> : &#123;<span class="attr">"title"</span> : <span class="string">"python"</span>&#125;&#125;</span><br><span class="line">                ]</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">"aggs"</span> : &#123;</span><br><span class="line">                <span class="attr">"avg_price"</span> : &#123;</span><br><span class="line">                    &#123;"avg" : &#123;"feild" : "price"&#125;&#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果如下：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"aggregations"</span> : &#123;</span><br><span class="line">        <span class="attr">"per_avg_price"</span> : &#123;</span><br><span class="line">            <span class="attr">"buckets"</span> : [</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="attr">"doc_count"</span> : <span class="number">2</span>,</span><br><span class="line">                    <span class="attr">"avg_price"</span> : &#123;<span class="attr">"value"</span> :  <span class="number">58.35</span>&#125;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="attr">"doc_count"</span> : <span class="number">4</span>,</span><br><span class="line">                    <span class="attr">"avg_price"</span> : &#123;<span class="attr">"value"</span> :  <span class="number">67.95</span>&#125;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;    </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Range-Date-Range-IP-Range-Aggregation"><a href="#Range-Date-Range-IP-Range-Aggregation" class="headerlink" title="Range / Date Range / IP Range Aggregation"></a>Range / Date Range / IP Range Aggregation</h1><p>Range 范围聚合，可以用于数字、日期</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">POST books/_search?size=0</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"aggs"</span> : &#123;</span><br><span class="line">        <span class="attr">"price_ranges"</span> : &#123;</span><br><span class="line">            <span class="attr">"range"</span> : &#123;</span><br><span class="line">                <span class="attr">"field"</span> : <span class="string">"price"</span>,</span><br><span class="line">                <span class="attr">"ranges"</span> : &#123;</span><br><span class="line">                    &#123;"to" : 50&#125;,    // 小于 50</span><br><span class="line">                    &#123;"from" : 50, "to" : 80&#125;,   // 大于等于50小于80</span><br><span class="line">                    &#123;"from" : 80&#125;   // 大于等于80</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Date Range 专门用于日期类型的，与 Range 不通在于日期的起止值可以使用数学表达式</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">POST books/_search?size=0</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"aggs"</span> : &#123;</span><br><span class="line">        <span class="attr">"publish_ranges"</span> : &#123;</span><br><span class="line">            <span class="attr">"date_range"</span> : &#123;</span><br><span class="line">                <span class="attr">"field"</span> : <span class="string">"publish_time"</span>,</span><br><span class="line">                <span class="attr">"format"</span> : <span class="string">"yyyy-MM-dd"</span>,</span><br><span class="line">                <span class="attr">"ranges"</span> : &#123;</span><br><span class="line">                    &#123;"to" : "now-24M/M"&#125;,   // 两年前</span><br><span class="line">                    &#123;"from" : "now-24M/M"&#125;  // 两年前到现在</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>IP Range 用于对IP类型数据范围聚合</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">POST ip_test/_search?size=0</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"aggs"</span> : &#123;</span><br><span class="line">        <span class="attr">"ip_ranges"</span> : &#123;</span><br><span class="line">            <span class="attr">"ip_range"</span> : &#123;</span><br><span class="line">                <span class="attr">"field"</span> : <span class="string">"ip"</span>,</span><br><span class="line">                <span class="attr">"ranges"</span> : &#123;</span><br><span class="line">                    &#123;"to" : "10.0.0.5"&#125;,</span><br><span class="line">                    &#123;<span class="attr">"from"</span> : <span class="string">"10.0.0.5"</span>&#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Date-Histogram-Aggregation"><a href="#Date-Histogram-Aggregation" class="headerlink" title="Date Histogram Aggregation"></a>Date Histogram Aggregation</h1><p>时间直方图聚合，常用于按照日期对文档进行统计并绘制条形图</p>
+<p>对 books 索引中的图书和出版日期按月做时间直方图聚合</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">POST books/_search?size=0</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"aggs"</span> : &#123;</span><br><span class="line">        <span class="attr">"books_over_time"</span> : &#123;</span><br><span class="line">            <span class="attr">"date_histogram"</span> : &#123;</span><br><span class="line">                <span class="attr">"feild"</span> : <span class="string">"publish_time"</span>,</span><br><span class="line">                <span class="attr">"interval"</span> : <span class="string">"month"</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果如下：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"aggregations"</span> : &#123;</span><br><span class="line">        <span class="attr">"books_over_time"</span> : &#123;</span><br><span class="line">            <span class="attr">"buckets"</span> : [</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="attr">"key_as_string"</span> : <span class="string">"2007-10-01T00:00:00.000Z"</span>,</span><br><span class="line">                    <span class="attr">"key"</span> : <span class="number">1191196800000</span>,</span><br><span class="line">                    <span class="attr">"doc_count"</span> : <span class="number">1</span></span><br><span class="line">                &#125;,</span><br><span class="line">                ...</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Missing-Aggregation"><a href="#Missing-Aggregation" class="headerlink" title="Missing Aggregation"></a>Missing Aggregation</h1><p>空值聚合，将文档集中所有缺失字段的文档分到一个桶中</p>
+<p>对 books 索引中缺失 price 字段（包含值为null的）的文档进行聚合</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">POST books/_search?size=0</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"aggs"</span> : &#123;</span><br><span class="line">        <span class="attr">"books_without_a_price"</span> : &#123;</span><br><span class="line">            <span class="attr">"missing"</span> : &#123;<span class="attr">"feild"</span> : <span class="string">"price"</span>&#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果如下：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"aggregations"</span> : &#123;</span><br><span class="line">        <span class="attr">"books_without_a_price"</span> : &#123;</span><br><span class="line">            <span class="attr">"doc_count"</span> : <span class="number">0</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Children-Aggregation"><a href="#Children-Aggregation" class="headerlink" title="Children Aggregation"></a>Children Aggregation</h1><p>一种特殊的单桶聚合，可以根据父子分档关系进行分桶</p>
+<h1 id="Geo-Distance-Aggregation"><a href="#Geo-Distance-Aggregation" class="headerlink" title="Geo Distance Aggregation"></a>Geo Distance Aggregation</h1><p>用于对地理点（geo_point）做范围统计</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">POST geo/_search?size=0</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"aggs"</span> : &#123;</span><br><span class="line">        <span class="attr">"city_from_beijing"</span> : &#123;</span><br><span class="line">            <span class="attr">"geo_distance"</span> : &#123;</span><br><span class="line">                <span class="attr">"feild"</span> : <span class="string">"location"</span>,</span><br><span class="line">                <span class="attr">"origin"</span> : <span class="string">"39.90498900,116.40528500"</span>,</span><br><span class="line">                <span class="attr">"unit"</span> : <span class="string">"km"</span>,</span><br><span class="line">                <span class="attr">"ranges"</span> : [</span><br><span class="line">                    &#123;<span class="attr">"to"</span> : <span class="number">500</span>&#125;,</span><br><span class="line">                    &#123;<span class="attr">"from"</span> : <span class="number">500</span>, <span class="attr">"to"</span> : <span class="number">1000</span>&#125;,</span><br><span class="line">                    &#123;<span class="attr">"from"</span> : <span class="number">1000</span>&#125;,</span><br><span class="line">                ]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;    </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果如下：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"aggregations"</span> : &#123;</span><br><span class="line">        <span class="attr">"city_from_beijing"</span> : &#123;</span><br><span class="line">            <span class="attr">"buckets"</span> : [</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="attr">"key"</span> : <span class="string">"*-500.0"</span>,</span><br><span class="line">                    <span class="attr">"from"</span> : <span class="number">0</span>,</span><br><span class="line">                    <span class="attr">"to"</span> : <span class="number">500</span>,</span><br><span class="line">                    <span class="attr">"doc_count"</span> : <span class="number">2</span></span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="attr">"key"</span> : <span class="string">"500.0-1000.0"</span>,</span><br><span class="line">                    <span class="attr">"from"</span> : <span class="number">500</span>,</span><br><span class="line">                    <span class="attr">"to"</span> : <span class="number">1000</span>,</span><br><span class="line">                    <span class="attr">"doc_count"</span> : <span class="number">2</span></span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="attr">"key"</span> : <span class="string">"1000.0-*"</span>,</span><br><span class="line">                    <span class="attr">"from"</span> : <span class="number">1000</span>,</span><br><span class="line">                    <span class="attr">"doc_count"</span> : <span class="number">3</span></span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;    </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -596,9 +548,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/netty/" rel="tag"># netty</a>
+            <a href="/tags/ElasticSearch/" rel="tag"># ElasticSearch</a>
           
-            <a href="/tags/Netty权威指南/" rel="tag"># Netty权威指南</a>
+            <a href="/tags/从Lucene到ElasticSearch：全文检索实战/" rel="tag"># 从Lucene到ElasticSearch：全文检索实战</a>
           
         </div>
       
@@ -611,8 +563,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/23/netty/Netty-UDP协议开发/" rel="next" title="Netty UDP协议开发">
-                <i class="fa fa-chevron-left"></i> Netty UDP协议开发
+              <a href="/2019/05/06/elasticsearch/聚合分析/ElasticSearch指标聚合/" rel="next" title="ElasticSearch指标聚合">
+                <i class="fa fa-chevron-left"></i> ElasticSearch指标聚合
               </a>
             
           </div>
@@ -620,10 +572,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/25/netty/Netty相关重要类简介/" rel="prev" title="Netty相关重要类简介">
-                Netty相关重要类简介 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -833,7 +781,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Reactor单线程模型"><span class="nav-text">Reactor单线程模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reactor多线程模型"><span class="nav-text">Reactor多线程模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#主从Reactor多线程模型"><span class="nav-text">主从Reactor多线程模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Netty线程模型"><span class="nav-text">Netty线程模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#最佳实践"><span class="nav-text">最佳实践</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Terms-Aggregation"><span class="nav-text">Terms Aggregation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Filter-Filters-Aggregation"><span class="nav-text">Filter / Filters Aggregation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Range-Date-Range-IP-Range-Aggregation"><span class="nav-text">Range / Date Range / IP Range Aggregation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Date-Histogram-Aggregation"><span class="nav-text">Date Histogram Aggregation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Missing-Aggregation"><span class="nav-text">Missing Aggregation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Children-Aggregation"><span class="nav-text">Children Aggregation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Geo-Distance-Aggregation"><span class="nav-text">Geo Distance Aggregation</span></a></li></ol></div>
             
 
           </div>

@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="cpp288&#39;s blog">
 <meta property="og:description" content="Max / Min Aggregation用于最大值/最小值统计 123456789GET books/_search&amp;#123;    &quot;size&quot; : 0,    &quot;aggs&quot; : &amp;#123;        &quot;max_price&quot; : &amp;#123;            &quot;max&quot; : &amp;#123;&quot;field&quot; : &quot;price&quot;&amp;#125;        &amp;#125;    &amp;#125;">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-05-06T06:29:05.162Z">
+<meta property="og:updated_time" content="2019-05-06T06:44:41.647Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ElasticSearch指标聚合">
 <meta name="twitter:description" content="Max / Min Aggregation用于最大值/最小值统计 123456789GET books/_search&amp;#123;    &quot;size&quot; : 0,    &quot;aggs&quot; : &amp;#123;        &quot;max_price&quot; : &amp;#123;            &quot;max&quot; : &amp;#123;&quot;field&quot; : &quot;price&quot;&amp;#125;        &amp;#125;    &amp;#125;">
@@ -410,7 +410,7 @@
                 
               
 
-              <time title="创建时间：2019-05-06 13:35:15 / 修改时间：14:29:05" itemprop="dateCreated datePublished" datetime="2019-05-06T13:35:15+08:00">2019-05-06</time>
+              <time title="创建时间：2019-05-06 13:35:15 / 修改时间：14:44:41" itemprop="dateCreated datePublished" datetime="2019-05-06T13:35:15+08:00">2019-05-06</time>
             
 
             
@@ -518,7 +518,7 @@
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"aggregations"</span> : &#123;</span><br><span class="line">        <span class="attr">"book_price"</span> : &#123;</span><br><span class="line">            <span class="attr">"values"</span> : &#123;</span><br><span class="line">                <span class="attr">"1.0"</span> : <span class="number">46.82</span>,</span><br><span class="line">                <span class="attr">"5.0"</span> : <span class="number">48.1</span>,</span><br><span class="line">                <span class="attr">"25.0"</span> : <span class="number">54.5</span>,</span><br><span class="line">                <span class="attr">"50.0"</span> : <span class="number">66.4</span>,</span><br><span class="line">                <span class="attr">"75.0"</span> : <span class="number">70.2</span>,</span><br><span class="line">                <span class="attr">"95.0"</span> : <span class="number">79.16</span>,</span><br><span class="line">                <span class="attr">"99.0"</span> : <span class="number">80.95200000000001</span>,</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="Value-Count-Aggregation"><a href="#Value-Count-Aggregation" class="headerlink" title="Value Count Aggregation"></a>Value Count Aggregation</h1><p>按字段统计文档数量</p>
 <p>例如，统计 books 索引中包含 author 字段的文档数量</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">GET books/_search</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"size"</span> : <span class="number">0</span>,</span><br><span class="line">    <span class="attr">"aggs"</span> : &#123;</span><br><span class="line">        <span class="attr">"doc_count"</span> : &#123;</span><br><span class="line">            <span class="attr">"value_count"</span> : &#123;<span class="attr">"field"</span> : <span class="string">"author"</span>&#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">POST books/_search</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"size"</span> : <span class="number">0</span>,</span><br><span class="line">    <span class="attr">"aggs"</span> : &#123;</span><br><span class="line">        <span class="attr">"doc_count"</span> : &#123;</span><br><span class="line">            <span class="attr">"value_count"</span> : &#123;<span class="attr">"field"</span> : <span class="string">"author"</span>&#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>结果如下：</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"aggregations"</span> : &#123;</span><br><span class="line">        <span class="attr">"doc_count"</span> : &#123;<span class="attr">"value"</span> : <span class="number">3</span>&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
@@ -567,6 +567,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/06/elasticsearch/聚合分析/ElasticSearch桶聚合/" rel="prev" title="ElasticSearch桶聚合">
+                ElasticSearch桶聚合 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -638,7 +642,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">44</span>
+                    <span class="site-state-item-count">45</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -810,7 +814,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">137k</span>
+    <span title="站点总字数">143k</span>
   
 
   
