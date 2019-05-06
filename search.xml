@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[ElasticSearch指标聚合]]></title>
+    <url>%2F2019%2F05%2F06%2Felasticsearch%2F%E8%81%9A%E5%90%88%E5%88%86%E6%9E%90%2FElasticSearch%E6%8C%87%E6%A0%87%E8%81%9A%E5%90%88%2F</url>
+    <content type="text"><![CDATA[Max / Min Aggregation用于最大值/最小值统计 123456789GET books/_search&#123; "size" : 0, "aggs" : &#123; "max_price" : &#123; "max" : &#123;"field" : "price"&#125; &#125; &#125;&#125; 结果如下： 12345&#123; "aggregations" : &#123; "max_price" : &#123;"value" : 81.4&#125; &#125;&#125; Avg / Sum Aggregation用于平均值/总和计算统计 123456789GET books/_search&#123; "size" : 0, "aggs" : &#123; "sum_price" : &#123; "sum" : &#123;"field" : "price"&#125; &#125; &#125;&#125; 结果如下： 12345&#123; "aggregations" : &#123; "sum_price" : &#123;"value" : 815&#125; &#125;&#125; Cardinality Aggregation用于基数统计，类似于SQL中的 distinct 操作，去掉集合中重复项，然后统计排重后的集合长度 例如，在 books 索引中对 language 字段进行 cardinality 操作可以统计出编程语言的种类数量： 123456789GET books/_search&#123; "size" : 0, "aggs" : &#123; "all_lan" : &#123; "cardinality" : &#123;"field" : "language"&#125; &#125; &#125;&#125; 结果如下： 12345&#123; "aggregations" : &#123; "all_lan" : &#123;"value" : 3&#125; &#125;&#125; Stats / Extended Stats AggregationStats 用于基本统计，会一次返回count、max、min、avg和sum 5个指标 Extended Stats 比 Stats 多4个指标：平方和（sum_of_squares）、方差（variance）、标准差（std_deviation）、平均值加/减两个标准差的区间（std_deviation_bounds） 123456789GET books/_search&#123; "size" : 0, "aggs" : &#123; "grades_stats" : &#123; "extended_stats" : &#123;"field" : "price"&#125; &#125; &#125;&#125; 结果如下： 123456789101112131415161718&#123; "aggregations" : &#123; "grades_stats" : &#123; "count" : 5, "min" : 46.5, "max" : 81.4, "avg" : 63.2, "sum" : 395, "sum_of_squares" : 21095.46, "variance" : 148.651999999999967, "std_deviation" : 12.19229264740638, "std_deviation_bounds" : &#123; "upper" : 88.16458529481276, "lower" : 39.41541470518475 &#125; &#125; &#125;&#125; Percentiles Aggregation用于百分位统计，百分位数是一个统计学术语，如果将一组数据从大到小排序，并计算相应的累计百分位，某一百分位所对应数据的值就称为这一百分位的百分位数 123456789GET books/_search&#123; "size" : 0, "aggs" : &#123; "book_price" : &#123; "percentiles" : &#123;"field" : "price"&#125; &#125; &#125;&#125; 结果如下： 123456789101112131415&#123; "aggregations" : &#123; "book_price" : &#123; "values" : &#123; "1.0" : 46.82, "5.0" : 48.1, "25.0" : 54.5, "50.0" : 66.4, "75.0" : 70.2, "95.0" : 79.16, "99.0" : 80.95200000000001, &#125; &#125; &#125;&#125; Value Count Aggregation按字段统计文档数量 例如，统计 books 索引中包含 author 字段的文档数量 123456789GET books/_search&#123; "size" : 0, "aggs" : &#123; "doc_count" : &#123; "value_count" : &#123;"field" : "author"&#125; &#125; &#125;&#125; 结果如下： 12345&#123; "aggregations" : &#123; "doc_count" : &#123;"value" : 3&#125; &#125;&#125;]]></content>
+      <categories>
+        <category>ElasticSearch</category>
+      </categories>
+      <tags>
+        <tag>ElasticSearch</tag>
+        <tag>从Lucene到ElasticSearch：全文检索实战</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[ElasticSearch搜索排序]]></title>
     <url>%2F2019%2F05%2F06%2Felasticsearch%2F%E6%90%9C%E7%B4%A2%E6%9F%A5%E8%AF%A2%2FElasticSearch%E6%90%9C%E7%B4%A2%E6%8E%92%E5%BA%8F%2F</url>
     <content type="text"><![CDATA[默认排序ElasticSearch 是按照查询和文档的相关度进行排序的，默认按评分降序排序 123456GET books/_search&#123; "query" : &#123; "term" : &#123;"title" : "java"&#125; &#125;&#125; 等价于 1234567891011GET books/_search&#123; "query" : &#123; "term" : &#123;"title" : "java"&#125; &#125;, "sort" : &#123; &#123; "_score" : &#123;"order" : "desc"&#125; &#125; &#125;&#125; 对于 match_all 而言，由于只返回所有文档，不需要评分，文档的顺序为添加文档的顺序 多字段排序和 SQL 一样，也支持多字段排序： 123456789GET books/_search&#123; "sort" : &#123; &#123; "price" : &#123;"order" : "desc"&#125;, "year" : &#123;"order" : "asc"&#125; &#125; &#125;&#125; 分片影响评分ElasticSearch 是在每一个分片上单独打分的，分片的数量会影响打分的结果 同时，分词器也会影响评分，原因是使用不同的分词器会使倒排序索引中的词项数发生改变，最终影响得分]]></content>
@@ -152,8 +164,8 @@
         <category>java</category>
       </categories>
       <tags>
-        <tag>java</tag>
         <tag>Netty权威指南</tag>
+        <tag>java</tag>
         <tag>IO</tag>
       </tags>
   </entry>
@@ -165,8 +177,8 @@
         <category>java</category>
       </categories>
       <tags>
-        <tag>java</tag>
         <tag>Netty权威指南</tag>
+        <tag>java</tag>
         <tag>IO</tag>
       </tags>
   </entry>
@@ -178,8 +190,8 @@
         <category>java</category>
       </categories>
       <tags>
-        <tag>java</tag>
         <tag>Netty权威指南</tag>
+        <tag>java</tag>
         <tag>IO</tag>
       </tags>
   </entry>
@@ -191,8 +203,8 @@
         <category>java</category>
       </categories>
       <tags>
-        <tag>java</tag>
         <tag>Netty权威指南</tag>
+        <tag>java</tag>
         <tag>IO</tag>
       </tags>
   </entry>
