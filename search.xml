@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[ElasticSearch搜索排序]]></title>
+    <url>%2F2019%2F05%2F06%2Felasticsearch%2F%E6%90%9C%E7%B4%A2%E6%9F%A5%E8%AF%A2%2FElasticSearch%E6%90%9C%E7%B4%A2%E6%8E%92%E5%BA%8F%2F</url>
+    <content type="text"><![CDATA[默认排序ElasticSearch 是按照查询和文档的相关度进行排序的，默认按评分降序排序 123456GET books/_search&#123; "query" : &#123; "term" : &#123;"title" : "java"&#125; &#125;&#125; 等价于 1234567891011GET books/_search&#123; "query" : &#123; "term" : &#123;"title" : "java"&#125; &#125;, "sort" : &#123; &#123; "_score" : &#123;"order" : "desc"&#125; &#125; &#125;&#125; 对于 match_all 而言，由于只返回所有文档，不需要评分，文档的顺序为添加文档的顺序 多字段排序和 SQL 一样，也支持多字段排序： 123456789GET books/_search&#123; "sort" : &#123; &#123; "price" : &#123;"order" : "desc"&#125;, "year" : &#123;"order" : "asc"&#125; &#125; &#125;&#125; 分片影响评分ElasticSearch 是在每一个分片上单独打分的，分片的数量会影响打分的结果 同时，分词器也会影响评分，原因是使用不同的分词器会使倒排序索引中的词项数发生改变，最终影响得分]]></content>
+      <categories>
+        <category>ElasticSearch</category>
+      </categories>
+      <tags>
+        <tag>ElasticSearch</tag>
+        <tag>从Lucene到ElasticSearch：全文检索实战</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[ElasticSearch搜索高亮]]></title>
     <url>%2F2019%2F05%2F06%2Felasticsearch%2F%E6%90%9C%E7%B4%A2%E6%9F%A5%E8%AF%A2%2FElasticSearch%E6%90%9C%E7%B4%A2%E9%AB%98%E4%BA%AE%2F</url>
     <content type="text"><![CDATA[自定义高亮片段ElasticSearch 默认会用 &lt;em&gt;&lt;/em&gt; 标签标记关键字。想要自定义标签，只要在高亮属性中给需要高亮的字段加上 pre_tags 和 post_tags 即可： 1234567891011121314GET books/_search&#123; "query" : &#123; "match" : &#123;"title" : "java"&#125; &#125;, "highlight" : &#123; "fields" : &#123; "title" : &#123; "pre_tags" : ["&lt;strong&gt;"], "post_tags" : ["&lt;/strong&gt;"] &#125; &#125; &#125;&#125; 多字段高亮比如，搜索 title 字段的时候，希望 description 字段中的关键字也可以高亮，这时候就需要把 require_field_match 属性设置为 false（默认为true） 12345678910111213GET books/_search&#123; "query" : &#123; "match" : &#123;"title" : "java"&#125; &#125;, "highlight" : &#123; "require_field_match" : false, "fields" : &#123; "title" : &#123;&#125;, "description" : &#123;&#125; &#125; &#125;&#125; 高亮性能分析ElasticSearch 提供了三种高亮器： highlighter 默认高亮器，需要对 _source 中保存的文档进行二次分析，速度最慢，优点是不需要额外的存储空间 postings-highlighter 不需要二次分析，但是需要在字段的映射中设置 index_options 参数为 offsets（即保存关键词的偏移量），速度快于 highlighter fast-vector-highlighter 速度最快，但是需要在字段的映射中设置 ter_vector 参数为 with_positions_offsets（即保存关键字的位置和偏移量），占用的空间最大，是典型的空间换时间的做法]]></content>

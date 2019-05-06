@@ -96,25 +96,25 @@
 
 
 
-  <meta name="description" content="官方文档：https://nacos.io/zh-cn/index.html 官方博客：https://nacos.io/zh-cn/blog/index.html 核心功能：  注册中心 配置中心  nacos服务监控：https://nacos.io/zh-cn/docs/monitor-guide.html 0.9.0发布时间：2019.2.28  Nacos 0.9.0 发布，稳定的快速迭">
-<meta name="keywords" content="nacos,微服务,阿里技术">
+  <meta name="description" content="默认排序ElasticSearch 是按照查询和文档的相关度进行排序的，默认按评分降序排序 123456GET books/_search&amp;#123;    &quot;query&quot; : &amp;#123;        &quot;term&quot; : &amp;#123;&quot;title&quot; : &quot;java&quot;&amp;#125;    &amp;#125;&amp;#125; 等价于 1234567891011GET books/_search&amp;#123;">
+<meta name="keywords" content="ElasticSearch,从Lucene到ElasticSearch：全文检索实战">
 <meta property="og:type" content="article">
-<meta property="og:title" content="nacos版本迭代整理（持续更新）">
-<meta property="og:url" content="https://cpp288.github.io/2019/03/07/micro-service/nacos版本迭代整理（持续更新）/index.html">
+<meta property="og:title" content="ElasticSearch搜索排序">
+<meta property="og:url" content="https://cpp288.github.io/2019/05/06/elasticsearch/搜索查询/ElasticSearch搜索排序/index.html">
 <meta property="og:site_name" content="cpp288&#39;s blog">
-<meta property="og:description" content="官方文档：https://nacos.io/zh-cn/index.html 官方博客：https://nacos.io/zh-cn/blog/index.html 核心功能：  注册中心 配置中心  nacos服务监控：https://nacos.io/zh-cn/docs/monitor-guide.html 0.9.0发布时间：2019.2.28  Nacos 0.9.0 发布，稳定的快速迭">
+<meta property="og:description" content="默认排序ElasticSearch 是按照查询和文档的相关度进行排序的，默认按评分降序排序 123456GET books/_search&amp;#123;    &quot;query&quot; : &amp;#123;        &quot;term&quot; : &amp;#123;&quot;title&quot; : &quot;java&quot;&amp;#125;    &amp;#125;&amp;#125; 等价于 1234567891011GET books/_search&amp;#123;">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-15T06:39:43.597Z">
+<meta property="og:updated_time" content="2019-05-06T02:19:25.682Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="nacos版本迭代整理（持续更新）">
-<meta name="twitter:description" content="官方文档：https://nacos.io/zh-cn/index.html 官方博客：https://nacos.io/zh-cn/blog/index.html 核心功能：  注册中心 配置中心  nacos服务监控：https://nacos.io/zh-cn/docs/monitor-guide.html 0.9.0发布时间：2019.2.28  Nacos 0.9.0 发布，稳定的快速迭">
+<meta name="twitter:title" content="ElasticSearch搜索排序">
+<meta name="twitter:description" content="默认排序ElasticSearch 是按照查询和文档的相关度进行排序的，默认按评分降序排序 123456GET books/_search&amp;#123;    &quot;query&quot; : &amp;#123;        &quot;term&quot; : &amp;#123;&quot;title&quot; : &quot;java&quot;&amp;#125;    &amp;#125;&amp;#125; 等价于 1234567891011GET books/_search&amp;#123;">
 
 
 
 
 
 
-  <link rel="canonical" href="https://cpp288.github.io/2019/03/07/micro-service/nacos版本迭代整理（持续更新）/">
+  <link rel="canonical" href="https://cpp288.github.io/2019/05/06/elasticsearch/搜索查询/ElasticSearch搜索排序/">
 
 
 
@@ -124,7 +124,7 @@
   };
 </script>
 
-  <title>nacos版本迭代整理（持续更新） | cpp288's blog</title>
+  <title>ElasticSearch搜索排序 | cpp288's blog</title>
   
 
 
@@ -369,7 +369,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://cpp288.github.io/2019/03/07/micro-service/nacos版本迭代整理（持续更新）/">
+    <link itemprop="mainEntityOfPage" href="https://cpp288.github.io/2019/05/06/elasticsearch/搜索查询/ElasticSearch搜索排序/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chen Jian">
@@ -386,7 +386,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">nacos版本迭代整理（持续更新）
+          <h1 class="post-title" itemprop="name headline">ElasticSearch搜索排序
 
               
             
@@ -410,22 +410,12 @@
                 
               
 
-              <time title="创建时间：2019-03-07 17:50:13" itemprop="dateCreated datePublished" datetime="2019-03-07T17:50:13+08:00">2019-03-07</time>
+              <time title="创建时间：2019-05-06 10:11:17 / 修改时间：10:19:25" itemprop="dateCreated datePublished" datetime="2019-05-06T10:11:17+08:00">2019-05-06</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                <time title="修改时间：2019-04-15 14:39:43" itemprop="dateModified" datetime="2019-04-15T14:39:43+08:00">2019-04-15</time>
               
             
           </span>
@@ -440,7 +430,7 @@
               </span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/微服务/" itemprop="url" rel="index"><span itemprop="name">微服务</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ElasticSearch/" itemprop="url" rel="index"><span itemprop="name">ElasticSearch</span></a></span>
 
                 
                 
@@ -470,7 +460,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">499</span>
+                <span title="本文字数">750</span>
               
 
               
@@ -504,35 +494,15 @@
       
 
       
-        <p>官方文档：<a href="https://nacos.io/zh-cn/index.html" target="_blank" rel="noopener">https://nacos.io/zh-cn/index.html</a></p>
-<p>官方博客：<a href="https://nacos.io/zh-cn/blog/index.html" target="_blank" rel="noopener">https://nacos.io/zh-cn/blog/index.html</a></p>
-<p>核心功能：</p>
-<ul>
-<li>注册中心</li>
-<li>配置中心</li>
-</ul>
-<p>nacos服务监控：<a href="https://nacos.io/zh-cn/docs/monitor-guide.html" target="_blank" rel="noopener">https://nacos.io/zh-cn/docs/monitor-guide.html</a></p>
-<h1 id="0-9-0"><a href="#0-9-0" class="headerlink" title="0.9.0"></a>0.9.0</h1><p>发布时间：2019.2.28</p>
-<ul>
-<li><a href="https://nacos.io/en-us/blog/nacos0.9.0.html" target="_blank" rel="noopener">Nacos 0.9.0 发布，稳定的快速迭代</a></li>
-<li><a href="https://nacos.io/en-us/blog/nacos0.9-intro.html" target="_blank" rel="noopener">Nacos 0.9.0版本发布啦</a></li>
-</ul>
-<p>更新内容：</p>
-<ol>
-<li>Nacos-Sync稳定性提升</li>
-<li><strong>Nacos Server功能拆分部署（通过启动参数实现拆分部署）</strong><blockquote>
-<p>启动Nacos server时候，增加-f参数，意思是function mode，和对应模块标示来进行启动，如果不穿，或者传入有误，都将启动全部功能。 配置中心参数对应config，注册中心参数对应naming</p>
-</blockquote>
-</li>
-<li>Nacos python语言体系的支持</li>
-</ol>
-<h1 id="1-0-0"><a href="#1-0-0" class="headerlink" title="1.0.0"></a>1.0.0</h1><p>发布时间：2019.4.10</p>
-<ul>
-<li><a href="https://mp.weixin.qq.com/s/SaS9JBBjiN-ac6nfpq2ACw" target="_blank" rel="noopener">Nacos 发布 1.0.0 GA 版本，可大规模投入到生产环境</a></li>
-</ul>
-<h1 id="相关博客"><a href="#相关博客" class="headerlink" title="相关博客"></a>相关博客</h1><ul>
-<li><a href="https://mp.weixin.qq.com/s/TQDhSMJJcCSJTR7Z0gh4gw" target="_blank" rel="noopener">阿里巴巴基于 Nacos 实现环境隔离的实践</a> 2019.3.13</li>
-</ul>
+        <h1 id="默认排序"><a href="#默认排序" class="headerlink" title="默认排序"></a>默认排序</h1><p>ElasticSearch 是按照查询和文档的相关度进行排序的，默认按评分降序排序</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">GET books/_search</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"query"</span> : &#123;</span><br><span class="line">        <span class="attr">"term"</span> : &#123;<span class="attr">"title"</span> : <span class="string">"java"</span>&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>等价于</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">GET books/_search</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"query"</span> : &#123;</span><br><span class="line">        <span class="attr">"term"</span> : &#123;<span class="attr">"title"</span> : <span class="string">"java"</span>&#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"sort"</span> : &#123;</span><br><span class="line">        &#123;</span><br><span class="line">            "_score" : &#123;"order" : "desc"&#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对于 match_all 而言，由于只返回所有文档，不需要评分，文档的顺序为添加文档的顺序</p>
+<h1 id="多字段排序"><a href="#多字段排序" class="headerlink" title="多字段排序"></a>多字段排序</h1><p>和 SQL 一样，也支持多字段排序：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">GET books/_search</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"sort"</span> : &#123;</span><br><span class="line">        &#123;</span><br><span class="line">            "price" : &#123;"order" : "desc"&#125;,</span><br><span class="line">            "year" : &#123;"order" :  "asc"&#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="分片影响评分"><a href="#分片影响评分" class="headerlink" title="分片影响评分"></a>分片影响评分</h1><p>ElasticSearch 是在每一个分片上单独打分的，分片的数量会影响打分的结果</p>
+<p>同时，分词器也会影响评分，原因是使用不同的分词器会使倒排序索引中的词项数发生改变，最终影响得分</p>
 
       
     </div>
@@ -556,11 +526,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/nacos/" rel="tag"># nacos</a>
+            <a href="/tags/ElasticSearch/" rel="tag"># ElasticSearch</a>
           
-            <a href="/tags/微服务/" rel="tag"># 微服务</a>
-          
-            <a href="/tags/阿里技术/" rel="tag"># 阿里技术</a>
+            <a href="/tags/从Lucene到ElasticSearch：全文检索实战/" rel="tag"># 从Lucene到ElasticSearch：全文检索实战</a>
           
         </div>
       
@@ -573,8 +541,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/06/micro-service/nacos做为注册中心/" rel="next" title="nacos做为注册中心">
-                <i class="fa fa-chevron-left"></i> nacos做为注册中心
+              <a href="/2019/05/06/elasticsearch/搜索查询/ElasticSearch搜索高亮/" rel="next" title="ElasticSearch搜索高亮">
+                <i class="fa fa-chevron-left"></i> ElasticSearch搜索高亮
               </a>
             
           </div>
@@ -582,10 +550,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/12/micro-service/apm/使用skywalking做分布式系统链路监控/" rel="prev" title="使用skywalking做分布式系统链路监控">
-                使用skywalking做分布式系统链路监控 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -795,7 +759,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0-9-0"><span class="nav-text">0.9.0</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-0-0"><span class="nav-text">1.0.0</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#相关博客"><span class="nav-text">相关博客</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#默认排序"><span class="nav-text">默认排序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多字段排序"><span class="nav-text">多字段排序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分片影响评分"><span class="nav-text">分片影响评分</span></a></li></ol></div>
             
 
           </div>
