@@ -172,7 +172,7 @@ GET books/_search
 例如，统计 books 索引中包含 author 字段的文档数量
 
 ```json
-GET books/_search
+POST books/_search
 {
     "size" : 0,
     "aggs" : {
