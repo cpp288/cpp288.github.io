@@ -96,28 +96,25 @@
 
 
 
-  <meta name="description" content="摘自《Netty权威指南》 BIOBIO通信模型：  问题显而易见：每个客户端都需要创建一个线程，并发访问量大时，系统会出现堆栈溢出、创建新线程失败等问题 代码演示功能：时间服务器 服务端：123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657">
-<meta name="keywords" content="java,Netty权威指南,IO">
+  <meta name="description" content="自定义高亮片段ElasticSearch 默认会用 &amp;lt;em&amp;gt;&amp;lt;/em&amp;gt; 标签标记关键字。想要自定义标签，只要在高亮属性中给需要高亮的字段加上 pre_tags 和 post_tags 即可： 1234567891011121314GET books/_search&amp;#123;    &quot;query&quot; : &amp;#123;        &quot;match&quot; : &amp;#123;&quot;title">
+<meta name="keywords" content="ElasticSearch,从Lucene到ElasticSearch：全文检索实战">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java BIO编程和伪异步I&#x2F;O编程">
-<meta property="og:url" content="https://cpp288.github.io/2019/04/18/java/io/Java-BIO编程和伪异步IO编程/index.html">
+<meta property="og:title" content="ElasticSearch搜索高亮">
+<meta property="og:url" content="https://cpp288.github.io/2019/05/06/elasticsearch/搜索查询/ElasticSearch搜索高亮/index.html">
 <meta property="og:site_name" content="cpp288&#39;s blog">
-<meta property="og:description" content="摘自《Netty权威指南》 BIOBIO通信模型：  问题显而易见：每个客户端都需要创建一个线程，并发访问量大时，系统会出现堆栈溢出、创建新线程失败等问题 代码演示功能：时间服务器 服务端：123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657">
+<meta property="og:description" content="自定义高亮片段ElasticSearch 默认会用 &amp;lt;em&amp;gt;&amp;lt;/em&amp;gt; 标签标记关键字。想要自定义标签，只要在高亮属性中给需要高亮的字段加上 pre_tags 和 post_tags 即可： 1234567891011121314GET books/_search&amp;#123;    &quot;query&quot; : &amp;#123;        &quot;match&quot; : &amp;#123;&quot;title">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://cpp288.github.io/images/java/io/BIO通信模型.png">
-<meta property="og:image" content="https://cpp288.github.io/images/java/io/伪异步IO模型.png">
-<meta property="og:updated_time" content="2019-04-19T01:38:26.665Z">
+<meta property="og:updated_time" content="2019-05-06T02:09:51.486Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java BIO编程和伪异步I&#x2F;O编程">
-<meta name="twitter:description" content="摘自《Netty权威指南》 BIOBIO通信模型：  问题显而易见：每个客户端都需要创建一个线程，并发访问量大时，系统会出现堆栈溢出、创建新线程失败等问题 代码演示功能：时间服务器 服务端：123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657">
-<meta name="twitter:image" content="https://cpp288.github.io/images/java/io/BIO通信模型.png">
+<meta name="twitter:title" content="ElasticSearch搜索高亮">
+<meta name="twitter:description" content="自定义高亮片段ElasticSearch 默认会用 &amp;lt;em&amp;gt;&amp;lt;/em&amp;gt; 标签标记关键字。想要自定义标签，只要在高亮属性中给需要高亮的字段加上 pre_tags 和 post_tags 即可： 1234567891011121314GET books/_search&amp;#123;    &quot;query&quot; : &amp;#123;        &quot;match&quot; : &amp;#123;&quot;title">
 
 
 
 
 
 
-  <link rel="canonical" href="https://cpp288.github.io/2019/04/18/java/io/Java-BIO编程和伪异步IO编程/">
+  <link rel="canonical" href="https://cpp288.github.io/2019/05/06/elasticsearch/搜索查询/ElasticSearch搜索高亮/">
 
 
 
@@ -127,7 +124,7 @@
   };
 </script>
 
-  <title>Java BIO编程和伪异步I/O编程 | cpp288's blog</title>
+  <title>ElasticSearch搜索高亮 | cpp288's blog</title>
   
 
 
@@ -372,7 +369,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://cpp288.github.io/2019/04/18/java/io/Java-BIO编程和伪异步IO编程/">
+    <link itemprop="mainEntityOfPage" href="https://cpp288.github.io/2019/05/06/elasticsearch/搜索查询/ElasticSearch搜索高亮/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chen Jian">
@@ -389,7 +386,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Java BIO编程和伪异步I/O编程
+          <h1 class="post-title" itemprop="name headline">ElasticSearch搜索高亮
 
               
             
@@ -413,22 +410,12 @@
                 
               
 
-              <time title="创建时间：2019-04-18 16:37:38" itemprop="dateCreated datePublished" datetime="2019-04-18T16:37:38+08:00">2019-04-18</time>
+              <time title="创建时间：2019-05-06 09:57:54 / 修改时间：10:09:51" itemprop="dateCreated datePublished" datetime="2019-05-06T09:57:54+08:00">2019-05-06</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                <time title="修改时间：2019-04-19 09:38:26" itemprop="dateModified" datetime="2019-04-19T09:38:26+08:00">2019-04-19</time>
               
             
           </span>
@@ -443,7 +430,7 @@
               </span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ElasticSearch/" itemprop="url" rel="index"><span itemprop="name">ElasticSearch</span></a></span>
 
                 
                 
@@ -473,7 +460,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">4.5k</span>
+                <span title="本文字数">1.2k</span>
               
 
               
@@ -487,7 +474,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">4 分钟</span>
+                <span title="阅读时长">1 分钟</span>
               
             </div>
           
@@ -507,17 +494,25 @@
       
 
       
-        <p>摘自《Netty权威指南》</p>
-<h1 id="BIO"><a href="#BIO" class="headerlink" title="BIO"></a>BIO</h1><p>BIO通信模型：</p>
-<p><img src="/images/java/io/BIO通信模型.png" alt="BIO通信模型"></p>
-<p>问题显而易见：<strong>每个客户端都需要创建一个线程，并发访问量大时，系统会出现堆栈溢出、创建新线程失败等问题</strong></p>
-<h2 id="代码演示"><a href="#代码演示" class="headerlink" title="代码演示"></a>代码演示</h2><p>功能：时间服务器</p>
-<p>服务端：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TimeServer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="comment">// 监听8080端口</span></span><br><span class="line">        <span class="keyword">int</span> port = <span class="number">8080</span>;</span><br><span class="line">        <span class="keyword">if</span> (args != <span class="keyword">null</span> &amp;&amp; args.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            port = Integer.valueOf(args[<span class="number">0</span>]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        ServerSocket server = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            server = <span class="keyword">new</span> ServerSocket(port);</span><br><span class="line">            System.out.println(<span class="string">"The time server is start in port : "</span> + port);</span><br><span class="line">            Socket socket;</span><br><span class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">                socket = server.accept();</span><br><span class="line">                <span class="comment">// 这里创建一个线程去执行业务</span></span><br><span class="line">                <span class="keyword">new</span> Thread(<span class="keyword">new</span> TimeServerHandler(socket)).start();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (server != <span class="keyword">null</span>) &#123;</span><br><span class="line">                System.out.println(<span class="string">"The time server close"</span>);</span><br><span class="line">                server.close();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 具体执行的线程 </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TimeServerHandler</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Socket socket;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TimeServerHandler</span><span class="params">(Socket socket)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.socket = socket;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        BufferedReader in = <span class="keyword">null</span>;</span><br><span class="line">        PrintWriter out = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            in = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(<span class="keyword">this</span>.socket.getInputStream()));</span><br><span class="line">            out = <span class="keyword">new</span> PrintWriter(<span class="keyword">this</span>.socket.getOutputStream(), <span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line">            String currentTime;</span><br><span class="line">            String body;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">                body = in.readLine();</span><br><span class="line">                <span class="keyword">if</span> (body == <span class="keyword">null</span>) &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(<span class="string">"The time server receive order : "</span> + body);</span><br><span class="line">                currentTime = <span class="string">"QUERY TIME ORDER"</span>.equalsIgnoreCase(body)</span><br><span class="line">                        ? <span class="keyword">new</span> Date(System.currentTimeMillis()).toString() : <span class="string">"BAD ORDER"</span>;</span><br><span class="line">                out.println(currentTime);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="comment">// 释放相关资源</span></span><br><span class="line">            <span class="keyword">if</span> (in != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    in.close();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (out != <span class="keyword">null</span>) &#123;</span><br><span class="line">                out.close();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">this</span>.socket != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    <span class="keyword">this</span>.socket.close();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">this</span>.socket = <span class="keyword">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>客户端：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TimeClient</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> port = <span class="number">8080</span>;</span><br><span class="line">        <span class="keyword">if</span> (args != <span class="keyword">null</span> &amp;&amp; args.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            port = Integer.valueOf(args[<span class="number">0</span>]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Socket socket = <span class="keyword">null</span>;</span><br><span class="line">        BufferedReader in = <span class="keyword">null</span>;</span><br><span class="line">        PrintWriter out = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            socket = <span class="keyword">new</span> Socket(<span class="string">"127.0.0.1"</span>, port);</span><br><span class="line">            in = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(socket.getInputStream()));</span><br><span class="line">            out = <span class="keyword">new</span> PrintWriter(socket.getOutputStream(), <span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line">            out.println(<span class="string">"QUERY TIME ORDER"</span>);</span><br><span class="line">            System.out.println(<span class="string">"Send order 2 server succeed."</span>);</span><br><span class="line"></span><br><span class="line">            String resp = in.readLine();</span><br><span class="line">            System.out.println(<span class="string">"Now is : "</span> + resp);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="comment">// 释放相关资源</span></span><br><span class="line">            <span class="keyword">if</span> (in != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    in.close();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (out != <span class="keyword">null</span>) &#123;</span><br><span class="line">                out.close();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (socket != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    socket.close();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h1 id="伪异步I-O"><a href="#伪异步I-O" class="headerlink" title="伪异步I/O"></a>伪异步I/O</h1><p>伪异步I/O模型图：</p>
-<p><img src="/images/java/io/伪异步IO模型.png" alt="伪异步IO模型"></p>
-<p>可以看到，伪异步I/O只是加入了一个线程池，避免了每次请求都创建线程的问题（这里就不写demo了）</p>
-<p>但是通过对输入和输出流的API文档分析，了解到读和写操作都是同步阻塞的，阻塞的时间取决于对方I/O线程的处理速度和网络I/O的传输速度。我们无法保证生产环境的网络状况和对端的应用程序能足够快，所以它的可靠性就非常差。</p>
+        <h1 id="自定义高亮片段"><a href="#自定义高亮片段" class="headerlink" title="自定义高亮片段"></a>自定义高亮片段</h1><p>ElasticSearch 默认会用 <code>&lt;em&gt;&lt;/em&gt;</code> 标签标记关键字。想要自定义标签，只要在高亮属性中给需要高亮的字段加上 pre_tags 和 post_tags 即可：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">GET books/_search</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"query"</span> : &#123;</span><br><span class="line">        <span class="attr">"match"</span> : &#123;<span class="attr">"title"</span> : <span class="string">"java"</span>&#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"highlight"</span> : &#123;</span><br><span class="line">        <span class="attr">"fields"</span> : &#123;</span><br><span class="line">            <span class="attr">"title"</span> : &#123;</span><br><span class="line">                <span class="attr">"pre_tags"</span> : [<span class="string">"&lt;strong&gt;"</span>],</span><br><span class="line">                <span class="attr">"post_tags"</span> : [<span class="string">"&lt;/strong&gt;"</span>]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="多字段高亮"><a href="#多字段高亮" class="headerlink" title="多字段高亮"></a>多字段高亮</h1><p>比如，搜索 title 字段的时候，希望 description 字段中的关键字也可以高亮，这时候就需要把 require_field_match 属性设置为 false（默认为true）</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">GET books/_search</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"query"</span> : &#123;</span><br><span class="line">        <span class="attr">"match"</span> : &#123;<span class="attr">"title"</span> : <span class="string">"java"</span>&#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"highlight"</span> : &#123;</span><br><span class="line">        <span class="attr">"require_field_match"</span> : <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">"fields"</span> : &#123;</span><br><span class="line">            <span class="attr">"title"</span> : &#123;&#125;,</span><br><span class="line">            <span class="attr">"description"</span> : &#123;&#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="高亮性能分析"><a href="#高亮性能分析" class="headerlink" title="高亮性能分析"></a>高亮性能分析</h1><p>ElasticSearch 提供了三种高亮器：</p>
+<ul>
+<li>highlighter<blockquote>
+<p>默认高亮器，需要对 _source 中保存的文档进行二次分析，速度最慢，优点是不需要额外的存储空间</p>
+</blockquote>
+</li>
+<li>postings-highlighter<blockquote>
+<p>不需要二次分析，但是需要在字段的映射中设置 index_options 参数为 offsets（即保存关键词的偏移量），速度快于 highlighter</p>
+</blockquote>
+</li>
+<li>fast-vector-highlighter<blockquote>
+<p>速度最快，但是需要在字段的映射中设置 ter_vector 参数为 with_positions_offsets（即保存关键字的位置和偏移量），占用的空间最大，是典型的空间换时间的做法</p>
+</blockquote>
+</li>
+</ul>
 
       
     </div>
@@ -541,11 +536,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/java/" rel="tag"># java</a>
+            <a href="/tags/ElasticSearch/" rel="tag"># ElasticSearch</a>
           
-            <a href="/tags/Netty权威指南/" rel="tag"># Netty权威指南</a>
-          
-            <a href="/tags/IO/" rel="tag"># IO</a>
+            <a href="/tags/从Lucene到ElasticSearch：全文检索实战/" rel="tag"># 从Lucene到ElasticSearch：全文检索实战</a>
           
         </div>
       
@@ -558,8 +551,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/18/nginx/Nginx之Openresty最佳实践/" rel="next" title="Nginx之Openresty最佳实践">
-                <i class="fa fa-chevron-left"></i> Nginx之Openresty最佳实践
+              <a href="/2019/05/05/elasticsearch/搜索查询/ElasticSearch位置查询/" rel="next" title="ElasticSearch位置查询">
+                <i class="fa fa-chevron-left"></i> ElasticSearch位置查询
               </a>
             
           </div>
@@ -567,10 +560,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/19/java/io/Java-NIO编程/" rel="prev" title="Java NIO编程">
-                Java NIO编程 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -780,7 +769,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#BIO"><span class="nav-text">BIO</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#代码演示"><span class="nav-text">代码演示</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#伪异步I-O"><span class="nav-text">伪异步I/O</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#自定义高亮片段"><span class="nav-text">自定义高亮片段</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多字段高亮"><span class="nav-text">多字段高亮</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#高亮性能分析"><span class="nav-text">高亮性能分析</span></a></li></ol></div>
             
 
           </div>

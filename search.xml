@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[ElasticSearch搜索高亮]]></title>
+    <url>%2F2019%2F05%2F06%2Felasticsearch%2F%E6%90%9C%E7%B4%A2%E6%9F%A5%E8%AF%A2%2FElasticSearch%E6%90%9C%E7%B4%A2%E9%AB%98%E4%BA%AE%2F</url>
+    <content type="text"><![CDATA[自定义高亮片段ElasticSearch 默认会用 &lt;em&gt;&lt;/em&gt; 标签标记关键字。想要自定义标签，只要在高亮属性中给需要高亮的字段加上 pre_tags 和 post_tags 即可： 1234567891011121314GET books/_search&#123; "query" : &#123; "match" : &#123;"title" : "java"&#125; &#125;, "highlight" : &#123; "fields" : &#123; "title" : &#123; "pre_tags" : ["&lt;strong&gt;"], "post_tags" : ["&lt;/strong&gt;"] &#125; &#125; &#125;&#125; 多字段高亮比如，搜索 title 字段的时候，希望 description 字段中的关键字也可以高亮，这时候就需要把 require_field_match 属性设置为 false（默认为true） 12345678910111213GET books/_search&#123; "query" : &#123; "match" : &#123;"title" : "java"&#125; &#125;, "highlight" : &#123; "require_field_match" : false, "fields" : &#123; "title" : &#123;&#125;, "description" : &#123;&#125; &#125; &#125;&#125; 高亮性能分析ElasticSearch 提供了三种高亮器： highlighter 默认高亮器，需要对 _source 中保存的文档进行二次分析，速度最慢，优点是不需要额外的存储空间 postings-highlighter 不需要二次分析，但是需要在字段的映射中设置 index_options 参数为 offsets（即保存关键词的偏移量），速度快于 highlighter fast-vector-highlighter 速度最快，但是需要在字段的映射中设置 ter_vector 参数为 with_positions_offsets（即保存关键字的位置和偏移量），占用的空间最大，是典型的空间换时间的做法]]></content>
+      <categories>
+        <category>ElasticSearch</category>
+      </categories>
+      <tags>
+        <tag>ElasticSearch</tag>
+        <tag>从Lucene到ElasticSearch：全文检索实战</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[ElasticSearch位置查询]]></title>
     <url>%2F2019%2F05%2F05%2Felasticsearch%2F%E6%90%9C%E7%B4%A2%E6%9F%A5%E8%AF%A2%2FElasticSearch%E4%BD%8D%E7%BD%AE%E6%9F%A5%E8%AF%A2%2F</url>
     <content type="text"><![CDATA[ElasticSearch 可以对地理位置点 geo_point 类型和地理位置形状 geo_shape 类型的数据进行搜索。 地址位置数据： 12345678&#123;"index" : &#123;"_index" : "geo", "_type" : "city", "_id" : "1"&#125;&#125;&#123;"name" : "北京", "location" : "39.90498900,116.40528500"&#125;&#123;"index" : &#123;"_index" : "geo", "_type" : "city", "_id" : "2"&#125;&#125;&#123;"name" : "上海", "location" : "31.23170600,121.47264400"&#125;&#123;"index" : &#123;"_index" : "geo", "_type" : "city", "_id" : "3"&#125;&#125;&#123;"name" : "广州", "location" : "23.12517800,113.28063700"&#125;&#123;"index" : &#123;"_index" : "geo", "_type" : "city", "_id" : "4"&#125;&#125;&#123;"name" : "杭州", "location" : "30.28745900,120.15357600"&#125; 创建一个索引并设置映射： 123456789101112131415PUT geo&#123; "mappings" : &#123; "city" : &#123; "properties" : &#123; "name" : &#123; "type" : "keyword" &#125; &#125;, "location" : &#123; "type" : "geo_point" &#125; &#125; &#125;&#125; geo_distance querygeo_distance query 可以查找在一个中心点指定范围内的地理点文档，例如查找距离北京200KM以内的城市 12345678910111213141516171819GET geo/_search&#123; "query" : &#123; "bool" : &#123; "must" : &#123; "match_all" : &#123;&#125; &#125;, "filter" : &#123; "geo_distance" : &#123; "distance" : "200km", "location" : &#123; "lat" : 39.90498900, "lon" : 116.40528500 &#125; &#125; &#125; &#125; &#125;&#125; 按各城市离北京的距离排序： 123456789101112GET geo/_search&#123; "query" : &#123; "match_all" : &#123;&#125; &#125;, "sort" : &#123; "_geo_distance" : &#123; "location" : "39.90498900,116.40528500", "unit" : "km" &#125; &#125;&#125; geo_bounding_box querygeo_bounding_box query 用于查找落入指定的矩形内的地址坐标。查询中由两个点确定一个矩形 123456789101112131415161718192021222324GET geo/_search&#123; "query" : &#123; "bool" : &#123; "must" : &#123; "match_all" : &#123;&#125; &#125;, "filter" : &#123; "geo_bounding_box" : &#123; "location" : &#123; "top_left" : &#123; "lat" : 39.90498900, "lon" : 116.40528500 &#125;, "bottom_right" : &#123; "lat" : 30.28745900, "lon" : 120.15357600 &#125; &#125; &#125; &#125; &#125; &#125;&#125; geo_polygon querygeo_polygon query 用于查找在指定多边形内的地理点 123456789101112131415161718192021222324252627282930GET geo/_search&#123; "query" : &#123; "bool" : &#123; "must" : &#123; "match_all" : &#123;&#125; &#125;, "filter" : &#123; "geo_polygon" : &#123; "location" : &#123; "points" : [ &#123; "lat" : 39.90498900, "lon" : 116.40528500 &#125;, &#123; "lat" : 39.90498900, "lon" : 116.40528500 &#125;, &#123; "lat" : 23.12517800, "lon" : 113.28063700 &#125;, ] &#125; &#125; &#125; &#125; &#125;&#125; geo_shape querygeo_shape query 用于查询 get_shape 类型的地理数据，地理形状之间的关系有相交、包含、不相交三种。 创建一个新的索引用于测试，其中 location 字段的类型设为 get_shape 类型： 123456789101112131415PUT geoshape&#123; "mappings" : &#123; "city" : &#123; "properties" : &#123; "name" : &#123; "type" : "keyword" &#125; &#125;, "location" : &#123; "type" : "geo_shape" &#125; &#125; &#125;&#125; 关于经纬度的顺序，geo_point 类型的字段纬度在前经度在后，对于 geo_shape 类型则相反 把西安和郑州连成的线写入索引： 1234567891011POST geoshape/city/1&#123; "name" : "西安-郑州", "location" : &#123; "type" : "linestring", "coordinates" : [ [108.94802400, 34.26316100], [113.66541200, 34.75797500] ] &#125;&#125; 查询包含在由银川和南昌作为对角线上的点组成的矩形的地理形状，由于西安和郑州组成的直线在该矩形区域内，因此可以被查到 123456789101112131415161718192021222324GET geoshape/_search&#123; "query" : &#123; "bool" : &#123; "must" : &#123; "match_all" : &#123;&#125; &#125;, "filter" : &#123; "geo_shape" : &#123; "location" : &#123; "shape" : &#123; "type" : "envelope", "coordinates" : [ [106.27817900, 38.46637000], // 银川 [115.89215100, 28.67649300] // 南昌 ] &#125;, "relation" : "within" &#125; &#125; &#125; &#125; &#125;&#125;]]></content>
@@ -128,8 +140,8 @@
         <category>java</category>
       </categories>
       <tags>
-        <tag>Netty权威指南</tag>
         <tag>java</tag>
+        <tag>Netty权威指南</tag>
         <tag>IO</tag>
       </tags>
   </entry>
@@ -141,8 +153,8 @@
         <category>java</category>
       </categories>
       <tags>
-        <tag>Netty权威指南</tag>
         <tag>java</tag>
+        <tag>Netty权威指南</tag>
         <tag>IO</tag>
       </tags>
   </entry>
@@ -154,8 +166,8 @@
         <category>java</category>
       </categories>
       <tags>
-        <tag>Netty权威指南</tag>
         <tag>java</tag>
+        <tag>Netty权威指南</tag>
         <tag>IO</tag>
       </tags>
   </entry>
@@ -167,8 +179,8 @@
         <category>java</category>
       </categories>
       <tags>
-        <tag>Netty权威指南</tag>
         <tag>java</tag>
+        <tag>Netty权威指南</tag>
         <tag>IO</tag>
       </tags>
   </entry>
