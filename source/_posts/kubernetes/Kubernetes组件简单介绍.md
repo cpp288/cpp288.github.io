@@ -292,7 +292,68 @@ spec:
       terminationGracePeriodSeconds: 30
 ```
 
-## Job（run to completion）
+## Deployment
+
+Deployment 是一种更高阶资源，用于部署应用并以声明的方式升级应用，而不是通过 ReplicationController 或 ReplicaSet 进行部署（更底层）
+
+![](/images/kubernetes/Deployment.png)
+
+Deployment 由 ReplicaSet 组成，并由它接管 Deployment 的 pod
+
+YAML描述文件：
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  # 指定新创建的pod至少要成功运行多久之后，才能将其视为可用，需要容器配置就绪探针
+  # 当所有容器的就绪探针返回成功时，pod就被标记为就绪状态
+  minReadySeconds: 10
+  # 设置升级的超时时间
+  progressDeadlineSeconds: 60
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.7.9
+        ports:
+        - containerPort: 80
+        # 定义就绪探针
+        readlinessProbe: 
+          periodSeconds: 1
+          httpGet: 
+            path: /
+            port: 8080
+      strategy: 
+        # 升级策略：[RollingUpdate(Default), Recreate]
+        type: RollingUpdate
+        RollingUpdate: 
+          maxSurge: 1
+          maxUnavailable: 0
+```
+
+升级策略：
+* RollingUpdate（默认）：滚动更新
+    * maxSurge
+        > 决定了 Deployment 配置中期望的副本数之外，最多允许超出的pod实例的数量，默认值为25%（也可以是绝对值，比如最多多处一个或两个pod）
+    * maxUnavailable
+        > 决定了在滚动升级期间，相对于期望副本数能够允许有多少pod实例处于不可用状态，默认值为25%
+* Recreate：一次性删除所有旧pod，创建新的pod
+
+## Job
+
+### Job（run to completion）
 
 [官方文档](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/)
 
@@ -326,4 +387,35 @@ spec:
   parallelism: 2
   # 限制pod的时间，如果pod运行时间超过该时间，系统将尝试终止pod，并将job标记为失败
   activeDeadlineSeconds: 50
+```
+
+### Corn Job
+
+[官方文档](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/)
+
+特定的时间运行或者在指定的时间间隔内重复运行
+
+```yaml
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: pi
+spec:
+  # 每天在每小时0，15，30，45分钟运行
+  schedule: "0,15,30,45 * * * *"
+  # pod最迟必须在预定时间后15秒开始运行，如果没有运行则任务将不会运行，并显示为Failed
+  startingDeadlineSeconds: 15
+  jobTemplate:
+    spec:
+      template: 
+        metadata: 
+          labels: 
+            app: corn-job
+        spec: 
+          containers:
+          - name: pi
+            image: perl
+            command: ["perl",  "-Mbignum=bpi", "-wle", "print bpi(2000)"]
+          # 重启策略：[OnFailure, Never, Always(Default)]
+          restartPolicy: Never
 ```
