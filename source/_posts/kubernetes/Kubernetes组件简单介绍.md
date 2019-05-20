@@ -291,3 +291,39 @@ spec:
           readOnly: true
       terminationGracePeriodSeconds: 30
 ```
+
+## Job（run to completion）
+
+[官方文档](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/)
+
+运行完成工作后即终止任务
+
+![](/images/kubernetes/Job.png)
+
+由Job管理的pod会一直被重新安排，直到它们成功完成任务
+
+YAML描述文件：
+
+```yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pi
+spec:
+  template:
+    spec:
+      containers:
+      - name: pi
+        image: perl
+        command: ["perl",  "-Mbignum=bpi", "-wle", "print bpi(2000)"]
+      # 重启策略：[OnFailure, Never, Always(Default)]
+      restartPolicy: Never
+  # 配置job在标记为失败之前可以重试的次数，默认为6
+  backoffLimit: 4
+  # 一个job运行多次，将顺序运行5个pod，如果其中一个pod发生故障，job会创建一个新的pod，所以job总共可以创建5个以上pod
+  competions: 5
+  # 最多2个pod可以平行运行
+  parallelism: 2
+  # 限制pod的时间，如果pod运行时间超过该时间，系统将尝试终止pod，并将job标记为失败
+  activeDeadlineSeconds: 50
+```
