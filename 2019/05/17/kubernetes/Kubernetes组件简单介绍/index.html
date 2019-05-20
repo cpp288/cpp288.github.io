@@ -106,7 +106,8 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://cpp288.github.io/images/kubernetes/ReplicationController协调流程.png">
 <meta property="og:image" content="https://cpp288.github.io/images/kubernetes/DaemonSet.png">
-<meta property="og:updated_time" content="2019-05-20T03:42:25.917Z">
+<meta property="og:image" content="https://cpp288.github.io/images/kubernetes/Job.png">
+<meta property="og:updated_time" content="2019-05-20T06:18:45.376Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kubernetes组件简单介绍">
 <meta name="twitter:description" content="Pod官方文档 pod是一组并置的容器（由一个或多个组成），代表了 Kubernetes 中的基本构建模块，在实际应用中我们不会单独部署容器，都是针对一组pod的容器进行部署和操作 重要概念：  标签：使用标签进行pod的分组（通过标签选择器列出 kubectl get po -l key=value） 注解：与标签不同的是，注解可以容纳更多内容，主要用于工具使用，没有标签那样的选择器 命名空间：">
@@ -428,7 +429,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                <time title="修改时间：2019-05-20 11:42:25" itemprop="dateModified" datetime="2019-05-20T11:42:25+08:00">2019-05-20</time>
+                <time title="修改时间：2019-05-20 14:18:45" itemprop="dateModified" datetime="2019-05-20T14:18:45+08:00">2019-05-20</time>
               
             
           </span>
@@ -473,7 +474,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">5.9k</span>
+                <span title="本文字数">6.6k</span>
               
 
               
@@ -487,7 +488,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">5 分钟</span>
+                <span title="阅读时长">6 分钟</span>
               
             </div>
           
@@ -545,6 +546,12 @@
 <p><img src="/images/kubernetes/DaemonSet.png" alt></p>
 <p>YAML描述文件：</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">apps/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">DaemonSet</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">fluentd-elasticsearch</span></span><br><span class="line"><span class="attr">  namespace:</span> <span class="string">kube-system</span></span><br><span class="line"><span class="attr">  labels:</span></span><br><span class="line"><span class="attr">    k8s-app:</span> <span class="string">fluentd-logging</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  selector:</span></span><br><span class="line"><span class="attr">    matchLabels:</span></span><br><span class="line"><span class="attr">      name:</span> <span class="string">fluentd-elasticsearch</span></span><br><span class="line"><span class="attr">  template:</span></span><br><span class="line"><span class="attr">    metadata:</span></span><br><span class="line"><span class="attr">      labels:</span></span><br><span class="line"><span class="attr">        name:</span> <span class="string">fluentd-elasticsearch</span></span><br><span class="line"><span class="attr">    spec:</span> </span><br><span class="line"><span class="attr">      nodeSelector:</span> </span><br><span class="line">        <span class="comment"># 节点选择器，会选择有disk=ssd标签的节点</span></span><br><span class="line"><span class="attr">        disk:</span> <span class="string">ssd</span></span><br><span class="line"><span class="attr">      containers:</span></span><br><span class="line"><span class="attr">      - name:</span> <span class="string">fluentd-elasticsearch</span></span><br><span class="line"><span class="attr">        image:</span> <span class="string">gcr.io/fluentd-elasticsearch/fluentd:v2.5.1</span></span><br><span class="line"><span class="attr">        resources:</span></span><br><span class="line"><span class="attr">          limits:</span></span><br><span class="line"><span class="attr">            memory:</span> <span class="number">200</span><span class="string">Mi</span></span><br><span class="line"><span class="attr">          requests:</span></span><br><span class="line"><span class="attr">            cpu:</span> <span class="number">100</span><span class="string">m</span></span><br><span class="line"><span class="attr">            memory:</span> <span class="number">200</span><span class="string">Mi</span></span><br><span class="line"><span class="attr">        volumeMounts:</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">varlog</span></span><br><span class="line"><span class="attr">          mountPath:</span> <span class="string">/var/log</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">varlibdockercontainers</span></span><br><span class="line"><span class="attr">          mountPath:</span> <span class="string">/var/lib/docker/containers</span></span><br><span class="line"><span class="attr">          readOnly:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">      terminationGracePeriodSeconds:</span> <span class="number">30</span></span><br></pre></td></tr></table></figure>
+<h2 id="Job（run-to-completion）"><a href="#Job（run-to-completion）" class="headerlink" title="Job（run to completion）"></a>Job（run to completion）</h2><p><a href="https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/" target="_blank" rel="noopener">官方文档</a></p>
+<p>运行完成工作后即终止任务</p>
+<p><img src="/images/kubernetes/Job.png" alt></p>
+<p>由Job管理的pod会一直被重新安排，直到它们成功完成任务</p>
+<p>YAML描述文件：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">batch/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Job</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">pi</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  template:</span></span><br><span class="line"><span class="attr">    spec:</span></span><br><span class="line"><span class="attr">      containers:</span></span><br><span class="line"><span class="attr">      - name:</span> <span class="string">pi</span></span><br><span class="line"><span class="attr">        image:</span> <span class="string">perl</span></span><br><span class="line"><span class="attr">        command:</span> <span class="string">["perl",</span>  <span class="string">"-Mbignum=bpi"</span><span class="string">,</span> <span class="string">"-wle"</span><span class="string">,</span> <span class="string">"print bpi(2000)"</span><span class="string">]</span></span><br><span class="line">      <span class="comment"># 重启策略：[OnFailure, Never, Always(Default)]</span></span><br><span class="line"><span class="attr">      restartPolicy:</span> <span class="string">Never</span></span><br><span class="line">  <span class="comment"># 配置job在标记为失败之前可以重试的次数，默认为6</span></span><br><span class="line"><span class="attr">  backoffLimit:</span> <span class="number">4</span></span><br><span class="line">  <span class="comment"># 一个job运行多次，将顺序运行5个pod，如果其中一个pod发生故障，job会创建一个新的pod，所以job总共可以创建5个以上pod</span></span><br><span class="line"><span class="attr">  competions:</span> <span class="number">5</span></span><br><span class="line">  <span class="comment"># 最多2个pod可以平行运行</span></span><br><span class="line"><span class="attr">  parallelism:</span> <span class="number">2</span></span><br><span class="line">  <span class="comment"># 限制pod的时间，如果pod运行时间超过该时间，系统将尝试终止pod，并将job标记为失败</span></span><br><span class="line"><span class="attr">  activeDeadlineSeconds:</span> <span class="number">50</span></span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -802,7 +809,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Pod"><span class="nav-text">Pod</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#控制器（Controllers）"><span class="nav-text">控制器（Controllers）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ReplicationController"><span class="nav-text">ReplicationController</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ReplicaSet"><span class="nav-text">ReplicaSet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DaemonSet"><span class="nav-text">DaemonSet</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Pod"><span class="nav-text">Pod</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#控制器（Controllers）"><span class="nav-text">控制器（Controllers）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ReplicationController"><span class="nav-text">ReplicationController</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ReplicaSet"><span class="nav-text">ReplicaSet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DaemonSet"><span class="nav-text">DaemonSet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Job（run-to-completion）"><span class="nav-text">Job（run to completion）</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -836,7 +843,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">149k</span>
+    <span title="站点总字数">150k</span>
   
 
   
