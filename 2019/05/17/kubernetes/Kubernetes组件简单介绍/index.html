@@ -96,28 +96,24 @@
 
 
 
-  <meta name="description" content="Nacos 是一个更易于帮助构建云原生应用的动态服务发现、配置和服务管理平台，提供「注册中心」、「配置中心」和「动态DNS服务」三大功能。 使用的相关版本：  nacos server：0.9.0 nacos client：0.9.1 spring boot：1.5.17.RELEASE spring cloud：Edgware.SR4 spring-cloud-starter-alibaba-n">
-<meta name="keywords" content="nacos,微服务,阿里技术">
+  <meta name="description" content="Podpod是一组并置的容器（由一个或多个组成），代表了 Kubernetes 中的基本构建模块，在实际应用中我们不会单独部署容器，都是针对一组pod的容器进行部署和操作 YAML描述文件创建pod： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354">
 <meta property="og:type" content="article">
-<meta property="og:title" content="nacos做为注册中心">
-<meta property="og:url" content="https://cpp288.github.io/2019/03/06/micro-service/nacos做为注册中心/index.html">
+<meta property="og:title" content="Kubernetes组件简单介绍">
+<meta property="og:url" content="https://cpp288.github.io/2019/05/17/kubernetes/Kubernetes组件简单介绍/index.html">
 <meta property="og:site_name" content="cpp288&#39;s blog">
-<meta property="og:description" content="Nacos 是一个更易于帮助构建云原生应用的动态服务发现、配置和服务管理平台，提供「注册中心」、「配置中心」和「动态DNS服务」三大功能。 使用的相关版本：  nacos server：0.9.0 nacos client：0.9.1 spring boot：1.5.17.RELEASE spring cloud：Edgware.SR4 spring-cloud-starter-alibaba-n">
+<meta property="og:description" content="Podpod是一组并置的容器（由一个或多个组成），代表了 Kubernetes 中的基本构建模块，在实际应用中我们不会单独部署容器，都是针对一组pod的容器进行部署和操作 YAML描述文件创建pod： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://cpp288.github.io/images/micro-service/nacos/namespace.png">
-<meta property="og:image" content="https://cpp288.github.io/images/micro-service/nacos/nacos服务发现.png">
-<meta property="og:updated_time" content="2019-03-07T09:50:48.346Z">
+<meta property="og:updated_time" content="2019-05-20T02:28:22.573Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="nacos做为注册中心">
-<meta name="twitter:description" content="Nacos 是一个更易于帮助构建云原生应用的动态服务发现、配置和服务管理平台，提供「注册中心」、「配置中心」和「动态DNS服务」三大功能。 使用的相关版本：  nacos server：0.9.0 nacos client：0.9.1 spring boot：1.5.17.RELEASE spring cloud：Edgware.SR4 spring-cloud-starter-alibaba-n">
-<meta name="twitter:image" content="https://cpp288.github.io/images/micro-service/nacos/namespace.png">
+<meta name="twitter:title" content="Kubernetes组件简单介绍">
+<meta name="twitter:description" content="Podpod是一组并置的容器（由一个或多个组成），代表了 Kubernetes 中的基本构建模块，在实际应用中我们不会单独部署容器，都是针对一组pod的容器进行部署和操作 YAML描述文件创建pod： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354">
 
 
 
 
 
 
-  <link rel="canonical" href="https://cpp288.github.io/2019/03/06/micro-service/nacos做为注册中心/">
+  <link rel="canonical" href="https://cpp288.github.io/2019/05/17/kubernetes/Kubernetes组件简单介绍/">
 
 
 
@@ -127,7 +123,7 @@
   };
 </script>
 
-  <title>nacos做为注册中心 | cpp288's blog</title>
+  <title>Kubernetes组件简单介绍 | cpp288's blog</title>
   
 
 
@@ -372,7 +368,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://cpp288.github.io/2019/03/06/micro-service/nacos做为注册中心/">
+    <link itemprop="mainEntityOfPage" href="https://cpp288.github.io/2019/05/17/kubernetes/Kubernetes组件简单介绍/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chen Jian">
@@ -389,7 +385,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">nacos做为注册中心
+          <h1 class="post-title" itemprop="name headline">Kubernetes组件简单介绍
 
               
             
@@ -413,7 +409,7 @@
                 
               
 
-              <time title="创建时间：2019-03-06 19:19:46" itemprop="dateCreated datePublished" datetime="2019-03-06T19:19:46+08:00">2019-03-06</time>
+              <time title="创建时间：2019-05-17 16:48:01" itemprop="dateCreated datePublished" datetime="2019-05-17T16:48:01+08:00">2019-05-17</time>
             
 
             
@@ -428,27 +424,11 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                <time title="修改时间：2019-03-07 17:50:48" itemprop="dateModified" datetime="2019-03-07T17:50:48+08:00">2019-03-07</time>
+                <time title="修改时间：2019-05-20 10:28:22" itemprop="dateModified" datetime="2019-05-20T10:28:22+08:00">2019-05-20</time>
               
             
           </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/微服务/" itemprop="url" rel="index"><span itemprop="name">微服务</span></a></span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -473,7 +453,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">2.4k</span>
+                <span title="本文字数">3.4k</span>
               
 
               
@@ -487,7 +467,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">2 分钟</span>
+                <span title="阅读时长">3 分钟</span>
               
             </div>
           
@@ -507,130 +487,9 @@
       
 
       
-        <p>Nacos 是一个更易于帮助构建云原生应用的动态服务发现、配置和服务管理平台，提供「注册中心」、「配置中心」和「动态DNS服务」三大功能。</p>
-<p>使用的相关版本：</p>
-<ul>
-<li>nacos server：0.9.0</li>
-<li>nacos client：0.9.1</li>
-<li>spring boot：1.5.17.RELEASE</li>
-<li>spring cloud：Edgware.SR4</li>
-<li>spring-cloud-starter-alibaba-nacos-discovery：0.1.1.RELEASE（对应spring boot 1.x版本）</li>
-</ul>
-<p>nacos官方文档：<a href="https://nacos.io" target="_blank" rel="noopener">https://nacos.io</a></p>
-<p>部署nacos server，按照官方文档部署就行（分为单机部署和集群部署，两者的启动方式稍有不同），现已支持拆分部署</p>
-<p>下面介绍的是和spring cloud做集成</p>
-<h1 id="相关对比"><a href="#相关对比" class="headerlink" title="相关对比"></a>相关对比</h1><table>
-<thead>
-<tr>
-<th>比较点</th>
-<th>Eureka</th>
-<th>Zookeeper</th>
-<th>Consul</th>
-<th>Nacos</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>运维熟悉度</td>
-<td>相对陌生</td>
-<td>熟悉</td>
-<td>更陌生</td>
-<td>陌生</td>
-</tr>
-<tr>
-<td>一致性（CAP）</td>
-<td>AP</td>
-<td>CP</td>
-<td>AP</td>
-<td>AP</td>
-</tr>
-<tr>
-<td>一致性协议</td>
-<td>HTTP 定时轮训</td>
-<td>ZAB</td>
-<td>RAFT</td>
-<td>～</td>
-</tr>
-<tr>
-<td>通讯方式</td>
-<td>HTTP REST</td>
-<td>自定义协议</td>
-<td>HTTP REST</td>
-<td>～</td>
-</tr>
-<tr>
-<td>更新机制</td>
-<td>Peer 2 Peer（服务器之间） + Scheduler（服务器和客户端）</td>
-<td>ZK Watch</td>
-<td>Agent 监听的方式</td>
-<td>～</td>
-</tr>
-<tr>
-<td>适用规模</td>
-<td>&lt; 30K</td>
-<td>&lt;20K</td>
-<td>&lt;5K</td>
-<td>100K+</td>
-</tr>
-<tr>
-<td>性能问题</td>
-<td>简单的更新机制、复杂设计、规模较大时 GC 频繁</td>
-<td>扩容麻烦、规模较大时 GC 频繁</td>
-<td>3K 节点以上，更新列表缓慢</td>
-<td>刚开源</td>
-</tr>
-<tr>
-<td>dashboard</td>
-<td>有</td>
-<td>没有，可以自己实现</td>
-<td>有</td>
-<td>有</td>
-</tr>
-</tbody>
-</table>
-<p>各自缺点：</p>
-<p><strong>Eureka：</strong></p>
-<ol>
-<li>客户端注册服务上报所有信息，节点多的情况下，网络，服务端压力过大，且浪费内存</li>
-<li>客户端更新服务信息通过简单的轮询机制，当服务数量巨大时，服务器压力过大。</li>
-<li>集群伸缩性不强，服务端集群通过广播式的复制，增加服务器压力</li>
-<li>Eureka2.0 闭源（Spring Cloud最新版本还是使用的1.X版本的Eureka）</li>
-</ol>
-<p><strong>Zookeeper：</strong></p>
-<ol>
-<li>维护成本较高，客户端，session状态，网络故障等问题，会导致服务异常</li>
-<li>集群伸缩性限制，内存，GC和连接</li>
-<li>主节点挂的情况下，会进行leader选举，在此过程中服务将不可用</li>
-<li>无控制台管理</li>
-</ol>
-<p><strong>Consul：</strong></p>
-<ol>
-<li>未经大规模市场验证，无法保证可靠性</li>
-<li>Go语言编写，内部异常排查困难</li>
-</ol>
-<p><strong>Nacos：</strong></p>
-<ol>
-<li>刚刚开源不久，社区热度不够，依然存在bug</li>
-</ol>
-<p>上面对比摘自与 <a href="https://github.com/mercyblitz/tech-weekly" target="_blank" rel="noopener">小马哥技术周报</a></p>
-<h1 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h1><p>加入依赖：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-alibaba-nacos-discovery<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- spring boot 1.x使用0.1.x版本，spring boot 2.x使用0.2.x版本 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.1.1.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba.nacos<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>nacos-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 这里需要替换 nacos-client 版本 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba.nacos<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>nacos-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.9.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>注意点：</p>
-<ol>
-<li>spring-cloud-starter-alibaba-nacos-discovery 依赖的版本和 spring boot 版本有关</li>
-<li>spring-cloud-starter-alibaba-nacos-discovery 默认使用的 nacos-client 的版本较低，会有问题（比如namespace设置无效），这里替换了较高的版本</li>
-</ol>
-<p>application.properties：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">spring.application.name=nacos-test</span><br><span class="line">server.port=8525</span><br><span class="line"># nacos server地址</span><br><span class="line">spring.cloud.nacos.discovery.server-addr=192.168.173.80:8848</span><br><span class="line"># namespace id</span><br><span class="line">spring.cloud.nacos.discovery.namespace=077d70f7-e430-4b4c-926a-44a9bfef003c</span><br></pre></td></tr></table></figure>
-<p>其它配置可以参考官网</p>
-<p><img src="/images/micro-service/nacos/namespace.png" alt></p>
-<p>注意：这里设置的namespace是界面上显示的id，不设置会进入public默认的命名空间</p>
-<blockquote>
-<p>namespace：常用场景之一是不同环境的注册的区分隔离，例如开发测试环境和生产环境的资源（如配置、服务）隔离等</p>
-</blockquote>
-<p>启动服务：</p>
-<p><img src="/images/micro-service/nacos/nacos服务发现.png" alt></p>
-
+        <h1 id="Pod"><a href="#Pod" class="headerlink" title="Pod"></a>Pod</h1><p>pod是一组并置的容器（由一个或多个组成），代表了 Kubernetes 中的基本构建模块，在实际应用中我们不会单独部署容器，都是针对一组pod的容器进行部署和操作</p>
+<p>YAML描述文件创建pod：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 必选，版本号，例如v1</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="comment"># 必选，Pod</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span></span><br><span class="line"><span class="comment"># 必选，元数据</span></span><br><span class="line"><span class="attr">metadata:</span> </span><br><span class="line">  <span class="comment"># 必选，Pod名称</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">string</span></span><br><span class="line">  <span class="comment"># 必选，Pod所属的命名空间</span></span><br><span class="line"><span class="attr">  namespace:</span> <span class="string">string</span></span><br><span class="line">  <span class="comment">#	自定义标签</span></span><br><span class="line"><span class="attr">  labels:</span> </span><br><span class="line"><span class="attr">  - name:</span> <span class="string">string</span></span><br><span class="line">  <span class="comment"># 自定义注释列表</span></span><br><span class="line"><span class="attr">  annotations:</span> </span><br><span class="line"><span class="attr">  - name:</span> <span class="string">string</span></span><br><span class="line"><span class="comment"># 必选，Pod中容器的详细定义</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="comment"># 必选，Pod中容器列表</span></span><br><span class="line"><span class="attr">  containers:</span> </span><br><span class="line">    <span class="comment"># 必选，容器名称</span></span><br><span class="line"><span class="attr">  - name:</span> <span class="string">string</span></span><br><span class="line">    <span class="comment"># 必选，容器的镜像名称</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">string</span></span><br><span class="line">    <span class="comment"># 获取镜像的策略 Alawys表示下载镜像 IfnotPresent表示优先使用本地镜像，否则下载镜像，Nerver表示仅使用本地镜像</span></span><br><span class="line"><span class="attr">    imagePullPolicy:</span> <span class="string">[Always</span> <span class="string">| Never | IfNotPresent]</span></span><br><span class="line"><span class="string">    # 容器的启动命令列表，如不指定，使用打包时使用的启动命令</span></span><br><span class="line"><span class="string"></span><span class="attr">    command:</span> <span class="string">[string]</span></span><br><span class="line">    <span class="comment"># 容器的启动命令参数列表</span></span><br><span class="line"><span class="attr">    args:</span> <span class="string">[string]</span></span><br><span class="line">    <span class="comment"># 容器的工作目录</span></span><br><span class="line"><span class="attr">    workingDir:</span> <span class="string">string</span></span><br><span class="line">    <span class="comment"># 挂载到容器内部的存储卷配置</span></span><br><span class="line"><span class="attr">    volumeMounts:</span> </span><br><span class="line">      <span class="comment"># 引用pod定义的共享存储卷的名称，需用volumes[]部分定义的的卷名</span></span><br><span class="line"><span class="attr">    - name:</span> <span class="string">string</span></span><br><span class="line">      <span class="comment"># 存储卷在容器内mount的绝对路径，应少于512字符</span></span><br><span class="line"><span class="attr">      mountPath:</span> <span class="string">string</span></span><br><span class="line">      <span class="comment"># 是否为只读模式</span></span><br><span class="line"><span class="attr">      readOnly:</span> <span class="string">boolean</span></span><br><span class="line">    <span class="comment"># 需要暴露的端口库号列表</span></span><br><span class="line"><span class="attr">    ports:</span> </span><br><span class="line">      <span class="comment"># 端口号名称</span></span><br><span class="line"><span class="attr">    - name:</span> <span class="string">string</span></span><br><span class="line">      <span class="comment"># 容器需要监听的端口号</span></span><br><span class="line"><span class="attr">      containerPort:</span> <span class="string">int</span></span><br><span class="line">      <span class="comment"># 容器所在主机需要监听的端口号，默认与Container相同</span></span><br><span class="line"><span class="attr">      hostPort:</span> <span class="string">int</span></span><br><span class="line">      <span class="comment"># 端口协议，支持TCP和UDP，默认TCP</span></span><br><span class="line"><span class="attr">      protocol:</span> <span class="string">string</span></span><br><span class="line">    <span class="comment"># 容器运行前需设置的环境变量列表</span></span><br><span class="line"><span class="attr">    env:</span> </span><br><span class="line">      <span class="comment"># 环境变量名称</span></span><br><span class="line"><span class="attr">    - name:</span> <span class="string">string</span></span><br><span class="line">      <span class="comment"># 环境变量的值</span></span><br><span class="line"><span class="attr">      value:</span> <span class="string">string</span></span><br><span class="line">    <span class="comment"># 资源限制和请求的设置</span></span><br><span class="line"><span class="attr">    resources:</span> </span><br><span class="line">      <span class="comment"># 资源限制的设置</span></span><br><span class="line"><span class="attr">      limits:</span> </span><br><span class="line">      <span class="comment"># cpu的限制，单位为core数，将用于docker run --cpu-shares参数</span></span><br><span class="line"><span class="attr">      cpu:</span> <span class="string">string</span></span><br><span class="line">      <span class="comment"># 内存限制，单位可以为Mib/Gib，将用于docker run --memory参数</span></span><br><span class="line"><span class="attr">      memory:</span> <span class="string">string</span></span><br><span class="line">    <span class="comment"># 资源请求的设置</span></span><br><span class="line"><span class="attr">    requests:</span> </span><br><span class="line">      <span class="comment"># cpu请求，容器启动的初始可用数量</span></span><br><span class="line"><span class="attr">      cpu:</span> <span class="string">string</span></span><br><span class="line">      <span class="comment"># 内存请求，容器启动的初始可用数量</span></span><br><span class="line"><span class="attr">      memory:</span> <span class="string">string</span></span><br><span class="line">    <span class="comment"># 对Pod内个容器健康检查的设置，当探测无响应几次后将自动重启该容器，检查方法有exec、httpGet和tcpSocket，对一个容器只需设置其中一种方法即可</span></span><br><span class="line"><span class="attr">    livenessProbe:</span> </span><br><span class="line">      <span class="comment"># 对Pod容器内检查方式设置为exec方式</span></span><br><span class="line"><span class="attr">      exec:</span> </span><br><span class="line">        <span class="comment"># exec方式需要制定的命令或脚本</span></span><br><span class="line"><span class="attr">        command:</span> <span class="string">[string]</span></span><br><span class="line">      <span class="comment"># 对Pod内个容器健康检查方法设置为HttpGet，需要制定Path、port</span></span><br><span class="line"><span class="attr">      httpGet:</span> </span><br><span class="line"><span class="attr">        path:</span> <span class="string">string</span></span><br><span class="line"><span class="attr">        port:</span> <span class="string">number</span></span><br><span class="line"><span class="attr">        host:</span> <span class="string">string</span></span><br><span class="line"><span class="attr">        scheme:</span> <span class="string">string</span></span><br><span class="line"><span class="attr">        HttpHeaders:</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">string</span></span><br><span class="line"><span class="attr">          value:</span> <span class="string">string</span></span><br><span class="line">      <span class="comment"># 对Pod内个容器健康检查方式设置为tcpSocket方式</span></span><br><span class="line"><span class="attr">      tcpSocket:</span> </span><br><span class="line"><span class="attr">         port:</span> <span class="string">number</span></span><br><span class="line">    <span class="comment"># 容器启动完成后首次探测的时间，单位为秒</span></span><br><span class="line"><span class="attr">    initialDelaySeconds:</span> <span class="number">0</span></span><br><span class="line">    <span class="comment"># 对容器健康检查探测等待响应的超时时间，单位秒，默认1秒</span></span><br><span class="line"><span class="attr">    timeoutSeconds:</span> <span class="number">0</span></span><br><span class="line">    <span class="comment"># 对容器监控检查的定期探测时间设置，单位秒，默认10秒一次</span></span><br><span class="line"><span class="attr">    periodSeconds:</span> <span class="number">0</span></span><br><span class="line"><span class="attr">    successThreshold:</span> <span class="number">0</span></span><br><span class="line"><span class="attr">    failureThreshold:</span> <span class="number">0</span></span><br><span class="line"><span class="attr">    securityContext:</span></span><br><span class="line"><span class="attr">      privileged:</span> <span class="literal">false</span></span><br><span class="line">  <span class="comment"># Pod的重启策略，Always表示一旦不管以何种方式终止运行，kubelet都将重启，OnFailure表示只有Pod以非0退出码退出才重启，Nerver表示不再重启该Pod</span></span><br><span class="line"><span class="attr">  restartPolicy:</span> <span class="string">[Always</span> <span class="string">| Never | OnFailure] </span></span><br><span class="line"><span class="string">  # 设置NodeSelector表示将该Pod调度到包含这个label的node上，以key：value的格式指定</span></span><br><span class="line"><span class="string"></span><span class="attr">  nodeSelector:</span> <span class="string">obeject</span>   　　</span><br><span class="line">  <span class="comment"># Pull镜像时使用的secret名称，以key：secretkey格式指定</span></span><br><span class="line"><span class="attr">  imagePullSecrets:</span> </span><br><span class="line"><span class="attr">  - name:</span> <span class="string">string</span></span><br><span class="line">  <span class="comment"># 是否使用主机网络模式，默认为false，如果设置为true，表示使用宿主机网络</span></span><br><span class="line"><span class="attr">  hostNetwork:</span> <span class="literal">false</span>      　　</span><br><span class="line">  <span class="comment"># 在该pod上定义共享存储卷列表</span></span><br><span class="line"><span class="attr">  volumes:</span> </span><br><span class="line">    <span class="comment"># 共享存储卷名称 （volumes类型有很多种）</span></span><br><span class="line"><span class="attr">  - name:</span> <span class="string">string</span></span><br><span class="line">    <span class="comment"># 类型为emtyDir的存储卷，与Pod同生命周期的一个临时目录。为空值</span></span><br><span class="line"><span class="attr">    emptyDir:</span> <span class="string">&#123;&#125;</span></span><br><span class="line">    <span class="comment"># 类型为hostPath的存储卷，表示挂载Pod所在宿主机的目录</span></span><br><span class="line"><span class="attr">    hostPath:</span> <span class="string">string</span></span><br><span class="line">      <span class="comment"># Pod所在宿主机的目录，将被用于同期中mount的目录</span></span><br><span class="line"><span class="attr">      path:</span> <span class="string">string</span></span><br><span class="line">    <span class="comment"># 类型为secret的存储卷，挂载集群与定义的secret对象到容器内部</span></span><br><span class="line"><span class="attr">    secret:</span> </span><br><span class="line"><span class="attr">      scretname:</span> <span class="string">string</span></span><br><span class="line"><span class="attr">      items:</span> </span><br><span class="line"><span class="attr">      - key:</span> <span class="string">string</span></span><br><span class="line"><span class="attr">        path:</span> <span class="string">string</span></span><br><span class="line">    <span class="comment"># 类型为configMap的存储卷，挂载预定义的configMap对象到容器内部</span></span><br><span class="line"><span class="attr">    configMap:</span> </span><br><span class="line"><span class="attr">      name:</span> <span class="string">string</span></span><br><span class="line"><span class="attr">      items:</span></span><br><span class="line"><span class="attr">      - key:</span> <span class="string">string</span></span><br><span class="line"><span class="attr">        path:</span> <span class="string">string</span></span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -651,16 +510,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/nacos/" rel="tag"># nacos</a>
-          
-            <a href="/tags/微服务/" rel="tag"># 微服务</a>
-          
-            <a href="/tags/阿里技术/" rel="tag"># 阿里技术</a>
-          
-        </div>
-      
 
       
       
@@ -670,8 +519,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/04/java/java拦截器（interceptor）和过滤器（filter）/" rel="next" title="java拦截器（interceptor）和过滤器（filter）">
-                <i class="fa fa-chevron-left"></i> java拦截器（interceptor）和过滤器（filter）
+              <a href="/2019/05/06/elasticsearch/聚合分析/ElasticSearch桶聚合/" rel="next" title="ElasticSearch桶聚合">
+                <i class="fa fa-chevron-left"></i> ElasticSearch桶聚合
               </a>
             
           </div>
@@ -679,10 +528,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/07/micro-service/nacos版本迭代整理（持续更新）/" rel="prev" title="nacos版本迭代整理（持续更新）">
-                nacos版本迭代整理（持续更新） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -892,7 +737,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#相关对比"><span class="nav-text">相关对比</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#简单使用"><span class="nav-text">简单使用</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Pod"><span class="nav-text">Pod</span></a></li></ol></div>
             
 
           </div>

@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Kubernetes组件简单介绍]]></title>
+    <url>%2F2019%2F05%2F17%2Fkubernetes%2FKubernetes%E7%BB%84%E4%BB%B6%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D%2F</url>
+    <content type="text"><![CDATA[Podpod是一组并置的容器（由一个或多个组成），代表了 Kubernetes 中的基本构建模块，在实际应用中我们不会单独部署容器，都是针对一组pod的容器进行部署和操作 YAML描述文件创建pod： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129# 必选，版本号，例如v1apiVersion: v1# 必选，Podkind: Pod# 必选，元数据metadata: # 必选，Pod名称 name: string # 必选，Pod所属的命名空间 namespace: string # 自定义标签 labels: - name: string # 自定义注释列表 annotations: - name: string# 必选，Pod中容器的详细定义spec: # 必选，Pod中容器列表 containers: # 必选，容器名称 - name: string # 必选，容器的镜像名称 image: string # 获取镜像的策略 Alawys表示下载镜像 IfnotPresent表示优先使用本地镜像，否则下载镜像，Nerver表示仅使用本地镜像 imagePullPolicy: [Always | Never | IfNotPresent] # 容器的启动命令列表，如不指定，使用打包时使用的启动命令 command: [string] # 容器的启动命令参数列表 args: [string] # 容器的工作目录 workingDir: string # 挂载到容器内部的存储卷配置 volumeMounts: # 引用pod定义的共享存储卷的名称，需用volumes[]部分定义的的卷名 - name: string # 存储卷在容器内mount的绝对路径，应少于512字符 mountPath: string # 是否为只读模式 readOnly: boolean # 需要暴露的端口库号列表 ports: # 端口号名称 - name: string # 容器需要监听的端口号 containerPort: int # 容器所在主机需要监听的端口号，默认与Container相同 hostPort: int # 端口协议，支持TCP和UDP，默认TCP protocol: string # 容器运行前需设置的环境变量列表 env: # 环境变量名称 - name: string # 环境变量的值 value: string # 资源限制和请求的设置 resources: # 资源限制的设置 limits: # cpu的限制，单位为core数，将用于docker run --cpu-shares参数 cpu: string # 内存限制，单位可以为Mib/Gib，将用于docker run --memory参数 memory: string # 资源请求的设置 requests: # cpu请求，容器启动的初始可用数量 cpu: string # 内存请求，容器启动的初始可用数量 memory: string # 对Pod内个容器健康检查的设置，当探测无响应几次后将自动重启该容器，检查方法有exec、httpGet和tcpSocket，对一个容器只需设置其中一种方法即可 livenessProbe: # 对Pod容器内检查方式设置为exec方式 exec: # exec方式需要制定的命令或脚本 command: [string] # 对Pod内个容器健康检查方法设置为HttpGet，需要制定Path、port httpGet: path: string port: number host: string scheme: string HttpHeaders: - name: string value: string # 对Pod内个容器健康检查方式设置为tcpSocket方式 tcpSocket: port: number # 容器启动完成后首次探测的时间，单位为秒 initialDelaySeconds: 0 # 对容器健康检查探测等待响应的超时时间，单位秒，默认1秒 timeoutSeconds: 0 # 对容器监控检查的定期探测时间设置，单位秒，默认10秒一次 periodSeconds: 0 successThreshold: 0 failureThreshold: 0 securityContext: privileged: false # Pod的重启策略，Always表示一旦不管以何种方式终止运行，kubelet都将重启，OnFailure表示只有Pod以非0退出码退出才重启，Nerver表示不再重启该Pod restartPolicy: [Always | Never | OnFailure] # 设置NodeSelector表示将该Pod调度到包含这个label的node上，以key：value的格式指定 nodeSelector: obeject # Pull镜像时使用的secret名称，以key：secretkey格式指定 imagePullSecrets: - name: string # 是否使用主机网络模式，默认为false，如果设置为true，表示使用宿主机网络 hostNetwork: false # 在该pod上定义共享存储卷列表 volumes: # 共享存储卷名称 （volumes类型有很多种） - name: string # 类型为emtyDir的存储卷，与Pod同生命周期的一个临时目录。为空值 emptyDir: &#123;&#125; # 类型为hostPath的存储卷，表示挂载Pod所在宿主机的目录 hostPath: string # Pod所在宿主机的目录，将被用于同期中mount的目录 path: string # 类型为secret的存储卷，挂载集群与定义的secret对象到容器内部 secret: scretname: string items: - key: string path: string # 类型为configMap的存储卷，挂载预定义的configMap对象到容器内部 configMap: name: string items: - key: string path: string]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[ElasticSearch桶聚合]]></title>
     <url>%2F2019%2F05%2F06%2Felasticsearch%2F%E8%81%9A%E5%90%88%E5%88%86%E6%9E%90%2FElasticSearch%E6%A1%B6%E8%81%9A%E5%90%88%2F</url>
     <content type="text"><![CDATA[Bucket 可以理解为一个桶，它会遍历文档中的内容，凡是符合某一要求的就放入一个桶中（类似于SQL中的group by） Terms Aggregation用于分组聚合 根据 language 字段对 books 索引中的文档进行分组，统计各编程语言的书的数量 12345678POST books/_search?size=0&#123; "aggs" : &#123; "per_count" : &#123; "items" : &#123;"feild" : "language"&#125; &#125; &#125;&#125; 结果如下： 12345678910111213&#123; "aggregations" : &#123; "per_count" : &#123; "doc_count_error_upper_bound" : 0, "sum_other_doc_count" : 0, "buckets" : [ &#123;"key" : "java", "doc_count" : 2&#125;, &#123;"key" : "python", "doc_count" : 2&#125;, &#123;"key" : "javascript", "doc_count" : 3&#125; ] &#125; &#125;&#125; Filter / Filters AggregationFilter 是过滤器聚合，将符合过滤器条件的文档分别分到一个桶中 Filters 是多过滤器聚合，将符合多个过滤条件的文档分到不通的桶中 123456789101112131415161718POST books/_search?size=0&#123; "aggs" : &#123; "per_avg_price" : &#123; "filters" : &#123; "filters" : [ &#123;"match" : &#123;"title" : "java"&#125;&#125;, &#123;"match" : &#123;"title" : "python"&#125;&#125; ] &#125;, "aggs" : &#123; "avg_price" : &#123; &#123;"avg" : &#123;"feild" : "price"&#125;&#125; &#125; &#125; &#125; &#125;&#125; 结果如下： 12345678910111213141516&#123; "aggregations" : &#123; "per_avg_price" : &#123; "buckets" : [ &#123; "doc_count" : 2, "avg_price" : &#123;"value" : 58.35&#125; &#125;, &#123; "doc_count" : 4, "avg_price" : &#123;"value" : 67.95&#125; &#125; ] &#125; &#125;&#125; Range / Date Range / IP Range AggregationRange 范围聚合，可以用于数字、日期 123456789101112131415POST books/_search?size=0&#123; "aggs" : &#123; "price_ranges" : &#123; "range" : &#123; "field" : "price", "ranges" : &#123; &#123;"to" : 50&#125;, // 小于 50 &#123;"from" : 50, "to" : 80&#125;, // 大于等于50小于80 &#123;"from" : 80&#125; // 大于等于80 &#125; &#125; &#125; &#125;&#125; Date Range 专门用于日期类型的，与 Range 不通在于日期的起止值可以使用数学表达式 123456789101112131415POST books/_search?size=0&#123; "aggs" : &#123; "publish_ranges" : &#123; "date_range" : &#123; "field" : "publish_time", "format" : "yyyy-MM-dd", "ranges" : &#123; &#123;"to" : "now-24M/M"&#125;, // 两年前 &#123;"from" : "now-24M/M"&#125; // 两年前到现在 &#125; &#125; &#125; &#125;&#125; IP Range 用于对IP类型数据范围聚合 1234567891011121314POST ip_test/_search?size=0&#123; "aggs" : &#123; "ip_ranges" : &#123; "ip_range" : &#123; "field" : "ip", "ranges" : &#123; &#123;"to" : "10.0.0.5"&#125;, &#123;"from" : "10.0.0.5"&#125; &#125; &#125; &#125; &#125;&#125; Date Histogram Aggregation时间直方图聚合，常用于按照日期对文档进行统计并绘制条形图 对 books 索引中的图书和出版日期按月做时间直方图聚合 1234567891011POST books/_search?size=0&#123; "aggs" : &#123; "books_over_time" : &#123; "date_histogram" : &#123; "feild" : "publish_time", "interval" : "month" &#125; &#125; &#125;&#125; 结果如下： 1234567891011121314&#123; "aggregations" : &#123; "books_over_time" : &#123; "buckets" : [ &#123; "key_as_string" : "2007-10-01T00:00:00.000Z", "key" : 1191196800000, "doc_count" : 1 &#125;, ... ] &#125; &#125;&#125; Missing Aggregation空值聚合，将文档集中所有缺失字段的文档分到一个桶中 对 books 索引中缺失 price 字段（包含值为null的）的文档进行聚合 12345678POST books/_search?size=0&#123; "aggs" : &#123; "books_without_a_price" : &#123; "missing" : &#123;"feild" : "price"&#125; &#125; &#125;&#125; 结果如下： 1234567&#123; "aggregations" : &#123; "books_without_a_price" : &#123; "doc_count" : 0 &#125; &#125;&#125; Children Aggregation一种特殊的单桶聚合，可以根据父子分档关系进行分桶 Geo Distance Aggregation用于对地理点（geo_point）做范围统计 1234567891011121314151617POST geo/_search?size=0&#123; "aggs" : &#123; "city_from_beijing" : &#123; "geo_distance" : &#123; "feild" : "location", "origin" : "39.90498900,116.40528500", "unit" : "km", "ranges" : [ &#123;"to" : 500&#125;, &#123;"from" : 500, "to" : 1000&#125;, &#123;"from" : 1000&#125;, ] &#125; &#125; &#125;&#125; 结果如下： 12345678910111213141516171819202122232425&#123; "aggregations" : &#123; "city_from_beijing" : &#123; "buckets" : [ &#123; "key" : "*-500.0", "from" : 0, "to" : 500, "doc_count" : 2 &#125;, &#123; "key" : "500.0-1000.0", "from" : 500, "to" : 1000, "doc_count" : 2 &#125;, &#123; "key" : "1000.0-*", "from" : 1000, "doc_count" : 3 &#125; ] &#125; &#125;&#125;]]></content>
@@ -176,8 +181,8 @@
         <category>java</category>
       </categories>
       <tags>
-        <tag>java</tag>
         <tag>Netty权威指南</tag>
+        <tag>java</tag>
         <tag>IO</tag>
       </tags>
   </entry>
@@ -189,8 +194,8 @@
         <category>java</category>
       </categories>
       <tags>
-        <tag>java</tag>
         <tag>Netty权威指南</tag>
+        <tag>java</tag>
         <tag>IO</tag>
       </tags>
   </entry>
@@ -202,8 +207,8 @@
         <category>java</category>
       </categories>
       <tags>
-        <tag>java</tag>
         <tag>Netty权威指南</tag>
+        <tag>java</tag>
         <tag>IO</tag>
       </tags>
   </entry>
@@ -215,8 +220,8 @@
         <category>java</category>
       </categories>
       <tags>
-        <tag>java</tag>
         <tag>Netty权威指南</tag>
+        <tag>java</tag>
         <tag>IO</tag>
       </tags>
   </entry>
