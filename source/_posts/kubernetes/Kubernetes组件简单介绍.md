@@ -9,7 +9,14 @@ categories:
 
 # Pod
 
+[官方文档](https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/)
+
 pod是一组并置的容器（由一个或多个组成），代表了 Kubernetes 中的基本构建模块，在实际应用中我们不会单独部署容器，都是针对一组pod的容器进行部署和操作
+
+重要概念：
+* 标签：使用标签进行pod的分组（通过标签选择器列出 `kubectl get po -l key=value`）
+* 注解：与标签不同的是，注解可以容纳更多内容，主要用于工具使用，没有标签那样的选择器
+* 命名空间：对资源进行分组
 
 YAML描述文件创建pod：
 
@@ -143,4 +150,144 @@ spec:
       items:
       - key: string
         path: string
+```
+
+# 控制器（Controllers）
+
+## ReplicationController
+
+[官方文档](https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller/)
+
+确保它的pod始终保持运行状态，如果pod因任何原因小时，ReplicationController会注意到缺少的pod并创建替代pod，原有pod将完全丢失
+
+![](/images/kubernetes/ReplicationController协调流程.png)
+
+YAML描述文件：
+
+```yaml
+apiVersion: v1
+# ReplicationController类型
+kind: ReplicationController
+metadata:
+  # ReplicationController名称
+  name: nginx
+spec:
+  # pod实例的目标数据
+  replicas: 2
+  # pod选择器决定了RC的操作对象
+  selector:                 
+    app: nginx
+  # 定义pod模板，在这里不需要定义pod名字，就算定义创建的时候也不会采用这个名字而是.metadata.generateName+5位随机数。
+  template: 
+    metadata:
+      # 定义标签，这里必须和selector中定义的KV一样
+      labels: 
+        app: nginx
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        ports: 
+        - containerPort: 80
+```
+
+注意：
+* 修改RC中的pod模版只会影响后面创建的pod，原有pod不会更改
+* 删除RC时，不会删除对应的pod，原因是RC创建的pod不是RC的组成部分，只是由其进行管理
+
+## ReplicaSet
+
+[官方文档](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/)
+
+可以完全替代 ReplicationController，ReplicaSet拥有更强的选择器表达能力
+
+YAML描述文件：
+
+```yaml
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: frontend
+  labels:
+    app: guestbook
+    tier: frontend
+spec:
+  # modify replicas according to your case
+  replicas: 3
+  selector:
+    matchLabels:
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        tier: frontend
+    spec:
+      containers:
+      - name: php-redis
+        image: gcr.io/google_samples/gb-frontend:v3
+```
+
+使用 matchExpressions 属性重写选择器：
+
+```yaml
+selector: 
+  matchExpressions: 
+  - key: app
+    operator: In
+    values: 
+    - tier
+```
+
+操作符：
+* In：Label的值必须与其中一个指定的values匹配
+* NotIn：Label的值与任何指定的values不匹配
+* Exists：pod必须包含一个指定名称的标签（值不重要），不需要指定values字段
+* DoesNotExist：与Exists相反
+
+## DaemonSet
+
+[官方文档](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)
+
+确保在集群的每个节点上运行一个pod（比如日志收集器、资源监控器），如果节点下线，DaemonSet不会在其它地方重建pod，但是当一个新节点加入时，DaemonSet会立刻部署一个新的pod实例在新节点上
+
+![](/images/kubernetes/DaemonSet.png)
+
+YAML描述文件：
+
+```yaml
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: fluentd-elasticsearch
+  namespace: kube-system
+  labels:
+    k8s-app: fluentd-logging
+spec:
+  selector:
+    matchLabels:
+      name: fluentd-elasticsearch
+  template:
+    metadata:
+      labels:
+        name: fluentd-elasticsearch
+    spec: 
+      nodeSelector: 
+        # 节点选择器，会选择有disk=ssd标签的节点
+        disk: ssd
+      containers:
+      - name: fluentd-elasticsearch
+        image: gcr.io/fluentd-elasticsearch/fluentd:v2.5.1
+        resources:
+          limits:
+            memory: 200Mi
+          requests:
+            cpu: 100m
+            memory: 200Mi
+        volumeMounts:
+        - name: varlog
+          mountPath: /var/log
+        - name: varlibdockercontainers
+          mountPath: /var/lib/docker/containers
+          readOnly: true
+      terminationGracePeriodSeconds: 30
 ```
