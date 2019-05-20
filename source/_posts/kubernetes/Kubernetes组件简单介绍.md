@@ -2,6 +2,9 @@
 title: Kubernetes组件简单介绍
 date: 2019-05-17 16:48:01
 tags:
+- Kubernetes
+categories:
+- Kubernetes
 ---
 
 # Pod
