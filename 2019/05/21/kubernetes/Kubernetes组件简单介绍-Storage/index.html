@@ -96,23 +96,29 @@
 
 
 
-  <meta name="description" content="For record only">
-<meta property="og:type" content="website">
-<meta property="og:title" content="cpp288&#39;s blog">
-<meta property="og:url" content="https://cpp288.github.io/tags/hexo/index.html">
+  <meta name="description" content="卷（Volumes）官方文档 卷是pod的一个组成部分，定义在pod中，不是独立的kubernetes对象 在官网可以看到有很多Volume类型，这里只介绍其中的几种，其它可以查看官网 emptyDir特点：  卷从一个空目录开始，运行在pod内的应用程序可以读写 卷的生命周期和pod的生命周期相关联，当pod删除时，卷的内容就会丢失  12345678910111213141516171819a">
+<meta name="keywords" content="Kubernetes">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kubernetes组件简单介绍-Storage">
+<meta property="og:url" content="https://cpp288.github.io/2019/05/21/kubernetes/Kubernetes组件简单介绍-Storage/index.html">
 <meta property="og:site_name" content="cpp288&#39;s blog">
-<meta property="og:description" content="For record only">
+<meta property="og:description" content="卷（Volumes）官方文档 卷是pod的一个组成部分，定义在pod中，不是独立的kubernetes对象 在官网可以看到有很多Volume类型，这里只介绍其中的几种，其它可以查看官网 emptyDir特点：  卷从一个空目录开始，运行在pod内的应用程序可以读写 卷的生命周期和pod的生命周期相关联，当pod删除时，卷的内容就会丢失  12345678910111213141516171819a">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://cpp288.github.io/images/kubernetes/Volume-hostPath.png">
+<meta property="og:image" content="https://cpp288.github.io/images/kubernetes/PV和PVC.png">
+<meta property="og:image" content="https://cpp288.github.io/images/kubernetes/PV.png">
+<meta property="og:updated_time" content="2019-05-21T10:55:56.129Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="cpp288&#39;s blog">
-<meta name="twitter:description" content="For record only">
+<meta name="twitter:title" content="Kubernetes组件简单介绍-Storage">
+<meta name="twitter:description" content="卷（Volumes）官方文档 卷是pod的一个组成部分，定义在pod中，不是独立的kubernetes对象 在官网可以看到有很多Volume类型，这里只介绍其中的几种，其它可以查看官网 emptyDir特点：  卷从一个空目录开始，运行在pod内的应用程序可以读写 卷的生命周期和pod的生命周期相关联，当pod删除时，卷的内容就会丢失  12345678910111213141516171819a">
+<meta name="twitter:image" content="https://cpp288.github.io/images/kubernetes/Volume-hostPath.png">
 
 
 
 
 
 
-  <link rel="canonical" href="https://cpp288.github.io/tags/hexo/">
+  <link rel="canonical" href="https://cpp288.github.io/2019/05/21/kubernetes/Kubernetes组件简单介绍-Storage/">
 
 
 
@@ -122,7 +128,7 @@
   };
 </script>
 
-  <title>标签: hexo | cpp288's blog</title>
+  <title>Kubernetes组件简单介绍-Storage | cpp288's blog</title>
   
 
 
@@ -170,7 +176,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -225,7 +231,7 @@
         
         
           
-          <li class="menu-item menu-item-tags menu-item-active">
+          <li class="menu-item menu-item-tags">
 
     
     
@@ -347,82 +353,252 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>hexo<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
+
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://cpp288.github.io/2019/05/21/kubernetes/Kubernetes组件简单介绍-Storage/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chen Jian">
+      <meta itemprop="description" content="For record only">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cpp288's blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-          <a class="post-title-link" href="/2019/02/26/如何使用hexo-github-pages建立个人博客/" itemprop="url">
-            
-              <span itemprop="name">如何使用hexo + github pages建立个人博客</span>
-            
-          </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Kubernetes组件简单介绍-Storage
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-02-26T15:56:47+08:00" content="2019-02-26">
-          02-26
-        </time>
-      </div>
+              
+            
+          </h1>
+        
 
-    </header>
-  </article>
+        <div class="post-meta">
+          <span class="post-time">
 
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-21 13:39:51 / 修改时间：18:55:56" itemprop="dateCreated datePublished" datetime="2019-05-21T13:39:51+08:00">2019-05-21</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Kubernetes/" itemprop="url" rel="index"><span itemprop="name">Kubernetes</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">2.7k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">2 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="卷（Volumes）"><a href="#卷（Volumes）" class="headerlink" title="卷（Volumes）"></a>卷（Volumes）</h1><p><a href="https://kubernetes.io/docs/concepts/storage/volumes/" target="_blank" rel="noopener">官方文档</a></p>
+<p>卷是pod的一个组成部分，定义在pod中，不是独立的kubernetes对象</p>
+<p>在官网可以看到有很多Volume类型，这里只介绍其中的几种，其它可以查看官网</p>
+<h2 id="emptyDir"><a href="#emptyDir" class="headerlink" title="emptyDir"></a>emptyDir</h2><p>特点：</p>
+<ul>
+<li>卷从一个空目录开始，运行在pod内的应用程序可以读写</li>
+<li>卷的生命周期和pod的生命周期相关联，当pod删除时，卷的内容就会丢失</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">test-pd</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  containers:</span></span><br><span class="line"><span class="attr">  - image:</span> <span class="string">k8s.gcr.io/test-webserver</span></span><br><span class="line"><span class="attr">    name:</span> <span class="string">test-container</span></span><br><span class="line">    <span class="comment"># 名为 cache-volume 的卷挂载在容器的 /cache 中</span></span><br><span class="line"><span class="attr">    volumeMounts:</span></span><br><span class="line"><span class="attr">    - mountPath:</span> <span class="string">/cache</span></span><br><span class="line"><span class="attr">      name:</span> <span class="string">cache-volume</span></span><br><span class="line"><span class="attr">  volumes:</span></span><br><span class="line">    <span class="comment"># 定义一个名为 cache-volume 的 emptyDir 卷</span></span><br><span class="line"><span class="attr">  - name:</span> <span class="string">cache-volume</span></span><br><span class="line"><span class="attr">    emptyDir:</span> <span class="string">&#123;&#125;</span></span><br><span class="line">    <span class="comment"># 指定介质，使用内存存储</span></span><br><span class="line">    <span class="comment"># emptyDir: </span></span><br><span class="line">    <span class="comment">#   medium: Memory</span></span><br></pre></td></tr></table></figure>
+<h2 id="hostPath"><a href="#hostPath" class="headerlink" title="hostPath"></a>hostPath</h2><p>大多数pod应该忽略它们的主机节点，因此不应该访问节点文件系统上的文件，但是一些系统级别的pod（通常由DaemonSet管理）需要读取节点的文件</p>
+<p><strong>hostPath是一种持久性存储，不会因为pod的删除而丢失内容</strong></p>
+<p><img src="/images/kubernetes/Volume-hostPath.png" alt></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">test-pd</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  containers:</span></span><br><span class="line"><span class="attr">  - image:</span> <span class="string">k8s.gcr.io/test-webserver</span></span><br><span class="line"><span class="attr">    name:</span> <span class="string">test-container</span></span><br><span class="line"><span class="attr">    volumeMounts:</span></span><br><span class="line"><span class="attr">    - mountPath:</span> <span class="string">/test-pd</span></span><br><span class="line"><span class="attr">      name:</span> <span class="string">test-volume</span></span><br><span class="line"><span class="attr">  volumes:</span></span><br><span class="line"><span class="attr">  - name:</span> <span class="string">test-volume</span></span><br><span class="line"><span class="attr">    hostPath:</span></span><br><span class="line">      <span class="comment"># directory location on host</span></span><br><span class="line"><span class="attr">      path:</span> <span class="string">/data</span></span><br><span class="line">      <span class="comment"># this field is optional</span></span><br><span class="line"><span class="attr">      type:</span> <span class="string">Directory</span></span><br></pre></td></tr></table></figure>
+<h2 id="GCE"><a href="#GCE" class="headerlink" title="GCE"></a>GCE</h2><p>如果是在GCE（Google Kubernetes Engine）中运行的，那么可以使用GCE持久磁盘作为底层存储机制</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">test-pd</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  containers:</span></span><br><span class="line"><span class="attr">  - image:</span> <span class="string">k8s.gcr.io/test-webserver</span></span><br><span class="line"><span class="attr">    name:</span> <span class="string">test-container</span></span><br><span class="line"><span class="attr">    volumeMounts:</span></span><br><span class="line"><span class="attr">    - mountPath:</span> <span class="string">/test-pd</span></span><br><span class="line"><span class="attr">      name:</span> <span class="string">test-volume</span></span><br><span class="line"><span class="attr">  volumes:</span></span><br><span class="line"><span class="attr">  - name:</span> <span class="string">test-volume</span></span><br><span class="line">    <span class="comment"># This GCE PD must already exist.</span></span><br><span class="line"><span class="attr">    gcePersistentDisk:</span></span><br><span class="line"><span class="attr">      pdName:</span> <span class="string">my-data-disk</span></span><br><span class="line">      <span class="comment"># 文件系统类型</span></span><br><span class="line"><span class="attr">      fsType:</span> <span class="string">ext4</span></span><br></pre></td></tr></table></figure>
+<h1 id="持久卷（PV）和持久卷声明（PVC）"><a href="#持久卷（PV）和持久卷声明（PVC）" class="headerlink" title="持久卷（PV）和持久卷声明（PVC）"></a>持久卷（PV）和持久卷声明（PVC）</h1><p><a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/" target="_blank" rel="noopener">官方文档</a></p>
+<p>为了使应用能够正常请求存储资源，同时避免处理基础设施细节，引入了两个新的资源：持久卷（PV）和持久卷声明（PVC）</p>
+<p>持久卷由集群管理员提供，并被pod通过持久卷声明来消费：</p>
+<p><img src="/images/kubernetes/PV和PVC.png" alt></p>
+<p>创建持久卷（PV）：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">PersistentVolume</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">pv0003</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  capacity:</span></span><br><span class="line">    <span class="comment"># 定义大小</span></span><br><span class="line"><span class="attr">    storage:</span> <span class="number">5</span><span class="string">Gi</span></span><br><span class="line"><span class="attr">  accessModes:</span></span><br><span class="line">      <span class="comment"># 单个客户端挂载为读写模式</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">ReadWriteOnce</span></span><br><span class="line">      <span class="comment"># 多个客户端挂载为只读模式</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">ReadOnlyMany</span></span><br><span class="line">  <span class="comment"># 回收策略[Retain, Recycle, Delete]</span></span><br><span class="line"><span class="attr">  persistentVolumeReclaimPolicy:</span> <span class="string">Recycle</span></span><br><span class="line"><span class="attr">  gcePersistentDisk:</span></span><br><span class="line"><span class="attr">    pdName:</span> <span class="string">my-data-disk</span></span><br><span class="line"><span class="attr">    fsType:</span> <span class="string">ext4</span></span><br></pre></td></tr></table></figure>
+<p>持久卷不属于任何命名空间，它跟节点一样是集群层面的资源：</p>
+<p><img src="/images/kubernetes/PV.png" alt></p>
+<p>创建持久卷声明（PVC）：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">PersistentVolumeClaim</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">myclaim</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  accessModes:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">ReadWriteOnce</span></span><br><span class="line"><span class="attr">  resources:</span></span><br><span class="line"><span class="attr">    requests:</span></span><br><span class="line"><span class="attr">      storage:</span> <span class="number">8</span><span class="string">Gi</span></span><br><span class="line"><span class="attr">  selector:</span></span><br><span class="line"><span class="attr">    matchLabels:</span></span><br><span class="line"><span class="attr">      release:</span> <span class="string">"stable"</span></span><br><span class="line"><span class="attr">    matchExpressions:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">&#123;key:</span> <span class="string">environment,</span> <span class="attr">operator:</span> <span class="string">In,</span> <span class="attr">values:</span> <span class="string">[dev]&#125;</span></span><br></pre></td></tr></table></figure>
+<p>Pod配置：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">mypod</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  containers:</span></span><br><span class="line"><span class="attr">    - name:</span> <span class="string">myfrontend</span></span><br><span class="line"><span class="attr">      image:</span> <span class="string">nginx</span></span><br><span class="line"><span class="attr">      volumeMounts:</span></span><br><span class="line"><span class="attr">      - mountPath:</span> <span class="string">"/var/www/html"</span></span><br><span class="line"><span class="attr">        name:</span> <span class="string">mypd</span></span><br><span class="line"><span class="attr">  volumes:</span></span><br><span class="line"><span class="attr">    - name:</span> <span class="string">mypd</span></span><br><span class="line"><span class="attr">      persistentVolumeClaim:</span></span><br><span class="line"><span class="attr">        claimName:</span> <span class="string">myclaim</span></span><br></pre></td></tr></table></figure>
+<p>相关文章：</p>
+<ul>
+<li><a href="/file/kubernetes/PV、PVC、StorageClass，这些到底在说啥？.pdf">PV、PVC、StorageClass，这些到底在说啥？</a></li>
+<li><a href="/file/kubernetes/PV、PVC体系是不是多此一举？从本地持久化卷谈起.pdf">PV、PVC体系是不是多此一举？从本地持久化卷谈起</a></li>
+</ul>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Kubernetes/" rel="tag"># Kubernetes</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/21/kubernetes/Kubernetes组件简单介绍-Service/" rel="next" title="Kubernetes组件简单介绍-Service">
+                <i class="fa fa-chevron-left"></i> Kubernetes组件简单介绍-Service
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -443,8 +619,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -593,6 +778,23 @@
       </div>
 
       
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#卷（Volumes）"><span class="nav-text">卷（Volumes）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#emptyDir"><span class="nav-text">emptyDir</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hostPath"><span class="nav-text">hostPath</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GCE"><span class="nav-text">GCE</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#持久卷（PV）和持久卷声明（PVC）"><span class="nav-text">持久卷（PV）和持久卷声明（PVC）</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
 
       
 
@@ -730,6 +932,10 @@
 
 
   
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
 
   
 
