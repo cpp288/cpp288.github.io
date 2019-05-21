@@ -99,8 +99,8 @@
   <meta name="description" content="Pod官方文档 pod是一组并置的容器（由一个或多个组成），代表了 Kubernetes 中的基本构建模块，在实际应用中我们不会单独部署容器，都是针对一组pod的容器进行部署和操作 重要概念：  标签：使用标签进行pod的分组（通过标签选择器列出 kubectl get po -l key=value） 注解：与标签不同的是，注解可以容纳更多内容，主要用于工具使用，没有标签那样的选择器 命名空间：">
 <meta name="keywords" content="Kubernetes">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Kubernetes组件简单介绍">
-<meta property="og:url" content="https://cpp288.github.io/2019/05/17/kubernetes/Kubernetes组件简单介绍/index.html">
+<meta property="og:title" content="Kubernetes组件简单介绍-Pod、Controller">
+<meta property="og:url" content="https://cpp288.github.io/2019/05/17/kubernetes/Kubernetes组件简单介绍-Pod、Controller/index.html">
 <meta property="og:site_name" content="cpp288&#39;s blog">
 <meta property="og:description" content="Pod官方文档 pod是一组并置的容器（由一个或多个组成），代表了 Kubernetes 中的基本构建模块，在实际应用中我们不会单独部署容器，都是针对一组pod的容器进行部署和操作 重要概念：  标签：使用标签进行pod的分组（通过标签选择器列出 kubectl get po -l key=value） 注解：与标签不同的是，注解可以容纳更多内容，主要用于工具使用，没有标签那样的选择器 命名空间：">
 <meta property="og:locale" content="zh-CN">
@@ -108,15 +108,9 @@
 <meta property="og:image" content="https://cpp288.github.io/images/kubernetes/DaemonSet.png">
 <meta property="og:image" content="https://cpp288.github.io/images/kubernetes/Deployment.png">
 <meta property="og:image" content="https://cpp288.github.io/images/kubernetes/Job.png">
-<meta property="og:image" content="https://cpp288.github.io/images/kubernetes/Service.png">
-<meta property="og:image" content="https://cpp288.github.io/images/kubernetes/手动创建Endpoint.png">
-<meta property="og:image" content="https://cpp288.github.io/images/kubernetes/Service-NodePort.png">
-<meta property="og:image" content="https://cpp288.github.io/images/kubernetes/Service-LoadBalancer.png">
-<meta property="og:image" content="https://cpp288.github.io/images/kubernetes/Ingress暴露多个服务.png">
-<meta property="og:image" content="https://cpp288.github.io/images/kubernetes/Ingress执行流程.png">
-<meta property="og:updated_time" content="2019-05-21T03:41:59.781Z">
+<meta property="og:updated_time" content="2019-05-21T03:52:43.384Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Kubernetes组件简单介绍">
+<meta name="twitter:title" content="Kubernetes组件简单介绍-Pod、Controller">
 <meta name="twitter:description" content="Pod官方文档 pod是一组并置的容器（由一个或多个组成），代表了 Kubernetes 中的基本构建模块，在实际应用中我们不会单独部署容器，都是针对一组pod的容器进行部署和操作 重要概念：  标签：使用标签进行pod的分组（通过标签选择器列出 kubectl get po -l key=value） 注解：与标签不同的是，注解可以容纳更多内容，主要用于工具使用，没有标签那样的选择器 命名空间：">
 <meta name="twitter:image" content="https://cpp288.github.io/images/kubernetes/ReplicationController协调流程.png">
 
@@ -125,7 +119,7 @@
 
 
 
-  <link rel="canonical" href="https://cpp288.github.io/2019/05/17/kubernetes/Kubernetes组件简单介绍/">
+  <link rel="canonical" href="https://cpp288.github.io/2019/05/17/kubernetes/Kubernetes组件简单介绍-Pod、Controller/">
 
 
 
@@ -135,7 +129,7 @@
   };
 </script>
 
-  <title>Kubernetes组件简单介绍 | cpp288's blog</title>
+  <title>Kubernetes组件简单介绍-Pod、Controller | cpp288's blog</title>
   
 
 
@@ -380,7 +374,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://cpp288.github.io/2019/05/17/kubernetes/Kubernetes组件简单介绍/">
+    <link itemprop="mainEntityOfPage" href="https://cpp288.github.io/2019/05/17/kubernetes/Kubernetes组件简单介绍-Pod、Controller/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chen Jian">
@@ -397,7 +391,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Kubernetes组件简单介绍
+          <h1 class="post-title" itemprop="name headline">Kubernetes组件简单介绍-Pod、Controller
 
               
             
@@ -436,7 +430,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                <time title="修改时间：2019-05-21 11:41:59" itemprop="dateModified" datetime="2019-05-21T11:41:59+08:00">2019-05-21</time>
+                <time title="修改时间：2019-05-21 11:52:43" itemprop="dateModified" datetime="2019-05-21T11:52:43+08:00">2019-05-21</time>
               
             
           </span>
@@ -481,7 +475,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">11k</span>
+                <span title="本文字数">8.4k</span>
               
 
               
@@ -495,7 +489,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">10 分钟</span>
+                <span title="阅读时长">8 分钟</span>
               
             </div>
           
@@ -583,42 +577,6 @@
 <h3 id="Corn-Job"><a href="#Corn-Job" class="headerlink" title="Corn Job"></a>Corn Job</h3><p><a href="https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/" target="_blank" rel="noopener">官方文档</a></p>
 <p>特定的时间运行或者在指定的时间间隔内重复运行</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">batch/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">CronJob</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">pi</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="comment"># 每天在每小时0，15，30，45分钟运行</span></span><br><span class="line"><span class="attr">  schedule:</span> <span class="string">"0,15,30,45 * * * *"</span></span><br><span class="line">  <span class="comment"># pod最迟必须在预定时间后15秒开始运行，如果没有运行则任务将不会运行，并显示为Failed</span></span><br><span class="line"><span class="attr">  startingDeadlineSeconds:</span> <span class="number">15</span></span><br><span class="line"><span class="attr">  jobTemplate:</span></span><br><span class="line"><span class="attr">    spec:</span></span><br><span class="line"><span class="attr">      template:</span> </span><br><span class="line"><span class="attr">        metadata:</span> </span><br><span class="line"><span class="attr">          labels:</span> </span><br><span class="line"><span class="attr">            app:</span> <span class="string">corn-job</span></span><br><span class="line"><span class="attr">        spec:</span> </span><br><span class="line"><span class="attr">          containers:</span></span><br><span class="line"><span class="attr">          - name:</span> <span class="string">pi</span></span><br><span class="line"><span class="attr">            image:</span> <span class="string">perl</span></span><br><span class="line"><span class="attr">            command:</span> <span class="string">["perl",</span>  <span class="string">"-Mbignum=bpi"</span><span class="string">,</span> <span class="string">"-wle"</span><span class="string">,</span> <span class="string">"print bpi(2000)"</span><span class="string">]</span></span><br><span class="line">          <span class="comment"># 重启策略：[OnFailure, Never, Always(Default)]</span></span><br><span class="line"><span class="attr">          restartPolicy:</span> <span class="string">Never</span></span><br></pre></td></tr></table></figure>
-<h1 id="服务（Service）"><a href="#服务（Service）" class="headerlink" title="服务（Service）"></a>服务（Service）</h1><p><a href="https://kubernetes.io/docs/concepts/services-networking/service/" target="_blank" rel="noopener">官方文档</a></p>
-<p>由于一下原因，我们需要引入Service：</p>
-<ul>
-<li>pod是短暂的，它们随时会启动或者关闭</li>
-<li>Kubernetes在pod启动前会给已经调度到节点上的pod分配IP地址，因此客户端不能提前知道提供服务的pod的IP地址</li>
-<li>水平伸缩意味着多个pod可能会提供相同的服务，每个pod都有自己的IP</li>
-</ul>
-<p><img src="/images/kubernetes/Service.png" alt></p>
-<p>YAML描述文件：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Service</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">my-service</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="comment"># ClientIP：特定客户端产生的所有请求每次都指向同一个pod</span></span><br><span class="line">  <span class="comment"># None：default</span></span><br><span class="line"><span class="attr">  sessionAffinity:</span> <span class="string">ClientIP</span></span><br><span class="line">  <span class="comment"># 通过标签选择器匹配pod</span></span><br><span class="line"><span class="attr">  selector:</span></span><br><span class="line"><span class="attr">    app:</span> <span class="string">MyApp</span></span><br><span class="line"><span class="attr">  ports:</span></span><br><span class="line">    <span class="comment"># TCP（default）</span></span><br><span class="line"><span class="attr">  - name:</span> <span class="string">http</span></span><br><span class="line"><span class="attr">    protocol:</span> <span class="string">TCP</span></span><br><span class="line">    <span class="comment"># Service port</span></span><br><span class="line"><span class="attr">    port:</span> <span class="number">80</span></span><br><span class="line">    <span class="comment"># 转发到的容器端口</span></span><br><span class="line"><span class="attr">    targetPort:</span> <span class="number">9376</span></span><br><span class="line"><span class="attr">  - name:</span> <span class="string">https</span></span><br><span class="line"><span class="attr">    protocol:</span> <span class="string">TCP</span></span><br><span class="line"><span class="attr">    port:</span> <span class="number">443</span></span><br><span class="line"><span class="attr">    targetPort:</span> <span class="number">8443</span></span><br></pre></td></tr></table></figure>
-<p><strong>pod中可以使用端口命名，所以在Service中配置 <code>targetPort</code> 可以使用pod端口名称，方便端口维护</strong></p>
-<p>我们也可以不使用标签选择器，而使用 <code>ExternalName</code> 来连接外部服务：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">...</span></span><br><span class="line"><span class="attr">spec:</span> </span><br><span class="line"><span class="attr">  type:</span> <span class="string">ExternalName</span></span><br><span class="line"><span class="attr">  ExternalName:</span> <span class="string">someapi.somcompany.com</span></span><br><span class="line"><span class="attr">  ports:</span></span><br><span class="line"><span class="attr">  - port:</span> <span class="number">80</span></span><br><span class="line"><span class="string">...</span></span><br></pre></td></tr></table></figure>
-<p>ExternalName 服务仅在DNS级别实施（为Service创建了简单的CNAME DNS）</p>
-<h2 id="endpoint"><a href="#endpoint" class="headerlink" title="endpoint"></a>endpoint</h2><p>使用命令 <code>kubectl describe svc &lt;service-name&gt;</code> 可以看到 <code>Endpoint</code> 信息：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">...</span></span><br><span class="line"><span class="attr">Endpoints:</span> <span class="number">10.108</span><span class="number">.1</span><span class="number">.4</span><span class="string">:8080,10.108.2.5:8080</span></span><br><span class="line"><span class="string">...</span></span><br></pre></td></tr></table></figure>
-<p>当service中定义了pod标签选择器，选择器用于构建IP和端口列表，存储在Endpoint资源中，如果service没有定义寻择期则不会创建Endpoint，我们可以手动创建：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Endpoint</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="comment"># Endpoint名称必须和Service的名称相匹配</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">my-service</span></span><br><span class="line"><span class="attr">subsets:</span> </span><br><span class="line"><span class="attr">  - addresses:</span> </span><br><span class="line"><span class="attr">    - ip:</span> <span class="number">11.11</span><span class="number">.11</span><span class="number">.11</span></span><br><span class="line"><span class="attr">    - ip:</span> <span class="number">22.22</span><span class="number">.22</span><span class="number">.22</span></span><br><span class="line"><span class="attr">    ports:</span> </span><br><span class="line"><span class="attr">    - port:</span> <span class="number">80</span></span><br></pre></td></tr></table></figure>
-<p><img src="/images/kubernetes/手动创建Endpoint.png" alt></p>
-<h2 id="暴露服务"><a href="#暴露服务" class="headerlink" title="暴露服务"></a>暴露服务</h2><p>向外部公开服务</p>
-<h3 id="NodePort"><a href="#NodePort" class="headerlink" title="NodePort"></a>NodePort</h3><p>每个集群节点都会在节点上打开一个端口，并将在该端口上接收到的流量重定向到基础服务，该服务仅在内部集群IP和端口上才可访问，但也可以通过所有节点上的专用端口访问</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Service</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">my-service</span></span><br><span class="line"><span class="attr">spec:</span> </span><br><span class="line">  <span class="comment"># 设置为 NodePort 服务类型</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">NodePort</span></span><br><span class="line"><span class="attr">  selector:</span></span><br><span class="line"><span class="attr">      app:</span> <span class="string">MyApp</span></span><br><span class="line"><span class="attr">  ports:</span> </span><br><span class="line"><span class="attr">  - port:</span> <span class="number">80</span></span><br><span class="line"><span class="attr">    targetPort:</span> <span class="number">8080</span></span><br><span class="line">    <span class="comment"># 通过集群节点的30123端口可以访问该服务，如果不指定会选择一个随机端口</span></span><br><span class="line"><span class="attr">    nodePort:</span> <span class="number">30123</span></span><br></pre></td></tr></table></figure>
-<p>这时EXTERNAL-IP显示<nodes>，我们可以通过 <code>EXTERNAL-IP:30123</code> 或者 <code>CLUSTER-IP:30123</code> 来访问服务</nodes></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl get svc my-service</span><br><span class="line">NAME            CLUSTER-IP        EXTERNAL-IP   PORT(S)             AGE</span><br><span class="line">my-service      10.111.254.223    &lt;nodes&gt;       80:30123/TCP        2m</span><br></pre></td></tr></table></figure>
-<p><img src="/images/kubernetes/Service-NodePort.png" alt></p>
-<h3 id="LoadBalancer"><a href="#LoadBalancer" class="headerlink" title="LoadBalancer"></a>LoadBalancer</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Service</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">my-service</span></span><br><span class="line"><span class="attr">spec:</span> </span><br><span class="line">  <span class="comment"># 设置为 LoadBalancer 服务类型</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">LoadBalancer</span></span><br><span class="line"><span class="attr">  selector:</span></span><br><span class="line"><span class="attr">      app:</span> <span class="string">MyApp</span></span><br><span class="line"><span class="attr">  ports:</span> </span><br><span class="line"><span class="attr">  - port:</span> <span class="number">80</span></span><br><span class="line"><span class="attr">    targetPort:</span> <span class="number">8080</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl get svc my-service</span><br><span class="line">NAME            CLUSTER-IP        EXTERNAL-IP          PORT(S)             AGE</span><br><span class="line">my-service      10.111.254.223    130.211.53.173       80:30123/TCP        2m</span><br></pre></td></tr></table></figure>
-<p>可以通过负载均衡IP：130.211.53.173访问服务</p>
-<p><img src="/images/kubernetes/Service-LoadBalancer.png" alt></p>
-<h3 id="Ingress"><a href="#Ingress" class="headerlink" title="Ingress"></a>Ingress</h3><p><a href="https://kubernetes.io/docs/concepts/services-networking/ingress/" target="_blank" rel="noopener">官方文档</a></p>
-<p>相比与 LoadBalancer 服务都需要自己的负载均衡器以及独有的公有IP地址，Ingress 只需要一个公网IP就能为许多服务提供访问</p>
-<p><img src="/images/kubernetes/Ingress暴露多个服务.png" alt></p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">networking.k8s.io/v1beta1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Ingress</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">test-ingress</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="comment"># TLS配置</span></span><br><span class="line"><span class="attr">  tls:</span></span><br><span class="line"><span class="attr">  - hosts:</span> </span><br><span class="line"><span class="bullet">    -</span> <span class="string">test.example.com</span></span><br><span class="line">    <span class="comment"># 从 tls-secret 中获得私钥和证书</span></span><br><span class="line"><span class="attr">    secretName:</span> <span class="string">tls-secret</span></span><br><span class="line"><span class="attr">  rules:</span></span><br><span class="line">  <span class="comment"># 将该域名映射到服务</span></span><br><span class="line"><span class="attr">  - host:</span> <span class="string">test.example.com</span></span><br><span class="line"><span class="attr">    http:</span></span><br><span class="line"><span class="attr">      paths:</span></span><br><span class="line">      <span class="comment"># 将该路径的请求发送到test服务的80端口</span></span><br><span class="line"><span class="attr">      - path:</span> <span class="string">/testpath</span></span><br><span class="line"><span class="attr">        backend:</span></span><br><span class="line"><span class="attr">          serviceName:</span> <span class="string">test</span></span><br><span class="line"><span class="attr">          servicePort:</span> <span class="number">80</span></span><br><span class="line"><span class="attr">  - host:</span> <span class="string">test2.example.com</span></span><br><span class="line"><span class="attr">      http:</span></span><br><span class="line"><span class="attr">        paths:</span></span><br><span class="line"><span class="attr">        - path:</span> <span class="string">/testpath2</span></span><br><span class="line"><span class="attr">          backend:</span></span><br><span class="line"><span class="attr">            serviceName:</span> <span class="string">test2</span></span><br><span class="line"><span class="attr">            servicePort:</span> <span class="number">80</span></span><br></pre></td></tr></table></figure>
-<p>Ingress执行流程：</p>
-<p><img src="/images/kubernetes/Ingress执行流程.png" alt></p>
-
       
     </div>
 
@@ -663,6 +621,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/21/kubernetes/Kubernetes组件简单介绍-Service/" rel="prev" title="Kubernetes组件简单介绍-Service">
+                Kubernetes组件简单介绍-Service <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -734,7 +696,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">46</span>
+                    <span class="site-state-item-count">47</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -876,7 +838,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Pod"><span class="nav-text">Pod</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#控制器（Controllers）"><span class="nav-text">控制器（Controllers）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ReplicationController"><span class="nav-text">ReplicationController</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ReplicaSet"><span class="nav-text">ReplicaSet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DaemonSet"><span class="nav-text">DaemonSet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Deployment"><span class="nav-text">Deployment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Job"><span class="nav-text">Job</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Job（run-to-completion）"><span class="nav-text">Job（run to completion）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Corn-Job"><span class="nav-text">Corn Job</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#服务（Service）"><span class="nav-text">服务（Service）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#endpoint"><span class="nav-text">endpoint</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#暴露服务"><span class="nav-text">暴露服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NodePort"><span class="nav-text">NodePort</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LoadBalancer"><span class="nav-text">LoadBalancer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ingress"><span class="nav-text">Ingress</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Pod"><span class="nav-text">Pod</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#控制器（Controllers）"><span class="nav-text">控制器（Controllers）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ReplicationController"><span class="nav-text">ReplicationController</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ReplicaSet"><span class="nav-text">ReplicaSet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DaemonSet"><span class="nav-text">DaemonSet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Deployment"><span class="nav-text">Deployment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Job"><span class="nav-text">Job</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Job（run-to-completion）"><span class="nav-text">Job（run to completion）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Corn-Job"><span class="nav-text">Corn Job</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

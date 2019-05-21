@@ -368,7 +368,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://cpp288.github.io/2019/05/17/kubernetes/Kubernetes组件简单介绍/">
+    <link itemprop="mainEntityOfPage" href="https://cpp288.github.io/2019/05/21/kubernetes/Kubernetes组件简单介绍-Service/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chen Jian">
@@ -388,7 +388,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/05/17/kubernetes/Kubernetes组件简单介绍/" class="post-title-link" itemprop="url">Kubernetes组件简单介绍</a>
+                <a href="/2019/05/21/kubernetes/Kubernetes组件简单介绍-Service/" class="post-title-link" itemprop="url">Kubernetes组件简单介绍-Service</a>
               
             
           </h1>
@@ -411,22 +411,12 @@
                 
               
 
-              <time title="创建时间：2019-05-17 16:48:01" itemprop="dateCreated datePublished" datetime="2019-05-17T16:48:01+08:00">2019-05-17</time>
+              <time title="创建时间：2019-05-21 11:51:36 / 修改时间：11:52:43" itemprop="dateCreated datePublished" datetime="2019-05-21T11:51:36+08:00">2019-05-21</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                <time title="修改时间：2019-05-21 11:41:59" itemprop="dateModified" datetime="2019-05-21T11:41:59+08:00">2019-05-21</time>
               
             
           </span>
@@ -471,7 +461,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">11k</span>
+                <span title="本文字数">2.9k</span>
               
 
               
@@ -485,7 +475,218 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">10 分钟</span>
+                <span title="阅读时长">3 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>
+              服务（Service）官方文档
+由于一下原因，我们需要引入Service：
+
+pod是短暂的，它们随时会启动或者关闭
+Kubernetes在pod启动前会给已经调度到节点上的pod分配IP地址，因此客户端不能提前知道提供服务的pod的IP地址
+水平伸缩意味着多个pod可能会提供相同的服务，每个pod
+              ...
+            </p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/05/21/kubernetes/Kubernetes组件简单介绍-Service/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://cpp288.github.io/2019/05/17/kubernetes/Kubernetes组件简单介绍-Pod、Controller/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chen Jian">
+      <meta itemprop="description" content="For record only">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cpp288's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/05/17/kubernetes/Kubernetes组件简单介绍-Pod、Controller/" class="post-title-link" itemprop="url">Kubernetes组件简单介绍-Pod、Controller</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-17 16:48:01" itemprop="dateCreated datePublished" datetime="2019-05-17T16:48:01+08:00">2019-05-17</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                <time title="修改时间：2019-05-21 11:52:43" itemprop="dateModified" datetime="2019-05-21T11:52:43+08:00">2019-05-21</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Kubernetes/" itemprop="url" rel="index"><span itemprop="name">Kubernetes</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">8.4k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">8 分钟</span>
               
             </div>
           
@@ -518,7 +719,7 @@ pod是一组并置的容器（由一个或多个组成），代表了 Kubernetes
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/05/17/kubernetes/Kubernetes组件简单介绍/#more" rel="contents">
+              <a class="btn" href="/2019/05/17/kubernetes/Kubernetes组件简单介绍-Pod、Controller/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -2149,211 +2350,6 @@ GET books/_sear
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://cpp288.github.io/2019/05/05/elasticsearch/搜索查询/ElasticSearch搜索机制/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chen Jian">
-      <meta itemprop="description" content="For record only">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="cpp288's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/05/elasticsearch/搜索查询/ElasticSearch搜索机制/" class="post-title-link" itemprop="url">ElasticSearch搜索机制</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-05-05 10:30:07 / 修改时间：14:44:10" itemprop="dateCreated datePublished" datetime="2019-05-05T10:30:07+08:00">2019-05-05</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ElasticSearch/" itemprop="url" rel="index"><span itemprop="name">ElasticSearch</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">321</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>
-              摘自《从Lucene到ElasticSearch：全文检索实战》
-搜索流程图如下：
-
-
-第一象限：用户
-第二象限：原始文档
-第三象限：ElasticSearch
-第四象限：搜索结果
-
-索引过程：原始文档有 title 和 content 两个字段，当把这条文档写入到 ElasticSearch 之后
-              ...
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/05/05/elasticsearch/搜索查询/ElasticSearch搜索机制/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2403,7 +2399,7 @@ GET books/_sear
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">46</span>
+                    <span class="site-state-item-count">47</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
