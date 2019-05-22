@@ -41,3 +41,4 @@ nacos服务监控：https://nacos.io/zh-cn/docs/monitor-guide.html
 # 相关博客
 
 * [阿里巴巴基于 Nacos 实现环境隔离的实践](https://mp.weixin.qq.com/s/TQDhSMJJcCSJTR7Z0gh4gw) 2019.3.13
+* [Spring Cloud Alibaba系列教程-03-搭建生产可用的Nacos集群](https://mp.weixin.qq.com/s/MKMLHK9Yd87_6HFbIU60vA) *2019.04.12*
