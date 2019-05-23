@@ -69,3 +69,43 @@ api server 作为中心组件，其他组件或者客户端（如kubectl）都�
 调度器最为重要的是调度算法，找到pod最优节点，这个其它篇幅中说明
 
 在集群中可以运行多个调度器，在pod中可以通过设置 `schedulerName` 属性来指定调度器，未设置由默认调度器调度（default-scheduler）
+
+# 控制器（controller）
+
+Kubernetes中主要有以下控制器：
+* Replication管理器 (ReplicationController资源的管理器) 
+* ReplicaSet、 DaemonSet 以及 Job 控制器
+* Deployment控制器
+* StatefulSet控制器
+* Node控制器
+* Service控制器
+* Endpoints控制器
+* Namespace控制器
+* PersistentVolume控制器
+* ...
+
+总的来说，控制器执行一个“调和“循环，将实际状态调整为期望状态(在资源spec部分定义)，然后将新的实际状态写入资源的 status 部分。 控制器利用监听机制来订阅变更，但是由于使用监听机制并不保证控制器不会漏掉事件， 所以仍然需要定期执行重列举操作来确保不会丢掉什么
+
+# Kubelet
+
+Kubelet 运行在工作节点上，负责所有运行在工作节点上的组件：
+* 在api server中创建一个node资源来注册该节点
+* 持续监控api server是否把该节点分配给pod，启动pod
+* 持续监控运行的容器，向api server报告它们的状态、事件和资源消耗
+* 它也是运行容器存活探针的组件，当探针报错时它会重启容器
+* 当pod从api server删除时，Kubelet终止容器，并通知api server该pod已经被终止
+
+Kubelet也可以基于本地指定目录下的pod清淡来运行pod
+
+![](/images/kubernetes/Kubelet.png)
+
+# kube-proxy
+
+运行在每个节点上，监听 api server 中服务对象的变化，再通过管理 iptables 来实现网络的转发
+
+支持三种模式：
+* userspace（k8s v1.2 后就已经淘汰）
+* iptables（默认方式）
+* ipvs（需要安装ipvsadm、ipset 工具包和加载 ip_vs 内核模块）
+
+参考博客：[Kube-Proxy简述](https://www.jianshu.com/p/3beb4336e251)
