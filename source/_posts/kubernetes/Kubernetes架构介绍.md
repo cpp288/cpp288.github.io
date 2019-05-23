@@ -64,3 +64,8 @@ api server 作为中心组件，其他组件或者客户端（如kubectl）都�
 
 # 调度器（schedule）
 
+通常我们不会去指定pod应该运行在哪个集群节点上，而是交给调度器来完成，调度器不会命令选中的节点（或者节点上的Kubelet）去运行pod，而是通过api server更新pod的定义，然后通知kubelet去创建并且运行pod的容器
+
+调度器最为重要的是调度算法，找到pod最优节点，这个其它篇幅中说明
+
+在集群中可以运行多个调度器，在pod中可以通过设置 `schedulerName` 属性来指定调度器，未设置由默认调度器调度（default-scheduler）
