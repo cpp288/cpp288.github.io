@@ -109,7 +109,7 @@
 <meta property="og:image" content="https://cpp288.github.io/images/kubernetes/apiserver调用流程示例.png">
 <meta property="og:image" content="https://cpp288.github.io/images/kubernetes/apiserver-watch.png">
 <meta property="og:image" content="https://cpp288.github.io/images/kubernetes/Kubelet.png">
-<meta property="og:updated_time" content="2019-05-23T11:28:18.391Z">
+<meta property="og:updated_time" content="2019-05-23T11:35:48.850Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kubernetes架构介绍">
 <meta name="twitter:description" content="Kubernetes集群分为两部分（官网介绍）：  控制平面（Master components provide the cluster’s control plane） etcd分布式持久化存储 API服务器（kube-apiserver） 调度器（kube-scheduler） 控制器管理器（kube-controller-manager）   工作节点（Node components run">
@@ -416,7 +416,7 @@
                 
               
 
-              <time title="创建时间：2019-05-23 11:33:15 / 修改时间：19:28:18" itemprop="dateCreated datePublished" datetime="2019-05-23T11:33:15+08:00">2019-05-23</time>
+              <time title="创建时间：2019-05-23 11:33:15 / 修改时间：19:35:48" itemprop="dateCreated datePublished" datetime="2019-05-23T11:33:15+08:00">2019-05-23</time>
             
 
             
@@ -466,7 +466,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">2.3k</span>
+                <span title="本文字数">2.4k</span>
               
 
               
@@ -533,7 +533,7 @@
 <li>增强乐观锁系统、验证系统的健壮性</li>
 <li>通过把实际存储机制从其他组件抽离，未来替换起来也更容易</li>
 </ul>
-<p>etcd 使用 RAFT 一致性算法（要求集群大部分节点参与才能进行到下一个状态），确保在任何时间点，每个节点的状态要么是大部分节点的当前状态，要么是之前确认过的状态</p>
+<p>etcd 使用 RAFT 一致性算法（要求集群大部分节点参与才能进行到下一个状态），确保在任何时间点，每个节点的状态要么是大部分节点的当前状态，要么是之前确认过的状态（部署基数实例数）</p>
 <p><img src="/images/kubernetes/etcd集群一致性.png" alt></p>
 <h1 id="api-server"><a href="#api-server" class="headerlink" title="api server"></a>api server</h1><p>api server 作为中心组件，其他组件或者客户端（如kubectl）都会去调用它（以Restful API形式）：</p>
 <p><img src="/images/kubernetes/apiserver调用流程示例.png" alt></p>
