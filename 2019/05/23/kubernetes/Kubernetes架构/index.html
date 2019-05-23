@@ -105,7 +105,9 @@
 <meta property="og:description" content="Kubernetes集群分为两部分（官网介绍）：  控制平面（Master components provide the cluster’s control plane） etcd分布式持久化存储 API服务器（kube-apiserver） 调度器（kube-scheduler） 控制器管理器（kube-controller-manager）   工作节点（Node components run">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://cpp288.github.io/images/kubernetes/k8s组件关系图.png">
-<meta property="og:updated_time" content="2019-05-23T03:49:38.051Z">
+<meta property="og:image" content="https://cpp288.github.io/images/kubernetes/etcd集群一致性.png">
+<meta property="og:image" content="https://cpp288.github.io/images/kubernetes/apiserver调用流程示例.png">
+<meta property="og:updated_time" content="2019-05-23T08:20:56.056Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kubernetes架构">
 <meta name="twitter:description" content="Kubernetes集群分为两部分（官网介绍）：  控制平面（Master components provide the cluster’s control plane） etcd分布式持久化存储 API服务器（kube-apiserver） 调度器（kube-scheduler） 控制器管理器（kube-controller-manager）   工作节点（Node components run">
@@ -412,7 +414,7 @@
                 
               
 
-              <time title="创建时间：2019-05-23 11:33:15 / 修改时间：11:49:38" itemprop="dateCreated datePublished" datetime="2019-05-23T11:33:15+08:00">2019-05-23</time>
+              <time title="创建时间：2019-05-23 11:33:15 / 修改时间：16:20:56" itemprop="dateCreated datePublished" datetime="2019-05-23T11:33:15+08:00">2019-05-23</time>
             
 
             
@@ -462,7 +464,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">361</span>
+                <span title="本文字数">1.2k</span>
               
 
               
@@ -522,6 +524,32 @@
 </ul>
 <p>组件关系图：</p>
 <p><img src="/images/kubernetes/k8s组件关系图.png" alt></p>
+<h1 id="etcd"><a href="#etcd" class="headerlink" title="etcd"></a>etcd</h1><p>Kubernetes所创建的对象（Pod、ReplicationController、Service、Secret等）需要以持久化方式存储到某个地方，这样它们在API服务器重启或者失败的时候才不会丢失，因此引入了etcd</p>
+<p>etcd是一个响应快、分布式、一致的kv存储，可以运行多个etcd实例来获取高可用性和更好的性能，<strong>etcd 是Kubernetes存储集群状态和元数据的唯一的地方</strong></p>
+<p>唯一能直接和 etcd 通信的是API服务器，所有其他组件通过API服务器间接地读取、写入数据到 etcd，这带来一些好处：</p>
+<ul>
+<li>增强乐观锁系统、验证系统的健壮性</li>
+<li>通过把实际存储机制从其他组件抽离，未来替换起来也更容易</li>
+</ul>
+<p>etcd 使用 RAFT 一致性算法（要求集群大部分节点参与才能进行到下一个状态），确保在任何时间点，每个节点的状态要么是大部分节点的当前状态，要么是之前确认过的状态</p>
+<p><img src="/images/kubernetes/etcd集群一致性.png" alt></p>
+<h1 id="api-server"><a href="#api-server" class="headerlink" title="api server"></a>api server</h1><p>api server 作为中心组件，其他组件或者客户端（如kubectl）都会去调用它（以Restful API形式）：</p>
+<p><img src="/images/kubernetes/apiserver调用流程示例.png" alt></p>
+<ul>
+<li>通过认证插件认证客户端<blockquote>
+<p>API 服务器会轮流调用这些插件，直到有一个能确认是谁发送了该请求，这是通过检查HTTP请求实现的</p>
+</blockquote>
+</li>
+<li>通过授权插件授权客户端<blockquote>
+<p>它们的作用是决定认证的用户是否可以对请求资源执行请求操作</p>
+</blockquote>
+</li>
+<li>通过准入控制插件验证AND/OR修改资源请求<blockquote>
+<p>如果请求尝试创建、修改或者删除一个资源，请求需要经过准入控制插件的验证，服务器会配置多个准入控制插件，这些插件会因为各种原因修改资源，可能会初始化资源定义中漏配的字段为默认值甚至重写它们，插件甚至会去修改并不在请求中的相关资源，同时也会因为某些原因拒绝一个请求。资源需要经过所有准入控制插件的验证（读取数据不会做准入控制的验证）<br>准入控制插件包括：AlwaysPullImages、ServiceAccount、NamespaceLifecycle等，具体查看<a href="https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/" target="_blank" rel="noopener">官网</a></p>
+</blockquote>
+</li>
+<li>验证资源以及持久化存储</li>
+</ul>
 
       
     </div>
@@ -611,8 +639,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -761,6 +798,23 @@
       </div>
 
       
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#etcd"><span class="nav-text">etcd</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#api-server"><span class="nav-text">api server</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
 
       
 
@@ -788,7 +842,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">157k</span>
+    <span title="站点总字数">158k</span>
   
 
   
