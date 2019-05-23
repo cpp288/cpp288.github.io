@@ -1,5 +1,5 @@
 ---
-title: Kubernetes架构
+title: Kubernetes架构介绍
 date: 2019-05-23 11:33:15
 tags:
 - Kubernetes
