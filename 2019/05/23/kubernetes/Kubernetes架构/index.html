@@ -96,23 +96,27 @@
 
 
 
-  <meta name="description" content="For record only">
-<meta property="og:type" content="website">
-<meta property="og:title" content="cpp288&#39;s blog">
-<meta property="og:url" content="https://cpp288.github.io/tags/性能优化/index.html">
+  <meta name="description" content="Kubernetes集群分为两部分（官网介绍）：  控制平面（Master components provide the cluster’s control plane） 工作节点（Node components run on every node）  控制平面：  etcd分布式持久化存储 API服务器（kube-apiserver） 调度器（kube-scheduler） 控制器管理器（kub">
+<meta name="keywords" content="Kubernetes">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kubernetes架构">
+<meta property="og:url" content="https://cpp288.github.io/2019/05/23/kubernetes/Kubernetes架构/index.html">
 <meta property="og:site_name" content="cpp288&#39;s blog">
-<meta property="og:description" content="For record only">
+<meta property="og:description" content="Kubernetes集群分为两部分（官网介绍）：  控制平面（Master components provide the cluster’s control plane） 工作节点（Node components run on every node）  控制平面：  etcd分布式持久化存储 API服务器（kube-apiserver） 调度器（kube-scheduler） 控制器管理器（kub">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://cpp288.github.io/images/kubernetes/k8s组件关系图.png">
+<meta property="og:updated_time" content="2019-05-23T03:48:02.156Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="cpp288&#39;s blog">
-<meta name="twitter:description" content="For record only">
+<meta name="twitter:title" content="Kubernetes架构">
+<meta name="twitter:description" content="Kubernetes集群分为两部分（官网介绍）：  控制平面（Master components provide the cluster’s control plane） 工作节点（Node components run on every node）  控制平面：  etcd分布式持久化存储 API服务器（kube-apiserver） 调度器（kube-scheduler） 控制器管理器（kub">
+<meta name="twitter:image" content="https://cpp288.github.io/images/kubernetes/k8s组件关系图.png">
 
 
 
 
 
 
-  <link rel="canonical" href="https://cpp288.github.io/tags/性能优化/">
+  <link rel="canonical" href="https://cpp288.github.io/2019/05/23/kubernetes/Kubernetes架构/">
 
 
 
@@ -122,7 +126,7 @@
   };
 </script>
 
-  <title>标签: 性能优化 | cpp288's blog</title>
+  <title>Kubernetes架构 | cpp288's blog</title>
   
 
 
@@ -170,7 +174,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -225,7 +229,7 @@
         
         
           
-          <li class="menu-item menu-item-tags menu-item-active">
+          <li class="menu-item menu-item-tags">
 
     
     
@@ -347,238 +351,248 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block tag">
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>性能优化<small>标签</small>
-        </h1>
-      </div>
-
-      
-        
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://cpp288.github.io/2019/05/23/kubernetes/Kubernetes架构/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chen Jian">
+      <meta itemprop="description" content="For record only">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cpp288's blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-          <a class="post-title-link" href="/2019/02/28/mysql/Mysql配置优化/" itemprop="url">
-            
-              <span itemprop="name">Mysql配置优化</span>
-            
-          </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Kubernetes架构
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-02-28T09:20:04+08:00" content="2019-02-28">
-          02-28
-        </time>
-      </div>
+              
+            
+          </h1>
+        
 
-    </header>
-  </article>
+        <div class="post-meta">
+          <span class="post-time">
 
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-23 11:33:15 / 修改时间：11:48:02" itemprop="dateCreated datePublished" datetime="2019-05-23T11:33:15+08:00">2019-05-23</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Kubernetes/" itemprop="url" rel="index"><span itemprop="name">Kubernetes</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">373</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/02/28/mysql/Mysql-MVCC/" itemprop="url">
-            
-              <span itemprop="name">Mysql MVCC</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-02-28T09:17:41+08:00" content="2019-02-28">
-          02-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/02/28/mysql/Mysql-InnoDB锁机制/" itemprop="url">
-            
-              <span itemprop="name">Mysql InnoDB锁机制</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-02-28T09:12:24+08:00" content="2019-02-28">
-          02-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/02/27/mysql/Mysql事务/" itemprop="url">
-            
-              <span itemprop="name">Mysql事务</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-02-27T20:11:18+08:00" content="2019-02-27">
-          02-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/02/27/mysql/Mysql查询优化/" itemprop="url">
-            
-              <span itemprop="name">Mysql查询优化</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-02-27T19:57:26+08:00" content="2019-02-27">
-          02-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/02/27/mysql/Mysql存储引擎/" itemprop="url">
-            
-              <span itemprop="name">Mysql存储引擎</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-02-27T19:48:38+08:00" content="2019-02-27">
-          02-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/02/26/mysql/Mysql索引/" itemprop="url">
-            
-              <span itemprop="name">Mysql索引</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-02-26T18:36:24+08:00" content="2019-02-26">
-          02-26
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+        <p>Kubernetes集群分为两部分（<a href="https://kubernetes.io/docs/concepts/overview/components/" target="_blank" rel="noopener">官网介绍</a>）：</p>
+<ul>
+<li>控制平面（Master components provide the cluster’s control plane）</li>
+<li>工作节点（Node components run on every node）</li>
+</ul>
+<p>控制平面：</p>
+<ul>
+<li>etcd分布式持久化存储</li>
+<li>API服务器（kube-apiserver）</li>
+<li>调度器（kube-scheduler）</li>
+<li>控制器管理器（kube-controller-manager）</li>
+</ul>
+<p>工作节点：</p>
+<ul>
+<li>kubelet</li>
+<li>kube-proxy</li>
+<li>容器运行时（Container Runtime）</li>
+</ul>
+<p>附加组件：</p>
+<ul>
+<li>Kubernetes DNS服务器</li>
+<li>Web UI (Dashboard)</li>
+<li>Ingress Controller</li>
+<li>容器集群监控（Heapster）</li>
+<li>容器网络接口插件</li>
+</ul>
+<p>组件关系图：</p>
+<p><img src="/images/kubernetes/k8s组件关系图.png" alt></p>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Kubernetes/" rel="tag"># Kubernetes</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/21/kubernetes/Kubernetes组件简单介绍-Storage/" rel="next" title="Kubernetes组件简单介绍-Storage">
+                <i class="fa fa-chevron-left"></i> Kubernetes组件简单介绍-Storage
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -886,6 +900,10 @@
 
 
   
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
 
   
 
