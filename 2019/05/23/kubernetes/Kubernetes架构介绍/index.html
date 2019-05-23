@@ -108,7 +108,8 @@
 <meta property="og:image" content="https://cpp288.github.io/images/kubernetes/etcd集群一致性.png">
 <meta property="og:image" content="https://cpp288.github.io/images/kubernetes/apiserver调用流程示例.png">
 <meta property="og:image" content="https://cpp288.github.io/images/kubernetes/apiserver-watch.png">
-<meta property="og:updated_time" content="2019-05-23T09:40:10.485Z">
+<meta property="og:image" content="https://cpp288.github.io/images/kubernetes/Kubelet.png">
+<meta property="og:updated_time" content="2019-05-23T11:28:18.391Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kubernetes架构介绍">
 <meta name="twitter:description" content="Kubernetes集群分为两部分（官网介绍）：  控制平面（Master components provide the cluster’s control plane） etcd分布式持久化存储 API服务器（kube-apiserver） 调度器（kube-scheduler） 控制器管理器（kube-controller-manager）   工作节点（Node components run">
@@ -415,7 +416,7 @@
                 
               
 
-              <time title="创建时间：2019-05-23 11:33:15 / 修改时间：17:40:10" itemprop="dateCreated datePublished" datetime="2019-05-23T11:33:15+08:00">2019-05-23</time>
+              <time title="创建时间：2019-05-23 11:33:15 / 修改时间：19:28:18" itemprop="dateCreated datePublished" datetime="2019-05-23T11:33:15+08:00">2019-05-23</time>
             
 
             
@@ -465,7 +466,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1.6k</span>
+                <span title="本文字数">2.3k</span>
               
 
               
@@ -479,7 +480,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 分钟</span>
+                <span title="阅读时长">2 分钟</span>
               
             </div>
           
@@ -556,6 +557,38 @@
 <h1 id="调度器（schedule）"><a href="#调度器（schedule）" class="headerlink" title="调度器（schedule）"></a>调度器（schedule）</h1><p>通常我们不会去指定pod应该运行在哪个集群节点上，而是交给调度器来完成，调度器不会命令选中的节点（或者节点上的Kubelet）去运行pod，而是通过api server更新pod的定义，然后通知kubelet去创建并且运行pod的容器</p>
 <p>调度器最为重要的是调度算法，找到pod最优节点，这个其它篇幅中说明</p>
 <p>在集群中可以运行多个调度器，在pod中可以通过设置 <code>schedulerName</code> 属性来指定调度器，未设置由默认调度器调度（default-scheduler）</p>
+<h1 id="控制器（controller）"><a href="#控制器（controller）" class="headerlink" title="控制器（controller）"></a>控制器（controller）</h1><p>Kubernetes中主要有以下控制器：</p>
+<ul>
+<li>Replication管理器 (ReplicationController资源的管理器) </li>
+<li>ReplicaSet、 DaemonSet 以及 Job 控制器</li>
+<li>Deployment控制器</li>
+<li>StatefulSet控制器</li>
+<li>Node控制器</li>
+<li>Service控制器</li>
+<li>Endpoints控制器</li>
+<li>Namespace控制器</li>
+<li>PersistentVolume控制器</li>
+<li>…</li>
+</ul>
+<p>总的来说，控制器执行一个“调和“循环，将实际状态调整为期望状态(在资源spec部分定义)，然后将新的实际状态写入资源的 status 部分。 控制器利用监听机制来订阅变更，但是由于使用监听机制并不保证控制器不会漏掉事件， 所以仍然需要定期执行重列举操作来确保不会丢掉什么</p>
+<h1 id="Kubelet"><a href="#Kubelet" class="headerlink" title="Kubelet"></a>Kubelet</h1><p>Kubelet 运行在工作节点上，负责所有运行在工作节点上的组件：</p>
+<ul>
+<li>在api server中创建一个node资源来注册该节点</li>
+<li>持续监控api server是否把该节点分配给pod，启动pod</li>
+<li>持续监控运行的容器，向api server报告它们的状态、事件和资源消耗</li>
+<li>它也是运行容器存活探针的组件，当探针报错时它会重启容器</li>
+<li>当pod从api server删除时，Kubelet终止容器，并通知api server该pod已经被终止</li>
+</ul>
+<p>Kubelet也可以基于本地指定目录下的pod清淡来运行pod</p>
+<p><img src="/images/kubernetes/Kubelet.png" alt></p>
+<h1 id="kube-proxy"><a href="#kube-proxy" class="headerlink" title="kube-proxy"></a>kube-proxy</h1><p>运行在每个节点上，监听 api server 中服务对象的变化，再通过管理 iptables 来实现网络的转发</p>
+<p>支持三种模式：</p>
+<ul>
+<li>userspace（k8s v1.2 后就已经淘汰）</li>
+<li>iptables（默认方式）</li>
+<li>ipvs（需要安装ipvsadm、ipset 工具包和加载 ip_vs 内核模块）</li>
+</ul>
+<p>参考博客：<a href="https://www.jianshu.com/p/3beb4336e251" target="_blank" rel="noopener">Kube-Proxy简述</a></p>
 
       
     </div>
@@ -814,7 +847,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#etcd"><span class="nav-text">etcd</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#api-server"><span class="nav-text">api server</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#调度器（schedule）"><span class="nav-text">调度器（schedule）</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#etcd"><span class="nav-text">etcd</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#api-server"><span class="nav-text">api server</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#调度器（schedule）"><span class="nav-text">调度器（schedule）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#控制器（controller）"><span class="nav-text">控制器（controller）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Kubelet"><span class="nav-text">Kubelet</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#kube-proxy"><span class="nav-text">kube-proxy</span></a></li></ol></div>
             
 
           </div>
