@@ -108,7 +108,7 @@
 <meta property="og:image" content="https://cpp288.github.io/images/kubernetes/etcd集群一致性.png">
 <meta property="og:image" content="https://cpp288.github.io/images/kubernetes/apiserver调用流程示例.png">
 <meta property="og:image" content="https://cpp288.github.io/images/kubernetes/apiserver-watch.png">
-<meta property="og:updated_time" content="2019-05-23T08:35:44.678Z">
+<meta property="og:updated_time" content="2019-05-23T08:42:24.707Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kubernetes架构">
 <meta name="twitter:description" content="Kubernetes集群分为两部分（官网介绍）：  控制平面（Master components provide the cluster’s control plane） etcd分布式持久化存储 API服务器（kube-apiserver） 调度器（kube-scheduler） 控制器管理器（kube-controller-manager）   工作节点（Node components run">
@@ -415,7 +415,7 @@
                 
               
 
-              <time title="创建时间：2019-05-23 11:33:15 / 修改时间：16:35:44" itemprop="dateCreated datePublished" datetime="2019-05-23T11:33:15+08:00">2019-05-23</time>
+              <time title="创建时间：2019-05-23 11:33:15 / 修改时间：16:42:24" itemprop="dateCreated datePublished" datetime="2019-05-23T11:33:15+08:00">2019-05-23</time>
             
 
             
@@ -553,7 +553,7 @@
 </ul>
 <p>其它客户端通过创建到 api server 的 HTTP 连接来监听变更，每当更新对象，api server会将新对象发送给监听了该对象的客户端（比如Controller、Kubectl等等），客户端接收到后执行相应任务</p>
 <p><img src="/images/kubernetes/apiserver-watch.png" alt></p>
-
+<h1 id="调度器（schedule）"><a href="#调度器（schedule）" class="headerlink" title="调度器（schedule）"></a>调度器（schedule）</h1>
       
     </div>
 
@@ -811,7 +811,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#etcd"><span class="nav-text">etcd</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#api-server"><span class="nav-text">api server</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#etcd"><span class="nav-text">etcd</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#api-server"><span class="nav-text">api server</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#调度器（schedule）"><span class="nav-text">调度器（schedule）</span></a></li></ol></div>
             
 
           </div>
