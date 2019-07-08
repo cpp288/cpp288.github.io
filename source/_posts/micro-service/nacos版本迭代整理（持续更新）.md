@@ -38,7 +38,17 @@ nacos服务监控：https://nacos.io/zh-cn/docs/monitor-guide.html
 
 * [Nacos 发布 1.0.0 GA 版本，可大规模投入到生产环境](https://mp.weixin.qq.com/s/SaS9JBBjiN-ac6nfpq2ACw)
 
+# 1.1.0
+
+发布时间：2019.7.6
+
+更新内容：
+1. 支持灰度配置
+2. 配置导入导出
+3. ...
+
 # 相关博客
 
 * [阿里巴巴基于 Nacos 实现环境隔离的实践](https://mp.weixin.qq.com/s/TQDhSMJJcCSJTR7Z0gh4gw) 2019.3.13
 * [Spring Cloud Alibaba系列教程-03-搭建生产可用的Nacos集群](https://mp.weixin.qq.com/s/MKMLHK9Yd87_6HFbIU60vA) *2019.04.12*
+
