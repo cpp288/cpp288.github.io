@@ -47,6 +47,8 @@ nacos服务监控：https://nacos.io/zh-cn/docs/monitor-guide.html
 2. 配置导入导出
 3. ...
 
+* [Nacos 1.1.0发布，支持灰度配置和地址服务器模式](https://yq.aliyun.com/articles/708477)
+
 # 相关博客
 
 * [阿里巴巴基于 Nacos 实现环境隔离的实践](https://mp.weixin.qq.com/s/TQDhSMJJcCSJTR7Z0gh4gw) 2019.3.13
